@@ -80,9 +80,6 @@ const Login = () => {
   }
   return (
     <div className="login">
-      {user.error ? <div className="actionDisplay">
-        <h5 style={{ color: 'red' }}>{user.error}</h5>
-      </div> : ''}
       <div className="container">
         <div className="loginBox">
           <h3>Login</h3>
