@@ -89,4 +89,9 @@
       display:block!important;
     }
   }
-  
+  /*visible navbar */
+  @media all and (min-width:769px){
+    .navbar ul {
+        visibility: visible!important;
+    }
+  }
