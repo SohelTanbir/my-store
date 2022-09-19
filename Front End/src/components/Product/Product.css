@@ -1,0 +1,32 @@
+#product{
+    width: 100%;
+    text-align: center;
+}
+.product-heading{
+    text-align: center;
+    padding:3rem 0;
+}
+.product-heading h2{
+    position: relative;
+    text-transform: uppercase;
+    font-weight:600;
+    margin-bottom:1rem;
+}
+.product-heading h2::before{
+    content: "";
+    position: absolute;
+    left:35%;
+    top:35%;
+    width:7rem;
+    height:.2rem;
+    background:red;
+}
+.product-heading h2::after{
+    content: "";
+    position: absolute;
+    right:35%;
+    top:35%;
+    width:7rem;
+    height:.2rem;
+    background:red;
+}

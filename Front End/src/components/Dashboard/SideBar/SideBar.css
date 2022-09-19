@@ -1,0 +1,13 @@
+.sideBar{
+    flex-basis:20%;
+    background:#160a5a;
+    height:100vh;
+    padding:3rem 2rem;
+}
+.sideBar ul li{
+    margin-bottom:1.5rem;
+    cursor: pointer;
+}
+.sideBar ul li a{
+    color:#dfdfdf;
+}

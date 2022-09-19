@@ -1,0 +1,71 @@
+#product .row{
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.single-product {
+    width: 23%;
+    height: 42rem;
+    margin: 2% auto;
+    text-align: center;
+    -webkit-box-shadow: 0 0 .1rem #b6b3b3;
+    box-shadow: 0 0 .1rem #b6b3b3;
+    cursor: pointer;
+}
+
+.single-product img{
+    width:100%;
+    height:25rem;
+    object-fit: cover;
+}
+.single-product .product-name {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: .5rem 0;
+    line-height: 2rem;
+}
+.single-product .product-price{
+    font-weight:400;
+    margin:.5rem 0;
+}
+.rating{
+    font-weight: 400;
+    color: #dfb839;
+}
+.add_to_cart_btn {
+    border: none;
+    outline: none;
+    padding: .4rem 1.5rem;
+    cursor: pointer;
+    border-radius: .3rem;
+    color: #fff;
+    background: #dfb839;
+    margin-bottom: 1rem;
+}
+
+/*
+----------------------------------------------------
+--------------- Responsive CSS -------------------
+-----------------------------------------------------
+*/
+/*large device*/
+@media all and (max-width:991px){
+    /*product*/
+    .single-product {
+        width: 32%;
+    }
+}
+/*small device*/
+@media all and (max-width:576px){
+    /*product*/
+    .single-product {
+        width: 47%;
+    }
+}
+/*Extra small device*/
+@media all and (max-width:380px){
+    /*product*/
+    .single-product {
+        width: 100%;
+        margin: 3% auto;
+    }
+}

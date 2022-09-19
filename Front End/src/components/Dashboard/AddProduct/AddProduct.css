@@ -1,0 +1,28 @@
+.product-add-form h2{
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+.product-add-form input,
+.submit-btn{
+    border: none;
+    outline:none;
+    margin-bottom:2.5rem;
+}
+.product-add-form input, textarea{
+    width:100%;
+    border:.1rem solid #dfdfdf;
+    padding:1rem 2rem;
+    border-radius:.5rem;
+}
+.product-add-form input:focus{
+    border: .1rem solid blue;
+    transition: .5s;
+}
+
+.product-add-form button{
+    background:blue;
+    padding:.8rem 2rem;
+    border-radius:.5rem;
+    color:#fff;
+    float: right;
+}

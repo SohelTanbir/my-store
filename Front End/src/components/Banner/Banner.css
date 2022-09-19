@@ -1,0 +1,56 @@
+.banner{
+    width: 100%;
+}
+.banner .row{
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.banner .categories{
+    width: 20%;
+}
+.banner .categories h3{
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    padding: .3rem;
+    background: #dfb839;
+}
+.categori-items{
+    font-size: 1.4rem;
+    padding: 1rem .5rem;
+    color: rgb(58, 58, 58);
+}
+.categori-items input{
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.categori-items span.category{
+    margin-left:.5rem;
+    color: #969696;
+}
+.banner-slider{
+    width: 80%;
+    padding: 0 2rem;
+}
+.banner-slider img{
+    width: 100%;
+}
+
+/*
+------------------------------------------------------------
+--------- Responsive Styles For Banner Section ---------
+------------------------------------------------------------
+*/
+
+/*Smll device*/
+@media all and (max-width: 768px){
+    .banner .categories {
+        width: 100%;
+    }
+    .banner-slider {
+        width: 100%;
+        margin-bottom: 3rem;
+        padding: 0;
+    }
+}

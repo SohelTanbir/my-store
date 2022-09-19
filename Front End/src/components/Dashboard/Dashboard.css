@@ -1,0 +1,49 @@
+.dashboard{
+    background:#dddd;
+}
+.dashboard-main{
+    display: flex;
+    justify-content: space-between;
+}
+.logout p{
+    padding-left: 1rem;
+    color:#dfdfdf;
+    cursor: pointer;
+}
+.main-part {
+    padding: 3rem 2rem;
+    width: 80%;
+}
+.total-orders,
+.total-blog,
+.total-admin,
+.total-review{
+    flex-basis: 23%;
+    padding:2rem;
+    text-align: center;
+    border-radius: 1rem;
+    font-size:2rem;
+    color:#fff;
+}
+.statistics h4, h5{
+    font-weight: 400;
+}
+.total-orders{
+    background:tomato;
+}
+.total-blog{
+    background:blue;
+}
+.total-admin{
+    background:#40407a;
+}
+.total-review{
+    background:orange;
+}
+.dashboard-grap{
+    background: url('../../images/dashborad-grap.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height:45rem;
+    margin:2rem 0;
+}
