@@ -48,27 +48,16 @@
 --------- Responsive CSS For Contact Page -------------
 ------------------------------------------------------------
 */
-/*large device*/
-@media all and (max-width:991px){
-    .contact-box {
-        width: 70%;
-    }
-}
 /*medium device*/
 @media all and (max-width:768px){
-    .contact-box {
-        width: 80%;
-    }
+    .trace-order-form{
+        width:100%;
+    }   
 }
 /*small device*/
 @media all and (max-width:576px){
-    .contact-box {
-        width: 100%;
-    }
-    .contact-box .w-50{
-      display: initial;
-    }
-    .contact-box .w-50 input{
-        width: 100%;
+    .trace-order-form h4 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
     }
 }
