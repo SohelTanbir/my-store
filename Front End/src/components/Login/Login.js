@@ -89,10 +89,15 @@ const Login = () => {
               <input type="password" name="password" onBlur={handleInput} placeholder="Password" /> <br />
               <button className="loginBtn" onClick={loginWithEmail}>
                 <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
+              <div className="forgot-password">
+              <Link to="/password/reset-password">
+                <span>Forgot Passwrod?</span>
+              </Link>
+              </div>
             </form>
           </div>
           <div className="loginOption">
-            <h4>Sign Up With</h4>
+            <h4>Login Up With</h4>
             <button onClick={handleFacebookLogin} className="facebook"><FontAwesomeIcon icon={faFacebookSquare} /> Facebook</button>
             <button onClick={handleGoogleLogin} className="google"><FontAwesomeIcon icon={faGoogle} /> Google</button>
             <Link to="/signup">Don't have an Account? Create now</Link>

@@ -28,12 +28,12 @@ const ProductDetails = () => {
                         <FontAwesomeIcon icon={faStarHalfAlt} />
                         <Link to="/reviews"><span className='total-ratings'>12 ratings</span></Link>
                         </div>
-                        <p className='brand'>Brand: No brand </p>
-                        <p className='color'><span>Color</span>: Multi color</p>
+                        <p className='brand'>Brand:{product[0].brand} </p>
+                        <p className='color'><span>Color</span>: {product[0].color}</p>
                         <div className="price">
                             <h3><span className='taka-sign'>৳ </span> {product[0].price} </h3>
                         </div>
-                        <div className="size">
+                        {product[0].size&& <div className="size">
                             <div className="M active">
                                 <h4>M</h4>
                             </div>
@@ -43,7 +43,7 @@ const ProductDetails = () => {
                             <div className="XL">
                                 <h4>XL</h4>
                             </div>
-                        </div>
+                        </div>}
                         <div className="button-group">
                             <button className='buy-now-btn'>Buy Now</button>
                             <button className='add-to-cart-btn'>Add to Cart</button>
@@ -51,12 +51,12 @@ const ProductDetails = () => {
                     </div>
                 </div>
                 <div className="product-description">
-                    <h4>Details of Product name will be here</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio vel quia excepturi aspernatur iure tempora est nihil laudantium sunt blanditiis?</p>
+                    <h4>Details of Product: {product[0].name}</h4>
+                    <p>{product[0].description}</p>
                 </div>
                 <div className="product-reviews">
                     <h4>Ratings and Reviews of....</h4>
-                    <h2>4.8 <span>/ 5</span></h2>
+                    <h2>{product[0].ratings} <span>/ 5</span></h2>
                     <div className="rating">
                         <FontAwesomeIcon icon={faStar} />
                         <FontAwesomeIcon icon={faStar} />
@@ -65,9 +65,10 @@ const ProductDetails = () => {
                         <FontAwesomeIcon icon={faStarHalfAlt} /> <br />
                         <span className='total-ratings'>12 ratings</span>
                     </div>
-                    <Review name="Sohel Rana" rating="5" comment="Amazing Product! Thanks to the seller. recommended to all" />
 
-                    <Review name="Shakil " rating="5" comment="recommended to all" />
+                    {product[0].allReviews.length > 0&&product[0].allReviews.map(review =>(
+                         <Review name={review.user} rating="5" comment={review.review} />
+                    ))}
                 </div>
             </div>
         </div>

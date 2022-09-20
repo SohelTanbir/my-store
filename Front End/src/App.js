@@ -20,6 +20,7 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 import Reviews from './components/Reviews/Review';
 import Contact from './components/Contact/Contact';
 import TraceOrder from './components/TraceOrder/TraceOrder';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 
 export const userContext = createContext();
 
@@ -62,6 +63,9 @@ function App() {
             </Route>
             <Route path="/orders/trace">
               <TraceOrder/>
+            </Route>
+            <Route path="/password/reset-password">
+              <ResetPassword/>
             </Route>
             <Route path="/details/:id">
               <ProductDetails/>

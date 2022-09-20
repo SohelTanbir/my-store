@@ -3,7 +3,7 @@
 }
 .loginBox{
     width:30%;
-    margin:8% auto;
+    margin:5% auto;
     background-image:linear-gradient(to right, #A5F8CA, #9EDFF1);
     padding:3rem 3rem;
     text-align: center;
@@ -74,7 +74,21 @@
 .loginOption a:hover{
     text-decoration: underline;
 }
-
+.login .forgot-password{
+    width: 100%;
+    text-align: right;
+}
+.login .forgot-password span{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #818181;
+    text-transform: capitalize;
+    margin-top: 1rem;
+    display: inline-block;
+}
+.login .forgot-password span:hover{
+    text-decoration: underline;
+}
 /*
 ------------------------------------------------------------
 ------------ Responsive CSS Login Page  ----------------

@@ -6,6 +6,7 @@ const Contact = () => {
         <div className='contact'>
               <div className="container">
                 <div className="contact-box">
+                    <h4>How can we help you?</h4>
                     <form>
                        <div className="w-50">
                        <input type="text" placeholder='Name'/> <br />

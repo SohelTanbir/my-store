@@ -44,12 +44,6 @@ const SignUp = ()=>{
     return(
         <div className="SignUp">
         <div className="container">
-            {user.success?<div className="actionDisplay">
-            <h4 style={{color:'blue'}}>Your Account Created successful!</h4>
-            </div>:''}
-            {user.error?<div className="actionDisplay">
-            <h4 style={{color:'red'}}>{user.error}</h4>
-            </div>:''}
             <div className="SignUpBox">
                 <h3>Sign Up</h3>
                 <div className="inputBox">
