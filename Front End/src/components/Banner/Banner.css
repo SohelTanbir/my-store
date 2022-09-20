@@ -46,7 +46,7 @@
 /*Smll device*/
 @media all and (max-width: 768px){
     .banner .categories {
-        width: 100%;
+        display: none
     }
     .banner-slider {
         width: 100%;
