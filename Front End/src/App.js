@@ -22,6 +22,7 @@ import Contact from './components/Contact/Contact';
 import TraceOrder from './components/TraceOrder/TraceOrder';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import SetNewPassword from './components/ResetPassword/SetNewPassword';
+import OrderStatus from './components/TraceOrder/OrderStatus';
 
 export const userContext = createContext();
 
@@ -32,9 +33,11 @@ function App() {
   return (
     <div className="App">
       <userContext.Provider value={[loggedInUser, setLoggedInUser], [cart, setCart],[payment, setPayment]}>
+
      <Router>
-     <Header/>
+     <Header/>                                                                                                                                     
           <Switch>
+       
             <Route exact path="/">
                 <Home/>
             </Route>
@@ -64,6 +67,9 @@ function App() {
             </Route>
             <Route path="/orders/trace">
               <TraceOrder/>
+            </Route>
+            <Route path="/orders/order-status">
+              <OrderStatus/>
             </Route>
             <Route path="/password/reset-password">
               <ResetPassword/>

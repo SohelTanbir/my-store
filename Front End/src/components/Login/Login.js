@@ -5,13 +5,15 @@ import {  faUser } from '@fortawesome/free-solid-svg-icons'
 import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
-import { faFacebookSquare, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+
 import { userContext } from '../../App';
 firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
+
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
@@ -76,6 +78,8 @@ const Login = () => {
         const newError = { ...user };
         newError.error = errorMessage;
         setUser(newError)
+        console.log(errorMessage);
+        console.log(newError);
       });
   }
   return (
