@@ -7,11 +7,12 @@ import { userContext } from '../../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-
+import { useHistory } from 'react-router';
 
 
 const Cart = () => {
     const { id } = useParams();
+    const history = useHistory();
     const { name, price, img } = FakeData[0]
     const [productQuantity, setProductQuantity] = useState(1);
     const [placeOrder, setPlaceOrder ] = useState(false);
@@ -47,6 +48,10 @@ const handleOrderShipment = (e)=>{
     alert("order place successfully")
 }
 
+// show product details page
+const showProductDetails = (id)=>{
+    history.push(`/details/${id}`);
+}
 
 
     return (
@@ -58,10 +63,10 @@ const handleOrderShipment = (e)=>{
                                 {FakeData.map(product =>(
                                      <div className="single-cart-product" key={product.id}>
                                      <div className="product-photo">
-                                     <Link to="/details"><img src={product.img} alt="product image" /></Link>
+                                     <Link onClick={()=> showProductDetails(product.id)}><img src={product.img} alt="product image" /></Link>
                                      </div>
                                      <div className="product-title">
-                                        <Link to="/details"><h4>{product.name}</h4></Link>
+                                        <Link onClick={()=> showProductDetails(product.id)}><h4>{product.name}</h4></Link>
                                          <p className='product-price'><span className='taka-sign'>৳ </span> {product.price}</p>
                                      </div>  
                                      <div className="product-quantity">

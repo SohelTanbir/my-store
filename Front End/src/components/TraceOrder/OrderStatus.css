@@ -9,17 +9,25 @@
     font-size: 3rem;
     font-weight: 400;
     color: #817f7f;
-    margin-bottom: 4rem;
     text-align: center;
+}
+.order-status-stepper .order-id{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #817f7f;
+    text-align: center;
+    margin-bottom: 5rem;
 }
 .order-steps{
     display: flex;
     justify-content: space-between;
+    padding-bottom: 8rem;
 }
 .single-step{
     position: relative;
     width: 25%;
 }
+
 .single-step::after{
     position: absolute;
     content: "";
@@ -47,6 +55,35 @@
     color: #817f7f;
     text-align: center;
 }
+.check-icon {
+    position: absolute;
+    top: 7%;
+    left: 46.5%;
+    color: #817f7f;
+}
+.single-step.active .circle{
+    background: green;
+    border: 0;
+}
+.single-step.active .check-icon{
+    color: #fff;
+}
+.order-status .btn{
+    display: block;
+    margin: auto;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: .3rem;
+    padding: 1rem 2rem;
+    background: #465487;
+}
+
+
+
 
 
 
@@ -59,6 +96,10 @@
 @media all and (max-width:806px){
     .order-status-stepper {
         width: 98%;
+    }
+    .check-icon {
+        top: 6%;
+        left: 45%;
     }
 }
 /*small device*/
@@ -82,5 +123,9 @@
     }
     .order-status-stepper h4 {
         margin-bottom: 1rem;
+    }
+    .check-icon {
+        top: 4%;
+        left: 42%;
     }
 }

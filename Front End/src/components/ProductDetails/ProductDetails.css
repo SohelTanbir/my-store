@@ -128,10 +128,6 @@
 --------- Responsive CSS For Contact Page -------------
 ------------------------------------------------------------
 */
-/*large device*/
-@media all and (max-width:991px){
-   
-}
 /*medium device*/
 @media all and (max-width:768px){
     .product-img {

@@ -36,7 +36,7 @@ const Header = () => {
                                 <Link to="/product">Products</Link>
                             </li>
                             <li>
-                                <Link to="/orders/trace">TracK Order</Link>
+                                <Link to="/orders/track">TracK Order</Link>
                             </li>
                             <li>
                                 <Link to="/contact">Contact</Link>
@@ -54,9 +54,7 @@ const Header = () => {
                      </div>
                     </div>
                     <div className="addToCart" data={cart}>
-                        <Link to="cart">
-                        <FontAwesomeIcon icon={faCartPlus} />
-                        </Link>
+                    <Link to="/cart"> <FontAwesomeIcon icon={faCartPlus} /></Link>
                     </div>
                 </div>
             </div>

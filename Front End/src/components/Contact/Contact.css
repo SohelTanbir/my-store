@@ -22,6 +22,13 @@
     padding:1rem 1.5rem;
     margin-bottom: 2.5rem;
     border: .1rem solid #eee;
+    transition: .5s ease-in;
+}
+.contact-box input:focus{
+    border: .1rem solid #550597;
+}
+.contact-box textarea:focus{
+    border: .1rem solid #550597;
 }
 .contact-box .w-50{
     display: flex;
@@ -52,7 +59,7 @@
     cursor: pointer;
     border-radius: .3rem;
     padding: 1rem 1.5rem;
-    background: #dfb839;
+    background: #465487;
 }
 
 /*

@@ -20,9 +20,13 @@
     font-weight: 400;
     color: #bbbbbb;
     outline: none;
+    transition: .5s ease-in;
     padding:1rem 1.5rem;
     margin-bottom: 2.5rem;
     border: .1rem solid #eee;
+}
+.trace-order-form input:focus{
+    border: .1rem solid #550597;
 }
 .trace-order-form ::placeholder{
     font-size: 1.8rem;

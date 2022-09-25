@@ -23,6 +23,7 @@ import TraceOrder from './components/TraceOrder/TraceOrder';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import SetNewPassword from './components/ResetPassword/SetNewPassword';
 import OrderStatus from './components/TraceOrder/OrderStatus';
+import UserProfile from './components/UserProfile/UserProfile';
 
 export const userContext = createContext();
 
@@ -37,51 +38,53 @@ function App() {
      <Router>
      <Header/>                                                                                                                                     
           <Switch>
-       
             <Route exact path="/">
                 <Home/>
             </Route>
-            <Route path="/home">
+            <Route exact path="/home">
                 <Home/>
             </Route>
-            <Route path="/product">
+            <Route exact path="/product">
                 <Product/>
             </Route>
-            <Route path="/reviews">
+            <Route exact path="/reviews">
                 <Reviews/>
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
                 <Login/>
             </Route>
-            <Route path="/signup">
+            <Route exact path="/signup">
                 <SignUp/>
             </Route>
-            <Route path="/dashboard">
+            <Route exact path="/dashboard">
                 <Dashboard/>
             </Route>
-            <Route path="/cart">
+            <Route exact path="/cart">
               <Cart/>
             </Route>
-            <Route path="/contact">
+            <Route exact path="/contact">
               <Contact/>
             </Route>
-            <Route path="/orders/trace">
+            <Route exact path="/orders/track">
               <TraceOrder/>
             </Route>
-            <Route path="/orders/order-status">
+            <Route exact path="/orders/order-status">
               <OrderStatus/>
             </Route>
-            <Route path="/password/reset-password">
+            <Route exact path="/password/reset-password">
               <ResetPassword/>
             </Route>
             <Route exact path="/password/new-password">
               <SetNewPassword/>
             </Route>
-            <Route path="/details/:id">
+            <Route exact path="/details/:id">
               <ProductDetails/>
             </Route>
-            <Route path="/addproduct">
+            <Route exact path="/addproduct">
                 <AddProduct/>
+            </Route>
+            <Route exact path="/users/profile">
+                <UserProfile/>
             </Route>
           </Switch>
      </Router>

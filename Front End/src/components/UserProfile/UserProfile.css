@@ -1,0 +1,99 @@
+.user-profile{
+    width:100%;
+    height: 100vh;
+    padding: 5rem 0;
+}
+.user-profile .row{
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.user-profile .user-info{
+    width:25%;
+    padding: 2rem;
+    text-align: center;
+    border-radius: .5rem;
+    background: #f8f8f8;
+}
+.profile-photo{
+    width: 5rem;
+    margin: auto;
+    height: 5rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.profile-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.user-info .user-name{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #817f7f;
+    padding: .5rem 0;
+    text-transform: capitalize;
+}
+.user-info p{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #000000;
+    padding: .5rem 0;
+    text-align: left;
+}
+.user-info p span{
+    color: #2b2b2b;
+    font-weight: 500;
+}
+
+.user-profile .orders-info{
+    width:74%;
+    margin-left: 1%;
+    padding: 0 1rem 1rem;
+}
+.orders-info h4{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #817f7f;
+    padding-bottom: .5rem;
+    border-bottom: .1rem solid #f8f8f8;
+    text-transform: capitalize;
+}
+.single-order{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: .1rem solid #eee;
+}
+.single-order img{
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+}
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+/*medium device*/
+@media all and (max-width:768px){
+    .user-profile .user-info{
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    .user-profile .orders-info{
+        width:100%;
+    }
+    .user-info p {
+        text-align: center;
+    }
+}
+/*medium device*/
+@media all and (max-width:400px){
+    .single-order {
+        flex-direction: column;
+    }
+    .single-order p {
+        font-size: 1.4rem;
+        padding-bottom: .5rem;
+    }
+}
