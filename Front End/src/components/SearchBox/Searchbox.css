@@ -23,7 +23,7 @@
 .search-box .search-btn{
     border: none;
     outline: none;
-    padding: 1.2rem;
+    padding: 1.3rem;
     color: #ffffff;
     background: #dfb839;
 }
@@ -37,6 +37,10 @@
 /*Smll device*/
 @media all and (max-width: 768px){
     .search-box {
+        width: 97%;
+        margin: auto;
+    }
+    .search-box form{
         display: flex;
         width: 95%;
         margin: auto;

@@ -87,11 +87,14 @@
         text-align: center;
     }
 }
-/*medium device*/
-@media all and (max-width:400px){
+/*small device*/
+@media all and (max-width:576px){
     .single-order {
         flex-direction: column;
     }
+}
+/*extra small device*/
+@media all and (max-width:400px){
     .single-order p {
         font-size: 1.4rem;
         padding-bottom: .5rem;

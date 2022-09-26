@@ -27,6 +27,13 @@ const UserProfile = () => {
                         <img src={product[0].img} alt="product photo" />
                         <p>{product[0].name}</p>
                         <p><span className='taka-sign'>৳ </span> {product[0].price}</p>
+                        <p className="status">Delivered</p>
+                    </div>
+                    <div className="single-order">
+                        <img src={product[0].img} alt="product photo" />
+                        <p>{product[0].name}</p>
+                        <p><span className='taka-sign'>৳ </span> {product[0].price}</p>
+                        <p className="status">Canceled</p>
                     </div>
                 </div>
                 </div>
