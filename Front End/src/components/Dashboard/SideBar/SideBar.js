@@ -14,7 +14,7 @@ const SideBar = () => {
                             <Link to="/dashboard"><FontAwesomeIcon icon={faTh} /> Dashboard</Link>
                         </li>
                         <li>
-                            <Link to="/addproduct"><FontAwesomeIcon icon={faPlusSquare} /> Add Product</Link>
+                            <Link to="/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /> Add Product</Link>
                         </li>
                         <li>
                             <Link to="/manageproduct"><FontAwesomeIcon icon={faEdit} /> Manage Product</Link>

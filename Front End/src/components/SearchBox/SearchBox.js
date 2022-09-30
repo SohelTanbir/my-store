@@ -6,7 +6,8 @@ import './Searchbox.css';
 
 const SearchBox = () => {
     const [searchVal, setSearchVal ] =  useState("");
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState([]);
+    const [selectedVal, setSelectedVal] = useState("All Categories")
 
 // handle search
 const handleSearch  = (e)=>{
@@ -25,13 +26,12 @@ const handleChangeCategory = (e)=>{
 
 
 
-
     return (
        <div className="container">
          <div className='search-box'>
             <form onSubmit={handleSearch}>
                 <select name="category" id="category" onChange={handleChangeCategory}>
-                    <option selected>All Categories</option>
+                    <option value="all">All Categories</option>
                     <option value="men">Men Fasion</option>
                     <option value="women">Women Fasion</option>
                     <option value="winter">Winter Collection</option>

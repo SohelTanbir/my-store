@@ -80,7 +80,7 @@ function App() {
             <Route exact path="/details/:id">
               <ProductDetails/>
             </Route>
-            <Route exact path="/addproduct">
+            <Route  path="/products/addproduct">
                 <AddProduct/>
             </Route>
             <Route exact path="/users/profile">
