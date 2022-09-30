@@ -15,9 +15,10 @@ const SignUp = ()=>{
         error:''
     })
     const handleInput = (e)=> {
-        const newuser = {...user};
-        newuser[e.target.name] = e.target.value;
-        setUser(newuser);
+        const newUser = {...user};
+        newUser[e.target.name] = e.target.value;
+        setUser(newUser);
+        console.log(newUser)
     }
 
     // submit form data and create account
@@ -29,9 +30,12 @@ const SignUp = ()=>{
         var user = userCredential.user;
         if(user){
             const NewSuccess = {...user};
+            console.log(NewSuccess)
             NewSuccess.success = true;
             setUser(NewSuccess);
-        } 
+        } else{
+            console.log("something wen wrong!")
+        }
     })
     .catch((error) => {
         const errorMessage = error.message;

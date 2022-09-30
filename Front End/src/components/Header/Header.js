@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCartPlus, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 
 const Header = () => {

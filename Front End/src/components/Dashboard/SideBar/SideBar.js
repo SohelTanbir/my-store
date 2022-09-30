@@ -17,7 +17,7 @@ const SideBar = () => {
                             <Link to="/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /> Add Product</Link>
                         </li>
                         <li>
-                            <Link to="/manageproduct"><FontAwesomeIcon icon={faEdit} /> Manage Product</Link>
+                            <Link to="/products/manage"><FontAwesomeIcon icon={faEdit} /> Manage Product</Link>
                         </li>
                         <li>
                             <Link to="/orders"><FontAwesomeIcon icon={faBars} /> Orders</Link>

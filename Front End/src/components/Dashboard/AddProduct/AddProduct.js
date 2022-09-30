@@ -4,20 +4,22 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 
 const AddProduct = () => {
-    const [addProduct, setAddProduct] = useState({});
-    const [category, setCategory] = useState([]);
+    const [product, setProduct] = useState({});
 
+    
+    // handle change
+    const handleChange = (e)=>{
+        const newProduct  ={...product}
+        newProduct[e.target.name] = e.target.value;
+        setProduct(newProduct)
+    }
+    
     // handle add product
-    const handleAddProduct = (e)=>{
-        alert("Product Added!");
+    const handleSubmit = (e)=>{
+        
         e.preventDefault();
     }
 
-    const handleChangeCategory = (e)=>{
-        const newCategory = [...category, e.target.value]
-        setCategory(newCategory)
-    }
-    
 
 
     return (
@@ -27,11 +29,13 @@ const AddProduct = () => {
             <SideBar></SideBar>
                 <div className="main-part product-add-form">
                    <h2>Add New Product</h2>
-                   <form onSubmit={handleAddProduct}>
-                       <input type="text" placeholder="Product Name"/> <br />
-                       <input type="text" placeholder="৳ Price"/> <br /> 
-                       <select name="category" id="category" onChange={handleChangeCategory}>
-                            <option value="all">All Categories</option>
+                   <form onSubmit={handleSubmit}>
+                       <input type="text" className="mr-2p" onBlur={handleChange} name='name' placeholder="Product Name"/>
+                       <input type="text" onBlur={handleChange} name='price' placeholder="৳ Price"/>
+                       <input type="text" className="mr-2p"  onBlur={handleChange} name='brand' placeholder="Brand"/> 
+                       <input type="text" onBlur={handleChange} name='color' placeholder="Color"/>
+                       <select name="category" className="mr-2p"  id="category" onBlur={handleChange}>
+                            <option value="all">Category</option>
                             <option value="men">Men Fasion</option>
                             <option value="women">Women Fasion</option>
                             <option value="winter">Winter Collection</option>
@@ -42,9 +46,19 @@ const AddProduct = () => {
                             <option value="t-shirt">T-shirt</option>
                             <option value="shirt">Shirt</option>
                         </select>
-                       <input type="file"/><br />
-                       <textarea name="product-description"  placeholder='Product description'></textarea>
-                       <button className='submit-btn' onClick={handleAddProduct} type="submit">Add Product</button>
+                       <select name="size" id="size" onBlur={handleChange}>
+                            <option value="all">Size</option>
+                            <option value="men">M</option>
+                            <option value="men">L</option>
+                            <option value="men">XL</option>
+                            <option value="men">M, L</option>
+                            <option value="men">M, XL</option>
+                            <option value="men">L, XL</option>
+                            <option value="men">M, L, XL</option>
+                        </select>
+                       <input name='photo' className="mr-2p"  onBlur={handleChange} type="file"/><br />
+                       <textarea name="description"  onBlur={handleChange} placeholder='Product description'></textarea>
+                       <button className='submit-btn' type="submit">Add Product</button>
                    </form>
                 </div>
             </div>

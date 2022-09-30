@@ -24,6 +24,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import SetNewPassword from './components/ResetPassword/SetNewPassword';
 import OrderStatus from './components/TraceOrder/OrderStatus';
 import UserProfile from './components/UserProfile/UserProfile';
+import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 
 export const userContext = createContext();
 
@@ -82,6 +83,9 @@ function App() {
             </Route>
             <Route  path="/products/addproduct">
                 <AddProduct/>
+            </Route>
+            <Route  path="/products/manage">
+                <ManageProducts/>
             </Route>
             <Route exact path="/users/profile">
                 <UserProfile/>
