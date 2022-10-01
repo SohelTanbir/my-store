@@ -19,7 +19,7 @@
 .products-container th, tr,td{
     font-size: 1.6rem;
     font-weight: 400;
-    padding: 1rem .5rem;
+    padding:.5rem;
 }
 .products-container th{
     font-weight: 600;
@@ -27,13 +27,6 @@
     text-transform: capitalize;
     background: #dadada;
 }
-.products-container tr{
-    border-bottom: .1rem solid #ddd;
-}
-.products-container tr:last-child{
-    border-bottom: 0;
-}
-
 .products-container tr:nth-child(odd){
     background: #f1f1f1;
 }
