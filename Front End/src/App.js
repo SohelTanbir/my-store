@@ -27,6 +27,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
+import Orders from './components/Dashboard/Orders/Orders';
 
 export const userContext = createContext();
 
@@ -94,6 +95,9 @@ function App() {
             </Route>
             <Route  path="/admin/make-admin">
                 <MakeAdmin/>
+            </Route>
+            <Route  path="/orders">
+                <Orders/>
             </Route>
             <Route exact path="/users/profile">
                 <UserProfile/>
