@@ -28,6 +28,8 @@ import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
 import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 import Orders from './components/Dashboard/Orders/Orders';
+import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
+import NotFound from './components/NotFount/NotFound';
 
 export const userContext = createContext();
 
@@ -84,23 +86,29 @@ function App() {
             <Route exact path="/details/:id">
               <ProductDetails/>
             </Route>
-            <Route  path="/products/addproduct">
+            <Route exact  path="/products/addproduct">
                 <AddProduct/>
             </Route>
-            <Route  path="/products/manage">
+            <Route exact path="/products/manage">
                 <ManageProducts/>
             </Route>
-            <Route  path="/products/update">
+            <Route exact path="/products/update">
                 <UpdateProduct/>
             </Route>
-            <Route  path="/admin/make-admin">
+            <Route  exact path="/admin/make-admin">
                 <MakeAdmin/>
             </Route>
-            <Route  path="/orders">
+            <Route exact  path="/orders/all">
                 <Orders/>
+            </Route>
+            <Route exact  path="/orders/status/update">
+                <UpdateOrder/>
             </Route>
             <Route exact path="/users/profile">
                 <UserProfile/>
+            </Route>
+            <Route exact path="*">
+                <NotFound/>
             </Route>
           </Switch>
      </Router>

@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import './Orders.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
-import monitor from '../../../images/products/monitor.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 
@@ -37,27 +36,7 @@ const Orders = () => {
                             <td>1</td>
                             <td><span>৳ </span> 150</td>
                             <td>
-                                <Link to="/orders/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#d1d1d1d1d1</td>
-                            <td>Processing</td>
-                            <td>1</td>
-                            <td><span>৳ </span> 150</td>
-                            <td>
-                                <Link to="/orders/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#d1d1d1d1d1</td>
-                            <td>Processing</td>
-                            <td>1</td>
-                            <td><span>৳ </span> 150</td>
-                            <td>
-                                <Link to="/orders/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                <Link to="/orders/status/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
                                 <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                             </td>
                         </tr>

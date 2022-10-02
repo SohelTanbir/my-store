@@ -20,10 +20,7 @@ const SideBar = () => {
                             <Link to="/products/manage"><FontAwesomeIcon icon={faEdit} /> Manage Product</Link>
                         </li>
                         <li>
-                            <Link to="/orders"><FontAwesomeIcon icon={faLayerGroup} /> Orders</Link>
-                        </li>
-                        <li>
-                            <Link to="/manageorders"><FontAwesomeIcon icon={faEdit} /> Manage Orders</Link>
+                            <Link to="/orders/all"><FontAwesomeIcon icon={faLayerGroup} /> Orders</Link>
                         </li>
                         <li>
                             <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /> Make Admin</Link>

@@ -2,7 +2,7 @@ import React from 'react';
 import './DashboardHeader.css';
 import user from '../../../images/user-photo.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faBlog, faCog, faCogs, faEdit, faPlusSquare, faPowerOff, faSignOutAlt, faTh, faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import {faPowerOff} from '@fortawesome/free-solid-svg-icons'
 import { faBlogger } from '@fortawesome/free-brands-svg-icons';
 const DashboardHeader = () => {
     return (
@@ -19,7 +19,7 @@ const DashboardHeader = () => {
                             </div>
                             <p>SohelRana</p>
                             <div className="logout">
-                                <p><FontAwesomeIcon icon={faPowerOff} /> Log Out</p>
+                                <p><FontAwesomeIcon icon={faPowerOff} /></p>
                             </div>
                         </div>
                     </div>
