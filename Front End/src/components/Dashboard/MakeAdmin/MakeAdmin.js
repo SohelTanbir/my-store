@@ -4,19 +4,19 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 
 const MakeAdmin = () => {
-    const [product, setProduct] = useState({});
+    const [admin, setAdmin] = useState({});
 
     
     // handle change
     const handleChange = (e)=>{
-        const newProduct  ={...product}
-        newProduct[e.target.name] = e.target.value;
-        setProduct(newProduct)
+        const newAdmin  ={...admin}
+        newAdmin[e.target.name] = e.target.value;
+        setAdmin(newAdmin)
     }
     
     // handle add product
     const handleSubmit = (e)=>{
-        
+        console.log(admin)
         e.preventDefault();
     }
 
@@ -30,7 +30,7 @@ const MakeAdmin = () => {
                    <h2>Make New Admin</h2>
                    <form onSubmit={handleSubmit}>
                    <input type="email"  onBlur={handleChange} name="email" placeholder="Enter email to make new admin" />
-                       <button className='submit-btn' type="submit">Add Admin</button>
+                    <button className='submit-btn'>Add Admin</button>
                    </form>
                 </div>
             </div>
