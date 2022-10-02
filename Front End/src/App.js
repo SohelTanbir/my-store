@@ -26,6 +26,7 @@ import OrderStatus from './components/TraceOrder/OrderStatus';
 import UserProfile from './components/UserProfile/UserProfile';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
+import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 
 export const userContext = createContext();
 
@@ -90,6 +91,9 @@ function App() {
             </Route>
             <Route  path="/products/update">
                 <UpdateProduct/>
+            </Route>
+            <Route  path="/admin/make-admin">
+                <MakeAdmin/>
             </Route>
             <Route exact path="/users/profile">
                 <UserProfile/>

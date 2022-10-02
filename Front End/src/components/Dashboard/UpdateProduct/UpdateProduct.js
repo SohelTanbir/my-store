@@ -21,7 +21,6 @@ const UpdateProduct = () => {
     }
 
 
-
     return (
         <div className="update-product">
             <DashboardHeader/>

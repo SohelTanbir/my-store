@@ -26,7 +26,7 @@ const SideBar = () => {
                             <Link to="/manageorders"><FontAwesomeIcon icon={faEdit} /> Manage Orders</Link>
                         </li>
                         <li>
-                            <Link to="/makeadmin"><FontAwesomeIcon icon={faUserPlus} /> Make Admin</Link>
+                            <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /> Make Admin</Link>
                         </li>
                         <li>
                             <Link to="/blogs"><FontAwesomeIcon icon={faBlogger} /> Blogs</Link>

@@ -9,7 +9,14 @@ import { Link } from 'react-router-dom';
 
 
 const ManageProducts = () => {
+
    const productName = "Redmi Monitor 1A 23.8 Full HD - Black";
+    const deleteProduct = ()=>{
+        alert('deleted');
+    }
+
+
+
    const nameModify = ()=>{
     if(JSON.stringify(productName).length >10){
             return JSON.stringify(productName).slice(0,10) + "...";
@@ -43,8 +50,9 @@ const ManageProducts = () => {
                             <td>Electronics</td>
                             <td>
                                 <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn'><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
-                                <button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button>
+                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
+                                <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
+
                             </td>
                         </tr>
                         <tr>
@@ -55,8 +63,8 @@ const ManageProducts = () => {
                             <td>Electronics</td>
                             <td>
                             <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn'><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
-                                <button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button>
+                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
+                                <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
                             </td>
                         </tr>
                     </table>
