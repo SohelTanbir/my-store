@@ -30,6 +30,7 @@ import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
 import Orders from './components/Dashboard/Orders/Orders';
 import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
+import Category from './components/Dashboard/Category/Category';
 
 export const userContext = createContext();
 
@@ -103,6 +104,9 @@ function App() {
             </Route>
             <Route exact  path="/orders/status/update">
                 <UpdateOrder/>
+            </Route>
+            <Route exact  path="/category/all">
+                <Category/>
             </Route>
             <Route exact path="/users/profile">
                 <UserProfile/>

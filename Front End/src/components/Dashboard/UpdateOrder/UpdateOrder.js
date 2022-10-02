@@ -38,6 +38,7 @@ const UpdateOrder = () => {
                                     <h4><span>Order ID</span> : #d1d1d1d1d1</h4>
                                     <h4><span>Amount</span> : 65656</h4>
                                     <h4><span>Payment</span> : paid by Bkash</h4>
+                                    <h4><span>Status</span> : Processing</h4>
                             </div>
                         </div>
                         <div className="update-status">

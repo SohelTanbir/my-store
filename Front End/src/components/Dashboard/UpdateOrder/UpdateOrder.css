@@ -24,7 +24,12 @@
     font-size: 1.6rem;
     font-weight: 400;
     color: #000;
-    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.shipping h4 span,
+.order h4 span{
+    font-weight: 600;
 }
 .update-status{
     width: 30%;

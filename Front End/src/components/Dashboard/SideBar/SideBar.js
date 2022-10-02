@@ -1,7 +1,7 @@
 import React from 'react';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {    faCog, faEdit, faLayerGroup, faPlusSquare,faTh, faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import {    faCog, faEdit, faLayerGroup, faPlusSquare,faQrcode,faTh, faUserPlus} from '@fortawesome/free-solid-svg-icons'
 import { faBlogger } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,9 @@ const SideBar = () => {
                         </li>
                         <li>
                             <Link to="/orders/all"><FontAwesomeIcon icon={faLayerGroup} /> Orders</Link>
+                        </li>
+                        <li>
+                            <Link to="/category/all"><FontAwesomeIcon icon={faQrcode} /> Category</Link>
                         </li>
                         <li>
                             <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /> Make Admin</Link>
