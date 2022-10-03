@@ -1,5 +1,6 @@
 const express = require("express");
 const app  = express();
+app.use(express.json());
 
 // dotenv config file
 require("dotenv").config();
@@ -7,16 +8,14 @@ require("dotenv").config();
 //internal requies 
 const connectDatabase = require("./config/DatabaseConnection");
 
-
-
 // database Connection
 connectDatabase();
 
-// routes
-app.get("/", (req, res)=>{
-    res.send("Welcome to Back End Development with MERN!");
-})
+// All routes
+const productsRoute = require("./routes/productsRoute");
 
+
+app.use("/api/v1", productsRoute)
 
 
 // App Listener
