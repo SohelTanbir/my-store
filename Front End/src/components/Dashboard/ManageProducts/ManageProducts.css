@@ -49,3 +49,28 @@
 .products-container .delete-btn:hover{
     color: red;
 }
+
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+/*large device*/
+@media all and (max-width:991px){
+    .product-main {
+        width: 98%; 
+    }
+ }
+ /*medium device*/
+ @media all and (max-width:768px){
+    .product-main {
+        overflow:scroll;
+    }
+    .products-container table {
+        width: 70rem;
+    }
+ }
+ /*small device*/
+ @media all and (max-width:576px){
+    
+ }
