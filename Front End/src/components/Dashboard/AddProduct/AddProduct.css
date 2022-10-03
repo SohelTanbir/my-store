@@ -64,3 +64,16 @@
         padding: 1rem 1.5rem;
         background: #465487;
 }
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+
+ /*medium device*/
+ @media all and (max-width:768px){
+    /*add product*/
+    .product-add-form input, textarea, select, .check-box input {
+        width: 100%;
+    }
+ }
