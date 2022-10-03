@@ -50,3 +50,23 @@
 .orders-container .delete-btn:hover{
     color: red;
 }
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+/*large device*/
+@media all and (max-width:991px){
+    .orders-main {
+        width: 98%; 
+    }
+ }
+ /*medium device*/
+ @media all and (max-width:768px){
+    .orders-main {
+        overflow:scroll;
+    }
+    .orders-container table {
+        width: 70rem;
+    }
+ }
