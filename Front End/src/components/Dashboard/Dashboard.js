@@ -13,19 +13,19 @@ const Dashboard = () => {
                     <div className="statistics">
                         <div className="container">
                             <div className="row">
-                                <div className="total-orders">
+                                <div className="statistics-item total-orders">
                                     <h4>Total Orders</h4>
                                     <h5>100+</h5>
                                 </div>
-                                <div className="total-blog">
+                                <div className="statistics-item total-blog">
                                     <h4>Total Blog</h4>
                                     <h5>10+</h5>
                                 </div>
-                                <div className="total-admin">
+                                <div className="statistics-item total-admin">
                                     <h4>Total Admin</h4>
                                     <h5>5+</h5>
                                 </div>
-                                <div className="total-review">
+                                <div className="statistics-item total-review">
                                     <h4>Total Review</h4>
                                     <h5>52+</h5>
                                 </div>
@@ -33,6 +33,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <div className="dashboard-grap">
+                        
                     </div>
                 </div>
             </div>

@@ -3,12 +3,22 @@ import './Category.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
-import PopUp from '../../PopUP/PopUp';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 
 const Category = () => {
+    const [category, setCategory ] = useState("");
+
+    // handle change input data
+    const handleChange = e =>{
+        setCategory(e.target.value);
+    }
+
+    // store category in db
+    const handleSubmit = e =>{
+        e.preventDefault();
+        console.log(category)
+    }
 
     const deleteProduct = ()=>{
         alert('deleted');
@@ -21,47 +31,32 @@ const Category = () => {
             <div className="dashboard-main">
             <SideBar/>
             <div className="category-main">
-                <div className="category-header">
-                    <h3>All Category(12)</h3>
-                    <button className='btn category-btn'>Add Category</button>
-                </div>
-                <div className="category-container">
+                    <h2>All Category(02)</h2>
+                    <div className="row">
+                    <div className="category-container">
                     <div className="row">
                         <div className="single-category">
                             <span>Bag</span>
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon onClick={deleteProduct} icon={faTimes} />
                         </div>
                         <div className="single-category">
                             <span>Olive Oil</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>Winter Collection</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>Watch</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>T-Shirt</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>Jens Pant</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>Dron Camera</span>
-                            <FontAwesomeIcon icon={faTimes} />
-                        </div>
-                        <div className="single-category">
-                            <span>Sunglass</span>
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon  onClick={deleteProduct} icon={faTimes} />
                         </div>
                     </div>
-                    <PopUp title="Add New Category"/>
                 </div>
+                <div className="add-new-category">
+                <div className="popup-box">
+                     <div className="title">
+                        <h3>Add New Category</h3>
+                     </div>
+                    <form onSubmit={handleSubmit}>
+                    <input type="text" onChange={handleChange} name='category' placeholder='Enter Category ' /> <br />
+                    <button>Add Now</button>
+                    </form>
+                </div>
+                </div>
+                    </div>
             </div>
             </div>
         </div>

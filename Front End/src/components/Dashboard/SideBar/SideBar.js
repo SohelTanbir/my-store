@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const SideBar = () => {
     return (
         <div className="sideBar">
-                    <ul>
+                    <ul className='sidebar-with-text'>
                         <li>
                             <Link to="/dashboard"><FontAwesomeIcon icon={faTh} /> Dashboard</Link>
                         </li>
@@ -38,7 +38,36 @@ const SideBar = () => {
                             <Link><FontAwesomeIcon icon={faCog} /> Setting</Link>
                         </li>
                     </ul>
-                </div>
+                    <ul className='sidebar-without-text'>
+                        <li title='Dashboard'>
+                            <Link to="/dashboard"><FontAwesomeIcon icon={faTh} /></Link>
+                        </li>
+                        <li title='Add Product'>
+                            <Link to="/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /></Link>
+                        </li>
+                        <li title='Manage Product'>
+                            <Link to="/products/manage"><FontAwesomeIcon icon={faEdit} /></Link>
+                        </li>
+                        <li title='Orders'>
+                            <Link to="/orders/all"><FontAwesomeIcon icon={faLayerGroup} /></Link>
+                        </li>
+                        <li title='Category'>
+                            <Link to="/category/all"><FontAwesomeIcon icon={faQrcode} /></Link>
+                        </li>
+                        <li title='Make Admin'>
+                            <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /></Link>
+                        </li>
+                        <li title='Blog'>
+                            <Link to="/blogs"><FontAwesomeIcon icon={faBlogger} /></Link>
+                        </li>
+                        <li title='Manage Blog'>
+                            <Link to="/manageblogs"><FontAwesomeIcon icon={faEdit} /></Link>
+                        </li>
+                        <li title='Setting'>
+                            <Link><FontAwesomeIcon icon={faCog} /></Link>
+                        </li>
+                    </ul>
+        </div>
     );
 };
 

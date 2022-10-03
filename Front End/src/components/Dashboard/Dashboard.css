@@ -18,12 +18,13 @@
 .total-blog,
 .total-admin,
 .total-review{
-    flex-basis: 23%;
+    width: 22rem;
     padding:2rem;
     text-align: center;
     border-radius: 1rem;
     font-size:2rem;
     color:#fff;
+    margin-bottom: 2rem;
 }
 .statistics h4, h5{
     font-weight: 400;
@@ -40,10 +41,27 @@
 .total-review{
     background:orange;
 }
-.dashboard-grap{
-    background: url('../../images/dashborad-grap.png') no-repeat;
-    background-size: cover;
-    background-position: center;
-    height:45rem;
-    margin:2rem 0;
+
+
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+/*large device*/
+@media all and (max-width:991px){
+   /*dashboard main part*/
+   .main-part {
+    width: 98%;
+}
+}
+/*medium device*/
+@media all and (max-width:768px){
+   
+}
+/*small device*/
+@media all and (max-width:576px){
+    .main-part .row {
+        justify-content: center;
+    }
 }
