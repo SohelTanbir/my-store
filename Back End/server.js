@@ -18,6 +18,14 @@ const productsRoute = require("./routes/productsRoute");
 app.use("/api/v1", productsRoute)
 
 
+
+// default error handler
+app.use((err, req, res)=>{
+    if(err){
+        console.log(err);
+    }
+})
+
 // App Listener
 app.listen(process.env.PORT || 8080, ()=>{
     console.log(`Server Listening on Port ${process.env.PORT || 8080}`);
