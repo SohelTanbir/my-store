@@ -82,3 +82,15 @@
 .w-100{
     width: 100%!important;
 }
+/*
+------------------------------------------------------------
+--------- Responsive CSS For Contact Page -------------
+------------------------------------------------------------
+*/
+ /*medium device*/
+ @media all and (max-width:576px){
+    .update-product h2 {
+        font-size: 2rem;
+        margin-bottom:0;
+    }
+ }
