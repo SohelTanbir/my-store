@@ -31,7 +31,7 @@ const getAllProducts =  async(req, res)=>{
                 products
             });
         }else{
-            res.status(200).json({
+            res.status(404).json({
                 success:false,
                 message:"Sorry! Didn't find any product!"
             })
@@ -42,8 +42,31 @@ const getAllProducts =  async(req, res)=>{
     
 }
 
+// get a product by id
+const getProductById =  async(req, res)=>{
+
+    try {
+        const products = await Product.findById(req.params.id);
+        if(products){
+            res.status(200).json({
+                success:true,
+                products
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Product Not Found!"
+            })
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    
+}
+
+
 // delete a product 
-const deleteProduct = async (req, res, next )=>{
+const deleteProduct = async (req, res )=>{
  
    try {
         const product =  await Product.findById(req.params.id)
@@ -54,7 +77,7 @@ const deleteProduct = async (req, res, next )=>{
                 message:"Product Delete Successfully!"
             });
         }else{
-            res.status(200).json({
+            res.status(404).json({
                 success:false,
                 message:"Product not Found!"
             });
@@ -65,11 +88,16 @@ const deleteProduct = async (req, res, next )=>{
 
 }
 
+// update a product
+
+
 
 
 // export default
 module.exports ={
     addNewProduct,
     getAllProducts,
-    deleteProduct
+    getProductById,
+    deleteProduct,
+
 }
