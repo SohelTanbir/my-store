@@ -20,11 +20,16 @@ app.use("/api/v1", productsRoute)
 
 
 // default error handler
-app.use((err, req, res)=>{
-    if(err){
-        console.log(err);
+// default Error Handler
+const errorHandler  = (err, req, res, next)=>{
+    if(req.headersSent){
+         return next(err)
     }
-})
+    res.status(500).json({error:err})
+     
+ }
+
+ app.use(errorHandler);
 
 // App Listener
 app.listen(process.env.PORT || 8080, ()=>{
