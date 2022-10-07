@@ -11,7 +11,7 @@ const {
 // category routes
 router.get("/category/all", getAllCategory);
 router.post("/category/create", createCategory);
-router.post("/category/delete/:id", deleteCategory);
+router.delete("/category/delete/:id", deleteCategory);
 
 
 

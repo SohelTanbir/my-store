@@ -21,36 +21,47 @@ const getAllCategory = async(req, res)=>{
     }
 }
 
-// create category 
+// create category --admin
 const createCategory = async (req, res)=>{
-    // capitalize category name
-    const newCategory =req.body.name.toLowerCase();
-
-
-    const category = new Category({name:newCategory});
-    category.save((err)=>{
-        if(!err){
-            res.status(200).json({
-                success:true,
-                message:"Category Created Successfully!",
-            });
-        }else{
-            res.status(401).json({
-                success:false,
-                message:"Category Created Failed!",
-                error:err.message
-            })
-        }
-    })
+   try {
+    const isExistCategory = await Category.find({name:req.body.name});
+    
+     if(isExistCategory.length <1){
+        // capitalize category name
+        const newCategory =req.body.name.toLowerCase();
+        const category = new Category({name:newCategory});
+        category.save((err)=>{
+            if(!err){
+                res.status(200).json({
+                    success:true,
+                    message:"Category Created Successfully!",
+                });
+            }else{
+                res.status(401).json({
+                    success:false,
+                    message:"Category Created Failed!",
+                    error:err.message
+                });
+            }
+        });
+     }else{
+        res.status(401).json({
+            success:false,
+            message:"Sorry! Category Already Exist!",
+        });
+     }
+   } catch (err) {
+    console.log(err);
+   }
 }
-// delete category
+// delete category --admin
 const deleteCategory = async (req, res)=>{
     const category = await Category.findById(req.params.id);
     if(category){
         category.deleteOne();
         res.status(200).json({
             success:true,
-            message:"Category Deleted Successful!"
+            message:"Category Deleted Successfully!"
         })
 
     }else{
