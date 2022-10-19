@@ -1,14 +1,19 @@
 const User =  require("../models/usersModel");
+const bcrypt = require("bcrypt");
 
 
-
-// create user
+// create user or Sign Up
 const createUser = async (req, res)=>{
     try {
         // check user exist or not
         const isUser = await User.find({email:req.body.email});
         if(isUser.length < 1){
-            const user = await User.create(req.body);
+            const hashPassword = await bcrypt.hash(req.body.password, 10);
+            const user = await User.create({
+                name:req.body.name,
+                email:req.body.email,
+                password:hashPassword
+            });
             user.save(err =>{
                 if(!err){
                     res.status(200).json({
@@ -85,7 +90,36 @@ const deleteUser =  async (req, res)=>{
     }
 }
 
-
+// login user
+const loginUser =  async (req, res) =>{
+    try {
+        const user =  await User.find({email:req.body.email});
+        if(user){
+            if(user[0].password == req.body.password){
+                res.status(200).json({
+                    success:true,
+                    message:"Login Success!"
+                });
+            }else{
+                res.status(400).json({
+                    success:false,
+                    message:"Authentication Faield!"
+                });
+            }
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Authentication Faield!"
+            });
+        }
+        
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:"Authentication Faield!"
+        });
+    }
+}
 
 
 
@@ -93,5 +127,6 @@ const deleteUser =  async (req, res)=>{
 module.exports ={
     createUser,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    loginUser
 }
