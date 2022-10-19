@@ -95,7 +95,8 @@ const loginUser =  async (req, res) =>{
     try {
         const user =  await User.find({email:req.body.email});
         if(user){
-            if(user[0].password == req.body.password){
+        const isValidPassword = await bcrypt.compare(req.body.password, user[0].password)
+            if(isValidPassword){
                 res.status(200).json({
                     success:true,
                     message:"Login Success!"
