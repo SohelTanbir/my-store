@@ -60,9 +60,38 @@ const getAllUsers = async (req, res)=>{
         });
     }
 }
+// delete user by Id
+const deleteUser =  async (req, res)=>{
+    try {
+        const user =  await User.findById(req.params.id);
+        if(user){
+            user.deleteOne();
+            res.status(200).json({
+                success:true,
+                message:"User Deleted Successfully!"
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"User not found!"
+            });
+        }
+        
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:err.message
+        });
+    }
+}
+
+
+
+
 
 // export default
 module.exports ={
     createUser,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 }
