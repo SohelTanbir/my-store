@@ -14,12 +14,14 @@ connectDatabase();
 // All routes
 const productsRoute = require("./routes/productsRoute");
 const categoryRoute =  require("./routes/categoryRoute");
+const userRoute = require("./routes/userRoute");
 
 // product 
 app.use("/api/v1", productsRoute);
 // category
 app.use("/api/v1", categoryRoute);
-
+// user
+app.use("/api/v1", userRoute)
 
 
 // default error handler
