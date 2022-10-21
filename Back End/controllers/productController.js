@@ -1,8 +1,9 @@
 const Product = require("../models/productModel");
 
 // Create a new product
-const addNewProduct = async (req, res)=>{
-
+const addNewProduct = async (req, res, next)=>{
+        // set user reference in product 
+        req.body.user = req.userId;
         const product = new Product(req.body);
         product.save((err)=>{
             if(!err){

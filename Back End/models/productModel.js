@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./usersModel");
 
 
 const productSchema = mongoose.Schema({
@@ -65,6 +66,11 @@ const productSchema = mongoose.Schema({
         type:Date,
         default:Date.now(),
     },
+    user:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true,
+    }
 });
 
 // export 

@@ -91,7 +91,7 @@ const deleteUser =  async (req, res)=>{
 }
 
 // login user
-const loginUser =  async (req, res) =>{
+const loginUser =  async (req, res, next) =>{
     try {
         const user =  await User.find({email:req.body.email});
         if(user){
@@ -106,13 +106,12 @@ const loginUser =  async (req, res) =>{
                 // set cookie
                 res.cookie(process.env.COOKIE_NAME, token, {
                     expiresIn:process.env.COOKIE_EXPERY
-                })
+                });
                 res.status(200).json({
                     success:true,
                     message:"Login Success!",
                     access_token:token
                 });
-
             }else{
                 res.status(400).json({
                     success:false,
