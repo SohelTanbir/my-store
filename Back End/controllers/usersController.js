@@ -12,7 +12,8 @@ const createUser = async (req, res)=>{
             const user = await User.create({
                 name:req.body.name,
                 email:req.body.email,
-                password:hashPassword
+                password:hashPassword,
+                role:req.body.role
             });
             user.save(err =>{
                 if(!err){
