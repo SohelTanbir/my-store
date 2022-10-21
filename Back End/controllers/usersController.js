@@ -1,6 +1,6 @@
 const User =  require("../models/usersModel");
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 
 // create user or Sign Up
 const createUser = async (req, res)=>{
@@ -95,12 +95,24 @@ const loginUser =  async (req, res) =>{
     try {
         const user =  await User.find({email:req.body.email});
         if(user){
-        const isValidPassword = await bcrypt.compare(req.body.password, user[0].password)
+            const isValidPassword = await bcrypt.compare(req.body.password, user[0].password)
             if(isValidPassword){
+                const token = jwt.sign({
+                    email:user[0].email,
+                    userId:user[0]._id
+                },process.env.JWT_SECREAT, {
+                    expiresIn:"1h"
+                })
+                // set cookie
+                res.cookie(process.env.COOKIE_NAME, token, {
+                    expiresIn:process.env.COOKIE_EXPERY
+                })
                 res.status(200).json({
                     success:true,
-                    message:"Login Success!"
+                    message:"Login Success!",
+                    access_token:token
                 });
+
             }else{
                 res.status(400).json({
                     success:false,
@@ -117,11 +129,18 @@ const loginUser =  async (req, res) =>{
     } catch (err) {
         res.status(400).json({
             success:false,
-            message:"Authentication Faield!"
+            message:"Authentication Failed!",
         });
     }
 }
 
+// logout
+const logoutUser = async (req, res)=>{
+    res.cookie(process.env.COOKIE_NAME, null).json({
+        success:true,
+        message:"Logged out the user!"
+    });
+}
 
 
 // export default
@@ -129,5 +148,6 @@ module.exports ={
     createUser,
     getAllUsers,
     deleteUser,
-    loginUser
+    loginUser,
+    logoutUser
 }

@@ -1,7 +1,9 @@
 const express = require("express");
 const app  = express();
-app.use(express.json());
+const cookieParser = require("cookie-parser");
 
+app.use(express.json());
+app.use(cookieParser())
 // dotenv config file
 require("dotenv").config();
 
@@ -24,14 +26,12 @@ app.use("/api/v1", categoryRoute);
 app.use("/api/v1", userRoute)
 
 
-// default error handler
 // default Error Handler
 const errorHandler  = (err, req, res, next)=>{
     if(req.headersSent){
          return next(err)
     }
     res.status(500).json({error:err})
-     
  }
 
  app.use(errorHandler);
