@@ -56,18 +56,25 @@ const createCategory = async (req, res)=>{
 }
 // delete category --admin
 const deleteCategory = async (req, res)=>{
-    const category = await Category.findById(req.params.id);
-    if(category){
-        category.deleteOne();
-        res.status(200).json({
-            success:true,
-            message:"Category Deleted Successfully!"
-        })
+    try {
+        const category = await Category.findById(req.params.id);
+        if(category){
+            category.deleteOne();
+            res.status(200).json({
+                success:true,
+                message:"Category Deleted Successfully!"
+            })
 
-    }else{
-        res.status(404).json({
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Category not Found!"
+            })
+        }
+    } catch (err) {
+        res.status(500).json({
             success:false,
-            message:"Category not Found!"
+          error:err.message
         })
     }
 }

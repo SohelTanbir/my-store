@@ -17,6 +17,7 @@ connectDatabase();
 const productsRoute = require("./routes/productsRoute");
 const categoryRoute =  require("./routes/categoryRoute");
 const userRoute = require("./routes/userRoute");
+const messageRoute = require("./routes/messageRoute");
 
 // product 
 app.use("/api/v1", productsRoute);
@@ -24,7 +25,8 @@ app.use("/api/v1", productsRoute);
 app.use("/api/v1", categoryRoute);
 // user
 app.use("/api/v1", userRoute)
-
+// message
+app.use("/api/v1", messageRoute)
 
 // default Error Handler
 const errorHandler  = (err, req, res, next)=>{
