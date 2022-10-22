@@ -130,11 +130,37 @@ const deleteOrder =   async(req, res)=>{
     }
 
 }
+// track order
+const trackOrder =  async (req, res) =>{
+    try {
+        const {email, orderId } = req.body
+        const order = await Order.findById(req.body.orderId);
+        if(order){
+            res.status(200).json({
+                success:true,
+                orderStatus: order.orderStatus
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Order not found!",
+            });
+        }
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:"There was a server side error!",
+            error:err.message
+        });
+    }
+}
+
 // export 
 module.exports = {
     createOrder,
     getAllOrders,
     getMyOrders,
     getOrderById,
-    deleteOrder
+    deleteOrder,
+    trackOrder
 }
