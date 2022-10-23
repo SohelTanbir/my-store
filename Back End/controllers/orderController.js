@@ -11,7 +11,8 @@ const createOrder  = async (req, res)=>{
             itemPrice,
             texPrice,
             shippingPrice, 
-            totalPrice 
+            totalPrice,
+            orderStatus 
         } = req.body;
         const order = await Order.create({
             shippingInfo,
@@ -21,6 +22,7 @@ const createOrder  = async (req, res)=>{
             texPrice,
             shippingPrice, 
             totalPrice,
+            orderStatus,
             user:req.userId
         });
     if(order){
@@ -106,7 +108,7 @@ const getOrderById =   async(req, res)=>{
     }
 }
 
-// delete order
+// delete order 
 const deleteOrder =   async(req, res)=>{
     try {
         const order = await Order.findById(req.params.id);
@@ -130,6 +132,30 @@ const deleteOrder =   async(req, res)=>{
     }
 
 }
+
+// update order  -- admin
+const updateOrder  = async (req, res) =>{
+    try {
+        const order = await Order.findByIdAndUpdate(req.params.id, {orderStatus:req.body.orderStatus});
+        if(order){
+            res.status(200).json({
+                success:true,
+                message:"Order Updated Successfully!",
+                order
+            });
+        }  res.status(400).json({
+            success:false,
+            message:"Order not found!",
+        });
+        
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:"There was a server side error!",
+        });
+    }
+}
+
 // track order
 const trackOrder =  async (req, res) =>{
     try {
@@ -150,10 +176,11 @@ const trackOrder =  async (req, res) =>{
         res.status(400).json({
             success:false,
             message:"There was a server side error!",
-            error:err.message
         });
     }
 }
+
+
 
 // export 
 module.exports = {
@@ -162,5 +189,6 @@ module.exports = {
     getMyOrders,
     getOrderById,
     deleteOrder,
-    trackOrder
+    trackOrder,
+    updateOrder
 }

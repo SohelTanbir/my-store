@@ -8,7 +8,8 @@ const {
     getMyOrders, 
     getOrderById,
     deleteOrder,
-    trackOrder
+    trackOrder,
+    updateOrder
 } = require("../controllers/orderController");
 
 
@@ -18,7 +19,8 @@ router.get("/orders/all",checkLogin,authorization, getAllOrders);
 router.get("/orders/me",checkLogin, getMyOrders);
 router.get("/orders/:id", getOrderById);
 router.delete("/orders/delete/:id",checkLogin,authorization, deleteOrder);
-router.get("/orders/me/track",checkLogin, trackOrder)
+router.put("/orders/update/:id",checkLogin, authorization, updateOrder);
+router.get("/orders/me/track",checkLogin, trackOrder);
 
 
 
