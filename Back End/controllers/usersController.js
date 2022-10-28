@@ -1,6 +1,8 @@
 const User =  require("../models/usersModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const sendEmail = require("../utilities/sendEmail");
+const nodemailer = require("nodemailer");
 
 // create user or Sign Up
 const createUser = async (req, res)=>{
@@ -142,6 +144,43 @@ const logoutUser = async (req, res)=>{
     });
 }
 
+// forgot password
+const forgotPassword = async (req, res)=>{
+    const user =  await User.findOne({email:req.body.email})
+    if(user){
+        const subject  = 'MyStore  Forogt Password Recovery';
+        const resetpasswordurl = `${req.protocol
+        }://${req.get("host")}/api/v1/users/password/reset`;
+        const message = `Please click the below link to reset your password \n\n 
+        ${resetpasswordurl}
+        if you are not requested this mail, please ignore it. 
+        `;
+        const response = await   sendEmail(user.email,subject, message);
+       if(response.accepted.length > 0){
+            res.status(200).json({
+                success:true,
+                message:`Email sent to ${user.email} successfully!`
+            });
+       }else{
+        res.status(400).json({
+            success:false,
+            message:`Email sent Failed!`
+        });
+       }
+    }else{
+        res.status(404).json({
+            success:false,
+            message:"User not found!"
+        });
+    }
+    
+
+}
+
+// reset password
+const resetPassword = async (req, res)=>{
+    res.send("your password reset successfully!")
+}
 
 // export default
 module.exports ={
@@ -149,5 +188,7 @@ module.exports ={
     getAllUsers,
     deleteUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    forgotPassword,
+    resetPassword
 }

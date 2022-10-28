@@ -78,10 +78,10 @@ function App() {
             <Route exact path="/orders/order-status">
               <OrderStatus/>
             </Route>
-            <Route exact path="/password/reset-password">
+            <Route exact path="/password/forgot">
               <ResetPassword/>
             </Route>
-            <Route exact path="/password/new-password">
+            <Route exact path="/password/reset/:id">
               <SetNewPassword/>
             </Route>
             <Route exact path="/details/:id">
