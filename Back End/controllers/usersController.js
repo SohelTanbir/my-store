@@ -50,7 +50,7 @@ const createUser = async (req, res)=>{
 const getAllUsers = async (req, res)=>{
     try {
         const users =  await User.find({});
-        if(users){
+        if(users.length > 0){
             res.status(200).json({
                 success:true,
                 users
@@ -58,7 +58,7 @@ const getAllUsers = async (req, res)=>{
         }else{
             res.status(404).json({
                 success:false,
-                message:"User not found!"
+                message:"Sorry! There is no user found!"
             });
         }
         
@@ -149,6 +149,7 @@ const logoutUser = async (req, res)=>{
 const forgotPassword = async (req, res)=>{
     const user =  await User.findOne({email:req.body.email})
     if(user){
+        // generate random string with hex
         const randomString =   crypto.randomBytes(20).toString("hex");
         const subject  = 'MyStore  Forogt Password Recovery';
         const resetpasswordurl = `${req.protocol
@@ -159,8 +160,9 @@ const forgotPassword = async (req, res)=>{
         `;
         const response = await   sendEmail(user.email,subject, message);
        if(response.accepted.length > 0){
-        // save user password reset token
+        // save user password reset token and time
         await user.updateOne({$set:{resetPasswordToken:randomString}});
+        await user.updateOne({$set:{resetPasswordExpire:Date.now() + 10*60*1000}})
             res.status(200).json({
                 success:true,
                 message:`Email sent to ${user.email} successfully!`,
@@ -185,9 +187,12 @@ const forgotPassword = async (req, res)=>{
 const resetPassword = async (req, res)=>{
   
     try {
-        const user  = await User.find({resetPasswordToken:req.params.id});
-
-    if(user.length > 0){
+        const user  = await User.find({
+            resetPasswordToken:req.params.id,
+            resetPasswordExpire:{$gt:Date.now()}
+        });
+        // const isResetPasswordTokenExpired = await User.find({resetPasswordTokenExpire:{$gt:Date.now()}})
+    if(user.length > 0 ){
         // check password and confirm password match or not
         if(req.body.password == req.body.confirmPassword){
             // generate hash password
@@ -197,13 +202,13 @@ const resetPassword = async (req, res)=>{
             const passwordUpdated = await User.updateOne({resetPasswordToken:req.params.id},{$set:{password:hashPassword}});
             if(passwordUpdated.modifiedCount > 0){
                 // set reset password token blank string
-                await User.updateOne({resetPasswordToken:req.params.id},{$set:{resetPasswordToken:""}});
+                await User.updateOne({resetPasswordToken:req.params.id},{$set:{resetPasswordToken:"", resetPasswordExpire:""}});
                 res.send("Password Changed Successfully!")
             }
         }else{
             res.status(400).json({
                 success:false,
-                message:"Confirm password not match!",
+                message:"Confirm password incorrect!",
             });
         }
 
