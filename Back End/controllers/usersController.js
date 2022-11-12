@@ -2,7 +2,8 @@ const User =  require("../models/usersModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../utilities/sendEmail");
-const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+
 
 // create user or Sign Up
 const createUser = async (req, res)=>{
@@ -148,18 +149,21 @@ const logoutUser = async (req, res)=>{
 const forgotPassword = async (req, res)=>{
     const user =  await User.findOne({email:req.body.email})
     if(user){
+        const randomString =   crypto.randomBytes(20).toString("hex");
         const subject  = 'MyStore  Forogt Password Recovery';
         const resetpasswordurl = `${req.protocol
-        }://${req.get("host")}/api/v1/users/password/reset`;
+        }://${req.get("host")}/api/v1/users/password/reset/${randomString}`;
         const message = `Please click the below link to reset your password \n\n 
         ${resetpasswordurl}
         if you are not requested this mail, please ignore it. 
         `;
         const response = await   sendEmail(user.email,subject, message);
        if(response.accepted.length > 0){
+        // save user password reset token
+        await user.updateOne({$set:{resetPasswordToken:randomString}});
             res.status(200).json({
                 success:true,
-                message:`Email sent to ${user.email} successfully!`
+                message:`Email sent to ${user.email} successfully!`,
             });
        }else{
         res.status(400).json({
@@ -179,7 +183,43 @@ const forgotPassword = async (req, res)=>{
 
 // reset password
 const resetPassword = async (req, res)=>{
-    res.send("your password reset successfully!")
+  
+    try {
+        const user  = await User.find({resetPasswordToken:req.params.id});
+
+    if(user.length > 0){
+        // check password and confirm password match or not
+        if(req.body.password == req.body.confirmPassword){
+            // generate hash password
+            const hashPassword = await bcrypt.hash(req.body.password, 10);
+            // update user password
+            
+            const passwordUpdated = await User.updateOne({resetPasswordToken:req.params.id},{$set:{password:hashPassword}});
+            if(passwordUpdated.modifiedCount > 0){
+                // set reset password token blank string
+                await user.updateOne({$set:{resetPasswordToken:""}});
+                res.send("Password Changed Successfully!")
+            }
+        }else{
+            res.status(400).json({
+                success:false,
+                message:"Confirm password not match!",
+            });
+        }
+
+    }else{
+        res.status(400).json({
+            success:false,
+            message:"invalid password reset token or has been expired!",
+        });
+    }
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:"There was a server error!",
+        });
+    }
+ 
 }
 
 // export default
