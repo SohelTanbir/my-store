@@ -197,7 +197,7 @@ const resetPassword = async (req, res)=>{
             const passwordUpdated = await User.updateOne({resetPasswordToken:req.params.id},{$set:{password:hashPassword}});
             if(passwordUpdated.modifiedCount > 0){
                 // set reset password token blank string
-                await user.updateOne({$set:{resetPasswordToken:""}});
+                await User.updateOne({resetPasswordToken:req.params.id},{$set:{resetPasswordToken:""}});
                 res.send("Password Changed Successfully!")
             }
         }else{
@@ -217,6 +217,7 @@ const resetPassword = async (req, res)=>{
         res.status(400).json({
             success:false,
             message:"There was a server error!",
+            error:err.message
         });
     }
  
