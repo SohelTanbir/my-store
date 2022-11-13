@@ -69,6 +69,29 @@ const getAllUsers = async (req, res)=>{
         });
     }
 }
+// get user by Id
+const getUserById =  async (req, res)=>{
+    try {
+        const user =  await User.findById(req.params.id);
+        if(user){
+            res.status(200).json({
+                success:true,
+                user
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"User not found!"
+            });
+        }
+        
+    } catch (err) {
+        res.status(400).json({
+            success:false,
+            message:err.message
+        });
+    }
+}
 // delete user by Id
 const deleteUser =  async (req, res)=>{
     try {
@@ -228,10 +251,14 @@ const resetPassword = async (req, res)=>{
  
 }
 
+
+
+
 // export default
 module.exports ={
     createUser,
     getAllUsers,
+    getUserById,
     deleteUser,
     loginUser,
     logoutUser,

@@ -19,6 +19,7 @@ const categoryRoute =  require("./routes/categoryRoute");
 const userRoute = require("./routes/userRoute");
 const messageRoute = require("./routes/messageRoute");
 const orderRoute = require("./routes/orderRoute");
+const cartRoute  = require("./routes/cartRoute");
 
 // product 
 app.use("/api/v1", productsRoute);
@@ -30,6 +31,9 @@ app.use("/api/v1", userRoute)
 app.use("/api/v1", messageRoute);
 // order
 app.use("/api/v1", orderRoute);
+// cart 
+app.use("/api/v1", cartRoute)
+
 
 
 // default Error Handler

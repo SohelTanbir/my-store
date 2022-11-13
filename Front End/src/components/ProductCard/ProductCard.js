@@ -9,8 +9,10 @@ import { useHistory } from 'react-router';
 const ProductCard = ({ product }) => {
     const history = useHistory();
     const [cart, setCart] = useContext(userContext);
+    console.log(cart);
     const handleAddToCart = (id) =>{
-        alert("added to cart")
+        alert(id)
+        setCart(id);
     }
 
     const goDetailsPage  = (id) =>{

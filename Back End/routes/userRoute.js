@@ -1,5 +1,13 @@
 const express =  require("express");
-const { createUser, getAllUsers, deleteUser, loginUser, logoutUser, forgotPassword, resetPassword } = require("../controllers/usersController");
+const { 
+    createUser,
+    getAllUsers, 
+    deleteUser, 
+    loginUser, 
+    logoutUser, 
+    forgotPassword, 
+    resetPassword, 
+    getUserById } = require("../controllers/usersController");
 const checkLogin = require("../middleware/checkLogin");
 const router  = express.Router();
 
@@ -7,6 +15,7 @@ const router  = express.Router();
 // users routes
 router.get("/users/all", checkLogin, getAllUsers);
 router.post("/users/signup", createUser);
+router.get("/users/one/:id", getUserById);
 router.delete("/users/delete/:id", deleteUser);
 router.post("/users/login", loginUser);
 router.post("/users/password/forgot", forgotPassword);
