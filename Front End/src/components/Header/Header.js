@@ -7,7 +7,8 @@ import { userContext } from '../../App';
 
 const Header = () => {
     const [toggle, setToggle] = useState(false);
-    const [cart, setCart] = useContext(userContext)
+    const [cart, setCart] = useContext(userContext);
+
     const handleMenu = ()=>{
         if(toggle === false){
            document.querySelector('.navbar ul').style.visibility ='visible';

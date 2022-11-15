@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Cart.css';
 import { useParams } from 'react-router';
 import FakeData from '../../FakeData/FakeData';
@@ -33,6 +33,14 @@ const Cart = () => {
 const showProductDetails = (id)=>{
     history.push(`/details/${id}`);
 }
+// remove product from cart
+const removeProduct = (id) =>{
+   const products =  cart.filter(product => id != product.id);
+   setCart(products)
+}
+
+
+
 
 
     return (
@@ -68,7 +76,7 @@ const showProductDetails = (id)=>{
                                                      }             
                                       </div>
                                      <div className="cart-action">
-                                             <button className='delete-btn'>
+                                             <button className='delete-btn' onClick={()=> removeProduct(product.id)}>
                                                  <FontAwesomeIcon icon={faTrash} />
                                              </button>  
                                      </div>
