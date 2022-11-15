@@ -32,7 +32,7 @@ const FakeData = [
         id:2,
         name:'Redmi Monitor 1A 23.8" Full HD - Black',
         img:monitor1A,
-        price:'12,390',
+        price:'12390',
         brand:"No Brand",
         category:'shirt',
         ratings:4.5,

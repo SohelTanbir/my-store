@@ -15,9 +15,8 @@ const Cart = () => {
 
     const [productQuantity, setProductQuantity] = useState(1);
     const[cart, setCart] =  useContext(userContext);
-    const { id } = useParams();
     const history = useHistory();
-
+    const [calculation, setCalculation ] = useState({});
     // handle product quantity
     const quantityIncrease = ()=>  {
         if(productQuantity <10){
@@ -38,10 +37,18 @@ const removeProduct = (id) =>{
    const products =  cart.filter(product => id != product.id);
    setCart(products)
 }
-
-
-
-
+// calculatate product price
+const productPrice = ()=>{
+   const quantity = cart.length;
+    let price = 0;
+    cart.map( product =>{
+        price += parseInt(product.price);
+    });
+    const shippingCost = Math.floor((price*2)/100);
+    const totalPrice  = price+shippingCost;
+    return {quantity,price, shippingCost, totalPrice};
+}
+const product = productPrice();
 
     return (
         <div className="cart">
@@ -89,9 +96,10 @@ const removeProduct = (id) =>{
                         </div>
                         <div className="cart-count">
                             <h3>Order Sumary</h3>
-                                <p>Quantity: {productQuantity}</p>
-                                <p>Shipping: <span className='taka-sign'>৳ </span> 5</p>
-                                <p>Total Price: <span className='taka-sign'>৳ </span>50+5</p>
+                                <p>Quantity: {product.quantity}</p>
+                                <p>Shipping: <span className='taka-sign'>৳ </span>{product.shippingCost}</p>
+                                <p>Price: <span className='taka-sign'>৳ </span>{product.price}</p>
+                                <p>Total Price: <span className='taka-sign'>৳ </span>{product.totalPrice}</p>
                                 <button className='checkout-btn'>Proceed to CheckOut</button>
                         </div>
                  </div>

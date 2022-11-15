@@ -13,7 +13,6 @@ const ProductCard = ({ product }) => {
     const handleAddToCart = (id) =>{
         FakeData.filter(product =>{
             if(product.id == id){
-              console.log(product);
               const newProduct = [...cart, product]
               setCart(newProduct)
             }
