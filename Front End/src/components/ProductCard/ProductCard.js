@@ -4,15 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 import { useHistory } from 'react-router';
+import FakeData from '../../FakeData/FakeData';
 
 
 const ProductCard = ({ product }) => {
     const history = useHistory();
     const [cart, setCart] = useContext(userContext);
-    console.log(cart);
     const handleAddToCart = (id) =>{
-        alert(id)
-        setCart(id);
+        FakeData.filter(product =>{
+            if(product.id == id){
+              console.log(product);
+              const newProduct = [...cart, product]
+              setCart(newProduct)
+            }
+        })
     }
 
     const goDetailsPage  = (id) =>{

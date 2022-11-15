@@ -24,6 +24,7 @@
     margin-left:3rem;
 }
 .addToCart{
+    position: relative;
     flex-basis:10%;
     text-align: center;
 }
@@ -31,20 +32,20 @@
     font-size:2.2rem;
     position:relative;
 }
-.addToCart a::after{
-    content:counter(data);
+.addToCart .product-count {
     position: absolute;
-    top:0;
-    right:-45%;
-    width:1.5rem;
-    height:1.5rem;
-    line-height:1.5rem;
+    top: 15%;
+    left: 58%;
+    width:1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
     border-radius: 50%;
-    background:#dfb839;
-    color:#fff;
+    background: #dfb839;
+    color: #fff;
     text-align: center;
-    font-size:1rem;
-    font-weight:bold;
+    font-size: 1rem;
+    font-weight: bold;
+    z-index: 999;
 }
 #mobileMenu{
     text-align:right;

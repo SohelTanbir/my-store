@@ -53,7 +53,8 @@ const Header = () => {
                             </a>
                      </div>
                     </div>
-                    <div className="addToCart" data={cart}>
+                    <div className="addToCart">
+                        <span className="product-count">{cart.length?cart.length:0}</span>
                     <Link to="/cart"> <FontAwesomeIcon icon={faCartPlus} /></Link>
                     </div>
                 </div>

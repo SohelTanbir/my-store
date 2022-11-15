@@ -38,10 +38,10 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState([]);
   const [payment, setPayment]= useState({});
-  console.log(cart);
+  
   return (
     <div className="App">
-      <userContext.Provider value={[loggedInUser, setLoggedInUser], [cart, setCart],[payment, setPayment]}>
+      <userContext.Provider value={[cart, setCart]}>
 
      <Router>
      <Header/>                                                                                                                                     

@@ -146,6 +146,37 @@
     padding:.6rem 2rem;
     border-radius:.5rem;
 }
+.empty-cart{
+    position: relative;
+    width: 40rem;
+    margin: auto;
+}
+.empty-cart img{
+    width: 100%;
+    animation: moveUp 3s infinite alternate;
+}
+.empty-cart p{
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-align: center;
+    padding: 1rem 0;
+}
+.empty-cart p span{
+    color: #dfb839;
+    font-weight: 700;
+}
+/*up and down animatin*/
+/*animation for image*/
+@keyframes moveUp{
+    0%{
+        transform: translateY(0px);
+        transition: all 3s;
+    }
+    100%{
+        transform: translateY(15px);
+        transition: all 3s;
+    }
+}
 
 /*
 ----------------------------------------------------
