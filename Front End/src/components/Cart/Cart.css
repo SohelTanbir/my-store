@@ -148,7 +148,7 @@
 }
 .empty-cart{
     position: relative;
-    width: 40rem;
+    max-width: 40rem;
     margin: auto;
 }
 .empty-cart img{
