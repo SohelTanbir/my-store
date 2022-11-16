@@ -36,7 +36,7 @@ export const userContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  const [cart, setCart] = useState(0);
+  const [cart, setCart] = useState([]);
   const [payment, setPayment]= useState({});
   
   return (
