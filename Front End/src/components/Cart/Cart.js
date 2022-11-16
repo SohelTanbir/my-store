@@ -41,8 +41,11 @@ const Cart = () => {
     }
     // remove product from cart
     const removeProduct = (id) =>{
+    // show notification
+ 
     const products =  cart.filter(product => id != product.id);
-    setCart(products)
+        setCart(products);
+        toast.success("Product removed from Cart!", {position: "top-center",autoClose: 1000})
     }
     // calculatate product price
     const productPrice = ()=>{
@@ -57,11 +60,9 @@ const Cart = () => {
     }
     const product = productPrice();
 
-    const notify = () => toast("Wow so easy!");
-
-
     return (
         <div className="cart">
+        <ToastContainer />
         <h3>Cart items</h3>
             <div className="container">
                  <div className="row">
@@ -112,8 +113,8 @@ const Cart = () => {
                                 <p>Shipping: <span className='taka-sign'>৳ </span>{product.shippingCost}</p>
                                 <p>Price: <span className='taka-sign'>৳ </span>{product.price}</p>
                                 <p>Total Price: <span className='taka-sign'>৳ </span>{product.totalPrice}</p>
-                                <button className='checkout-btn' onClick={ ()=> toast.success("Proceed to Checkout", {position: "top-center",autoClose: 3000,}) }>Proceed to CheckOut</button>
-                                <ToastContainer />
+                                <button className='checkout-btn' onClick={ ()=> toast.success("Proceed to Checkout", {position: "top-center",autoClose: 1000,}) }>Proceed to CheckOut</button>
+          
                         </div>
                  </div>
             </div>

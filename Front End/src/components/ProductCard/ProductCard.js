@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
             }
         });
         // show toast notification for add prodcut to cart
-        toast.success("1 item added to Cart!", {position: "top-center",autoClose: 3000,}) 
+        toast.success("1 item added to Cart!", {position: "top-center",autoClose: 1000,}) 
     }
 
     const goDetailsPage  = (id) =>{
