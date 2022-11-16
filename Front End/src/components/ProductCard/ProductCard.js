@@ -5,7 +5,8 @@ import { faBars, faCartPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 import { useHistory } from 'react-router';
 import FakeData from '../../FakeData/FakeData';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product }) => {
     const history = useHistory();
@@ -16,7 +17,9 @@ const ProductCard = ({ product }) => {
               const newProduct = [...cart, product]
               setCart(newProduct)
             }
-        })
+        });
+        // show toast notification for add prodcut to cart
+        toast.success("1 item added to Cart!", {position: "top-center",autoClose: 3000,}) 
     }
 
     const goDetailsPage  = (id) =>{
@@ -44,7 +47,8 @@ const ProductCard = ({ product }) => {
                         <FontAwesomeIcon icon={faStar} />
                         </div>
                         <h3 className='product-price'>Price: <span className='taka-sign'>৳ </span> {product.price}</h3>
-                        <button  onClick={()=> handleAddToCart(product.id)} className="add_to_cart_btn">Add to Cart</button>
+                        <button  onClick={()=>{ handleAddToCart(product.id)}} className="add_to_cart_btn">Add to Cart</button>
+                        <ToastContainer />
              </div>
     );
 };

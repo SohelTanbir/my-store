@@ -10,9 +10,8 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import emptyCart  from '../../images/cart/empty cart.jpg'
 import Shippment from './Shippment';
-import toast, { Toaster } from 'react-hot-toast';
-
-const notify = () => toast('Here is your toast.');
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -58,7 +57,7 @@ const Cart = () => {
     }
     const product = productPrice();
 
-
+    const notify = () => toast("Wow so easy!");
 
 
     return (
@@ -107,15 +106,14 @@ const Cart = () => {
                         </div>
 
                     {/* <Shippment/> */}
-                    {/* <ToastContainer /> */}
                         <div className="cart-count">
                             <h3>Order Sumary</h3>
                                 <p>Quantity: {product.quantity}</p>
                                 <p>Shipping: <span className='taka-sign'>৳ </span>{product.shippingCost}</p>
                                 <p>Price: <span className='taka-sign'>৳ </span>{product.price}</p>
                                 <p>Total Price: <span className='taka-sign'>৳ </span>{product.totalPrice}</p>
-                                <button className='checkout-btn' onClick={notify}>Proceed to CheckOut</button>
-                                <Toaster />
+                                <button className='checkout-btn' onClick={ ()=> toast.success("Proceed to Checkout", {position: "top-center",autoClose: 3000,}) }>Proceed to CheckOut</button>
+                                <ToastContainer />
                         </div>
                  </div>
             </div>
