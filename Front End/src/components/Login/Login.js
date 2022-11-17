@@ -17,7 +17,8 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
-  const [loggedInUser, setLoggedInUser] = useContext(userContext);
+  const {userData} = useContext(userContext);
+  const [loggedInUser, setLoggedInUser] = userData;
   const [user, setUser] = useState({
     error: ''
   });

@@ -10,7 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product }) => {
     const history = useHistory();
-    const [cart, setCart] = useContext(userContext);
+    const {cartItems} =  useContext(userContext);    
+    const [cart, setCart ]= cartItems;
     const handleAddToCart = (id) =>{
         FakeData.filter(product =>{
             if(product.id == id){
@@ -19,7 +20,7 @@ const ProductCard = ({ product }) => {
             }
         });
         // show toast notification for add prodcut to cart
-        toast.success("1 item added to Cart!", {position: "top-center",autoClose: 1000,}) 
+        toast.success("1 item added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
     }
 
     const goDetailsPage  = (id) =>{

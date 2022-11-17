@@ -41,82 +41,82 @@ function App() {
   
   return (
     <div className="App">
-      <userContext.Provider value={[cart, setCart]}>
+      <userContext.Provider value={{cartItems:[cart, setCart], userData:[loggedInUser, setLoggedInUser] }}>
 
-     <Router>
-     <Header/>                                                                                                                                     
-          <Switch>
-            <Route exact path="/">
-                <Home/>
-            </Route>
-            <Route exact path="/home">
-                <Home/>
-            </Route>
-            <Route exact path="/product">
-                <Product/>
-            </Route>
-            <Route exact path="/reviews">
-                <Reviews/>
-            </Route>
-            <Route exact path="/login">
-                <Login/>
-            </Route>
-            <Route exact path="/signup">
-                <SignUp/>
-            </Route>
-            <Route exact path="/dashboard">
-                <Dashboard/>
-            </Route>
-            <Route exact path="/cart">
-              <Cart/>
-            </Route>
-            <Route exact path="/contact">
-              <Contact/>
-            </Route>
-            <Route exact path="/orders/track">
-              <TraceOrder/>
-            </Route>
-            <Route exact path="/orders/order-status">
-              <OrderStatus/>
-            </Route>
-            <Route exact path="/password/forgot">
-              <ResetPassword/>
-            </Route>
-            <Route exact path="/password/reset/:id">
-              <SetNewPassword/>
-            </Route>
-            <Route exact path="/details/:id">
-              <ProductDetails/>
-            </Route>
-            <Route exact  path="/products/addproduct">
-                <AddProduct/>
-            </Route>
-            <Route exact path="/products/manage">
-                <ManageProducts/>
-            </Route>
-            <Route exact path="/products/update">
-                <UpdateProduct/>
-            </Route>
-            <Route  exact path="/admin/make-admin">
-                <MakeAdmin/>
-            </Route>
-            <Route exact  path="/orders/all">
-                <Orders/>
-            </Route>
-            <Route exact  path="/orders/status/update">
-                <UpdateOrder/>
-            </Route>
-            <Route exact  path="/category/all">
-                <Category/>
-            </Route>
-            <Route exact path="/users/profile">
-                <UserProfile/>
-            </Route>
-            <Route exact path="*">
-                <NotFound/>
-            </Route>
-          </Switch>
-     </Router>
+      <Router>
+      <Header/>                                                                                                                                     
+            <Switch>
+              <Route exact path="/">
+                  <Home/>
+              </Route>
+              <Route exact path="/home">
+                  <Home/>
+              </Route>
+              <Route exact path="/product">
+                  <Product/>
+              </Route>
+              <Route exact path="/reviews">
+                  <Reviews/>
+              </Route>
+              <Route exact path="/login">
+                  <Login/>
+              </Route>
+              <Route exact path="/signup">
+                  <SignUp/>
+              </Route>
+              <Route exact path="/dashboard">
+                  <Dashboard/>
+              </Route>
+              <Route exact path="/cart">
+                <Cart/>
+              </Route>
+              <Route exact path="/contact">
+                <Contact/>
+              </Route>
+              <Route exact path="/orders/track">
+                <TraceOrder/>
+              </Route>
+              <Route exact path="/orders/order-status">
+                <OrderStatus/>
+              </Route>
+              <Route exact path="/password/forgot">
+                <ResetPassword/>
+              </Route>
+              <Route exact path="/password/reset/:id">
+                <SetNewPassword/>
+              </Route>
+              <Route exact path="/details/:id">
+                <ProductDetails/>
+              </Route>
+              <Route exact  path="/products/addproduct">
+                  <AddProduct/>
+              </Route>
+              <Route exact path="/products/manage">
+                  <ManageProducts/>
+              </Route>
+              <Route exact path="/products/update">
+                  <UpdateProduct/>
+              </Route>
+              <Route  exact path="/admin/make-admin">
+                  <MakeAdmin/>
+              </Route>
+              <Route exact  path="/orders/all">
+                  <Orders/>
+              </Route>
+              <Route exact  path="/orders/status/update">
+                  <UpdateOrder/>
+              </Route>
+              <Route exact  path="/category/all">
+                  <Category/>
+              </Route>
+              <Route exact path="/users/profile">
+                  <UserProfile/>
+              </Route>
+              <Route exact path="*">
+                  <NotFound/>
+              </Route>
+            </Switch>
+      </Router>
      </userContext.Provider>
     </div>
   );

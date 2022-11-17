@@ -7,7 +7,8 @@ import { userContext } from '../../App';
 
 const Header = () => {
     const [toggle, setToggle] = useState(false);
-    const [cart, setCart] = useContext(userContext);
+    const {cartItems} =  useContext(userContext);    
+    const [cart, setCart ]= cartItems;
 
     const handleMenu = ()=>{
         if(toggle === false){
