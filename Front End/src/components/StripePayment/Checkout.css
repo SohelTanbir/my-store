@@ -1,0 +1,17 @@
+.stripe-payment{
+    width: 100%;
+}
+.pay-btn{
+    width: 20rem;
+    margin-left: auto;
+    font-size: 1.6rem;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    padding: 1rem 2rem;
+    background: #dfb839;
+    border-radius: .5rem;
+    margin: 1rem 0 0;
+    transition: .5s ease;
+    margin-top: 10rem;
+}

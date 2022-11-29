@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import './Checkout.css'
 
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { userContext } from '../../App';
@@ -6,7 +7,8 @@ import { userContext } from '../../App';
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [payment, setPayment] = useContext(userContext);
+  const {paymentInfo} = useContext(userContext);
+  const [payment, setPayment] =  paymentInfo;
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -37,19 +39,15 @@ const CheckoutForm = () => {
     }
   };
 
-  const payBtn = {
-    padding:'.7rem',
-    marginTop:'2rem',
-    background:'#dfb839',
-    borderRadius:'.5rem'
-  }
   return (
-    <form onSubmit={handleSubmit} style={{padding:'2rem 0', width:'70%', margin:'auto'}}>
-      <CardElement />
-      <button style={payBtn} type="submit" disabled={!stripe}>
-        Proceed Payment
-      </button>
-    </form>
+   <div className='stripe-payment'>
+       <form onSubmit={handleSubmit} style={{padding:'2rem 0', width:'70%', margin:'auto'}}>
+        <CardElement />
+        <button className='pay-btn' type="submit" disabled={!stripe}>
+          Proceed Payment
+        </button>
+      </form>
+   </div>
   );
 };
 

@@ -123,6 +123,7 @@
     margin: 1rem 0 0;
     transition: .5s ease;
 }
+
 .cart-count button:hover{
     background:#b48a00;
 }
@@ -145,6 +146,12 @@
     color: #dfb839;
     font-weight: 700;
 }
+.disable-btn{
+    background-color:#f6f3eb!important;
+    color: #c4c3c3;
+    cursor: not-allowed;
+}
+
 /*up and down animatin*/
 /*animation for image*/
 @keyframes moveUp{

@@ -38,11 +38,13 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(0);
+  const [payment, setPayment] = useState(0)
   const [quantity, setQuantity] = useState(0);
   return (
     <div className="App">
       <userContext.Provider value={{cartItems:[cart, setCart], userData:[loggedInUser, setLoggedInUser], prices:[price, setPrice],
-      quantities:[quantity, setQuantity]
+      quantities:[quantity, setQuantity],
+      paymentInfo:[payment, setPayment]
        }}>
 
       <Router>
