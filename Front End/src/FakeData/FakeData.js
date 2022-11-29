@@ -26,7 +26,8 @@ const FakeData = [
         ],
         color:'Multi Color',
         description:"This product comes with very attractive design. The material used in it will meet your expectation and need also. Now with a new look it is even better than before and its quality will definitely meet your desire. So you may take this to bring smile and enjoy the feel of good quality product.This product comes with very attractive design. The material used in it will meet your expectation and need also. Now with a new look it is even better than before and its quality will definitely meet your desire. So you may take this to bring smile and enjoy the feel of good quality product",
-        size:["M", "L", "XL"]
+        size:["M", "L", "XL"],
+        quantity:1
     },
     {
         id:2,
@@ -41,6 +42,7 @@ const FakeData = [
         ],
         color:'Familiy Blue',
         description:"This product comes with very attractive design. The material used in it will meet your expectation and need also. Now with a new look it is even better than before and its quality will definitely meet your desire. So you may take this to bring smile and enjoy the feel of good quality product.",
+        quantity:1
     },
     {
         id:3,
@@ -55,7 +57,8 @@ const FakeData = [
         ],
         color:'Family Blue',
         description:"",
-        size:[39,40,41,42]
+        size:[39,40,41,42],
+        quantity:1
     },
     {
         id:4,
@@ -68,7 +71,8 @@ const FakeData = [
         allReviews:["valo na. kew niyenna"],
         color:'Family Blue',
         description:"Men's lifestyle belt sandal for ultra softness super flexible. Can be used any season especially rainy day because of its waterproof. Focus of its colour combination is good.",
-        size:["M","L","XL"]
+        size:["M","L","XL"],
+        quantity:1
     },
     {
         id:5,
@@ -85,6 +89,7 @@ const FakeData = [
         ],
         color:'Multi color',
         description:"This backpack is fully fit the user back which has a stylish standby with a durable. Light in weight. Fashion backpack purse perfect for the weekend getaway bag, college bag, very snazzy for go shopping or do outdoor. It is made of fiber materials which is perfect and fashionable for a smart person like you. Lightweight types of backpacks are sometimes worn on only one shoulder strap. The Backpack pockets to hold small valuable items and adjustable shoulder straps for extra comfort",
+        quantity:1
     },
     {
         id:6,
@@ -97,6 +102,7 @@ const FakeData = [
         allReviews:[],
         color:'Multi color',
         description:"Product details of Trendy Shoes For Man With High Quality Fabrics And Breathable Outdoor Sport Sneakers Lightweight Air Mesh Men ShoesSneaker for men. Shoes for men. Summer sneaker. Summer shoes for men. shoes for men 2022 Running shoes Casual shoes Sports breathable shoes gym shoes for men walking shoes",
+        quantity:1
     },
     {
         id:7,
@@ -106,7 +112,6 @@ const FakeData = [
         brand:"No Brand",
         category:'shoes',
         ratings:4.5,
-        allReviews:["!", ""],
         allReviews:[
             {user:"shakib",review:"good"},
             {user:"al amin",review:"all is okay. nice product"},
@@ -115,6 +120,7 @@ const FakeData = [
         ],
         color:'yellow',
         description:"Product details of Trendy Shoes For Man With High Quality Fabrics And Breathable Outdoor Sport Sneakers Lightweight Air Mesh Men ShoesSneaker for men. Shoes for men. Summer sneaker. Summer shoes for men. shoes for men 2022 Running shoes Casual shoes Sports breathable shoes gym shoes for men walking shoes",
+        quantity:1
     },
     {
         id:8,
@@ -130,6 +136,7 @@ const FakeData = [
         color:'Multi color',
         size:["M", "L", "XL"],
         description:"Product details of Trendy Shoes For Man With High Quality Fabrics And Breathable Outdoor Sport Sneakers Lightweight Air Mesh Men ShoesSneaker for men. Shoes for men. Summer sneaker. Summer shoes for men. shoes for men 2022 Running shoes Casual shoes Sports breathable shoes gym shoes for men walking shoes",
+        quantity:1
     },
     {
         id:9,
@@ -147,6 +154,7 @@ const FakeData = [
         ],
         color:'Multi color',
         description:"আসসালামুআলাইকুম SP WORLD -র পক্ষ থেকে আপনাকে আন্তরিক শুভেচ্ছা । এই ঘড়িটি পুরুষদের জন্য ডিজাইন করা ফ্যাশনেবল একটি ঘড়ি । এটি আপনার হাতের সৌন্দর্য বৃদ্ধি করবে । এই ঘড়িটি শৈলী ,গুণমান ও কারু শিল্পের একটি ক্লাসিক সংমিশ্রণ । ডিজাইন টি আকর্ষনীয় এবং উচ্চ মানের মেটারিয়াল দিয়ে তৈরি এবং সর্বশেষ ডিজাইন । আমাদের কাছে এমন উন্নত মানের ডিজাইনের এবং সাশ্রয়ী মূল্যের আরো অনেক ঘড়ি আছে । আমাদের কাছে আছে বাজারে নতুন আসা মনকাড়া রঙের ঘড়ির কালেকশন । যেগুলো আপনার দেখামাত্রই পছন্দ হয়ে যাবে এবং এগুলো আপনার সৌন্দর্যকে আরও বৃদ্ধি করবে । সবার কাছ থেকে প্রশংসা কুড়াতে সাহায্য করবে । আমাদের Daraz Shop (SP WORLD) ভ্রমণ করে আপনার পছন্দের ঘড়ি কি সাশ্রয়ী মূল্যে কেনার অনুরোধ রইল ।",
+        quantity:1
     },
     {
         id:10,
@@ -160,6 +168,7 @@ const FakeData = [
             {user:"jahangir alam",review:"very bad product. not original product"},
         ],
         description:"ভালো খাই, সুস্থ থাকি। আস্থা রাখুন, ইনশাআল্লাহ ভালোটাই পাবেন।,100% কেমিক্যাল মুক্ত, সরিষা ফুলের মধু অবশ্যই জমে যাবে পরিমাণ- 1 Kg নিজস্ব তত্বাবধানে সংগ্রহ করা হয়, তাই নিশ্চিন্ত ভাবে আমাদের পণ্য ক্রয় করতে পারেন। আমরা বিশ্বস্ততার সাথে আমাদের পণ্য বিক্রয় করে যাচ্ছি। প্রতিটা ফুল একটা নির্দিষ্ট মৌসুমে ফোটে। সাধারনত ডিসেম্বর/জানুয়ারী মাস থেকেই সরিষা ক্ষেতে সরিষা ফুল ফুটতে শুরু করে । এই সময় মৌমাছি ঐ ফুল হতেই মধু আহরণ করে। সরিষা ফুলের মধুতেও অন্যান্য ফুলের মধু থাকে তবে সরিষা ফুলের আধিক্যের কারনে একে সরিষা ফু্লের মধু নামকরণ করা হয়",
+        quantity:1
     },
     {
         id:11,
@@ -175,6 +184,7 @@ const FakeData = [
         ],
         color:"black",
         description:"এটি আপনি চাবির রিং এর সাথে লাগিয়ে রাখতে পারবেন ফলে চাবিটি হারিয়ে গেলেও ফিরে পেতে পারেন , চাবি হারানোর যে কত জামেলা যে হারিয়েছে সে বুজে সো চাবি হারাতে না চাইলে এই পণ্যটি কিনে চাবি হারানোর জামেলা থেকে রক্কা পান।",
+        quantity:1
     },
     {
         id:12,
@@ -189,6 +199,7 @@ const FakeData = [
             {user:"alam",review:"এই দামে প্রডাক্টি অনেক ভালোই আছে"},
         ],
         description:"জাপানী টমেটার বিজ ১০০ পিস বাসার টবের",
+        quantity:1
     },
 
    

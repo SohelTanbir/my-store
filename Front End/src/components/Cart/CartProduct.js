@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -9,18 +9,34 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CartProduct = ({product}) => {
     const [productQuantity, setProductQuantity] = useState(1);
+    const {prices}= useContext(userContext);
+    const [price, setPrice ] = prices;
     const history = useHistory();
     const {cartItems} =  useContext(userContext);    
-    const [cart, setCart ]= cartItems;
+    const [cart, setCart ]= cartItems;  
+    const {quantities} = useContext(userContext);
+    const [quantity, setQuantity] =quantities;
     // handle product quantity
-    const quantityIncrease = ()=>  {
+    const quantityIncrease = (id)=>  {
         if(productQuantity <10){
+            cart.map ((item )=>{
+                if( item.id ===id ){
+                    item.quantity +=1;
+                }
+                return "";
+            })
             setProductQuantity(productQuantity+1);
         }
     };
-    const quantityDecrease = ()=>{
+    const quantityDecrease = (id)=>{
         if(productQuantity > 1){
-            setProductQuantity(productQuantity-1)
+            cart.map ((item )=>{
+                if( item.id ===id ){
+                    item.quantity -=1;
+                }
+                return "";
+            })
+            setProductQuantity(productQuantity-1);
         }
     }
     // show product details page
@@ -30,14 +46,22 @@ const CartProduct = ({product}) => {
     // remove product from cart
     const removeProduct = (id) =>{
     // show notification
- 
-    const products =  cart.filter(product => id != product.id);
+    const products =  cart.filter(product => id !== product.id);
         setCart(products);
         toast.success("Product removed from Cart!",
         {position: "bottom-right",autoClose: 500})
     }
+    // calculatate product price
+    const productPrice = ()=>{
+        let price = 0;
+        cart.map(product =>setPrice(price += product.quantity * product.price));
 
-
+    }
+  
+    useEffect(()=>{
+        productPrice();
+        setQuantity(cart.length + (productQuantity-1));
+    });
 
 
 
@@ -46,7 +70,7 @@ const CartProduct = ({product}) => {
               <div className="single-cart-product">
                 <ToastContainer/>
                     <div className="product-photo">
-                        <Link onClick={()=> showProductDetails(product.id)}><img src={product.img} alt="product image" /></Link>
+                        <Link onClick={()=> showProductDetails(product.id)}><img src={product.img} alt="product" /></Link>
                     </div>
                     <div className="product-title">
                             <Link onClick={()=> showProductDetails(product.id)}><h4>{product.name.substring(0, 30)+"..."}</h4></Link>
@@ -54,17 +78,17 @@ const CartProduct = ({product}) => {
                             </div>  
                             <div className="product-quantity">
                                                  {productQuantity <=1? 
-                                                 <button className='increase-btn' style={{color:'#dfdfdf',cursor:'default'}} onClick={quantityDecrease}>
+                                                 <button className='increase-btn' style={{color:'#dfdfdf',cursor:'default'}}>
                                                          <FontAwesomeIcon icon={faMinus} />
                                                  </button>:
-                                                     <button className='increase-btn' onClick={quantityDecrease}>
+                                                     <button className='increase-btn' onClick={()=> quantityDecrease(product.id)}>
                                                          <FontAwesomeIcon icon={faMinus} />
                                                      </button>}
                                                      <span className='total-products-count'>{productQuantity}</span>
-                                                     {productQuantity == 10? <button className='decrease-btn' style={{color:'#dfdfdf',cursor:'default'}} onClick={quantityIncrease}>
+                                                     {productQuantity === 10? <button className='decrease-btn' style={{color:'#dfdfdf',cursor:'default'}}>
                                                      <FontAwesomeIcon icon={faPlus} />
                                                      </button>:
-                                                     <button className='decrease-btn' onClick={quantityIncrease}>
+                                                     <button className='decrease-btn' onClick={()=> quantityIncrease(product.id)}>
                                                      <FontAwesomeIcon icon={faPlus} />
                                                      </button>
                                                      }             

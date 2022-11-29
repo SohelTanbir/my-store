@@ -11,23 +11,31 @@ import CartProduct from './CartProduct';
 
 
 const Cart = () => {
-
-    const [productQuantity, setProductQuantity] = useState(1);
+    const {quantities} = useContext(userContext);
+    const [quantity, setQuantity] = useState(0);
     const { cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;
+    const {prices}= useContext(userContext);
+    const [price, setPrice ] = prices;
 
-    // calculatate product price
     const productPrice = ()=>{
-    const quantity = cart.length + (productQuantity-1);
         let price = 0;
-        cart.map( product =>{
-            price += parseInt(product.price) * productQuantity;
-        });
-        const shippingCost = Math.floor((price*2)/100);
-        const totalPrice  = price+shippingCost;
-        return {quantity,price, shippingCost, totalPrice};
+        cart.map(product =>setPrice(price += product.quantity * product.price));
+
     }
-    const product = productPrice();
+    
+    const productQnt = ()=>{
+        let qnt = 0;
+        cart.map(product =>(qnt += product.quantity));
+        setQuantity(qnt);
+    }
+
+    useEffect(()=>{
+        productPrice();
+        productQnt();
+        cart.length <=0 && setPrice(0);
+    });
+
 
     return (
         <div className="cart">
@@ -48,10 +56,10 @@ const Cart = () => {
                     {/* <Shippment/> */}
                         <div className="cart-count">
                             <h3>Order Sumary</h3>
-                                <p>Quantity: {product.quantity}</p>
-                                <p>Shipping: <span className='taka-sign'>৳ </span>{product.shippingCost}</p>
-                                <p>Price: <span className='taka-sign'>৳ </span>{product.price}</p>
-                                <p>Total Price: <span className='taka-sign'>৳ </span>{product.totalPrice}</p>
+                                <p>Quantity: {quantity}</p>
+                                <p>Shipping: <span className='taka-sign'>৳ </span>{ Math.floor((price*2)/100)}</p>
+                                <p>Price: <span className='taka-sign'>৳ </span>{price}</p>
+                                <p>Total Price: <span className='taka-sign'>৳ </span>{price}</p>
                                 <button className='checkout-btn' onClick={ ()=> toast.success("Proceed to Checkout", {position: "bottom-right",autoClose: 500,}) }>Proceed to CheckOut</button>
           
                         </div>
