@@ -6,11 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CartProduct from './CartProduct';
 import Shipment from '../Shipment/Shipment';
-import StripePayment from '../StripePayment/StripePayment';
-
-
-
-
 
 
 const Cart = () => {
@@ -41,13 +36,12 @@ const Cart = () => {
 // handle proceed order
 const proceedOrder = ()=>{
     setShiping(true);
-    // toast.success("Proceed to Checkout", {position: "bottom-right",autoClose: 500})
 }
 
     return (
         <div className="cart">
         <ToastContainer />
-        <h3>Cart items</h3>
+            {shiping===false && <h3>Cart items</h3>}
             <div className="container">
                  {
                     shiping?<Shipment/>:<div className="row">

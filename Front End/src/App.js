@@ -31,6 +31,7 @@ import Orders from './components/Dashboard/Orders/Orders';
 import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
+import OrderSuccess from './components/OrderSuccess/OrderSuccess';
 
 export const userContext = createContext();
 
@@ -80,7 +81,7 @@ function App() {
               <Route exact path="/orders/track">
                 <TraceOrder/>
               </Route>
-              <Route exact path="/orders/order-status">
+              <Route exact path="/orders/status">
                 <OrderStatus/>
               </Route>
               <Route exact path="/password/forgot">
@@ -110,6 +111,9 @@ function App() {
               <Route exact  path="/orders/status/update">
                   <UpdateOrder/>
               </Route>
+              {/* <Route exact  path="/orders/placed">
+                  <OrderSuccess/>
+              </Route> */}
               <Route exact  path="/category/all">
                   <Category/>
               </Route>

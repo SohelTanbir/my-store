@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CheckoutForm from '../StripePayment/CheckoutForm';
 import StripePayment from '../StripePayment/StripePayment';
 import './Shipment.css';
 

@@ -1,6 +1,9 @@
 .stripe-payment{
     width: 100%;
 }
+.order-btn{
+    text-align: right;
+}
 .pay-btn{
     width: 20rem;
     margin-left: auto;
