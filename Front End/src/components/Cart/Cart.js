@@ -15,6 +15,24 @@ const Cart = () => {
     const [cart, setCart ]= cartItems;
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
+    const shippingPrice = Math.floor((price*3)/100);
+    const totalPrice = price + shippingPrice;
+    const [order, setOrder] = useState({
+        productInfo:{
+            name:"",
+            price:"",
+            shippingPrice:"",
+            quantity:"",
+            image:""
+        },
+        shipingInfo:{
+            name:"",
+            phone:"",
+            city:"",
+            addrees:""
+        }
+    });
+ 
 
     const productPrice = ()=>{
         let price = 0;
@@ -35,8 +53,11 @@ const Cart = () => {
     });
 // handle proceed order
 const proceedOrder = ()=>{
+    setOrder({...order, price, shippingPrice, quantity, image:"T-shirt image"});
     setShiping(true);
+  
 }
+console.log(order)
 
     return (
         <div className="cart">
@@ -59,9 +80,9 @@ const proceedOrder = ()=>{
                     {shiping === false && <div className="cart-count">
                         <h3>Order Sumary</h3>
                             <p>Quantity: {quantity}</p>
-                            <p>Shipping: <span className='taka-sign'>৳ </span>{ Math.floor((price*2)/100)}</p>
+                            <p>Shipping fee: <span className='taka-sign'>৳ </span>{shippingPrice}</p>
                             <p>Price: <span className='taka-sign'>৳ </span>{price}</p>
-                            <p>Total Price: <span className='taka-sign'>৳ </span>{price}</p>
+                            <p>Total Price: <span className='taka-sign'>৳ </span>{totalPrice}</p>
                         {
                         cart.length?<button className='checkout-btn' onClick={ proceedOrder }>Proceed to CheckOut</button>
                         :<button className='checkout-btn disable-btn'>Proceed</button>}

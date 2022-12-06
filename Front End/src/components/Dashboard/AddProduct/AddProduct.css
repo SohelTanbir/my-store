@@ -8,7 +8,10 @@
     outline:none;
     margin-bottom:2.5rem;
 }
-.product-add-form input, textarea, select, .check-box input{
+.product-add-form input,
+.product-add-form textarea,
+.product-add-form select, 
+.product-add-form  .check-box input{
     width:49%;
     font-size: 1.8rem;
     font-weight: 400;
