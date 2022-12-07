@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { userContext } from '../../App';
 import './Shippment.css'
 
 const Shippment = () => {
+    const {ordersInfo } = useContext(userContext);
+    const [order, setOrder] = ordersInfo;
+
+    const handleShipment = ()=>{
+      
+    }
+    console.log(order)
+
+
+
     return (
         <div className="shiping-form">
         <h3>Shipping addresse</h3>
         <div className="shipingForm">
-           <form>
+           <form onSubmit={handleShipment}>
            <input type="text" name="name" placeholder="your name"/> <br />
             <input type="email" name="email"   placeholder="your email"/><br />
             <input type="text" name="location"  placeholder="Present Location"/><br />

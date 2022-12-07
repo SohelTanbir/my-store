@@ -17,21 +17,8 @@ const Cart = () => {
     const [price, setPrice ] = prices;
     const shippingPrice = Math.floor((price*3)/100);
     const totalPrice = price + shippingPrice;
-    const [order, setOrder] = useState({
-        productInfo:{
-            name:"",
-            price:"",
-            shippingPrice:"",
-            quantity:"",
-            image:""
-        },
-        shipingInfo:{
-            name:"",
-            phone:"",
-            city:"",
-            addrees:""
-        }
-    });
+    const {ordersInfo } = useContext(userContext);
+    const [order, setOrder] = ordersInfo;
  
 
     const productPrice = ()=>{
@@ -53,7 +40,7 @@ const Cart = () => {
     });
 // handle proceed order
 const proceedOrder = ()=>{
-    setOrder({...order, price, shippingPrice, quantity, image:"T-shirt image"});
+    setOrder({...order, price, shippingPrice,totalPrice, quantity, image:"T-shirt image"});
     setShiping(true);
   
 }

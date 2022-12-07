@@ -7,12 +7,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import OrderSuccess from '../OrderSuccess/OrderSuccess';
 
 const CheckoutForm = () => {
-  const [order, setOrder] = useState(false);
+  const [strip, setStrip] = useState(false)
   const stripe = useStripe();
   const elements = useElements();
-  const {paymentInfo} = useContext(userContext);
-  const [payment, setPayment] =  paymentInfo;
-
+  const {ordersInfo } = useContext(userContext);
+  const [order, setOrder] = ordersInfo;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,9 +28,11 @@ const CheckoutForm = () => {
     if (error) {
       toast.error(error.message, {position: "bottom-right",autoClose: 1000})
     } else {
-      const payInfo = {...payment, id:paymentMethod.id,type: paymentMethod.type}
-      setPayment(payInfo);
-      setOrder(true);
+      const paymentInfo = {id:paymentMethod.id,type: paymentMethod.type}
+      setStrip(true);
+      const newOrder = {...order, paymentInfo};
+      setOrder(newOrder);
+      console.log(order);
      toast.success("Order placed successfully", {position: "bottom-right",autoClose: 1000})
     }
   };
@@ -41,7 +42,7 @@ const CheckoutForm = () => {
    <div className='stripe-payment'>
        <ToastContainer />
         {
-          order?<OrderSuccess/>:
+          strip?<OrderSuccess/>:
           <form onSubmit={handleSubmit} style={{padding:'2rem 0', width:'70%', margin:'auto'}}>
           <CardElement />
           <div className="order-btn">

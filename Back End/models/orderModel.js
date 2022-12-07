@@ -19,7 +19,7 @@ const orderSchema = mongoose.Schema({
             required:true
         }
     },
-    orderItems:[
+    productInfo:[
         {
             name:{
                 type:String,
@@ -66,11 +66,6 @@ const orderSchema = mongoose.Schema({
         }
     },
     itemPrice:{
-        type:Number,
-        default:0,
-        required:true
-    },
-    texPrice:{
         type:Number,
         default:0,
         required:true
