@@ -22,8 +22,8 @@ const handleShipping = (e)=>{
     setShiping(true);
     const newOrder = {...order, shippingInfo};
     setOrder(newOrder);
-}
 
+}
     return (
        <div>
             {shiping? <StripePayment/>

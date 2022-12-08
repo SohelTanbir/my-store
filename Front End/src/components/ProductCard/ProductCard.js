@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
 
     return (
             <div  className="single-product">
-                        <img onClick={()=> goDetailsPage(product.id)} src={product.img} alt="image" />
+                        <img onClick={()=> goDetailsPage(product.id)} src={product.img} alt="imag" />
                         <h3 onClick={()=> goDetailsPage(product.id)} className='product-name'>{productName()}</h3>
                         <div className="rating">
                         <FontAwesomeIcon icon={faStar} />

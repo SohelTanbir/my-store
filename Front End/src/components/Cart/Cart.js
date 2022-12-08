@@ -11,6 +11,7 @@ import Shipment from '../Shipment/Shipment';
 const Cart = () => {
     const [shiping, setShiping ] =  useState(false);
     const [quantity, setQuantity] = useState(0);
+    const [productName, setProductName ] = useState([]);
     const { cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;
     const {prices}= useContext(userContext);
@@ -40,11 +41,12 @@ const Cart = () => {
     });
 // handle proceed order
 const proceedOrder = ()=>{
-    setOrder({...order, price, shippingPrice,totalPrice, quantity, image:"T-shirt image"});
+    const productInfo ={name:cart[0].name, price, shippingPrice,totalPrice, quantity, image:"T-shirt image"}
+    setOrder({...order, productInfo});
     setShiping(true);
   
 }
-console.log(order)
+
 
     return (
         <div className="cart">

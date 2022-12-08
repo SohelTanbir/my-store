@@ -29,13 +29,25 @@ const CheckoutForm = () => {
       toast.error(error.message, {position: "bottom-right",autoClose: 1000})
     } else {
       const paymentInfo = {id:paymentMethod.id,type: paymentMethod.type}
-      setStrip(true);
       const newOrder = {...order, paymentInfo};
       setOrder(newOrder);
-      console.log(order);
-     toast.success("Order placed successfully", {position: "bottom-right",autoClose: 1000})
+      // create new order
+      const orderSuccess = await fetch("http://localhost:5000/api/v1/orders/create", {
+        method: 'post',
+        headers: { 'content-type': 'application/json' },
+        body:JSON.stringify(order)
+      })
+      console.log("order details = ", order)
+      if(orderSuccess.ok){
+        setStrip(true);
+        toast.success("Order placed successfully", {position: "bottom-right",autoClose: 1000})
+      }else{
+        toast.error("Something Wrong!", {position: "bottom-right",autoClose: 1000})
+      }
+    
     }
   };
+
 
 
   return (

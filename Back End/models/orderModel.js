@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
     shippingInfo:{
-        addrease:{
+        name:{
             type:String,
+            required:true
+        },
+        phone:{
+            type:Number,
             required:true
         },
         city:{
             type:String,
             required:true
         },
-        country:{
+        address:{
             type:String,
             required:true
         },
-        phoneNo:{
-            type:Number,
-            required:true
-        }
     },
     productInfo:[
         {
@@ -37,17 +37,26 @@ const orderSchema = mongoose.Schema({
                 type:String,
                 required:true
             },
+            shippingPrice:{
+                type:Number,
+                default:0,
+                required:true
+            },
+            totalPrice:{
+                type:Number,
+                default:0,
+                required:true
+            },
             product:{
                 type:mongoose.Schema.ObjectId,
                 ref:"Product",
-                required:true,
+                // required:true,
             }
         }
     ],
     user:{
         type:mongoose.Schema.ObjectId,
         ref:"User",
-        required:true,
     },
     paymentInfo:{
         id:{
@@ -59,29 +68,20 @@ const orderSchema = mongoose.Schema({
             required:true,
             default:"Procesing"
         },
+        type:{
+            type:String,
+            required:true,
+            default:"Card"
+        },
         paidAt:{
             type:Date,
             required:true,
             default:Date.now()
         }
     },
-    itemPrice:{
-        type:Number,
-        default:0,
-        required:true
-    },
-    shippingPrice:{
-        type:Number,
-        default:0,
-        required:true
-    },
-    totalPrice:{
-        type:Number,
-        default:0,
-        required:true
-    },
     orderStatus:{
         type:String,
+        required:true,
         default:"Procesing",
     },
     createdAt:{

@@ -1,29 +1,25 @@
 import React, { useState } from 'react';
 import './SignUp.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCartPlus, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookSquare, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import {  faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
 
 
 const SignUp = ()=>{
-    const [user, setUser ] = useState({
-        success:false,
-        error:''
-    })
+    const [user, setUser ] = useState({})
     const handleInput = (e)=> {
         const newUser = {...user};
         newUser[e.target.name] = e.target.value;
         setUser(newUser);
-        console.log(newUser)
     }
 
     // submit form data and create account
-    const submitForm = (e)=>{
-        e.preventDefault();
+    const  submitForm = async (e)=>{
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
         // Signed in 
@@ -44,6 +40,19 @@ const SignUp = ()=>{
         setUser(NewError);
     });
     e.preventDefault();
+    const response =  await fetch("http://localhost:5000/api/v1/users/signup",{
+        method:"post",
+        headers:{'content-type':'application/json'},
+        body:JSON.stringify(user)
+    });
+    if(response.ok){
+        const {message} = JSON.parse(await response.text());
+        // show toast notification for add prodcut to cart
+    toast.success(`${message}!`, {position: "top-center",autoClose: 1000,}) 
+    }else{
+     const {message} = JSON.parse(await response.text());
+    toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
+    }
 }
     return(
         <div className="SignUp">
@@ -52,10 +61,10 @@ const SignUp = ()=>{
                 <h3>Sign Up</h3>
                 <div className="inputBox">
                    <form onSubmit={submitForm}>
-                   <input type="text" name="name" onBlur={handleInput} placeholder="Your Name" required /> <br />
-                    <input type="email" name="email"  onBlur={handleInput} placeholder="Enter E-mail" required /> <br />
+                   <input type="text" name="name" onBlur={handleInput} placeholder="Name" required /> <br />
+                    <input type="email" name="email"  onBlur={handleInput} placeholder="Email" required /> <br />
                     <input type="password" name="password" onBlur={handleInput} placeholder="Password" required/> <br />
-                    <button className="signupBtn" onClick={submitForm}>
+                    <button className="signupBtn">
                     <FontAwesomeIcon icon={faUser} /><span>Create Account</span></button>
                    </form>
                 </div>
@@ -64,6 +73,7 @@ const SignUp = ()=>{
                 </div>
             </div>
         </div>
+        <ToastContainer />
     </div>
     )
 }

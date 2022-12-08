@@ -1,17 +1,20 @@
 const express = require("express");
 const app  = express();
 const cookieParser = require("cookie-parser");
+const cors =  require("cors");
 
+app.use(cors({
+    origin:"http://localhost:3000"
+}));
 app.use(express.json());
 app.use(cookieParser())
-// dotenv config file
 require("dotenv").config();
 
 //internal requies 
 const connectDatabase = require("./config/DatabaseConnection");
-
 // database Connection
 connectDatabase();
+
 
 // All routes
 const productsRoute = require("./routes/productsRoute");

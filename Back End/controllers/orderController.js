@@ -3,27 +3,24 @@ const Product = require("../models/productModel");
 
 // create order -- admin
 const createOrder  = async (req, res)=>{
+    console.log(req.body)
     try {
         const {
             shippingInfo,
-            orderItems,
+            productInfo,
             paymentInfo,
-            itemPrice,
-            texPrice,
             shippingPrice, 
             totalPrice,
             orderStatus 
         } = req.body;
         const order = await Order.create({
             shippingInfo,
-            orderItems,
+            productInfo,
             paymentInfo,
-            itemPrice,
-            texPrice,
             shippingPrice, 
             totalPrice,
             orderStatus,
-            user:req.userId
+            // user:"sohel"
         });
     if(order){
         res.status(200).json({
@@ -37,6 +34,7 @@ const createOrder  = async (req, res)=>{
         res.status(500).json({
             success:false,
             message:"There was a server side error!",
+            error:err.message
         });
     }
 }
