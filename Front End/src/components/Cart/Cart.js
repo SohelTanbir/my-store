@@ -79,7 +79,6 @@ const proceedOrder = ()=>{
                     </div>}
              </div>
                  }
-                
             </div>
         </div>
     );

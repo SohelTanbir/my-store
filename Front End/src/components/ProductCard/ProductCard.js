@@ -3,18 +3,18 @@ import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
-import { useHistory } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import FakeData from '../../FakeData/FakeData';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const {cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;
     const handleAddToCart = (id) =>{
         FakeData.filter(product =>{
-            if(product.id == id){
+            if(product.id === id){
               const newProduct = [...cart, product]
               setCart(newProduct)
             }
@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
     }
 
     const goDetailsPage  = (id) =>{
-        history.push(`/details/${id}`);
+        navigate(`/details/${id}`);
     }
     // product name modify
     const productName = ()=>{

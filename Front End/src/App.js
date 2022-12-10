@@ -1,15 +1,10 @@
 import React, { createContext, useState } from 'react'
 import './App.css';
 import Home from './components/Home/Home';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Product from './components/Product/Product';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 import Dashboard from './components/Dashboard/Dashboard';
@@ -31,7 +26,6 @@ import Orders from './components/Dashboard/Orders/Orders';
 import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
-import OrderSuccess from './components/OrderSuccess/OrderSuccess';
 
 export const userContext = createContext();
 
@@ -51,83 +45,60 @@ function App() {
       ordersInfo: [order, setOrder]
        }}>
 
-      <Router>
+      <BrowserRouter>
       <Header/>                                                                                                                                     
-            <Switch>
-              <Route exact path="/">
-                  <Home/>
+            <Routes>
+              <Route exact path="/" element={<Home/>}>
+                  
               </Route>
-              <Route exact path="/home">
-                  <Home/>
-              </Route>
-              <Route exact path="/product">
-                  <Product/>
-              </Route>
-              <Route exact path="/reviews">
-                  <Reviews/>
-              </Route>
-              <Route exact path="/login">
-                  <Login/>
-              </Route>
-              <Route exact path="/signup">
-                  <SignUp/>
-              </Route>
-              <Route exact path="/dashboard">
-                  <Dashboard/>
-              </Route>
-              <Route exact path="/cart">
-                <Cart/>
-              </Route>
-              <Route exact path="/contact">
-                <Contact/>
-              </Route>
-              <Route exact path="/orders/track">
-                <TraceOrder/>
-              </Route>
-              <Route exact path="/orders/status">
-                <OrderStatus/>
-              </Route>
-              <Route exact path="/password/forgot">
-                <ResetPassword/>
-              </Route>
-              <Route exact path="/password/reset/:id">
-                <SetNewPassword/>
-              </Route>
-              <Route exact path="/details/:id">
-                <ProductDetails/>
-              </Route>
-              <Route exact  path="/products/addproduct">
-                  <AddProduct/>
-              </Route>
-              <Route exact path="/products/manage">
-                  <ManageProducts/>
-              </Route>
-              <Route exact path="/products/update">
-                  <UpdateProduct/>
-              </Route>
-              <Route  exact path="/admin/make-admin">
-                  <MakeAdmin/>
-              </Route>
-              <Route exact  path="/orders/all">
-                  <Orders/>
-              </Route>
-              <Route exact  path="/orders/status/update">
-                  <UpdateOrder/>
-              </Route>
-              {/* <Route exact  path="/orders/placed">
-                  <OrderSuccess/>
-              </Route> */}
-              <Route exact  path="/category/all">
-                  <Category/>
-              </Route>
-              <Route exact path="/users/profile">
-                  <UserProfile/>
-              </Route>
-              <Route exact path="*">
-                  <NotFound/>
-              </Route>
-            </Switch>
-      </Router>
+              <Route exact path="/home" element={  <Home/>} />
+                
+              <Route exact path="/product" element={   <Product/>} />
+               
+              <Route exact path="/reviews" element={ <Reviews/>} />
+                 
+
+              <Route exact path="/login" element={<Login/>} />
+       
+              <Route exact path="/signup" element={<SignUp/>} />
+               
+
+              <Route exact path="/dashboard" element={<Dashboard/>} />
+
+              <Route exact path="/cart" element={ <Cart/>} />
+
+              <Route exact path="/contact" element={  <Contact/>} />
+              
+              <Route exact path="/orders/track" element={   <TraceOrder/>} />
+
+              <Route exact path="/orders/status" element={  <OrderStatus/>} />
+              
+              <Route exact path="/password/forgot" element={<ResetPassword/>} />
+          
+              <Route exact path="/password/reset/:id" element={<SetNewPassword/>} />
+                
+              <Route exact path="/details/:id" element={<ProductDetails/>} />
+
+              <Route exact  path="/products/addproduct" element={<AddProduct/>} /> 
+
+              <Route exact path="/products/manage" element={<ManageProducts/>} />
+
+              <Route exact path="/products/update" element={<UpdateProduct/>} />
+
+              <Route  exact path="/admin/make-admin" element={<MakeAdmin/>} />
+
+              <Route exact  path="/orders/all" element={<Orders/>} />
+
+              <Route exact  path="/orders/status/update" element={<UpdateOrder/>} />
+
+              <Route exact  path="/category/all" element={  <Category/>} />
+
+              <Route exact path="/users/profile" element={   <UserProfile/>} />
+
+              <Route exact path="*" element={<NotFound/>} />
+
+            </Routes>
+      </BrowserRouter>
      </userContext.Provider>
     </div>
   );

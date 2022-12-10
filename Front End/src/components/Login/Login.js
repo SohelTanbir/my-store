@@ -8,7 +8,7 @@ import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
 import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
 
-  const history = useHistory();
+  // const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
   const {userData} = useContext(userContext);
@@ -39,7 +39,7 @@ const Login = () => {
         const user = result.user;
         const loggedUser = { name: user.displayName, email:user.email, photo: user.photoURL }
         setLoggedInUser(loggedUser);
-        history.replace(from);
+        // history.replace(from);
       }).catch((error) => {
         const errorMessage = error.message;
         const email = error.email;
@@ -55,7 +55,7 @@ const Login = () => {
         const user = result.user;
         const loggedUser = { name: user.displayName, email: user.email, photo: user.photoURL }
         setLoggedInUser(loggedUser);
-        history.replace(from);
+        // history.replace(from);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -87,7 +87,7 @@ const Login = () => {
   setLoggedInUser(user)
   // redirect user to home page
   setTimeout(() => {
-    history.push("/"); 
+    // history.push("/"); 
   }, 1100);
   }else{
     setLoader(false);

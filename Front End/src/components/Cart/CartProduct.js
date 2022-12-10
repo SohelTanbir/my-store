@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useHistory } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import { userContext } from '../../App';
 import { ToastContainer, toast } from 'react-toastify';
 
 
 const CartProduct = ({product}) => {
+    const navigate = useNavigate();
     const [productQuantity, setProductQuantity] = useState(1);
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
-    const history = useHistory();
     const {cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;  
     const {quantities} = useContext(userContext);
@@ -41,7 +41,7 @@ const CartProduct = ({product}) => {
     }
     // show product details page
     const showProductDetails = (id)=>{
-        history.push(`/details/${id}`);
+        navigate(`/details/${id}`);
     }
     // remove product from cart
     const removeProduct = (id) =>{
@@ -55,7 +55,6 @@ const CartProduct = ({product}) => {
     const productPrice = ()=>{
         let price = 0;
         cart.map(product =>setPrice(price += product.quantity * product.price));
-
     }
   
     useEffect(()=>{
@@ -69,13 +68,13 @@ const CartProduct = ({product}) => {
         <div>
               <div className="single-cart-product">
                 <ToastContainer/>
-                    <div className="product-photo">
-                        <Link onClick={()=> showProductDetails(product.id)}><img src={product.img} alt="product" /></Link>
+                    <div className="product-photo" onClick={()=> showProductDetails(product.id)}>
+                    <img src={product.img} alt="product" />
                     </div>
-                    <div className="product-title">
-                            <Link onClick={()=> showProductDetails(product.id)}><h4>{product.name.substring(0, 30)+"..."}</h4></Link>
+                    <div className="product-title" onClick={()=> showProductDetails(product.id)}>
+                            <h4>{product.name.substring(0, 30)+"..."}</h4>
                                 <p className='product-price'><span className='taka-sign'>৳ </span> {product.price}</p>
-                            </div>  
+                    </div>  
                             <div className="product-quantity">
                                                  {productQuantity <=1? 
                                                  <button className='increase-btn' style={{color:'#dfdfdf',cursor:'default'}}>
