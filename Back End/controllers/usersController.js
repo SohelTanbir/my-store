@@ -122,22 +122,25 @@ const loginUser =  async (req, res, next) =>{
     try {
         const user =  await User.find({email:req.body.email});
         if(user){
+            const {name, email, role} = user[0];
             const isValidPassword = await bcrypt.compare(req.body.password, user[0].password)
             if(isValidPassword){
                 const token = jwt.sign({
-                    email:user[0].email,
+                    email,
                     userId:user[0]._id
                 },process.env.JWT_SECREAT, {
                     expiresIn:"1h"
                 })
                 // set cookie
                 res.cookie(process.env.COOKIE_NAME, token, {
-                    expiresIn:process.env.COOKIE_EXPERY
+                    expiresIn:process.env.COOKIE_EXPERY,
+                    httpOnly: true
                 });
                 res.status(200).json({
                     success:true,
                     message:"Login Success!",
-                    access_token:token
+                    access_token:token,
+                    user:{name, email, role}
                 });
             }else{
                 res.status(400).json({

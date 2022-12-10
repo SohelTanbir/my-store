@@ -13,10 +13,6 @@ const Banner = ()=>{
   
     }
 
-
-    console.log(category);
-
-
     return(
         <div className="banner">
            <div className="container">

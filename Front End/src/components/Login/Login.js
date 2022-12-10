@@ -2,13 +2,18 @@ import React, { useContext, useState } from 'react';
 import './Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
 import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
+
+
 import { userContext } from '../../App';
+import Loader from '../Loader/Loader';
 firebase.initializeApp(firebaseConfig);
 
 
@@ -19,9 +24,11 @@ const Login = () => {
   const { from } = location.state || { from: { pathname: "/" } };
   const {userData} = useContext(userContext);
   const [loggedInUser, setLoggedInUser] = userData;
-  const [user, setUser] = useState({
-    error: ''
-  });
+  const [user, setUser] = useState({});
+  let [loader, setLoader] = useState(false);
+
+
+
 
   // login with google account
   const handleGoogleLogin = () => {
@@ -63,36 +70,44 @@ const Login = () => {
     setUser(newUser);
   }
 
-  const loginWithEmail = (e) => {
+  const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user)
-        const loggedUser = { name: user.displayName, email: user.email, photo: user.photoURL }
-        setLoggedInUser(loggedUser);
-        history.replace(from);
-
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        const newError = { ...user };
-        newError.error = errorMessage;
-        setUser(newError)
-        console.log(errorMessage);
-        console.log(newError);
-      });
+    const response = await fetch("http://localhost:5000/api/v1/users/login",{
+      method:"post",
+      headers:{'content-type':'application/json'},
+       credentials: 'include',
+      body:JSON.stringify(user)
+  });
+  if(response.ok){
+    setLoader(true);
+      const {message, user} = JSON.parse(await response.text());
+      // show toast notification for add prodcut to cart
+  toast.success(`${message}!`, {position: "top-center",autoClose: 1000,});
+  setLoggedInUser(user)
+  // redirect user to home page
+  setTimeout(() => {
+    history.push("/"); 
+  }, 1100);
+  }else{
+    setLoader(false);
+   const {message} = JSON.parse(await response.text());
+  toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
   }
+}
+
   return (
     <div className="login">
       <div className="container">
+        {loader&& <Loader color="#dfb839" />}
+     
         <div className="loginBox">
           <h3>Login</h3>
           <div className="inputBox">
-            <form onSubmit={loginWithEmail}>
-              <input type="email" name="email" onBlur={handleInput} placeholder="Enter E-mail" required /> <br />
+            <form onSubmit={handleSubmit}>
+              <input type="email" name="email" onBlur={handleInput} placeholder="Email" required /> <br />
               <input type="password" name="password" onBlur={handleInput} placeholder="Password" /> <br />
-              <button className="loginBtn" onClick={loginWithEmail}>
+              <button className="loginBtn">
                 <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
               <div className="forgot-password">
               <Link to="/password/reset-password">
@@ -109,6 +124,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

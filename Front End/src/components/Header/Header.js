@@ -6,6 +6,8 @@ import { faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 
 const Header = () => {
+    const {userData} = useContext(userContext);
+    const [loggedInUser, setLoggedInUser] = userData;
     const [toggle, setToggle] = useState(false);
     const {cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;
@@ -22,6 +24,7 @@ const Header = () => {
         }
     }
 
+    
     return (
        <div className="header">
             <div className="container">
@@ -45,7 +48,7 @@ const Header = () => {
                             </li>
                             
                             <li>
-                                <Link to="/login">Login/Sign Up</Link>
+                                {loggedInUser.name?<Link title='User' to="/users/profile">{loggedInUser.name}</Link>:<Link to="/login">Login/Sign Up</Link>}
                             </li>
 
                         </ul>
