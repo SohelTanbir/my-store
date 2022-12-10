@@ -53,9 +53,9 @@ const Header = () => {
 
                         </ul>
                         <div id="mobileMenu">
-                            <a href="#" onClick={handleMenu}>
+                            <Link to="#" onClick={handleMenu}>
                             <FontAwesomeIcon icon={faBars} />
-                            </a>
+                            </Link>
                      </div>
                     </div>
                     <div className="addToCart">

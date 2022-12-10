@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import './SignUp.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
+import Loader from '../Loader/Loader';
 
 
 const SignUp = ()=>{
-    const [user, setUser ] = useState({})
+    const navigate = useNavigate();
+    const [user, setUser ] = useState({});
+    let [loader, setLoader] = useState(false);
     const handleInput = (e)=> {
         const newUser = {...user};
         newUser[e.target.name] = e.target.value;
@@ -20,6 +23,7 @@ const SignUp = ()=>{
 
     // submit form data and create account
     const  submitForm = async (e)=>{
+        setLoader(true);
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
         // Signed in 
@@ -46,10 +50,16 @@ const SignUp = ()=>{
         body:JSON.stringify(user)
     });
     if(response.ok){
+        setLoader(false);
         const {message} = JSON.parse(await response.text());
         // show toast notification for add prodcut to cart
-    toast.success(`${message}!`, {position: "top-center",autoClose: 1000,}) 
+    toast.success(`${message}!`, {position: "top-center",autoClose: 1000,});
+      // redirect user to home page
+  setTimeout(() => {
+    navigate("/login"); 
+  },2000); 
     }else{
+        setLoader(false);
      const {message} = JSON.parse(await response.text());
     toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
     }
@@ -57,6 +67,7 @@ const SignUp = ()=>{
     return(
         <div className="SignUp">
         <div className="container">
+        {loader&& <Loader color="#dfb839" />}
             <div className="SignUpBox">
                 <h3>Sign Up</h3>
                 <div className="inputBox">
