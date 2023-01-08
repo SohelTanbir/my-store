@@ -3,10 +3,10 @@ import './Loader.css';
 import  {BeatLoader } from "react-spinners";
 
 
-const Loader = ({color}) => {
+const Loader = () => {
     return (
         <div className='loader container'>
-               <BeatLoader  color={color} />
+               <BeatLoader color="#dfb839" />
         </div>
     );
 };

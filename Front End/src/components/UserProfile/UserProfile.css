@@ -50,24 +50,48 @@
     margin-left: 1%;
     padding: 0 1rem 1rem;
 }
-.orders-info h4{
-    font-size: 2rem;
-    font-weight: 500;
+.my-orders-table {
+    width:100%;
+    margin-left: 1%;
+    overflow-x: auto;
+}
+.my-orders-table table{
+    min-width: 90rem;
+}
+.my-orders-table table tr{
+    font-size: 1.6rem;
+    font-weight: 400;
     color: #817f7f;
     padding-bottom: .5rem;
     border-bottom: .1rem solid #f8f8f8;
     text-transform: capitalize;
+    overflow-x:scroll!important;
+
 }
-.single-order{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: .1rem solid #eee;
+.my-orders-table table td{
+    border-bottom: .1rem solid #f8f8f8;
 }
-.single-order img{
+.my-orders-table table img {
     width: 10rem;
     height: 10rem;
     object-fit: cover;
+    padding: 10px;
+}
+.user-profile::-webkit-scrollbar{
+    height: 2px;
+    width: 2px;
+    background: gray;
+}
+
+/* Track */
+.user-profile::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+
+.user-profile::-webkit-scrollbar-thumb:horizontal{
+    background: #dfb839;
+    border-radius: 5px;
 }
 /*
 ------------------------------------------------------------

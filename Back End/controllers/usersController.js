@@ -145,7 +145,7 @@ const loginUser =  async (req, res, next) =>{
             }else{
                 res.status(400).json({
                     success:false,
-                    message:"Authentication Faield!"
+                    message:"incorrect email or password"
                 });
             }
         }else{

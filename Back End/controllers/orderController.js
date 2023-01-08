@@ -1,9 +1,8 @@
 const Order = require("../models/orderModel");
 const Product = require("../models/productModel");
 
-// create order -- admin
+// create order
 const createOrder  = async (req, res)=>{
-    console.log(req.body)
     try {
         const {
             shippingInfo,
@@ -42,15 +41,16 @@ const createOrder  = async (req, res)=>{
 const getAllOrders = async (req, res)=>{
     try {
         const orders = await Order.find({});
-        if(orders){
+        if(orders.length > 0){
             res.status(200).json({
                 success:true,
-                orders
+                Total_Orders:orders.length,
+                Orders:orders
             });
         }else{
             res.status(404).json({
                 success:false,
-                "message":"Order not found!"
+                "message":"Order doesn't exist!"
             });
         }
     } catch (err) {
@@ -158,16 +158,16 @@ const updateOrder  = async (req, res) =>{
 const trackOrder =  async (req, res) =>{
     try {
         const {email, orderId } = req.body
-        const order = await Order.findById(req.body.orderId);
+        const order = await Order.findById(orderId);
         if(order){
             res.status(200).json({
                 success:true,
-                orderStatus: order.orderStatus
+                message: order.orderStatus
             });
         }else{
             res.status(404).json({
                 success:false,
-                message:"Order not found!",
+                "message":"Order doesn't exist!",
             });
         }
     } catch (err) {

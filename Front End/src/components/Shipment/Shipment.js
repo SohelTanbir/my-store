@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { userContext } from '../../App';
 import StripePayment from '../StripePayment/StripePayment';
 import './Shipment.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Shipment = () => {
     const [shiping, setShiping] =  useState(false);
@@ -19,13 +21,17 @@ const Shipment = () => {
 // handle submit shiping data
 const handleShipping = (e)=>{
     e.preventDefault();
+   if(shippingInfo.name && shippingInfo.phone && shippingInfo.city && shippingInfo.address){
     setShiping(true);
     const newOrder = {...order, shippingInfo};
     setOrder(newOrder);
-
+   }else{
+    toast.error("All field required!",{position: "bottom-right",autoClose: 1000});
+   }
 }
     return (
        <div>
+        <ToastContainer/>
             {shiping? <StripePayment/>
             :<div className="shiping-form">
                     <h3>Shipping addresse</h3>

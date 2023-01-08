@@ -14,13 +14,14 @@ const {
 
 
 // order routes
-router.post("/orders/create",checkLogin, createOrder);
-router.get("/orders/all",checkLogin,authorization, getAllOrders);
+//ToDo must be add checklogin
+router.post("/orders/create", createOrder);
+router.get("/orders/all", getAllOrders);
 router.get("/orders/me",checkLogin, getMyOrders);
 router.get("/orders/:id", getOrderById);
 router.delete("/orders/delete/:id",checkLogin,authorization, deleteOrder);
 router.put("/orders/update/:id",checkLogin, authorization, updateOrder);
-router.get("/orders/me/track",checkLogin, trackOrder);
+router.post("/orders/me/track", trackOrder);
 
 
 

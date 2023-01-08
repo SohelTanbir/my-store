@@ -9,9 +9,10 @@ const { getAllCartItems, addToCart, removeProduct } = require("../controllers/ca
 
 
 // cart routes
-router.get("/cart/all",checkLogin, getAllCartItems);
-router.post("/cart/add",checkLogin, addToCart);
-router.delete("/cart/delete/:id",checkLogin, removeProduct);
+// Todo I have to add checkLogin middleware
+router.get("/cart/all", getAllCartItems);
+router.post("/cart/add", addToCart);
+router.delete("/cart/delete/:id", removeProduct);
 
 
 // export router

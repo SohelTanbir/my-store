@@ -2,38 +2,41 @@ import React from 'react';
 import './OrderStatus.css';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCartPlus, faCheck, faUser } from '@fortawesome/free-solid-svg-icons'
+import {  faCheck } from '@fortawesome/free-solid-svg-icons'
 
-const OrderStatus = () => {
+const OrderStatus = ({status, orderId}) => {
+
+    console.log(status);
+
     return (
         <div className='order-status'>
             <div className="container">
                 <div className="order-status-stepper">
                 <h4>Your Order Status</h4>
-                <p className='order-id'>Order Id: #45s2s4s5622s12</p>
+                <p className='order-id'>Order Id: # ${orderId}</p>
                     <div className="order-steps">
-                        <div className="single-step pending active">
+                        <div className={`single-step pending active`}>
                             <div className="check-icon">
                                 <FontAwesomeIcon icon={faCheck}  />
                             </div>
                             <div className="circle"></div>
                             <p className='step-title'>Payment Pending</p>
                         </div>
-                        <div className="single-step processing">
+                        <div className={`single-step processing ${status ==='Procesing' || status ==='Shipped' ||  status ==='Delivered' ?'active':''}`}>
                         <div className="check-icon">
                                 <FontAwesomeIcon icon={faCheck}  />
                             </div>
                             <div className="circle"></div>
                             <p className='step-title'>Processing</p>
                         </div>
-                        <div className="single-step shipped ">
+                        <div className={`single-step shipped ${status ==='Shipped'|| status ==='Delivered'?'active':''}`}>
                             <div className="check-icon">
                                 <FontAwesomeIcon icon={faCheck}  />
                             </div>
                             <div className="circle"></div>
                             <p className='step-title'>Shipped</p>
                         </div>
-                        <div className="single-step delivered">
+                        <div className={`single-step delivered ${status ==='Delivered'?'active':''}`}>
                             <div className="check-icon">
                                 <FontAwesomeIcon icon={faCheck}  />
                             </div>

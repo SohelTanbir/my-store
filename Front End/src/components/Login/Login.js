@@ -81,7 +81,7 @@ const Login = () => {
     setLoader(true);
       const {message, user} = JSON.parse(await response.text());
       // show toast notification for add prodcut to cart
-  toast.success(`${message}!`, {position: "top-center",autoClose: 1000,});
+  toast.success(message, {position: "top-center",autoClose: 1000,});
   setLoggedInUser(user)
   // redirect user to home page
   setTimeout(() => {
@@ -97,7 +97,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="container">
-        {loader&& <Loader color="#dfb839" />}
+        {loader&& <Loader/>}
      
         <div className="loginBox">
           <h3>Login</h3>
@@ -108,7 +108,7 @@ const Login = () => {
               <button className="loginBtn">
                 <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
               <div className="forgot-password">
-              <Link to="/password/reset-password">
+              <Link to="/password/forgot">
                 <span>Forgot Passwrod?</span>
               </Link>
               </div>

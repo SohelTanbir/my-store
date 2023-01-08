@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -12,16 +12,6 @@ const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const {cartItems} =  useContext(userContext);    
     const [cart, setCart ]= cartItems;
-    const handleAddToCart = (id) =>{
-        FakeData.filter(product =>{
-            if(product.id === id){
-              const newProduct = [...cart, product]
-              setCart(newProduct)
-            }
-        });
-        // show toast notification for add prodcut to cart
-        toast.success("1 item added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
-    }
 
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);
@@ -38,8 +28,8 @@ const ProductCard = ({ product }) => {
 
     return (
             <div  className="single-product">
-                        <img onClick={()=> goDetailsPage(product.id)} src={product.img} alt="imag" />
-                        <h3 onClick={()=> goDetailsPage(product.id)} className='product-name'>{productName()}</h3>
+                        <img onClick={()=> goDetailsPage(product._id)} src={product.images[0].url} alt="imag" />
+                        <h3 onClick={()=> goDetailsPage(product._id)} className='product-name'>{productName()}</h3>
                         <div className="rating">
                         <FontAwesomeIcon icon={faStar} />
                         <FontAwesomeIcon icon={faStar} />
@@ -48,7 +38,6 @@ const ProductCard = ({ product }) => {
                         <FontAwesomeIcon icon={faStar} />
                         </div>
                         <h3 className='product-price'>Price: <span className='taka-sign'>৳ </span> {product.price}</h3>
-                        <button  onClick={()=>{ handleAddToCart(product.id)}} className="add_to_cart_btn">Add to Cart</button>
                         <ToastContainer />
              </div>
     );

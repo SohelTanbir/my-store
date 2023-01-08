@@ -22,4 +22,5 @@
     "mongoose": "^6.6.3",
     "nodemailer": "^6.8.0"
   }
+  
 }

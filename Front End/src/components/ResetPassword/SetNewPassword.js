@@ -9,7 +9,7 @@ const SetNewPassword = () => {
             <div className="container">
                 <div className="set-news-passowrd-form">
                     <h4>Welcome!</h4>
-                    <p>Now you are ready to set new password.</p>
+                    <p>You are ready to set new password.</p>
                     <form>
                         <input type="password" placeholder='New password'/> <br />
                         <input type="password" placeholder='Confirm password'/> <br />

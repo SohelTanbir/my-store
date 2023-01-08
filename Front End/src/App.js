@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import './App.css';
 import Home from './components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,7 +17,6 @@ import Contact from './components/Contact/Contact';
 import TraceOrder from './components/TraceOrder/TraceOrder';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import SetNewPassword from './components/ResetPassword/SetNewPassword';
-import OrderStatus from './components/TraceOrder/OrderStatus';
 import UserProfile from './components/UserProfile/UserProfile';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
@@ -35,8 +34,20 @@ function App() {
   const [price, setPrice] = useState(0);
   const [payment, setPayment] = useState(0)
   const [quantity, setQuantity] = useState(0);
-  const [order, setOrder] = useState({});
-  console.log("active user = ", loggedInUser)
+  const [order, setOrder] = useState([]);
+
+  // load cart from DB
+const loadCartProduct = async()=>{
+    const response = await fetch("http://localhost:5000/api/v1/cart/all");
+    const {cartProducts} =  await response.json();
+    if(cartProducts?.length > 0){
+        setCart(cartProducts)
+    }
+}
+useEffect(()=>{
+  loadCartProduct();
+},[cart.length])
+
   return (
     <div className="App">
       <userContext.Provider value={{cartItems:[cart, setCart], userData:[loggedInUser, setLoggedInUser], prices:[price, setPrice],
@@ -71,8 +82,6 @@ function App() {
               
               <Route exact path="/orders/track" element={   <TraceOrder/>} />
 
-              <Route exact path="/orders/status" element={  <OrderStatus/>} />
-              
               <Route exact path="/password/forgot" element={<ResetPassword/>} />
           
               <Route exact path="/password/reset/:id" element={<SetNewPassword/>} />

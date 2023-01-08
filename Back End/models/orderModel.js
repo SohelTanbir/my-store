@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Product = require("../models/productModel");
 const orderSchema = mongoose.Schema({
     shippingInfo:{
         name:{
@@ -37,16 +37,6 @@ const orderSchema = mongoose.Schema({
                 type:String,
                 required:true
             },
-            shippingPrice:{
-                type:Number,
-                default:0,
-                required:true
-            },
-            totalPrice:{
-                type:Number,
-                default:0,
-                required:true
-            },
             product:{
                 type:mongoose.Schema.ObjectId,
                 ref:"Product",
@@ -57,6 +47,16 @@ const orderSchema = mongoose.Schema({
     user:{
         type:mongoose.Schema.ObjectId,
         ref:"User",
+    },
+    shippingPrice:{
+        type:Number,
+        default:0,
+        required:true
+    },
+    totalPrice:{
+        type:Number,
+        default:0,
+        required:true
     },
     paymentInfo:{
         id:{
