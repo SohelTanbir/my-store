@@ -1,19 +1,22 @@
 import React from 'react';
+import   SwiperCore, { Navigation, Pagination, Scrollbar,Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import 'swiper/css/bundle';
 import banner1 from '../../images/banner-1.png'
 import banner2 from '../../images/banner-2.jpg'
 import banner3 from '../../images/banner-3.jpg'
 
 
 const Slider = () => {
+    SwiperCore.use([Autoplay])
     
     return (
         <div>
                 <Swiper
-                slidesPerView={1}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
+                   modules={[Pagination]}
+                   slidesPerView={1}
+                   pagination={{ clickable: true }}
+                   autoplay={{delay: 1500}}
                 >
                 <SwiperSlide>
                     <img src={banner2} alt="product " />
