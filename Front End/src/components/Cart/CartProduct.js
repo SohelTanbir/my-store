@@ -88,7 +88,7 @@ const CartProduct = ({product}) => {
                     </div>
                     <div className="product-title" onClick={()=> showProductDetails(product.productId)}>
                             <h4>{product.name.substring(0, 30)+"..."}</h4>
-                                <p className='product-price'><span className='taka-sign'>৳ </span> {product.price}</p>
+                                <p className='product-price'><span className='taka-sign'>৳ </span> {product.price*productQuantity}</p>
                     </div>  
                             <div className="product-quantity">
                                                  {productQuantity <=1? 

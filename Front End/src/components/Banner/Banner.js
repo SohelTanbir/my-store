@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Banner.css'
 import banner1 from '../../images/banner-1.png'
+import Slider from '../Slider/Slider';
 
 
 const Banner = ()=>{
@@ -34,7 +35,7 @@ const Banner = ()=>{
                     </div>
                 </div>
                 <div className="banner-slider">
-                   <img src={banner1} alt="product " />
+                     <Slider/>
                 </div>
                </div>
            </div>

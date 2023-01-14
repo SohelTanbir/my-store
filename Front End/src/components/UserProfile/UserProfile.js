@@ -57,7 +57,7 @@ const UserProfile = () => {
                                     <td>{product._id}</td>
                                     <td><img src={product.productInfo[0].image} alt="product" /></td>
                                     <td>{productName(product.productInfo[0].name)}</td>
-                                    <td><span className='taka-sign'>৳ </span> {product.productInfo[0].price}</td>
+                                    <td><span className='taka-sign'>৳ </span> {product.totalPrice}</td>
                                     <td>{product.orderStatus}</td>
                                 </tr>
                                 )}

@@ -51,6 +51,7 @@ const proceedOrder = ()=>{
 });
     setOrder({...order, productInfo:orders, shippingPrice, totalPrice});
     setShiping(true);
+    console.log(cart);
 }
 
 
