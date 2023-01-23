@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './ProductDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faStarHalf, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link, useParams } from 'react-router-dom';
-import FakeData from '../../FakeData/FakeData';
 import Review from '../Reviews/Review';
 import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
@@ -21,7 +20,7 @@ const ProductDetails = () => {
         fetch(`http://localhost:5000/api/v1/product/one/${id}`)
         .then(res => res.json())
         .then(data => setProduct(data.products));
-    }, []);
+    });
     
 const handleAddToCart = async(id) =>{
 
@@ -44,7 +43,6 @@ const handleAddToCart = async(id) =>{
         body:JSON.stringify(cartProduct)
         });
     if(res.ok){
-        const message  = await res.text();
         setCart(product)
         toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
        }else{

@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const CartProduct = ({product}) => {
     const navigate = useNavigate();
-    const [productQuantity, setProductQuantity] = useState(1);
+    const [productQuantity, setProductQuantity] = useState(product.quantity);
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
     const {cartItems} =  useContext(userContext);    

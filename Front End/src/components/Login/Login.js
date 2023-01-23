@@ -103,8 +103,8 @@ const Login = () => {
           <h3>Login</h3>
           <div className="inputBox">
             <form onSubmit={handleSubmit}>
-              <input type="email" name="email" onBlur={handleInput} placeholder="Email" required /> <br />
-              <input type="password" name="password" onBlur={handleInput} placeholder="Password" /> <br />
+              <input type="email" name="email" onChange={handleInput} placeholder="Email" required /> <br />
+              <input type="password" name="password" onChange={handleInput} placeholder="Password" /> <br />
               <button className="loginBtn">
                 <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
               <div className="forgot-password">

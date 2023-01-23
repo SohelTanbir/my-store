@@ -15,8 +15,8 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 import Reviews from './components/Reviews/Review';
 import Contact from './components/Contact/Contact';
 import TraceOrder from './components/TraceOrder/TraceOrder';
+import ForgotPassword from './components/ResetPassword/ForgotPassword';
 import ResetPassword from './components/ResetPassword/ResetPassword';
-import SetNewPassword from './components/ResetPassword/SetNewPassword';
 import UserProfile from './components/UserProfile/UserProfile';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
@@ -82,9 +82,9 @@ useEffect(()=>{
               
               <Route exact path="/orders/track" element={   <TraceOrder/>} />
 
-              <Route exact path="/password/forgot" element={<ResetPassword/>} />
+              <Route exact path="/password/forgot" element={<ForgotPassword/>} />
           
-              <Route exact path="/password/reset/:id" element={<SetNewPassword/>} />
+              <Route exact path="/password/reset/:token" element={<ResetPassword/>} />
                 
               <Route exact path="/details/:id" element={<ProductDetails/>} />
 

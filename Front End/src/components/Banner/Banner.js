@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Banner.css'
-import banner1 from '../../images/banner-1.png'
 import Slider from '../Slider/Slider';
 
 

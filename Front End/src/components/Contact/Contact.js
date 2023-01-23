@@ -18,7 +18,6 @@ const Contact = () => {
         newMessage[e.target.name] = e.target.value;
         setMessage(newMessage)
     }
-    console.log(message);
     
     // handle add product
     const handleSubmit = async(e)=>{
@@ -37,14 +36,14 @@ const Contact = () => {
             email:"",
             subject:"",
             message:""});
-            toast.success("Thanks! your messaged recoreded!",{position: "bottom-right",autoClose: 1000});
+            toast.success("Thanks! your messaged recoreded!",{position: "top-center",autoClose: 1000});
         }else{
             setLoader(false);
-            toast.error("Message send Failed!",{position: "bottom-right",autoClose: 1000});
+            toast.error("Message send Failed!",{position: "top-center",autoClose: 1000});
         }
         }else{
             setLoader(false);
-            toast.error("All field required!",{position: "bottom-right",autoClose: 1000});
+            toast.error("All field required!",{position: "top-center",autoClose: 1000});
         }
     }
 
