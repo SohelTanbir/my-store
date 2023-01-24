@@ -44,7 +44,18 @@
     color: #2b2b2b;
     font-weight: 500;
 }
-
+.logout-btn {
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    background: #9ffff2;
+    width: 100%;
+    margin: 17px 0 3px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #b1b0ff;
+}
 .user-profile .orders-info{
     width:74%;
     margin-left: 1%;

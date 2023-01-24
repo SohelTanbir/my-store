@@ -3,12 +3,15 @@ import './UserProfile.css'
 import FakeData from '../../FakeData/FakeData';
 import profilePhoto from '../../images/users/sohelrana.jpg'
 import Loader from '../Loader/Loader';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const UserProfile = () => {
     const [myOrders, setMyOrders] = useState([]);
-
+    const navigate = useNavigate();
     // fatch my orders from db
     useEffect(  ()=>{
         fetch("http://localhost:5000/api/v1/orders/all")
@@ -24,13 +27,25 @@ const UserProfile = () => {
         }
     }
 
+// handle Log out user
+const handleLogOut = async () =>{
+    const response = await fetch("http://localhost:5000/api/v1/users/logout");
+    const {success, message } = await response.json();
+    if(success){
+        toast.success(message,{position: "top-center",autoClose: 1000});
+        // redirect to home page
+        setTimeout(()=>navigate("/"), 2000)
+    }else{
 
+    }
+}
 
 
     return (
     
         <div className='user-profile'>
             {myOrders?.length?<div className="container">
+            <ToastContainer />
             <div className="row">
                 <div className="user-info">
                     <div className="profile-photo">
@@ -40,6 +55,7 @@ const UserProfile = () => {
                     <p> <span>Email: </span> sohelrana@gmail.com</p>
                     <p> <span>Phone: </span> 01774000000</p>
                     <p> <span>Address: </span> Dinajpur</p>
+                    <button onClick={handleLogOut} className="logout-btn">Log out</button>
                 </div>
                 <div className="orders-info">
                     <h4>My Orders ({myOrders.length?myOrders.length:0})</h4>

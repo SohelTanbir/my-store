@@ -167,7 +167,7 @@ const loginUser =  async (req, res, next) =>{
 const logoutUser = async (req, res)=>{
     res.cookie(process.env.COOKIE_NAME, null).json({
         success:true,
-        message:"Logged out the user!"
+        message:"Logged Out Successfully"
     });
 }
 
@@ -231,7 +231,7 @@ const resetPassword = async (req, res)=>{
             if(passwordUpdated.modifiedCount > 0){
                 // set reset password token blank string
                 // await User.updateOne({resetPasswordToken:req.params.id},{$set:{resetPasswordToken:"", resetPasswordExpire:""}});
-                await User.updateOne({resetPasswordToken:req.params.id});
+                await User.updateOne({resetPasswordToken:req.params.id}, {$set:{resetPasswordToken:"", resetPasswordExpire:""}});
                 res.status(200).json({
                     success:true,
                     message:"Password Changed Successfully!",

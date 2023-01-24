@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import './ResetPassword.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -42,7 +42,7 @@ const ResetPassword = () => {
             // redirect to login page
             setTimeout(() => {
                 navigate("/login");
-            }, 5000);
+            }, 2000);
         }else{
             setLoader(false);
             toast.error(message,{position: "top-center",autoClose:1000});
@@ -65,7 +65,6 @@ const ResetPassword = () => {
                 <div className="set-news-passowrd-form">
                     <h4> New Password!</h4>
                     <p>You are ready to set new password.</p>
-                    <p>Redirect to login page in 5s</p>
                     <form onSubmit={handleSubmit}>
                         <input type="password" onChange={handleChange} name='password' placeholder='New password' value={resetPassword.password}/> <br />
                         <input type="password" onChange={handleChange} name='confirmPassword' placeholder='Confirm password' value={resetPassword.confirmPassword}/> <br />
