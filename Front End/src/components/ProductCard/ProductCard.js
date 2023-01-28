@@ -1,17 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCartPlus, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 import { useNavigate } from "react-router-dom";
-import FakeData from '../../FakeData/FakeData';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const {cartItems} =  useContext(userContext);    
-    const [cart, setCart ]= cartItems;
+    // const [cart, setCart ]= cartItems;
 
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);
@@ -28,7 +27,7 @@ const ProductCard = ({ product }) => {
 
     return (
             <div  className="single-product">
-                        <img onClick={()=> goDetailsPage(product._id)} src={product.images[0].url} alt="imag" />
+                        <img onClick={()=> goDetailsPage(product._id)} src={product.images[0]?.url} alt="product" />
                         <h3 onClick={()=> goDetailsPage(product._id)} className='product-name'>{productName()}</h3>
                         <div className="rating">
                         <FontAwesomeIcon icon={faStar} />

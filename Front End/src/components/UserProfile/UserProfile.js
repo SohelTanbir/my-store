@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './UserProfile.css'
-import FakeData from '../../FakeData/FakeData';
 import profilePhoto from '../../images/users/sohelrana.jpg'
 import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../../App';
 
 
 
 const UserProfile = () => {
+    const {userData} = useContext(userContext);
+    const [loggedInUser, setLoggedInUser] = userData;
     const [myOrders, setMyOrders] = useState([]);
     const navigate = useNavigate();
     // fatch my orders from db
@@ -33,8 +35,10 @@ const handleLogOut = async () =>{
     const {success, message } = await response.json();
     if(success){
         toast.success(message,{position: "top-center",autoClose: 1000});
+        // reset user login data
+        setLoggedInUser({});
         // redirect to home page
-        setTimeout(()=>navigate("/"), 2000)
+        setTimeout(()=>navigate("/login"), 2000)
     }else{
 
     }
