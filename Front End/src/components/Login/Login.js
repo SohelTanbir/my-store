@@ -26,7 +26,7 @@ const Login = () => {
   const {userData} = useContext(userContext);
   const [loggedInUser, setLoggedInUser] = userData;
   const [user, setUser] = useState({});
-  let [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
 
 
 
@@ -97,7 +97,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="container">
-        {loader&& <Loader/>}
+        
      
         <div className="loginBox">
           <h3>Login</h3>

@@ -1,24 +1,37 @@
 const Product = require("../models/productModel");
+const cloudinary =  require("cloudinary");
 
 // Create a new product
 const addNewProduct = async (req, res, next)=>{
         // set user reference in product 
         req.body.user = req.userId;
-        const product = new Product(req.body);
-        product.save((err)=>{
-            if(!err){
-                res.status(200).json({
-                    success:true,
-                    message:"Product Created Successfully!",
-                    product
-                });
-            }else{
-                res.status(200).json({
-                    success:false,
-                    message:err.message
-                })
-            }
-        });
+        const path = req.files.image.path;
+        const {url, public_id} = await  cloudinary.uploader.upload(path);
+        req.fields.images = {public_id, url}
+        const productData  = req.fields;
+
+        if(url){
+            const product = new Product(productData);
+            product.save((err)=>{
+                if(!err){
+                    res.status(200).json({
+                        success:true,
+                        message:"Product Created Successfully!",
+                        product
+                    });
+                }else{
+                    res.status(200).json({
+                        success:false,
+                        message:err.message
+                    })
+                }
+            });
+        }else{
+            res.status(200).json({
+                success:false,
+                message:"Image upload Failed!",
+            });
+        }
 }
 
 // Get All Products

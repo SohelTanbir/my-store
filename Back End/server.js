@@ -2,20 +2,35 @@ const express = require("express");
 const app  = express();
 const cookieParser = require("cookie-parser");
 const cors =  require("cors");
+const bodyParser = require('body-parser');
+const formidable =  require("express-formidable");
+const cloudinary = require("cloudinary");
 
 app.use(cors({
     origin:"http://localhost:3000",
     credentials:true
 }));
-app.use(express.json());
-app.use(cookieParser())
-require("dotenv").config();
 
+
+// app.use(express.json());
+app.use(express.urlencoded({extended: false})); 
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+require("dotenv").config();
+app.use(formidable());
 //internal requies 
 const connectDatabase = require("./config/DatabaseConnection");
 // database Connection
 connectDatabase();
 
+
+// cloudinary configuration     
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key:  process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+    secure: true
+})
 
 // All routes
 const productsRoute = require("./routes/productsRoute");
