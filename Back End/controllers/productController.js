@@ -7,7 +7,7 @@ const addNewProduct = async (req, res, next)=>{
         req.body.user = req.userId;
         const path = req.files.image.path;
         if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg'){
-            const {url, public_id} = await  cloudinary.uploader.upload(path, {folder:"Products",  use_filename: true});
+            const {url, public_id} = await  cloudinary.uploader.upload(path,{folder:"mystore"});
             req.fields.images = {public_id, url}
             const productData  = req.fields;
             if(url){
@@ -92,25 +92,25 @@ const getProductById =  async(req, res)=>{
 // delete a product 
 const deleteProduct = async (req, res )=>{
  
-//    try {
+   try {
         const product =  await Product.findById(req.params.id);
-        console.log(product);
-        res.send(product)
-//         if(product){
-//             product.deleteOne();
-//             res.status(200).json({
-//                 success:true,
-//                 message:"Product Delete Successfully!"
-//             });
-//         }else{
-//             res.status(404).json({
-//                 success:false,
-//                 message:"Product not Found!"
-//             });
-//         }
-//    } catch (err) {
-//         console.log(err);
-//    }
+        if(product){
+
+            product.deleteOne();
+            const {result} =await  cloudinary.v2.uploader.destroy(product.images[0].public_id);
+            res.status(200).json({
+                success:true,
+                message:"Product Delete Successfully!"
+            });
+        }else{
+            res.status(404).json({
+                success:false,
+                message:"Product not Found!"
+            });
+        }
+   } catch (err) {
+        console.log(err);
+   }
 
 }
 
