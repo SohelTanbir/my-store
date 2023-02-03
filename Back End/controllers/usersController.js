@@ -9,14 +9,14 @@ const crypto = require("crypto");
 const createUser = async (req, res)=>{
     try {
         // check user exist or not
-        const isUser = await User.find({email:req.body.email});
+        const isUser = await User.find({email:req.fields.email});
         if(isUser.length < 1){
-            const hashPassword = await bcrypt.hash(req.body.password, 10);
+            const hashPassword = await bcrypt.hash(req.fields.password, 10);
             const user = await User.create({
-                name:req.body.name,
-                email:req.body.email,
+                name:req.fields.name,
+                email:req.fields.email,
                 password:hashPassword,
-                role:req.body.role
+                role:req.fields.role
             });
             user.save(err =>{
                 if(!err){
@@ -27,7 +27,7 @@ const createUser = async (req, res)=>{
                 }else{
                     res.status(400).json({
                         success:false,
-                        message:err.message
+                        message:err.message +"here"
                     });
                 }
             })
@@ -120,10 +120,11 @@ const deleteUser =  async (req, res)=>{
 // login user
 const loginUser =  async (req, res, next) =>{
     try {
-        const user =  await User.find({email:req.body.email});
+        const user =  await User.find({email:req.fields.email});
+        console.log(req.fields.email)
         if(user){
             const {name, email, role} = user[0];
-            const isValidPassword = await bcrypt.compare(req.body.password, user[0].password)
+            const isValidPassword = await bcrypt.compare(req.fields.password, user[0].password)
             if(isValidPassword){
                 const token = jwt.sign({
                     email,

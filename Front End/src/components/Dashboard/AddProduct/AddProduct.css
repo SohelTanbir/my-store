@@ -22,6 +22,7 @@
     border: .1rem solid #eee;
     transition: .5s ease-in;
 }
+
 .check-box{
     width: 48%;
 }
@@ -45,6 +46,7 @@
     color: #bbbbbb;
 }
 .product-add-form input[type="file"]{
+    width: 100%;
     padding: .7rem 1.5rem;
 }
 .product-add-form input[type="file"]::-webkit-file-upload-button{

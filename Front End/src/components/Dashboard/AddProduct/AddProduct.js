@@ -65,11 +65,11 @@ const AddProduct = () => {
             })
         }else{
             setLoader(false);
-            toast.error(message,{position: "top-center",autoClose: 500});
+            toast.error(message,{position: "top-center",autoClose: 1000});
         }
     }else{
         setLoader(false);
-        toast.error("All field are required!",{position: "top-center",autoClose: 500});
+        toast.error("All field are required!",{position: "top-center",autoClose: 1000});
     }
 
     }

@@ -6,32 +6,42 @@ const addNewProduct = async (req, res, next)=>{
         // set user reference in product 
         req.body.user = req.userId;
         const path = req.files.image.path;
-        const {url, public_id} = await  cloudinary.uploader.upload(path);
-        req.fields.images = {public_id, url}
-        const productData  = req.fields;
+        if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg'){
+            const {url, public_id} = await  cloudinary.uploader.upload(path, {folder:"Products",  use_filename: true});
+            req.fields.images = {public_id, url}
+            const productData  = req.fields;
+            if(url){
+                const product = new Product(productData);
+                product.save((err)=>{
+                    if(!err){
+                        res.status(200).json({
+                            success:true,
+                            message:"Product Created Successfully!",
+                            product
+                        });
+                    }else{
+                        res.status(200).json({
+                            success:false,
+                            message:err.message
+                        })
+                    }
+                });
+            }else{
+                res.status(200).json({
+                    success:false,
+                    message:"Image upload Failed!",
+                });
+            }
 
-        if(url){
-            const product = new Product(productData);
-            product.save((err)=>{
-                if(!err){
-                    res.status(200).json({
-                        success:true,
-                        message:"Product Created Successfully!",
-                        product
-                    });
-                }else{
-                    res.status(200).json({
-                        success:false,
-                        message:err.message
-                    })
-                }
-            });
         }else{
             res.status(200).json({
                 success:false,
-                message:"Image upload Failed!",
+                message:"Only image file allowed!",
             });
         }
+ 
+
+      
 }
 
 // Get All Products
@@ -82,23 +92,25 @@ const getProductById =  async(req, res)=>{
 // delete a product 
 const deleteProduct = async (req, res )=>{
  
-   try {
-        const product =  await Product.findById(req.params.id)
-        if(product){
-            product.deleteOne();
-            res.status(200).json({
-                success:true,
-                message:"Product Delete Successfully!"
-            });
-        }else{
-            res.status(404).json({
-                success:false,
-                message:"Product not Found!"
-            });
-        }
-   } catch (err) {
-        console.log(err);
-   }
+//    try {
+        const product =  await Product.findById(req.params.id);
+        console.log(product);
+        res.send(product)
+//         if(product){
+//             product.deleteOne();
+//             res.status(200).json({
+//                 success:true,
+//                 message:"Product Delete Successfully!"
+//             });
+//         }else{
+//             res.status(404).json({
+//                 success:false,
+//                 message:"Product not Found!"
+//             });
+//         }
+//    } catch (err) {
+//         console.log(err);
+//    }
 
 }
 
