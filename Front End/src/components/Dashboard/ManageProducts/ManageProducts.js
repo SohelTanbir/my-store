@@ -42,8 +42,8 @@ useEffect( ( )=>{
 }, [products])
 
    const nameModify = (productName)=>{
-    if(JSON.stringify(productName)?.length >30){
-            return JSON.stringify(productName).slice(0,30) + "...";
+    if(JSON.stringify(productName)?.length >20){
+            return JSON.stringify(productName).slice(0,20) + "...";
     }else{
         return productName
     }
@@ -64,6 +64,8 @@ useEffect( ( )=>{
                             <th>Name</th>
                             <th>photo</th>
                             <th>Price</th>
+                            <th>Brand</th>
+                            <th>Size</th>
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
@@ -75,6 +77,8 @@ useEffect( ( )=>{
                                     <td className='product-name'>{nameModify(product.name)}</td>
                                     <td><img src={product.images[0].url} alt="product" /> </td>
                                     <td><span>৳ </span> {product.price}</td>
+                                    <td> {product.band}</td>
+                                    <td>{product.size}</td>
                                     <td>{product.category}</td>
                                     <td>
                                     <button className='action-btn edit-btn' onClick={ ()=> pageNavigate(product._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
