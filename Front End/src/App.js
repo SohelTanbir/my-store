@@ -93,7 +93,7 @@ useEffect(()=>{
 
               <Route exact path="/products/manage" element={<ManageProducts/>} />
 
-              <Route exact path="/products/update" element={<UpdateProduct/>} />
+              <Route exact path="/products/update/:id" element={<UpdateProduct/>} />
 
               <Route  exact path="/admin/make-admin" element={<MakeAdmin/>} />
 

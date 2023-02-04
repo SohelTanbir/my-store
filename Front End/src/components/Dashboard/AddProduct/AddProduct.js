@@ -30,6 +30,7 @@ const AddProduct = () => {
     
     // handle add product
     const handleSubmit = async (e)=>{
+        console.log(product)
         setLoader(true);
         e.preventDefault();
         const formData = new FormData();
@@ -50,6 +51,7 @@ const AddProduct = () => {
            method:'POST',
             body:formData
         });
+        console.log(formData)
         const {success, message } =  await res.json();
         if(success){
             setLoader(false);
@@ -108,6 +110,7 @@ const fileUploader = (e)=>{
                         </select>
                        <select name="size" id="size" onChange={handleChange} value={product.size}>
                             <option value="all">Size</option>
+                            <option value="none">None</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
                             <option value="XL">XL</option>

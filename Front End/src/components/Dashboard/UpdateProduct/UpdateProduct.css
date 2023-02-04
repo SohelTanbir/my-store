@@ -57,6 +57,7 @@
     color: #bbbbbb;
 }
 .product-update-form input[type="file"]{
+    width: 100%;
     padding: .7rem 1.5rem;
 }
 .product-update-form input[type="file"]::-webkit-file-upload-button{

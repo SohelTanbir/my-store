@@ -10,6 +10,7 @@ const addNewProduct = async (req, res, next)=>{
             const {url, public_id} = await  cloudinary.uploader.upload(path,{folder:"mystore"});
             req.fields.images = {public_id, url}
             const productData  = req.fields;
+            console.log(productData)
             if(url){
                 const product = new Product(productData);
                 product.save((err)=>{

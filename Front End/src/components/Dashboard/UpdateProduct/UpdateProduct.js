@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UpdateProduct.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
+import { useParams } from 'react-router-dom';
 
 const UpdateProduct = () => {
     const [product, setProduct] = useState({});
+    const [oldProduct, setOldProduct ]=  useState({});
+    const { id }= useParams();
 
+    const loadProduct = async ()=>{
+        const res = await fetch(`http://localhost:5000/api/v1/product/one/${id}`);
+        const {products} = await res.json();
+        setOldProduct(products);
+    }
+
+
+// handle side effect
+    useEffect(()=>{
+        loadProduct();
+    }, [])
+
+    console.log(oldProduct)
     
     // handle change
     const handleChange = (e)=>{
@@ -16,7 +32,7 @@ const UpdateProduct = () => {
     
     // handle add product
     const handleSubmit = (e)=>{
-        
+        console.log(product)
         e.preventDefault();
     }
 
@@ -32,22 +48,22 @@ const UpdateProduct = () => {
                        <div className="flex-container">
                         <div className="input-group mr-2p">
                                 <label>Product name</label> <br />
-                                <input type="text"  onBlur={handleChange} name='name' />
+                                <input type="text"  onBlur={handleChange} name='name' value={oldProduct.name} />
                         </div>
 
                         <div className="input-group">
                             <label>Price</label> <br />
-                            <input type="text" onBlur={handleChange} name='price'/>
+                            <input type="text" onBlur={handleChange} name='price' value={oldProduct.price}/>
                         </div>
 
                         <div className="input-group mr-2p">
                             <label>Brand</label> <br />
-                            <input type="text"  onBlur={handleChange} name='brand' />
+                            <input type="text"  onBlur={handleChange} name='brand'  value={oldProduct.brand}/>
                         </div>
 
                         <div className="input-group">
                             <label>Color</label> <br />
-                              <input type="text" onBlur={handleChange} name='color'/>
+                              <input type="text" onBlur={handleChange} name='color' value={oldProduct.color}/>
                         </div>
 
                         <div className="input-group mr-2p">
@@ -69,23 +85,24 @@ const UpdateProduct = () => {
                             <label>Size</label> <br />
                             <select name="size" id="size" onBlur={handleChange}>
                             <option value="all">Size</option>
-                            <option value="men">M</option>
-                            <option value="men">L</option>
-                            <option value="men">XL</option>
-                            <option value="men">M, L</option>
-                            <option value="men">M, XL</option>
-                            <option value="men">L, XL</option>
-                            <option value="men">M, L, XL</option>
+                            <option value="none">None</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="M, L">M, L</option>
+                            <option value="M, XL">M, XL</option>
+                            <option value="L, XL">L, XL</option>
+                            <option value="M, L, XL ">M, L, XL</option>
                         </select>
                         </div>
-                        <div className="input-group mr-2p">
+                        <div className="w-100 mr-2p">
                             <label>Photo</label> <br />
                             <input name='photo'  onBlur={handleChange} type="file"/><br />
                         </div>
 
                         <div className="input-group w-100">
                             <label>Description</label> <br />
-                            <textarea name="description"  onBlur={handleChange} ></textarea>
+                            <textarea name="description"  onBlur={handleChange}  value={oldProduct.description}></textarea>
                         </div>
                 
                        <button className='submit-btn' type="submit">Update Product</button>

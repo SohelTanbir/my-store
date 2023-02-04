@@ -4,13 +4,14 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const ManageProducts = () => {
     const [products, setProducts ] = useState([]);
+    const navigate = useNavigate();
 
 
 const loadProduct = async ()=>{
@@ -31,6 +32,10 @@ const deleteProduct = async (productId)=>{
     }
 }
 
+// page navigate to update product
+const pageNavigate = (id)=>{
+    navigate(`/products/update/${id}`)
+}
 
 useEffect( ( )=>{
     loadProduct();
@@ -72,7 +77,7 @@ useEffect( ( )=>{
                                     <td><span>৳ </span> {product.price}</td>
                                     <td>{product.category}</td>
                                     <td>
-                                    <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                    <button className='action-btn edit-btn' onClick={ ()=> pageNavigate(product._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
                                         <button className='action-btn delete-btn' onClick={()=> deleteProduct(product._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
                                         <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
                                     </td>
