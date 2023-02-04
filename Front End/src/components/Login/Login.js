@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import './Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { userContext } from '../../App';
 import Loader from '../Loader/Loader';
+import Header from '../Header/Header';
 firebase.initializeApp(firebaseConfig);
 
 
@@ -95,35 +96,36 @@ const Login = () => {
 }
 
   return (
-    <div className="login">
-      <div className="container">
-        
-     
-        <div className="loginBox">
-          <h3>Login</h3>
-          <div className="inputBox">
-            <form onSubmit={handleSubmit}>
-              <input type="email" name="email" onChange={handleInput} placeholder="Email" required /> <br />
-              <input type="password" name="password" onChange={handleInput} placeholder="Password" /> <br />
-              <button className="loginBtn">
-                <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
-              <div className="forgot-password">
-              <Link to="/password/forgot">
-                <span>Forgot Passwrod?</span>
-              </Link>
+    <Fragment>
+        <Header/>
+          <div className="login">
+          <div className="container">
+            <div className="loginBox">
+              <h3>Login</h3>
+              <div className="inputBox">
+                <form onSubmit={handleSubmit}>
+                  <input type="email" name="email" onChange={handleInput} placeholder="Email" required /> <br />
+                  <input type="password" name="password" onChange={handleInput} placeholder="Password" /> <br />
+                  <button className="loginBtn">
+                    <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
+                  <div className="forgot-password">
+                  <Link to="/password/forgot">
+                    <span>Forgot Passwrod?</span>
+                  </Link>
+                  </div>
+                </form>
               </div>
-            </form>
+              <div className="loginOption">
+                <h4>Login Up With</h4>
+                <button onClick={handleFacebookLogin} className="facebook"><FontAwesomeIcon icon={faFacebookSquare} /> Facebook</button>
+                <button onClick={handleGoogleLogin} className="google"><FontAwesomeIcon icon={faGoogle} /> Google</button>
+                <Link to="/signup">Don't have an Account? Create now</Link>
+              </div>
+            </div>
           </div>
-          <div className="loginOption">
-            <h4>Login Up With</h4>
-            <button onClick={handleFacebookLogin} className="facebook"><FontAwesomeIcon icon={faFacebookSquare} /> Facebook</button>
-            <button onClick={handleGoogleLogin} className="google"><FontAwesomeIcon icon={faGoogle} /> Google</button>
-            <Link to="/signup">Don't have an Account? Create now</Link>
-          </div>
-        </div>
+          <ToastContainer/>
       </div>
-      <ToastContainer/>
-    </div>
+    </Fragment>
   );
 };
 

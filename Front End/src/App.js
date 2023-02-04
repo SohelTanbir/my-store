@@ -36,6 +36,7 @@ function App() {
   const [quantity, setQuantity] = useState(0);
   const [order, setOrder] = useState([]);
 
+
   // load cart from DB
 const loadCartProduct = async()=>{
     const response = await fetch("http://localhost:5000/api/v1/cart/all");
@@ -57,7 +58,7 @@ useEffect(()=>{
        }}>
 
       <BrowserRouter>
-      <Header/>                                                                                                                                     
+                                                                                                                      
             <Routes>
               <Route exact path="/" element={<Home/>}>
                   

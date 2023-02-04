@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import './ProductDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
@@ -8,6 +8,7 @@ import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userContext } from '../../App';
+import Header from '../Header/Header';
 
 
 const ProductDetails = () => {
@@ -52,7 +53,9 @@ const handleAddToCart = async(id) =>{
     }
 
     return (
-        <div className='product-details'>
+      <Fragment>
+            <Header/>
+            <div className='product-details'>
                <ToastContainer />
             {product._id ? <div className="container">
                 <div className="row">
@@ -114,6 +117,7 @@ const handleAddToCart = async(id) =>{
             </div>
             :<Loader/>}
         </div>
+      </Fragment>
     );
 };
 

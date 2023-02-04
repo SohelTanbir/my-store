@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './Contact.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
+import Header from '../Header/Header';
 
 const Contact = () => {
     const [message, setMessage] = useState({
@@ -48,7 +49,9 @@ const Contact = () => {
     }
 
     return (
-        <div className='contact'>
+        <Fragment>
+            <Header/>
+            <div className='contact'>
             <ToastContainer />
             {loader&& <Loader/>}
               <div className="container">
@@ -66,6 +69,7 @@ const Contact = () => {
                 </div>
               </div>
         </div>
+        </Fragment>
     );
 };
 

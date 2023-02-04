@@ -113,6 +113,7 @@ const deleteProduct = async (req, res )=>{
    }
 
 }
+    
 
 // update a product
 const updateProduct = async (req, res)=>{

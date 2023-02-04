@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Banner from '../Banner/Banner';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -11,15 +11,18 @@ import Service from '../Service/Service';
 
 const Home = ()=> {
     return (
-        <div className="home">
-            <SearchBox/>
-            <Banner/>
-            <Service/>
-            <Product/>
-            <LatestNews/>
-            {/* <Blog/> */}
-            <Footer/>
-        </div>
+        <Fragment>
+            <Header/>
+            <div className="home">
+                <SearchBox/>
+                <Banner/>
+                <Service/>
+                <Product/>
+                <LatestNews/>
+                {/* <Blog/> */}
+                <Footer/>
+            </div>
+        </Fragment>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import './UserProfile.css'
 import profilePhoto from '../../images/users/sohelrana.jpg'
 import Loader from '../Loader/Loader';
@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../App';
+import Header from '../Header/Header';
 
 
 
@@ -46,7 +47,9 @@ const handleLogOut = async () =>{
 
 
     return (
-    
+        <Fragment>
+            <Header/>
+            
         <div className='user-profile'>
             {myOrders?.length?<div className="container">
             <ToastContainer />
@@ -87,6 +90,7 @@ const handleLogOut = async () =>{
                 </div>
             </div>:<Loader/>}
         </div>
+        </Fragment>
     );
 };
 

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import './TraceOrder.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OrderStatus from './OrderStatus';
 import Loader from '../Loader/Loader';
+import Header from '../Header/Header';
 
 const TraceOrder = () => {
     const [orderId, setOrderId] = useState({});
@@ -44,24 +45,27 @@ const TraceOrder = () => {
     }
 
     return (
-        <div className='trace-order'>
-            <ToastContainer/>
-            {loader&& <Loader/>}
-            <div className="container">
-            {status.length?
-            <OrderStatus status={status} orderId={orderId.orderId}/>:
-            <div className="trace-order-form">
-                <h4>Track your Order</h4>
-                    <form onSubmit={handleSubmit}>
-                    <input type="text" name='email' onChange={handleChange} placeholder='Email Address'/> <br />
-                    <input type="text" name='orderId' onChange={handleChange} placeholder='Order Id'/> <br />
-                    <button className='trace-now-btn'>Trace Now</button>
-                </form>
+       <Fragment>
+            <Header/>
+                <div className='trace-order'>
+                    <ToastContainer/>
+                    {loader&& <Loader/>}
+                    <div className="container">
+                    {status.length?
+                    <OrderStatus status={status} orderId={orderId.orderId}/>:
+                    <div className="trace-order-form">
+                        <h4>Track your Order</h4>
+                            <form onSubmit={handleSubmit}>
+                            <input type="text" name='email' onChange={handleChange} placeholder='Email Address'/> <br />
+                            <input type="text" name='orderId' onChange={handleChange} placeholder='Order Id'/> <br />
+                            <button className='trace-now-btn'>Trace Now</button>
+                        </form>
+                    </div>
+                    }
+                
+                    </div>
             </div>
-            }
-        
-            </div>
-        </div>
+       </Fragment>
     );
 };
 

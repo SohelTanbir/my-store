@@ -1,9 +1,10 @@
-import React, {  useState } from 'react';
+import React, {  Fragment, useState } from 'react';
 import './ResetPassword.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
+import Header from '../Header/Header';
 
 
 
@@ -52,13 +53,15 @@ const ResetPassword = () => {
             toast.error("New password and confirm password is not match!",{position: "top-center",autoClose: 2000});
         }
        }else{
-        toast.error("All field required!",{position: "bottom-right",autoClose: 1000});
+        toast.error("All field required!",{position: "top-center",autoClose: 1000});
         setTimeout(()=>   setLoader(false), 500)
        }
     }
 
     return (
-        <div className='set-new-password'>
+      <Fragment>
+            <Header/>
+            <div className='set-new-password'>
             <div className="container">
             <ToastContainer />
                 {loader&& <Loader/>}
@@ -73,6 +76,7 @@ const ResetPassword = () => {
                 </div>
             </div>
         </div>
+      </Fragment>
     );
 };
 

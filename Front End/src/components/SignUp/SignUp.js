@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import './SignUp.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
@@ -7,8 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebase from "firebase/app";
 import 'firebase/auth';
-import firebaseConfig from '../../firebase/firebase.config';
 import Loader from '../Loader/Loader';
+import Header from '../Header/Header'
 
 
 const SignUp = ()=>{
@@ -65,27 +65,30 @@ const SignUp = ()=>{
     }
 }
     return(
-        <div className="SignUp">
-        <div className="container">
-        {loader&& <Loader color="#dfb839" />}
-            <div className="SignUpBox">
-                <h3>Sign Up</h3>
-                <div className="inputBox">
-                   <form onSubmit={submitForm}>
-                   <input type="text" name="name" onBlur={handleInput} placeholder="Name" required /> <br />
-                    <input type="email" name="email"  onBlur={handleInput} placeholder="Email" required /> <br />
-                    <input type="password" name="password" onBlur={handleInput} placeholder="Password" required/> <br />
-                    <button className="signupBtn">
-                    <FontAwesomeIcon icon={faUser} /><span>Create Account</span></button>
-                   </form>
+       <Fragment>
+            <Header/>
+            <div className="SignUp">
+                <div className="container">
+                {loader&& <Loader color="#dfb839" />}
+                    <div className="SignUpBox">
+                        <h3>Sign Up</h3>
+                        <div className="inputBox">
+                        <form onSubmit={submitForm}>
+                        <input type="text" name="name" onBlur={handleInput} placeholder="Name" required /> <br />
+                            <input type="email" name="email"  onBlur={handleInput} placeholder="Email" required /> <br />
+                            <input type="password" name="password" onBlur={handleInput} placeholder="Password" required/> <br />
+                            <button className="signupBtn">
+                            <FontAwesomeIcon icon={faUser} /><span>Create Account</span></button>
+                        </form>
+                        </div>
+                        <div className="loginOption">
+                        <Link to="/login">Have an Account? Login now</Link>
+                        </div>
+                    </div>
                 </div>
-                <div className="loginOption">
-                   <Link to="/login">Have an Account? Login now</Link>
-                </div>
-            </div>
+                <ToastContainer />
         </div>
-        <ToastContainer />
-    </div>
+       </Fragment>
     )
 }
 
