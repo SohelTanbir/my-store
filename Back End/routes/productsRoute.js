@@ -15,7 +15,7 @@ const checkLogin = require("../middleware/checkLogin");
 router.get("/product/all", getAllProducts);
 router.get("/product/one/:id", getProductById);
 router.post("/product/create",addNewProduct);
-router.delete("/product/delete/:id",checkLogin,authorization, deleteProduct);
+router.delete("/product/delete/:id", deleteProduct);
 router.put("/product/update/:id",checkLogin,authorization, updateProduct);
 
 

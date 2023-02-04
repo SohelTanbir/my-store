@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './ManageProducts.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
-import monitor from '../../../images/products/monitor.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ManageProducts = () => {
@@ -17,18 +18,23 @@ const loadProduct = async ()=>{
     const productData = await response.json();
     setProducts(productData.products)
 }
+const deleteProduct = async (productId)=>{
+    const response = await fetch(`http://localhost:5000/api/v1/product/delete/${productId}`,{
+        method:"DELETE",
+        headers:{'content-type':'application/json'}
+    });
+    const {success, message} = await response.json();
+    if(success){
+        toast.success(message,{position: "top-center",autoClose: 1000});
+    }else{
+        toast.error(message,{position: "top-center",autoClose: 1000});
+    }
+}
 
 
 useEffect( ( )=>{
     loadProduct();
-}, [])
-
-
-    const deleteProduct = ()=>{
-        alert('deleted');
-    }
-
-
+}, [products])
 
    const nameModify = (productName)=>{
     if(JSON.stringify(productName)?.length >30){
@@ -40,6 +46,7 @@ useEffect( ( )=>{
 
     return (
         <div className="manage-products">
+            <ToastContainer/>
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
@@ -61,12 +68,12 @@ useEffect( ( )=>{
                                 <tr>
                                     <td># {nameModify(product._id)}</td>
                                     <td className='product-name'>{nameModify(product.name)}</td>
-                                    <td><img src={monitor} alt="product" /> </td>
-                                    <td><span>৳ </span> 150</td>
-                                    <td>Electronics</td>
+                                    <td><img src={product.images[0].url} alt="product" /> </td>
+                                    <td><span>৳ </span> {product.price}</td>
+                                    <td>{product.category}</td>
                                     <td>
                                     <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                        <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
+                                        <button className='action-btn delete-btn' onClick={()=> deleteProduct(product._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
                                         <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
                                     </td>
                             </tr>
