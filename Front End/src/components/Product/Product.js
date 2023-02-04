@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const currentPath = window.location.pathname;
 
     useEffect(()=>{
         fetch("http://localhost:5000/api/v1/product/all")
@@ -14,9 +15,6 @@ const Product = () => {
         .then(data => setProducts(data.products));
     }, []);
 
-  const currentPath = window.location.pathname;
-  console.log(currentPath)
-    
 
     return (
        <Fragment>

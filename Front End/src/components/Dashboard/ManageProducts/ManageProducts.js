@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ManageProducts.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
@@ -9,17 +9,30 @@ import { Link } from 'react-router-dom';
 
 
 const ManageProducts = () => {
+    const [products, setProducts ] = useState([]);
 
-   const productName = "Redmi Monitor 1A 23.8 Full HD - Black";
+
+const loadProduct = async ()=>{
+    const response = await fetch("http://localhost:5000/api/v1/product/all");
+    const productData = await response.json();
+    setProducts(productData.products)
+}
+
+
+useEffect( ( )=>{
+    loadProduct();
+}, [])
+
+
     const deleteProduct = ()=>{
         alert('deleted');
     }
 
 
 
-   const nameModify = ()=>{
-    if(JSON.stringify(productName).length >10){
-            return JSON.stringify(productName).slice(0,10) + "...";
+   const nameModify = (productName)=>{
+    if(JSON.stringify(productName)?.length >30){
+            return JSON.stringify(productName).slice(0,30) + "...";
     }else{
         return productName
     }
@@ -31,7 +44,7 @@ const ManageProducts = () => {
             <div className="dashboard-main">
             <SideBar/>
             <div className="product-main">
-                <h2>All Products(20)</h2>
+                <h2>All Products({products.length?products.length : 0})</h2>
                 <div className="products-container">
                     <table>
                         <tr>
@@ -42,33 +55,27 @@ const ManageProducts = () => {
                             <th>Category</th>
                             <th>Action</th>
                         </tr>
-                        <tr>
-                            <td>#d1d1d1d1d1</td>
-                            <td>{nameModify()}</td>
-                            <td><img src={monitor} alt="photo" /> </td>
-                            <td><span>৳ </span> 150</td>
-                            <td>Electronics</td>
-                            <td>
-                                <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
-                                <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#d1d1d1d1d1</td>
-                            <td>{nameModify()}</td>
-                            <td><img src={monitor} alt="photo" /> </td>
-                            <td><span>৳ </span> 150</td>
-                            <td>Electronics</td>
-                            <td>
-                            <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
-                                <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
-                            </td>
-                        </tr>
+                        {
+                            products.map((product, index) =>( 
+                                <tr>
+                                    <td># {nameModify(product._id)}</td>
+                                    <td className='product-name'>{nameModify(product.name)}</td>
+                                    <td><img src={monitor} alt="product" /> </td>
+                                    <td><span>৳ </span> 150</td>
+                                    <td>Electronics</td>
+                                    <td>
+                                    <Link to="/products/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                        <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
+                                        <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
+                                    </td>
+                            </tr>
+                        ))
+                        
+                        }
                     </table>
                 </div>
+                {products.length <1 && <h4 className='no-product'>There is no products found!</h4>}
             </div>
             </div>
         </div>
