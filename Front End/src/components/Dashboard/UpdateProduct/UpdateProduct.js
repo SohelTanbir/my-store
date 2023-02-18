@@ -4,27 +4,33 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { useParams } from 'react-router-dom';
 import Loader from '../../Loader/Loader'
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateProduct = () => {
     const [product, setProduct] = useState({});
     const [oldProduct, setOldProduct ]=  useState([]);
-    const [selectedCategory, setSelectedCategory ] = useState("");
+    const [category, setCategory ] = useState("");
     const [selectedSize, setSelectedSize ] = useState("");
+    const [image, setImage] = useState("");
+    const [loader, setLoader] = useState(false);
     const { id }= useParams();
 
+
+// find a product
+const findProdcutById = async ()=>{
+  const response = await  fetch(`http://localhost:5000/api/v1/product/one/${id}`);
+  const { products } =  await response.json();
+  setCategory(products.category);
+  setSelectedSize(products.size);   
+  setOldProduct(products);
+}
 
 
 // handle side effect
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/v1/product/one/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setOldProduct(data.products)
-            setSelectedCategory(data.products.category)
-            setSelectedSize(data.products.size)
-        } );
-    })
+        findProdcutById()
+    }, [])
 
 
     // handle change
@@ -34,17 +40,68 @@ const UpdateProduct = () => {
         setProduct(newProduct);
      
     }
-    
+
     // handle add product
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(selectedCategory);
+        const formData = new FormData();
+        formData.append("image", image);
+        if(product.name){
+            formData.set("name",product.name);
+        }if(product.price){
+            formData.set("price",product.price);
+        }
+        if(product.brand){
+            formData.set("brand",product.brand);
+            }
+         if(product.color){
+            formData.set("color",product.color);
+            }
+            if(product.category){
+            formData.set("category",product.category);
+            }
+         if(product.size){
+            formData.set("size",product.size);
+            }
+        if(product.description){
+            formData.set("description",product.description);
+        }
+    // if upload prodcut image then store product in db
+    if(product){
+        setLoader(false);   
+        const res = await fetch(`http://localhost:5000/api/v1/product/update/${id}`,{
+           method:'PUT',
+            body:formData
+        });
+        console.log(formData)
+        const {success, message } =  await res.json();
+        if(success){
+            setLoader(false);
+            toast.success(message,{position: "top-center",autoClose: 500});
+            setProduct({
+                name:"",
+                price:"",
+                brand:"",
+                color:"",
+                category:"",
+                size:"",
+                description:""
+            })
+        }else{
+            setLoader(false);
+            toast.error(message,{position: "top-center",autoClose: 1000});
+        }
+    }else{
+        setLoader(false);
+        toast.error("All field are required!",{position: "top-center",autoClose: 1000});
     }
+}
 
 
     return (
       <Fragment>
-       {oldProduct._id && selectedCategory.length >0 && selectedSize.length > 0? <div className="update-product">
+        <ToastContainer/>
+            {oldProduct._id?<div className="update-product">
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar></SideBar>
@@ -74,7 +131,7 @@ const UpdateProduct = () => {
 
                         <div className="input-group mr-2p">
                             <label>Category</label> <br />
-                            <select name="category" className="mr-2p"  id="category" onChange={handleChange} defaultValue={selectedCategory}>
+                            <select name="category" className="mr-2p"  id="category" onChange={handleChange} defaultValue={category}>
                                 <option value="men">Men</option>
                                 <option value="women">Women</option>
                                 <option value="winter">Winter</option>
@@ -84,6 +141,7 @@ const UpdateProduct = () => {
                                 <option value="bag">Bags</option>
                                 <option value="t-shirt">T-shirt</option>
                                 <option value="shirt">Shirt</option>
+                                <option value="others">Others</option>
                             </select>
                         </div>
                         <div className="input-group">
@@ -101,7 +159,7 @@ const UpdateProduct = () => {
                         </div>
                         <div className="w-100 mr-2p">
                             <label>Photo</label> <br />
-                            <input name='photo'  onChange={handleChange} type="file"/><br />
+                            <input name='photo'  onChange={(e)=>  setImage(e.target.files[0])} type="file"/><br />
                                 <div className="preview-product-img">
                                     <img src={oldProduct.images[0].url} alt="product" />
                                 </div>
@@ -117,7 +175,7 @@ const UpdateProduct = () => {
                    </form>
                 </div>
             </div>
-        </div>:<Loader/>}
+        </div>:<Loader/>    }
       </Fragment>
     );
 };

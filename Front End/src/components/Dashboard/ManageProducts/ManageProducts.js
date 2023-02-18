@@ -77,7 +77,7 @@ useEffect( ( )=>{
                                     <td className='product-name'>{nameModify(product.name)}</td>
                                     <td><img src={product.images[0].url} alt="product" /> </td>
                                     <td><span>৳ </span> {product.price}</td>
-                                    <td> {product.band}</td>
+                                    <td> {product.brand}</td>
                                     <td>{product.size}</td>
                                     <td>{product.category}</td>
                                     <td>

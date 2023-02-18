@@ -72,8 +72,8 @@ const handleAddToCart = async(id) =>{
                         <FontAwesomeIcon icon={faStarHalfAlt} />
                         <Link to="/reviews"><span className='total-ratings'>{product.ratings} ratings</span></Link>
                         </div>
-                        <p className='brand'>Brand: {product.brand?product.brand:'Unknown'}</p>
-                        <p className='color'><span>Color</span>:  {product.color?product.brand:'Mix'}</p>
+                        <p className='brand'>Brand: {product.brand?product.brand:'No brand'}</p>
+                        <p className='color'><span>Color</span>:  {product.color?product.color:'Mix'}</p>
                         <div className="price">
                             <h3><span className='taka-sign'>৳ </span>{product.price} </h3>
                         </div>

@@ -5,12 +5,11 @@ const cloudinary =  require("cloudinary");
 const addNewProduct = async (req, res, next)=>{
         // set user reference in product 
         req.body.user = req.userId;
-        const path = req.files.image.path;
-        if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg'){
+        const path = req.files.image.path 
+        if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg' || req.files.image.type == 'image/webp'){
             const {url, public_id} = await  cloudinary.uploader.upload(path,{folder:"mystore"});
             req.fields.images = {public_id, url}
             const productData  = req.fields;
-            console.log(productData)
             if(url){
                 const product = new Product(productData);
                 product.save((err)=>{
@@ -96,7 +95,6 @@ const deleteProduct = async (req, res )=>{
    try {
         const product =  await Product.findById(req.params.id);
         if(product){
-
             product.deleteOne();
             const {result} =await  cloudinary.v2.uploader.destroy(product.images[0].public_id);
             res.status(200).json({
@@ -120,18 +118,44 @@ const deleteProduct = async (req, res )=>{
 const updateProduct = async (req, res)=>{
     try {
         const product =  await Product.findById(req.params.id);
+       
         if(product){
-            const updateData = {
-                $set:{
-                    name:req.body.name,
-                    description:req.body.description,
-                    price:req.body.price,
-                    category:req.body.category,
-                    images:req.body.images
+            const imgLinks = [];
+            const updateData = {};
+            if(req.files.image){
+                const path =req.files.image.path;
+                if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg'){
+                    const {url, public_id} = await  cloudinary.uploader.upload(path,{folder:"mystore"});
+                    imgLinks.push({public_id, url})
                 }
+                  // delete previous image from cloudinary 
+                  const {result } =await cloudinary.uploader.destroy(product.images[0].public_id);
             }
+            if(req.fields.name){
+                updateData.name = req.fields.name;
+            }
+            if(req.fields.price){
+                updateData.price = req.fields.price;
+            }
+            if(req.fields.brand){
+                updateData.color = req.fields.color;
+            }
+            if(req.fields.category){
+                updateData.category = req.fields.category;
+            }
+            if(req.fields.size){
+                updateData.size = req.fields.size
+            }
+            if(req.fields.description){
+                updateData.description = req.fields.description
+            }
+            if(imgLinks.length > 0){
+                updateData.images = imgLinks[0]
+            }
+            console.log("updated = ", updateData);
+
             // update
-            Product.findByIdAndUpdate(req.params.id, updateData, (err, data)=>{
+            Product.findByIdAndUpdate(req.params.id, updateData , (err, data)=>{
                 if(!err){
                     res.status(200).json({
                         success:true,

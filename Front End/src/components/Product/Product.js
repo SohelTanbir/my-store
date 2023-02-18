@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import './Product.css'
 import ProductCard from '../ProductCard/ProductCard';
-import FakeData from '../../FakeData/FakeData';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 

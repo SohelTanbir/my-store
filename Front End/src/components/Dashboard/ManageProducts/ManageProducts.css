@@ -30,10 +30,6 @@
 .products-container tr:nth-child(odd){
     background: #f1f1f1;
 }
-.products-container td.product-name{
-    text-align: left;
-    padding-left: 15px;
-}
 .products-container table img{
     width: 5rem;
     height: 5rem;

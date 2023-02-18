@@ -30,7 +30,6 @@ const AddProduct = () => {
     
     // handle add product
     const handleSubmit = async (e)=>{
-        console.log(product)
         setLoader(true);
         e.preventDefault();
         const formData = new FormData();
@@ -107,6 +106,7 @@ const fileUploader = (e)=>{
                             <option value="bag">Bags</option>
                             <option value="t-shirt">T-shirt</option>
                             <option value="shirt">Shirt</option>
+                            <option value="others">Others</option>
                         </select>
                        <select name="size" id="size" onChange={handleChange} value={product.size}>
                             <option value="all">Size</option>
