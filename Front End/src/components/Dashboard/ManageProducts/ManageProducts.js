@@ -7,7 +7,7 @@ import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Loader from '../../Loader/Loader'
 
 const ManageProducts = () => {
     const [products, setProducts ] = useState([]);
@@ -55,44 +55,48 @@ useEffect( ( )=>{
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-            <div className="product-main">
-                <h2>All Products({products.length?products.length : 0})</h2>
-                <div className="products-container">
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>photo</th>
-                            <th>Price</th>
-                            <th>Brand</th>
-                            <th>Size</th>
-                            <th>Category</th>
-                            <th>Action</th>
-                        </tr>
-
-                        {
-                            products.map((product, index) =>( 
-                                <tr>
-                                    <td># {nameModify(product._id)}</td>
-                                    <td className='product-name'>{nameModify(product.name)}</td>
-                                    <td><img src={product.images[0].url} alt="product" /> </td>
-                                    <td><span>৳ </span> {product.price}</td>
-                                    <td> {product.brand}</td>
-                                    <td>{product.size}</td>
-                                    <td>{product.category}</td>
-                                    <td>
-                                    <button className='action-btn edit-btn' onClick={ ()=> pageNavigate(product._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
-                                        <button className='action-btn delete-btn' onClick={()=> deleteProduct(product._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
-                                        <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
-                                    </td>
+                {
+                    products.length ?  <div className="product-main">
+                    <h2>All Products({products.length?products.length : 0})</h2>
+                    <div className="products-container">
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>photo</th>
+                                <th>Price</th>
+                                <th>Brand</th>
+                                <th>Size</th>
+                                <th>Category</th>
+                                <th>Action</th>
                             </tr>
-                        ))
-                        
-                        }
-                    </table>
+    
+                            {
+                                products.map((product, index) =>( 
+                                    <tr>
+                                        <td># {nameModify(product._id)}</td>
+                                        <td className='product-name'>{nameModify(product.name)}</td>
+                                        <td><img src={product.images[0].url} alt="product" /> </td>
+                                        <td><span>৳ </span> {product.price}</td>
+                                        <td> {product.brand}</td>
+                                        <td>{product.size}</td>
+                                        <td>{product.category}</td>
+                                        <td>
+                                        <button className='action-btn edit-btn' onClick={ ()=> pageNavigate(product._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
+                                            <button className='action-btn delete-btn' onClick={()=> deleteProduct(product._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/> ||</button>
+                                            <Link to="/products/view"><button className='action-btn view-btn'><FontAwesomeIcon title='View' icon={faEye }  /></button></Link>
+                                        </td>
+                                </tr>
+                            ))
+                            
+                            }
+                        </table>
+                    </div>
+                    {products.length <1 && <h4 className='no-product'>There is no products found!</h4>}
                 </div>
-                {products.length <1 && <h4 className='no-product'>There is no products found!</h4>}
-            </div>
+                : <Loader/>
+
+                }
             </div>
         </div>
     );
