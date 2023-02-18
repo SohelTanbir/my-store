@@ -8,7 +8,7 @@ const DashboardHeader = () => {
     return (
         <div className="dashboradHeader">
             <div className="dashboard-header">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
                         <div className="logo">
                             <a href="/home">My<span>Store</span></a>

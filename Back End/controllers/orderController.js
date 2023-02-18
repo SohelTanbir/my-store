@@ -44,8 +44,8 @@ const getAllOrders = async (req, res)=>{
         if(orders.length > 0){
             res.status(200).json({
                 success:true,
-                Total_Orders:orders.length,
-                Orders:orders
+                total_orders:orders.length,
+                orders:orders
             });
         }else{
             res.status(404).json({
