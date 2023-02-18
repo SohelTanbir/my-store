@@ -27,7 +27,7 @@ const Orders = () => {
         alert('deleted');
     }
 
-
+console.log(orderItems);
 
 
 
@@ -50,10 +50,11 @@ const Orders = () => {
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
-                        <tr>
-                            <td>#d1d1d1d1d1</td>
-                            <td>Shirt</td>
-                            <td>img</td>
+                        {orderItems.map( (order, index) => (
+                            <tr>
+                            <td>#{order._id}</td>
+                            <td>{order.productInfo[1].name}</td>
+                            <td><img src={order.productInfo[1].image} alt="product" /></td>
                             <td>Processing</td>
                             <td>1</td>
                             <td><span>৳ </span> 150</td>
@@ -62,6 +63,7 @@ const Orders = () => {
                                 <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                             </td>
                         </tr>
+                        ))}
 
                     </table>
                 </div>

@@ -42,8 +42,8 @@ useEffect( ( )=>{
 }, [products])
 
    const nameModify = (productName)=>{
-    if(JSON.stringify(productName)?.length >20){
-            return JSON.stringify(productName).slice(0,20) + "...";
+    if(JSON.stringify(productName)?.length >10){
+            return JSON.stringify(productName).slice(0,10) + "...";
     }else{
         return productName
     }
