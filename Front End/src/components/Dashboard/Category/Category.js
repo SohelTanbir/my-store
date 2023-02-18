@@ -7,6 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Loader from '../../Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CategoryModal from './CategoryModal/CategoryModal';
 
 
 
@@ -14,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Category = () => {
     const [category, setCategory ] = useState([]);
-
+    const [showModal, setShowModal ] = useState(false);
 
 
     const loadCategory = async()=>{
@@ -27,6 +28,11 @@ const Category = () => {
     useEffect(()=>{
         loadCategory();
     },[category])
+
+    // handle modal close or Show
+    const handleModal = ()=>{
+        setShowModal(true);
+    }
 
     // handle change input data
     const handleChange = e =>{
@@ -54,6 +60,7 @@ const Category = () => {
 
     return (
         <div className="all-orders">
+            <CategoryModal showModal={showModal} setShowModal={setShowModal}/>
             <ToastContainer/>
             <DashboardHeader/>
             <div className="dashboard-main">
@@ -61,7 +68,7 @@ const Category = () => {
             <div className="category-main">
                     <div className="category-header">
                     <h2>All Category({category.length? category.length : 0})</h2>
-                    <button>Add Now</button>
+                    <button onClick={handleModal}>Add category</button>
                     </div>
                     <div className="row">
                     <div className="category-container">
