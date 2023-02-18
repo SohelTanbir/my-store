@@ -24,11 +24,11 @@ const getAllCategory = async(req, res)=>{
 // create category --admin
 const createCategory = async (req, res)=>{
    try {
-    const isExistCategory = await Category.find({name:req.body.name});
+    const isExistCategory = await Category.find({name:req.fields.name.toLowerCase()});
     
      if(isExistCategory.length <1){
         // capitalize category name
-        const newCategory =req.body.name.toLowerCase();
+        const newCategory =req.fields.name.toLowerCase();
         const category = new Category({name:newCategory});
         category.save((err)=>{
             if(!err){

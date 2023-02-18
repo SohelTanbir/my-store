@@ -64,6 +64,7 @@
 }
 .single-category span{
     margin-right: 1rem;
+    text-transform: capitalize;
 }
 .add-new-category{
     width: 30%;

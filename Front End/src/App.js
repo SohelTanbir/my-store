@@ -1,15 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './components/Home/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Product from './components/Product/Product';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-
-
 import Dashboard from './components/Dashboard/Dashboard';
 import AddProduct from './components/Dashboard/AddProduct/AddProduct';
-import Header from './components/Header/Header';
 import Cart from './components/Cart/Cart';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import Reviews from './components/Reviews/Review';
