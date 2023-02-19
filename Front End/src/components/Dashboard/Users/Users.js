@@ -21,7 +21,6 @@ const Users = () => {
         const {success, users, error} = await res.json();
         setAllUsers(users);
         setError(error)
-        console.log(users);
     }
 
     //  handle side effect actions
@@ -66,38 +65,42 @@ const Users = () => {
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-            <div className="category-main">
-                    <div className="category-header">
+            <div className="users-main">
+                    <div className="users-header">
                     <h2>All users({allUsers.length?allUsers.length:0})</h2>
                     <button onClick={handleModal}>Add user</button>
                     </div>
                     <div className="row">
-                        <div className="users-table">
-                            {allUsers.length?    <table>
-                                <tr>
-                                    <th>User ID</th>
-                                    <th>Name</th>
-                                    <th>Photo</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                                {allUsers.map(user =>(
+                        <div className="users-container">
+                            <div className="users-table">
+                                {allUsers.length?    <table>
                                     <tr>
-                                    <td>{user._id}</td>
-                                    <td>{user.name}</td>
-                                    <td><img src={user.avater} alt="No Photos" /></td>
-                                    <td>{user.email}</td>
-                                    <td>{user.role}</td>
-                                    <td>
-                                        <Link to="/users/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                        <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
-                                    </td>
-                                </tr>
-                                ))}
-                            </table>
-                            :<Loader/>
-                            }
+                                        <th>Name</th>
+                                        <th>Photo</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>CreatedAt</th>
+                                        <th>Created  By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    {allUsers.map(user =>(
+                                        <tr>
+                                        <td>{user.name}</td>
+                                        <td><img src={user.avater} alt="No Photos" /></td>
+                                        <td>{user.email}</td>
+                                        <td>{user.role}</td>
+                                        <td>{user.createdAt.toLocalTimeString}</td>
+                                        <td>Sohel Rana</td>
+                                        <td>
+                                            <Link to="/users/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                            <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
+                                        </td>
+                                    </tr>
+                                    ))}
+                                </table>
+                                :<Loader/>
+                                }
+                            </div>
                         </div>
                       
                     </div>
