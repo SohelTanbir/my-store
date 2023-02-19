@@ -31,7 +31,7 @@ const serviceData = [
 
 const Service = () => {
     return(
-        <div className="service">
+        <div className="service py-5">
             <div className="container">
                 <div className="row">
                     {
