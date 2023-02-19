@@ -2,21 +2,26 @@ import React, { useEffect, useState } from 'react';
 import './Users.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../../Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
+    const [error, setError ] = useState("");
    
 
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all");
-        const {users} = await res.json();
-        setAllUsers(users)
+        const {success, users, error} = await res.json();
+        setAllUsers(users);
+        setError(error)
+        console.log(users);
     }
 
     //  handle side effect actions
@@ -39,8 +44,8 @@ const Users = () => {
         e.preventDefault();
     }
 
-    const deleteProduct = async(id)=>{
-        const response = await fetch(`http://localhost:5000/api/v1/category/delete/${id}`,{
+    const deleteUser = async(id)=>{
+        const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
             method:"DELETE"
         })
         const {success, message } = await response.json();
@@ -52,6 +57,8 @@ const Users = () => {
     }
 
 
+
+
     return (
         <div className="all-orders">
         
@@ -61,11 +68,37 @@ const Users = () => {
             <SideBar/>
             <div className="category-main">
                     <div className="category-header">
-                    <h2>All users(0)</h2>
+                    <h2>All users({allUsers.length?allUsers.length:0})</h2>
                     <button onClick={handleModal}>Add user</button>
                     </div>
                     <div className="row">
-                      
+                        <div className="users-table">
+                            {allUsers.length?    <table>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                                {allUsers.map(user =>(
+                                    <tr>
+                                    <td>{user._id}</td>
+                                    <td>{user.name}</td>
+                                    <td><img src={user.avater} alt="No Photos" /></td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td>
+                                        <Link to="/users/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                        <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
+                                    </td>
+                                </tr>
+                                ))}
+                            </table>
+                            :<Loader/>
+                            }
+                        </div>
                       
                     </div>
             </div>
