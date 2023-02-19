@@ -3,6 +3,8 @@ import { Modal} from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+
 const CategoryModal = ({showModal, setShowModal})=> {
           const [category, setCategory ] = useState("");
           const handleClose = () => setShowModal(false);
@@ -12,6 +14,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
           }
           const handleSubmit = async(e)=>{
                     e.preventDefault();
+                   if(category.length > 0){
                     const formData = new FormData();
                     formData.set("name", category)
                     const response = await fetch("http://localhost:5000/api/v1/category/create", {
@@ -21,13 +24,16 @@ const CategoryModal = ({showModal, setShowModal})=> {
                     const {success, message} = await response.json();
                     if(success){
                               toast.success(message,{position: "top-center",autoClose: 1000});
+                              // close modal 
+                              setShowModal(false);
+                              // reset category
+                              setCategory("");
                     }else{
                               toast.error(message,{position: "top-center",autoClose: 1000});
                     }
-                    // close modal 
-                    setShowModal(false);
-                    // reset category
-                    setCategory("")
+                   }else{
+                    toast.error("Please Enter Category Name!",{position: "top-center",autoClose: 1000});
+                   }
           }
 
 
