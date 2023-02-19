@@ -51,7 +51,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
                                                   <form onSubmit={handleSubmit} className='py-4'>
                                                             <div className="input-group w-100">
                                                                       <input type="text" onChange={handleChange} className='form-control w-100 fs-3 py-2' name="category"   placeholder='Category name' defaultValue={category}/>
-                                                                      <input type="submit" className='btn btn-success ms-auto fs-3 my-4 py-2 rounded' value="Add now" />
+                                                                      <input type="submit" className='btn btn-success ms-auto fs-3 my-4 py-2 rounded' value="Save " />
                                                             </div>
                                                             </form>
                                                   </div>

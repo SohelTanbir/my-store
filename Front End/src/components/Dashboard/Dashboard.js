@@ -10,24 +10,32 @@ const Dashboard = () => {
             <div className="dashboard-main">
                 <SideBar/>
                 <div className="main-part">
-                    <div className="statistics">
+                    <div className="statistics pt-4">
                         <div className="container">
                             <div className="row">
-                                <div className="statistics-item total-orders">
-                                    <h4>Total Orders</h4>
-                                    <h5>100+</h5>
+                                <div className="col-md-3">
+                                    <div className="statistics-item total-orders">
+                                        <h4>Total Orders</h4>
+                                        <h5>100+</h5>
+                                    </div>
                                 </div>
-                                <div className="statistics-item total-blog">
-                                    <h4>Total Blog</h4>
-                                    <h5>10+</h5>
+                                <div className="col-md-3">
+                                    <div className="statistics-item total-blog">
+                                        <h4>Total Blog</h4>
+                                        <h5>10+</h5>
+                                    </div>
                                 </div>
-                                <div className="statistics-item total-admin">
-                                    <h4>Total Admin</h4>
-                                    <h5>5+</h5>
+                                <div className="col-md-3">
+                                    <div className="statistics-item total-admin">
+                                        <h4>Total Admin</h4>
+                                        <h5>5+</h5>
+                                    </div>
                                 </div>
-                                <div className="statistics-item total-review">
-                                    <h4>Total Review</h4>
-                                    <h5>52+</h5>
+                                <div className="col-md-3">
+                                    <div className="statistics-item total-review">
+                                        <h4>Total Review</h4>
+                                        <h5>52+</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>

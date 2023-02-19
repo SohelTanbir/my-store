@@ -71,13 +71,11 @@ const Category = () => {
                     <button onClick={handleModal}>Add category</button>
                     </div>
                     <div className="row">
-                    <div className="category-container">
-                    <div className="row">
                         {category.length ?
                         <>
                             {
                                 category.map(categoriItem =>(
-                                    <div className="single-category">
+                                    <div className="single-category col-xl-1  col-md-3 col-sm-4">
                                         <span>{categoriItem.name}</span>
                                         <FontAwesomeIcon onClick={()=> deleteProduct(categoriItem._id)} icon={faTimes} />
                                     </div>
@@ -87,8 +85,6 @@ const Category = () => {
                         :<Loader/>
                         }
                     </div>
-                </div>
-                </div>
             </div>
             </div>
         </div>

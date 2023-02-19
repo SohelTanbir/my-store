@@ -1,6 +1,3 @@
-.dashboard{
-    background:#dddd;
-}
 .dashboard-main{
     display: flex;
     justify-content: space-between;
@@ -12,7 +9,7 @@
 }
 .main-part {
     padding: 2rem;
-    width: 80%;
+    width: 100%;
 }
 .total-orders,
 .total-blog,
