@@ -1,7 +1,7 @@
 import React from 'react';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {    faCog, faEdit, faLayerGroup, faPlusSquare,faQrcode,faTh, faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import {    faCog, faEdit, faEnvelope, faLayerGroup, faPlusSquare,faQrcode,faTh, faUserPlus, faUsers} from '@fortawesome/free-solid-svg-icons'
 import { faBlogger } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
@@ -26,13 +26,10 @@ const SideBar = () => {
                             <Link to="/category/all"><FontAwesomeIcon icon={faQrcode} /> Category</Link>
                         </li>
                         <li>
-                            <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /> Make Admin</Link>
+                            <Link to="/admin/users"><FontAwesomeIcon icon={faUsers} /> Users</Link>
                         </li>
                         <li>
-                            <Link to="/blogs"><FontAwesomeIcon icon={faBlogger} /> Blogs</Link>
-                        </li>
-                        <li>
-                            <Link to="/manageblogs"><FontAwesomeIcon icon={faEdit} /> Manage Blogs</Link>
+                            <Link to="/users/message"><FontAwesomeIcon icon={faEnvelope} /> Mesages <span className="badge bg-danger">4</span></Link>
                         </li>
                         <li>
                             <Link><FontAwesomeIcon icon={faCog} /> Setting</Link>

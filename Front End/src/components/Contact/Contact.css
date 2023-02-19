@@ -76,7 +76,7 @@
 /*medium device*/
 @media all and (max-width:768px){
     .contact-box {
-        width: 80%;
+          width: 100%;
     }
 }
 /*small device*/

@@ -18,7 +18,7 @@ import ResetPassword from './components/ResetPassword/ResetPassword';
 import UserProfile from './components/UserProfile/UserProfile';
 import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts';
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
-import MakeAdmin from './components/Dashboard/MakeAdmin/MakeAdmin';
+import Users from './components/Dashboard/Users/Users.js';
 import Orders from './components/Dashboard/Orders/Orders';
 import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
@@ -93,7 +93,7 @@ useEffect(()=>{
 
               <Route exact path="/products/update/:id" element={<UpdateProduct/>} />
 
-              <Route  exact path="/admin/make-admin" element={<MakeAdmin/>} />
+              <Route  exact path="/admin/users" element={<Users/>} />
 
               <Route exact  path="/orders/all" element={<Orders/>} />
 

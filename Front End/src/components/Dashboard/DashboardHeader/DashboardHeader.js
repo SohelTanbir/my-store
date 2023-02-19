@@ -3,6 +3,8 @@ import './DashboardHeader.css';
 import user from '../../../images/user-photo.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPowerOff} from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+
 
 
 
@@ -14,15 +16,15 @@ const DashboardHeader = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-3">
                             <div className="logo">
-                                <a href="/dashboard">My<span>Store</span></a>
+                                <Link to="/dashboard">My<span>Store</span></Link>
                             </div>
                         </div>
                         <div className="col-lg-9">
                             <div className="activeUser align-items-center">
+                                <p>Admin</p>
                                 <div className="user-photo">
                                     <img src={user} alt="" />
                                 </div>
-                                <p>Admin</p>
                             </div>
                         </div>
                     </div>
