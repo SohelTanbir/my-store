@@ -58,9 +58,15 @@ const Contact = () => {
                 <div className="contact-box">
                     <h4>How can we help you?</h4>
                     <form onSubmit={handleSubmit}>
-                       <div className="w-50">
-                       <input type="text" name='name'  onChange={handleChange} placeholder='Name' value={message.name} /> <br />
+                       <div className="row">
+                        <div className=" col-md-6">
+                            <input type="text" name='name'  onChange={handleChange} placeholder='Name' value={message.name} /> <br />
+
+                        </div>
+                        <div className="col-md-6">
                         <input type="email" name='email'  onChange={handleChange} placeholder='Email' value={message.email} /> <br />
+                        </div>
+                        
                        </div>
                         <input type="text" name='subject'  onChange={handleChange} placeholder='Subject' value={message.subject}/> <br />
                         <textarea name="message" onChange={handleChange} placeholder='Message' value={message.message}></textarea>
