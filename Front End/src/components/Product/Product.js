@@ -3,16 +3,18 @@ import './Product.css'
 import ProductCard from '../ProductCard/ProductCard';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
+import { useSelector } from 'react-redux';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
     const currentPath = window.location.pathname;
+    const searchInputVal =  useSelector(state => state.searchVal);
 
     useEffect(()=>{
-        fetch("http://localhost:5000/api/v1/product/all")
+        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}`)
         .then(res => res.json())
         .then(data => setProducts(data.products));
-    }, []);
+    }, [searchInputVal]);
 
 
     return (

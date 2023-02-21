@@ -9,8 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
-    const {cartItems} =  useContext(userContext);    
-    // const [cart, setCart ]= cartItems;
+
 
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);

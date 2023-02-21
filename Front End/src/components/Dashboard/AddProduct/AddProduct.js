@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import './AddProduct.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
@@ -19,8 +19,23 @@ const AddProduct = () => {
     });
     const [image, setImage] = useState("");
     const [loader, setLoader] = useState(false);
+    const [categories, setCategories] = useState([])
 
     
+    const loadCategory = async()=>{
+        const res =  await fetch("http://localhost:5000/api/v1/category/all");
+        const {categories} = await res.json();
+        setCategories(categories);
+    }
+
+    //  handle side effect actions
+    useEffect(()=>{
+        loadCategory();
+    },[categories])
+
+
+
+
     // handle change
     const handleChange = (e)=>{
         const newProduct  ={...product}
@@ -119,7 +134,7 @@ const fileUploader = (e)=>{
                             <option value="L, XL">L, XL</option>
                             <option value="M, L, XL ">M, L, XL</option>
                         </select>
-                       <input name='photo' className="mr-2p"  onChange={fileUploader} type="file"/><br />
+                       <input name='photo' className="mr-2p"  onChange={fileUploader} type="file" defaultValue=""/><br />
                        <textarea name="description"  onChange={handleChange} placeholder='Product description' value={product.description}></textarea>
                        <button className='submit-btn' type="submit">Add Product</button>
                    </form>

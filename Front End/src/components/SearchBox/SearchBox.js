@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import './Searchbox.css';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { getSearchInputVal } from '../../Store/SearchSlice/SearchSlice';
 
 
 const SearchBox = () => {
     const [searchVal, setSearchVal ] =  useState("");
     const [category, setCategory] = useState([]);
-    const [selectedVal, setSelectedVal] = useState("All Categories")
+    const [selectedVal, setSelectedVal] = useState("All Categories");
+    const dispatch = useDispatch();
 
 // handle search
 const handleSearch  = (e)=>{
     e.preventDefault();
-    alert('Success');
+    
 }
+
 // handle change form data
 const handleChange = (e)=>{
-    setSearchVal(e.target.value)
+    setSearchVal(e.target.value);
+    dispatch(getSearchInputVal(searchVal));
 }
 //handle change category
 const handleChangeCategory = (e)=>{
     const newCategory = [...category, e.target.value]
-    setCategory(newCategory)
+    setCategory(newCategory);
 }
 
 
@@ -42,7 +45,7 @@ const handleChangeCategory = (e)=>{
                     <option value="t-shirt">T-shirt</option>
                     <option value="shirt">Shirt</option>
                 </select>
-                <input onBlur={handleChange} type="text" placeholder='What do you need?' />
+                <input onChange={handleChange} type="text" placeholder='What do you need?' />
                 <button className='search-btn'>Search</button>
             </form>
         </div>

@@ -47,8 +47,9 @@ const addNewProduct = async (req, res, next)=>{
 // Get All Products
 const getAllProducts =  async(req, res)=>{
 
-    try {
-        const products = await Product.find({});
+    try {   
+        const searchStr = req.query.name?{name:{$regex:req.query.name, $options:'i'}} : {}
+        const products = await Product.find(searchStr);
         if(products){
             res.status(200).json({
                 success:true,

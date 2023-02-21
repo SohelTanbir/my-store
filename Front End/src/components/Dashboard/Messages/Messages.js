@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../../Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 const Messages = () => {
@@ -17,7 +16,7 @@ const Messages = () => {
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/message/all");
-        const {success, messages} = await res.json();
+        const { messages} = await res.json();
         setMessages(messages);
     }
 
@@ -25,11 +24,6 @@ const Messages = () => {
     useEffect(()=>{
         loadUsers();
     },[Messages])
-
-    // handle modal close or Show
-    const handleModal = ()=>{
-      
-    }
 
     const deleteMessage = async(id)=>{
         const response = await fetch(`http://localhost:5000/api/v1/message/delete/${id}`,{
@@ -77,7 +71,6 @@ const Messages = () => {
                                                   <td>{message.message}</td>
                                                   <td>{message.createdAt}</td>
                                                   <td>
-                                                  <Link to="/users/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
                                                   <button className='action-btn delete-btn' onClick={()=> deleteMessage(message._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                                                   </td>
                                     </tr>
