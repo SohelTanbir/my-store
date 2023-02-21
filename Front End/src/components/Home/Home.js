@@ -14,7 +14,6 @@ const Home = ()=> {
         <Fragment>
             <Header/>
             <div className="home">
-                <SearchBox/>
                 <Banner/>
                 <Service/>
                 <Product/>

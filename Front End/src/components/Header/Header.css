@@ -4,17 +4,24 @@
     left: 0;
     width:100%;
     padding: 1.5rem;
+    margin-bottom: 1.5rem;
     background: #fff;
     box-shadow:  .1rem .1rem .5rem #d1c5e3;
     z-index: 10;
 }
-.logo{
-    flex-basis:15%;
+.logo{  
+    flex-grow: 1;
     text-transform: uppercase;
     font-weight:700;
 }
 .logo span{
     color:#dfb839;
+}
+.header .menu{
+    flex-grow: 1;
+}
+.header .searchbar{
+    flex-grow: 1;
 }
 .navbar{
     flex-basis:75%;
@@ -24,7 +31,10 @@
 .navbar  a{
     font-size: 1.6rem;
     color: #000;
-    margin-left: 3rem;
+    margin-left: 2.5rem;
+}
+.navbar  a:first-child{
+    margin-left: 0;
 }
 .addToCart{
     position: relative;

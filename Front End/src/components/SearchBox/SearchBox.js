@@ -30,7 +30,6 @@ const handleChangeCategory = (e)=>{
 
 
     return (
-       <div className="container">
          <div className='search-box'>
             <form onSubmit={handleSearch}>
                 <select name="category" id="category" onChange={handleChangeCategory}>
@@ -45,11 +44,9 @@ const handleChangeCategory = (e)=>{
                     <option value="t-shirt">T-shirt</option>
                     <option value="shirt">Shirt</option>
                 </select>
-                <input onChange={handleChange} type="text" placeholder='What do you need?' />
-                <button className='search-btn'>Search</button>
+                <input onChange={handleChange} type="text" placeholder='Search what do you need...' />
             </form>
         </div>
-       </div>
     );
 };
 
