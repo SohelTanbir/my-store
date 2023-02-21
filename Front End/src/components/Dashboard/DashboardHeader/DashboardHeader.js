@@ -14,12 +14,12 @@ const DashboardHeader = () => {
             <div className="dashboard-header">
                 <div className="container-fluid">
                     <div className="row align-items-center">
-                        <div className="col-lg-3">
+                        <div className="col-3">
                             <div className="logo">
                                 <Link to="/dashboard">My<span>Store</span></Link>
                             </div>
                         </div>
-                        <div className="col-lg-9">
+                        <div className="col-9">
                             <div className="activeUser align-items-center">
                                 <p>Admin</p>
                                 <div className="user-photo">

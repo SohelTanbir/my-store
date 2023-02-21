@@ -23,6 +23,7 @@ import Orders from './components/Dashboard/Orders/Orders';
 import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
+import Messages from './components/Dashboard/Messages/Messages';
 
 export const userContext = createContext();
 
@@ -100,6 +101,8 @@ useEffect(()=>{
               <Route exact  path="/orders/status/update" element={<UpdateOrder/>} />
 
               <Route exact  path="/category/all" element={  <Category/>} />
+              
+              <Route exact  path="/users/message" element={  <Messages/>} />
 
               <Route exact path="/users/profile" element={   <UserProfile/>} />
 

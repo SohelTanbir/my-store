@@ -9,7 +9,7 @@ const { createMessage, getAllMessage, deleteMessage } = require("../controllers/
 
 
 // message routes
-router.get("/message/all", checkLogin, getAllMessage);
+router.get("/message/all", getAllMessage);
 router.post("/message/create", createMessage);
 router.delete("/message/delete/:id", deleteMessage);
 
