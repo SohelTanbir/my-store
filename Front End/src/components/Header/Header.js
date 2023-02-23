@@ -30,32 +30,24 @@ const Header = () => {
     return (
        <div className="header">
             <div className="container-fluid">
-                <div className="d-flex">
-                        <div className="col-2">
+                <div className="d-flex justify-content-between align-items-center">
                         <div className="logo">
                         <Link to="/"> My<span>Store</span> </Link>
                         </div>
-                        </div>
-                    <div className="col-6   ">
+                    <div className="search-box">
                         <SearchBox/>
                     </div>
-                    <div className="menu">
-                    <Navbar expand="lg">
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="ms-auto">
-                                <Link to="/home">Home</Link>
-                                <Link to="/orders/track">TracK Order</Link>
-                                <Link to="/contact">Contact</Link>
-                                <Link to="/login">Login</Link>
-                                <Link to="/cart">
-                                        <span>Cart</span>
-                                </Link>
-                        
-                            </Nav>
-                            </Navbar.Collapse>
-                        </Navbar>
-                    </div>
+                   <div className="header-action d-flex align-items-center">
+                        <div className="login-btn">
+                            <button>Login</button>
+                        </div>
+                        <div className="add-to-cart">
+                            <div className="cart-icon">
+                                <FontAwesomeIcon icon={faCartPlus}/>
+                                <span className='cart-total'>5</span>
+                            </div>
+                        </div>
+                   </div>
                 </div>
             </div>
        </div>

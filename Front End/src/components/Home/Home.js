@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Banner from '../Banner/Banner';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 import LatestNews from '../LatestNews/LatestNews';
 import Product from '../Product/Product';
@@ -12,6 +13,7 @@ import Service from '../Service/Service';
 const Home = ()=> {
     return (
         <Fragment>
+            <HeaderTop/>
             <Header/>
             <div className="home">
                 <Banner/>
