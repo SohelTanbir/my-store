@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CartProduct from './CartProduct';
 import Shipment from '../Shipment/Shipment';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 
 
@@ -57,6 +58,7 @@ const proceedOrder = ()=>{
 
     return (
         <Fragment>
+            <HeaderTop/>
                 <Header/>
                 <div className="cart">
                 <ToastContainer />

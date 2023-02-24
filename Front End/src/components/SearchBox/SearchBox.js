@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './Searchbox.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSearchInputVal } from '../../Store/SearchSlice/SearchSlice';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBox = () => {
     const [searchVal, setSearchVal ] =  useState("");
@@ -33,6 +34,9 @@ const handleChangeCategory = (e)=>{
          <div className='search-box'>
             <form onSubmit={handleSearch}>
                 <input onChange={handleChange} type="text" placeholder='Search what do you need...' />
+                <div className="search-icon">
+                    <FontAwesomeIcon icon={faSearch} />
+                </div>
             </form>
         </div>
     );

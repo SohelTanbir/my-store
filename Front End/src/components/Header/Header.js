@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBaby, faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import SearchBox from '../SearchBox/SearchBox';
@@ -34,21 +34,31 @@ const Header = () => {
                         <div className="logo">
                         <Link to="/"> My<span>Store</span> </Link>
                         </div>
-                    <div className="search-box">
+                    <div className="search-bar">
                         <SearchBox/>
                     </div>
                    <div className="header-action d-flex align-items-center">
                         <div className="login-btn">
+                         <Link to="/login">
                             <button>Login</button>
+                         </Link>
                         </div>
                         <div className="add-to-cart">
                             <div className="cart-icon">
-                                <FontAwesomeIcon icon={faCartPlus}/>
+                                <Link to="/cart">
+                                    <FontAwesomeIcon icon={faCartPlus}/>
+                                </Link>
                                 <span className='cart-total'>5</span>
                             </div>
                         </div>
+                        <div className="bars-icon">
+                            <FontAwesomeIcon icon={faBars}/>
+                        </div>
                    </div>
                 </div>
+            </div>
+            <div className="header-bottom-search">
+                <SearchBox/>
             </div>
        </div>
     );

@@ -15,6 +15,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { userContext } from '../../App';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 firebase.initializeApp(firebaseConfig);
 
 
@@ -97,6 +98,7 @@ const Login = () => {
 
   return (
     <Fragment>
+      <HeaderTop/>
         <Header/>
           <div className="login">
           <div className="container">

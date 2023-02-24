@@ -22,7 +22,7 @@
 .header .searchbar{
     flex-grow: 1;
 }
-.header .search-box{
+.header .search-bar{
     max-width: 80rem;
     width: 100%;
     margin: 0 .5rem;
@@ -34,13 +34,17 @@
     font-size: 1.6rem;
     color: #fff;
     border-radius: 1rem;
+    margin-left: 1rem;
     background: #FF6000;
 }
 .cart-icon{
     position: relative;
     font-size: 2.5rem;
-    margin-left: 1.5rem;
+    margin-left: 2rem;
     cursor: pointer;
+}
+.cart-icon a{
+   color: #877373;
 }
 .cart-icon .cart-total {
     position: absolute;
@@ -55,3 +59,68 @@
     border-radius: 50%;
     text-align: center;
 }
+.header .bars-icon {
+    display: none;
+    font-size: 1.8rem;
+    margin-left: 2.5rem;
+    color: #877373;
+ }
+ .header-bottom-search{
+    display: none;
+ }
+ /*Responsive CSS*/
+ /*medium device*/
+ @media all and (max-width:767px){
+    .header{
+        background: #FF6000;
+    }
+    .header .logo a{
+      color: #fff;
+    }
+    .header .search-bar{
+       display: none;
+    }
+    .header-top{
+        display: none;
+    }
+    .header .login-btn button {
+        padding: .5rem 1.5rem;
+        color: #000;
+        background: #ffffff;
+        font-weight: 600;
+    }
+    .cart-icon a {
+        color: #fff;
+    }
+    .header .bars-icon {
+        display: block;
+        color: #fff;
+    }
+    .header-bottom-search {
+        margin: 1.5rem 0 0;
+        display: block;
+    }
+    .header-bottom-search .search-box{
+        max-width: 100%;
+    }
+
+ }
+
+
+ /*small device*/
+ @media all and (max-width:575px){
+    .header{
+        padding: 1rem;
+    }
+    .header .search-box input {
+        padding: .6rem 1rem;
+        border-radius: 1rem;
+    }
+    .header  .search-box  .search-icon {
+        right: 1rem;
+        top: .9rem;
+    }
+    .header-bottom-search {
+        margin: .7rem 0 0;
+    }
+ }

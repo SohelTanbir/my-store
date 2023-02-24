@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HeaderTop.css';
 
 
@@ -10,10 +11,19 @@ const HeaderTop = () => {
                                         <div className="d-flex align-items-center justify-content-between">
                                                   <p className='free-shipping'>Free Shipping on first order! <span>Order Now</span></p>
                                                   <ul className='top-menu d-flex'>
-                                                            <li><a href="#">Track order</a></li>
-                                                            <li><a href="#">Contact</a></li>
-                                                            <li><a href="#">Profile</a></li>
-                                                            <li><a href="#">Easy Return</a></li>
+                                                            <li>
+                                                                      <Link to="/orders/track">Track order</Link>
+                                                            </li>
+                                                            <li>
+                                                                      <Link to="/contact">Contact</Link>
+                                                            </li>
+                                                            <li>
+                                                                      <Link to="/users/profile">Profile</Link>
+                                                            </li>
+                                                                  
+                                                            <li>
+                                                                      <Link to="/return/policy">Easy Return</Link>
+                                                            </li>
                                                   </ul>
                                         </div>
                               </div>

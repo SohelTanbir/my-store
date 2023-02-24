@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import OrderStatus from './OrderStatus';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 const TraceOrder = () => {
     const [orderId, setOrderId] = useState({});
@@ -46,6 +47,7 @@ const TraceOrder = () => {
 
     return (
        <Fragment>
+        <HeaderTop/>
             <Header/>
                 <div className='trace-order'>
                     <ToastContainer/>

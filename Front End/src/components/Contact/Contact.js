@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 const Contact = () => {
     const [message, setMessage] = useState({
@@ -50,6 +51,7 @@ const Contact = () => {
 
     return (
         <Fragment>
+            <HeaderTop/>
             <Header/>
             <div className='contact'>
             <ToastContainer />

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../../App';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 
 
@@ -48,6 +49,7 @@ const handleLogOut = async () =>{
 
     return (
         <Fragment>
+            <HeaderTop/>
             <Header/>
             
         <div className='user-profile'>

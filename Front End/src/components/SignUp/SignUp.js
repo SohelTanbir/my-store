@@ -9,6 +9,7 @@ import firebase from "firebase/app";
 import 'firebase/auth';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header'
+import HeaderTop from '../Header/HeaderTop';
 
 
 const SignUp = ()=>{
@@ -66,6 +67,7 @@ const SignUp = ()=>{
 }
     return(
        <Fragment>
+        <HeaderTop/>
             <Header/>
             <div className="SignUp">
                 <div className="container">

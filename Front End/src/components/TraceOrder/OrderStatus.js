@@ -6,7 +6,6 @@ import {  faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const OrderStatus = ({status, orderId}) => {
 
-    console.log(status);
 
     return (
         <div className='order-status'>

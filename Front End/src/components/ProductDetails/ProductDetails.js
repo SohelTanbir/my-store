@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userContext } from '../../App';
 import Header from '../Header/Header';
+import HeaderTop from '../Header/HeaderTop';
 
 
 const ProductDetails = () => {
@@ -54,6 +55,7 @@ const handleAddToCart = async(id) =>{
 
     return (
       <Fragment>
+        <HeaderTop/>
             <Header/>
             <div className='product-details'>
                <ToastContainer />
