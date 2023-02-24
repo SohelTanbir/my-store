@@ -2,31 +2,23 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBaby, faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import {  faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
-import { Container, Nav, Navbar } from 'react-bootstrap';
 import SearchBox from '../SearchBox/SearchBox';
+import RightNav from '../RightNav/RightNav';
 
 const Header = () => {
     const {userData} = useContext(userContext);
     const [loggedInUser, setLoggedInUser] = userData;
     const [toggle, setToggle] = useState(false);
-    const {cartItems} =  useContext(userContext);    
-    const [cart, setCart ]= cartItems;
+    const [showNav, setShowNav ] = useState(false);
 
-    const handleMenu = ()=>{
-        if(toggle === false){
-           document.querySelector('.navbar ul').style.visibility ='visible';
-           document.querySelector('.navbar ul').style.left ='0%';
-           setToggle(true)
-        }else{
-            document.querySelector('.navbar ul').style.visibility ='hidden';
-            document.querySelector('.navbar ul').style.left ='-100%';
-           setToggle(false)
-        }
-    }
+// show or hide right sidebar menu
+const handleRightNav = ()=>{
+    setShowNav(!false);
+}
 
-    
+
     return (
        <div className="header">
             <div className="container-fluid">
@@ -51,7 +43,7 @@ const Header = () => {
                                 <span className='cart-total'>5</span>
                             </div>
                         </div>
-                        <div className="bars-icon">
+                        <div className="bars-icon" onClick={handleRightNav}>
                             <FontAwesomeIcon icon={faBars}/>
                         </div>
                    </div>
@@ -60,6 +52,8 @@ const Header = () => {
             <div className="header-bottom-search">
                 <SearchBox/>
             </div>
+            {/* mobile menu  */}
+            <RightNav showNav={showNav} setShowNav={setShowNav}/>
        </div>
     );
 };
