@@ -4,7 +4,6 @@
     left: 0;
     width:100%;
     padding: 1.5rem 2.5rem;
-    margin-bottom: 1.5rem;
     background: #fff;
     box-shadow:  .1rem .1rem .5rem #d1c5e3;
     z-index: 10;
@@ -87,7 +86,7 @@
         padding: .5rem 1.5rem;
         color: #000;
         background: #ffffff;
-        font-weight: 600;
+        font-weight: 500;
     }
     .cart-icon a {
         color: #fff;

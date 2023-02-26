@@ -33,7 +33,7 @@
     font-weight: 400;
     color: #bbbbbb;
 }
-.trace-order-form .trace-now-btn{
+.trace-order-form .trace-now-btn {
     display: block;
     margin-left: auto;
     font-size: 1.6rem;
@@ -42,9 +42,9 @@
     outline: none;
     color: #fff;
     cursor: pointer;
-    border-radius: .3rem;
+    border-radius: .5rem;
     padding: 1rem 2rem;
-    background: #465487;
+    background: #FF6000;
 }
 
 /*

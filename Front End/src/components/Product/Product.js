@@ -25,7 +25,7 @@ const Product = () => {
                     <h2>Brand Product</h2>
                     <p>Choose your favorite product from here</p>
                 </div>
-                    {products.length ?<div className="row">
+                    {products.length ?<div className="row g-4">
                         {
                             products.map(product => <ProductCard key={product._id}  product={product}/>)
                         }

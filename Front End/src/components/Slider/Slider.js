@@ -16,7 +16,7 @@ const Slider = () => {
                    modules={[Pagination]}
                    slidesPerView={1}
                    pagination={{ clickable: true }}
-                   autoplay={{delay: 1500}}
+                   autoplay={{delay: 10000}}
                 >
                 <SwiperSlide>
                     <img src={banner2} alt="product " />
