@@ -121,7 +121,6 @@ const deleteUser =  async (req, res)=>{
 const loginUser =  async (req, res, next) =>{
     try {
         const user =  await User.find({email:req.fields.email});
-        console.log(req.fields.email)
         if(user){
             const {name, email, role} = user[0];
             const isValidPassword = await bcrypt.compare(req.fields.password, user[0].password)

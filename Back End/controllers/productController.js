@@ -48,8 +48,11 @@ const addNewProduct = async (req, res, next)=>{
 const getAllProducts =  async(req, res)=>{
 
     try {   
-        const searchStr = req.query.name?{name:{$regex:req.query.name, $options:'i'}} : {}
-        const products = await Product.find(searchStr);
+        const searchStr = req.query.name?{name:{$regex:req.query.name, $options:'i'}} : {};
+        const currentPage = Number(req.query.page) || 1;
+        const showPerPage = 5;
+        const skipProduct = showPerPage *(currentPage - 1);
+        const products = await Product.find(searchStr).limit(showPerPage).skip(skipProduct);
         if(products){
             res.status(200).json({
                 success:true,

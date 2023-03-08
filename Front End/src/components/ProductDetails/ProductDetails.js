@@ -22,7 +22,7 @@ const ProductDetails = () => {
         fetch(`http://localhost:5000/api/v1/product/one/${id}`)
         .then(res => res.json())
         .then(data => setProduct(data.products));
-    });
+    }, []);
     
 const handleAddToCart = async(id) =>{
 
@@ -43,7 +43,7 @@ const handleAddToCart = async(id) =>{
             'content-type':'application/json',
         },
         body:JSON.stringify(cartProduct)
-        });
+        }, []);
     if(res.ok){
         setCart(product)
         toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
