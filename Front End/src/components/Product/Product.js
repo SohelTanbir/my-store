@@ -4,6 +4,10 @@ import ProductCard from '../ProductCard/ProductCard';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
+import Pagination from 'react-bootstrap/Pagination';
+import PagePagination from '../Pagination/PagePagination';
+
+
 
 const Product = () => {
     const [products, setProducts] = useState([]);
@@ -15,6 +19,11 @@ const Product = () => {
         .then(res => res.json())
         .then(data => setProducts(data.products));
     }, [searchInputVal]);
+
+
+
+
+
 
 
     return (
@@ -31,6 +40,10 @@ const Product = () => {
                         }
                     </div>
                     :<Loader />}
+
+                   <div className="pagination-container">
+                        <PagePagination products={products}/>
+                   </div>
         </div>
        </Fragment>
     );
