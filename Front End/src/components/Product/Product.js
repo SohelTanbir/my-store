@@ -15,7 +15,7 @@ const Product = () => {
     const searchInputVal =  useSelector(state => state.searchVal);
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}`)
+        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=1`)
         .then(res => res.json())
         .then(data => setProducts(data.products));
     }, [searchInputVal]);
