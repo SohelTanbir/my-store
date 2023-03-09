@@ -4,7 +4,6 @@ import ProductCard from '../ProductCard/ProductCard';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
-import Pagination from 'react-bootstrap/Pagination';
 import PagePagination from '../Pagination/PagePagination';
 
 
@@ -12,14 +11,14 @@ import PagePagination from '../Pagination/PagePagination';
 const Product = () => {
     const [products, setProducts] = useState([]);
     const currentPath = window.location.pathname;
-    const searchInputVal =  useSelector(state => state.searchVal);
+    const searchInputVal =  useSelector(state => state.searchVal.searchVal);
+    const pageNumber =  useSelector(state => state.PaginationSlice.page);
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=1`)
+        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=${pageNumber}`)
         .then(res => res.json())
         .then(data => setProducts(data.products));
-    }, [searchInputVal]);
-
+    }, [searchInputVal, pageNumber]);
 
 
 
