@@ -5,21 +5,26 @@ import { getPageNumber } from '../../Store/PaginationSlice/PaginationSlice';
 
 
 
-const PagePagination = ({products}) => {
+const PagePagination = ({totalProduct=10}) => {
   const dispatch = useDispatch();
   const currentPage =  useSelector(state => state.PaginationSlice.page);
+  const showPerPage = 15;
+  const page = Math.ceil(totalProduct/showPerPage);
+  const totoalPage = [];
+  for (let number = 1; number <=page; number++) {
+    totoalPage.push(
+      <Pagination.Item onClick={()=>dispatch(getPageNumber({page:number}))}  key={number} active={currentPage===number}>
+        {number}
+    </Pagination.Item>
+    )
+    
+  }
+
 
   return (
-    <>
-        {products.map((product, index) =>
-        <Pagination>
-            <Pagination.Item onClick={()=> dispatch(getPageNumber({page:index+1}))}  key={index} active={index+1===currentPage}>
-              {index+1}
-            </Pagination.Item>
-        </Pagination>
-       )}
-
-    </>
+    <Pagination>
+    {totoalPage}
+  </Pagination>
   );
 };
 

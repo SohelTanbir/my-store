@@ -53,11 +53,12 @@ const getAllProducts =  async(req, res)=>{
         const showPerPage = 15;
         const skipProduct = showPerPage *(currentPage - 1);
         const products = await Product.find(searchStr).limit(showPerPage).skip(skipProduct);
-
+        const totalProducts = await Product.find({});
         if(products){
             res.status(200).json({
                 success:true,
-                products
+                products,
+                total:totalProducts.length
             });
         }else{
             res.status(404).json({

@@ -7,21 +7,24 @@ import { useSelector } from 'react-redux';
 import PagePagination from '../Pagination/PagePagination';
 
 
-
 const Product = () => {
     const [products, setProducts] = useState([]);
     const currentPath = window.location.pathname;
     const searchInputVal =  useSelector(state => state.searchVal.searchVal);
     const pageNumber =  useSelector(state => state.PaginationSlice.page);
+    const [totalProduct, setTotalProduct ] =  useState(0)
+
+const loadProduct = async()=>{
+    const res = await fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=${pageNumber}`);
+    const { products, total} = await res.json()
+    setProducts(products);
+    setTotalProduct(total)
+}
+
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=${pageNumber}`)
-        .then(res => res.json())
-        .then(data => setProducts(data.products));
+        loadProduct()
     }, [searchInputVal, pageNumber]);
-
-
-
 
 
 
@@ -41,7 +44,7 @@ const Product = () => {
                     :<Loader />}
 
                    <div className="pagination-container">
-                        <PagePagination products={products}/>
+                        <PagePagination totalProduct={totalProduct}/>
                    </div>
         </div>
        </Fragment>
