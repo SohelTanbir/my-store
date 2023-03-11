@@ -3,15 +3,16 @@ import './Banner.css'
 import Slider from '../Slider/Slider';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { getCategory } from '../../Store/SearchSlice/SearchSlice';
 
 const Banner = ()=>{
     const [category, setCategory] = useState([])
-
+    const dispatch = useDispatch();
     //handle change category
     const handleChangeCategory = (e)=>{
-        const newCategory = [...category, e.target.value]
-        setCategory(newCategory)
-  
+        setCategory(e.target.getAttribute("data"))
+        dispatch(getCategory(category))
     }
 
     return(
@@ -26,16 +27,16 @@ const Banner = ()=>{
                         Top Categories
                     </h3>
                     <ul className="categori-items">
-                        <li><a href="#">Electronics</a></li>
-                        <li><a href="#">Men's Fashion</a></li>
-                        <li><a href="#">Women's Fashion</a></li>
-                        <li><a href="#">Winter Cloths</a></li>
-                        <li><a href="#">Shoes Collections</a></li>
-                        <li><a href="#">Shirt </a></li>
-                        <li><a href="#">T-Shirt </a></li>
-                        <li><a href="#">Bags </a></li>
-                        <li><a href="#">Watches </a></li>
-                        <li><a href="#">Others</a></li>
+                        <li onClick={handleChangeCategory} data="electronics">Electronics</li>
+                        <li onClick={handleChangeCategory} data="men">Men's Fashion</li>
+                        <li onClick={handleChangeCategory} data="women">Women's Fashion</li>
+                        <li onClick={handleChangeCategory} data="winter">Winter Cloths</li>
+                        <li onClick={handleChangeCategory} data="shoes">Shoes Collections</li>
+                        <li onClick={handleChangeCategory} data="shirt">Shirt</li>
+                        <li onClick={handleChangeCategory} data="t-shirt">T-Shirt </li>
+                        <li onClick={handleChangeCategory} data="bag">Bags</li>
+                        <li onClick={handleChangeCategory} data="watch">Watches</li>
+                        <li onClick={handleChangeCategory} data="others">Others</li>
                     </ul>
                 </div>
                 <div className="banner-slider">

@@ -5,16 +5,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
-const SearchSlice =  createSlice({
-          name:'search',
+const CategorySlice =  createSlice({
+          name:'category',
           initialState:{
-                    searchVal:"",
                     category:"",
           },
           reducers:{
-                    getSearchInputVal: (state, action)=>{
-                              state.searchVal = action.payload;
-                    },
                     getCategory:(state, action)=>{
                               state.category =  action.payload;
                               console.log(state);
@@ -25,7 +21,7 @@ const SearchSlice =  createSlice({
 
 
 // export actions
-export const { getSearchInputVal, getCategory } = SearchSlice.actions;
+export const { getCategory } = CategorySlice.actions;
 
 // export default  reducer
-export default SearchSlice.reducer;
+export default CategorySlice.reducer;
