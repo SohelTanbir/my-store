@@ -7,13 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getCategory } from '../../Store/Category/CategorySlice';
 
 const Banner = ()=>{
-    const [category, setCategory] = useState("")
     const dispatch = useDispatch();
-    //handle change category
-    const handleChangeCategory = (e)=>{
-        setCategory(e.target.getAttribute("data"))
-        dispatch(getCategory(category))
-    }
 
     return(
         <div className="banner">
@@ -24,19 +18,19 @@ const Banner = ()=>{
                         <span className="category-icon">
                             <FontAwesomeIcon icon={faList} />
                         </span>
-                        Top Categories
+                        Top Categories 
                     </h3>
                     <ul className="categori-items">
-                        <li onClick={handleChangeCategory} data="electronics">Electronics</li>
-                        <li onClick={handleChangeCategory} data="men">Men's Fashion</li>
-                        <li onClick={handleChangeCategory} data="women">Women's Fashion</li>
-                        <li onClick={handleChangeCategory} data="winter">Winter Cloths</li>
-                        <li onClick={handleChangeCategory} data="shoes">Shoes Collections</li>
-                        <li onClick={handleChangeCategory} data="shirt">Shirt</li>
-                        <li onClick={handleChangeCategory} data="t-shirt">T-Shirt </li>
-                        <li onClick={handleChangeCategory} data="bag">Bags</li>
-                        <li onClick={handleChangeCategory} data="watch">Watches</li>
-                        <li onClick={handleChangeCategory} data="others">Others</li>
+                        <li onClick={ (e)=> dispatch(getCategory(e.target.getAttribute("data")))} data="electronics">Electronics</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="men">Men's Fashion</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="women">Women's Fashion</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="winter">Winter Cloths</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="shoes">Shoes Collections</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="shirt">Shirt</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="t-shirt">T-Shirt </li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="bag">Bags</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="watch">Watches</li>
+                        <li onClick={(e)=>  dispatch(getCategory(e.target.getAttribute("data")))} data="others">Others</li>
                     </ul>
                 </div>
                 <div className="banner-slider">

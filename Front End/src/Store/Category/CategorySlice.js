@@ -13,6 +13,7 @@ const CategorySlice =  createSlice({
           reducers:{
                     getCategory:(state, action)=>{
                               state.category =  action.payload;
+                              console.log(action.payload);
                     } 
           }
           
