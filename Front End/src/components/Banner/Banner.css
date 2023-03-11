@@ -25,6 +25,7 @@
 .categori-items li{
     margin-top: .8rem;
     transition: .2s;
+    cursor: pointer;
 }
 .categori-items li:hover {
     transform: translateX(.5rem);

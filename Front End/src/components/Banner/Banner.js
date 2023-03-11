@@ -4,10 +4,10 @@ import Slider from '../Slider/Slider';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { getCategory } from '../../Store/SearchSlice/SearchSlice';
+import { getCategory } from '../../Store/Category/CategorySlice';
 
 const Banner = ()=>{
-    const [category, setCategory] = useState([])
+    const [category, setCategory] = useState("")
     const dispatch = useDispatch();
     //handle change category
     const handleChangeCategory = (e)=>{

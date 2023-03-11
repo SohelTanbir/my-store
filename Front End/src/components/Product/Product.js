@@ -12,10 +12,12 @@ const Product = () => {
     const currentPath = window.location.pathname;
     const searchInputVal =  useSelector(state => state.searchVal.searchVal);
     const pageNumber =  useSelector(state => state.PaginationSlice.page);
+    const {category} =  useSelector(state =>state.category);
     const [totalProduct, setTotalProduct ] =  useState(0)
 
+
 const loadProduct = async()=>{
-    const res = await fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&page=${pageNumber}`);
+    const res = await fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&category=${category}&page=${pageNumber}`);
     const { products, total} = await res.json()
     setProducts(products);
     setTotalProduct(total)
@@ -23,10 +25,8 @@ const loadProduct = async()=>{
 
 
     useEffect(()=>{
-        loadProduct()
-    }, [searchInputVal, pageNumber]);
-
-
+        loadProduct();
+    }, [searchInputVal, pageNumber, category]);
 
     return (
        <Fragment>
@@ -43,9 +43,9 @@ const loadProduct = async()=>{
                     </div>
                     :<Loader />}
 
-                   <div className="pagination-container">
-                        <PagePagination totalProduct={totalProduct}/>
-                   </div>
+                <div className="pagination-container">
+                    <PagePagination totalProduct={totalProduct}/>
+                </div>
         </div>
        </Fragment>
     );
