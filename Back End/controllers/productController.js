@@ -1,5 +1,6 @@
 const Product = require("../models/productModel");
 const cloudinary =  require("cloudinary");
+const Apifeatures = require("../utilities/Apifeatures");
 
 // Create a new product
 const addNewProduct = async (req, res, next)=>{
@@ -48,12 +49,11 @@ const addNewProduct = async (req, res, next)=>{
 const getAllProducts =  async(req, res)=>{
 
     try {   
-        const searchStr = req.query.name?{name:{$regex:req.query.name, $options:'i'}} : {};
-        const currentPage = Number(req.query.page) || 1;
-        const showPerPage = 15;
-        const skipProduct = showPerPage *(currentPage - 1);
-        const products = await Product.find(searchStr).limit(showPerPage).skip(skipProduct);
-        const totalProducts = await Product.find({});
+        const apifeatures =  new  Apifeatures(Product.find(), req.query).Search().FilterByCategory().Pagination();
+
+        const products =await apifeatures.query;
+        const totalProducts = products.length >0? await Product.find({}):0;
+      
         if(products){
             res.status(200).json({
                 success:true,
