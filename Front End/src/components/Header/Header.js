@@ -6,6 +6,7 @@ import {  faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { userContext } from '../../App';
 import SearchBox from '../SearchBox/SearchBox';
 import RightNav from '../RightNav/RightNav';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const {userData} = useContext(userContext);
@@ -17,7 +18,7 @@ const Header = () => {
 const handleRightNav = ()=>{
     setShowNav(!false);
 }
-
+const cartProducts = useSelector(state => state.cart.cartProducts.cartProducts);
 
     return (
        <div className="header">
@@ -40,7 +41,7 @@ const handleRightNav = ()=>{
                                 <Link to="/cart">
                                     <FontAwesomeIcon icon={faCartPlus}/>
                                 </Link>
-                                <span className='cart-total'>5</span>
+                                <span className='cart-total'>{cartProducts?cartProducts.length:0}</span>
                             </div>
                         </div>
                         <div className="bars-icon" onClick={handleRightNav}>

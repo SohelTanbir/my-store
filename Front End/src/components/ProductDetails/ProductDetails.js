@@ -10,14 +10,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { userContext } from '../../App';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
+import { useDispatch } from 'react-redux';
+import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
 
 
 const ProductDetails = () => {
-    const {cartItems} =  useContext(userContext);    
-    const [cart, setCart ]= cartItems;  
     const { id } = useParams();
     const [product, setProduct] = useState([]);
-
+    const dispath = useDispatch();
     useEffect(()=>{
         fetch(`http://localhost:5000/api/v1/product/one/${id}`)
         .then(res => res.json())
@@ -45,12 +45,13 @@ const handleAddToCart = async(id) =>{
         body:JSON.stringify(cartProduct)
         }, []);
     if(res.ok){
-        setCart(product)
         toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
        }else{
         const {message} = await res.json();
         toast.error(message, {position: "bottom-right",autoClose: 1000,}) 
        }
+       // load cart items
+       dispath(loadCartProduct());
     }
 
     return (

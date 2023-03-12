@@ -48,13 +48,13 @@
     border: none;
     outline: none;
     padding: 10px 15px;
-    background: #9ffff2;
+    background: #FF6000;
     width: 100%;
     margin: 17px 0 3px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 600;
-    color: #b1b0ff;
+    color: #fff;
 }
 .user-profile .orders-info{
     width:74%;

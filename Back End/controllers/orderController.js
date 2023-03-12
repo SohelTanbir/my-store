@@ -11,7 +11,7 @@ const createOrder  = async (req, res)=>{
             shippingPrice, 
             totalPrice,
             orderStatus 
-        } = req.body;
+        } = req.fields;
         const order = await Order.create({
             shippingInfo,
             productInfo,

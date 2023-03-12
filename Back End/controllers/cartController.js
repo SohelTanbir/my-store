@@ -27,7 +27,7 @@ const getAllCartItems =  async (req, res) =>{
 // add product to cart
 const addToCart =  async (req, res)=>{
     try {
-    const {productId, name, description, price, category, images}  = req.body;
+    const {productId, name, description, price, category, images}  = req.fields;
       const productExist = await  Cart.find({productId});
 
     if(!productExist.length >0){

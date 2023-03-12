@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
-
-
+    const dispatch =  useDispatch();
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);
     }
@@ -21,11 +22,37 @@ const ProductCard = ({ product }) => {
             return product.name
         }
     }
-   
-    // handle add to cart 
-    const handleAddToCart  = (id)=>{
-        alert(id);
-    }
+
+const handleAddToCart = async(id) =>{
+    if(product._id===id){
+        const cartProduct = {
+            productId:product._id,
+            name:product.name,
+            description:product.description,
+            price:product.price,
+            category:product.category,
+            images:{
+                public_id:product.images[0].public_id,
+                url:product.images[0].url
+            }
+        }
+        const res = await fetch("http://localhost:5000/api/v1/cart/add",{
+            method:'post',
+            headers:{
+                'content-type':'application/json',
+            },
+            body:JSON.stringify(cartProduct)
+            }, []);
+        if(res.ok){
+            toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
+           }else{
+            const {message} = await res.json();
+            toast.error(message, {position: "bottom-right",autoClose: 1000,}) 
+           }
+        }
+    dispatch(loadCartProduct());
+}
+
 
     return (
             <div  className="single-product">

@@ -24,10 +24,15 @@ import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
 import Messages from './components/Dashboard/Messages/Messages';
-
+import { useDispatch } from 'react-redux';
+import { loadCartProduct } from './Store/CartSlice/CartSlice';
 export const userContext = createContext();
 
+
+
+
 function App() {
+  const dispatch = useDispatch();
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(0);
@@ -36,17 +41,10 @@ function App() {
   const [order, setOrder] = useState([]);
 
 
-  // load cart from DB
-const loadCartProduct = async()=>{
-    const response = await fetch("http://localhost:5000/api/v1/cart/all");
-    const {cartProducts} =  await response.json();
-    if(cartProducts?.length > 0){
-        setCart(cartProducts)
-    }
-}
+
 useEffect(()=>{
-  loadCartProduct();
-},[cart.length])
+  dispatch(loadCartProduct())
+},[cart])
 
   return (
     <div className="App">

@@ -8,7 +8,7 @@ import CartProduct from './CartProduct';
 import Shipment from '../Shipment/Shipment';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
-
+import { useSelector } from 'react-redux';
 
 
 const Cart = () => {
@@ -23,31 +23,31 @@ const Cart = () => {
     const totalPrice = price + shippingPrice;
     const {ordersInfo } = useContext(userContext);
     const [order, setOrder] = ordersInfo;
-
-
+    const cartProducts = useSelector(state => state.cart.cartProducts.cartProducts);
+  
+    console.log(cartProducts);
     const productPrice = ()=>{
         let price = 0;
-        cart.length&& cart.map(product =>setPrice(price += product.quantity * product.price));
+        cartProducts&& cartProducts.map(product =>setPrice(price += product.quantity * product.price));
 
     }
     
     const productQnt = ()=>{
         let qnt = 0;
-        cart.length&& cart.map(product =>(qnt += product.quantity));
+        cartProducts&& cartProducts.map(product =>(qnt += product.quantity));
         setQuantity(qnt);
     }
 
     useEffect(()=>{
         productPrice();
         productQnt();
-        cart.length <=0 && setPrice(0);
+        cartProducts?.length <=0 && setPrice(0);
     });
 
 // handle proceed order
 let orders = [];
 const proceedOrder = ()=>{
-    cart.map(pd =>{
-    console.log(pd.images[0].url);
+    cartProducts.map(pd =>{
     orders.push({ name:pd.name, price:pd.price, quantity:pd.quantity, image:pd.images[0].url});
     return 0;
 });
@@ -55,6 +55,7 @@ const proceedOrder = ()=>{
     setShiping(true);
 }
 
+console.log(cart);
 
     return (
         <Fragment>
@@ -68,7 +69,7 @@ const proceedOrder = ()=>{
                             shiping?<Shipment/>:<div className="row">
                             <div className="product-info">
                             {
-                                cart?.length?cart.map(product => <CartProduct product={product} key={product._id} />)
+                                cartProducts?.length?cartProducts.map(product => <CartProduct product={product} key={product._id} />)
                                 :<div className="empty-cart">
                                 <img src={emptyCart} alt="Empty Cart" />
                                 <p>Your <span>Cart</span> is Empty</p>
@@ -84,7 +85,7 @@ const proceedOrder = ()=>{
                                     <p>Price: <span className='taka-sign'>৳ </span>{price}</p>
                                     <p>Total Price: <span className='taka-sign'>৳ </span>{totalPrice}</p>
                                 {
-                                cart?.length?<button className='checkout-btn' onClick={ proceedOrder }>Proceed to CheckOut</button>
+                                cartProducts?.length?<button className='checkout-btn' onClick={ proceedOrder }>Proceed to CheckOut</button>
                                 :<button className='checkout-btn disable-btn'>Proceed</button>}
             
                             </div>}

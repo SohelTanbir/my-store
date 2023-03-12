@@ -5,9 +5,12 @@ import {  faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { userContext } from '../../App';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
 
 
 const CartProduct = ({product}) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [productQuantity, setProductQuantity] = useState(product.quantity);
     const {prices}= useContext(userContext);
@@ -56,12 +59,12 @@ const CartProduct = ({product}) => {
             const {cartProducts} =  await response.json();
             if(cartProducts?.length > 0){
                 setCart(cartProducts)
-            }else{
-                window.location.reload()
             }
         }else{
             toast.error(message,{position: "bottom-right",autoClose: 500});
         }
+        // reload cart product after delete product from 
+        dispatch(loadCartProduct());
     }
     // calculatate product price
     const productPrice = ()=>{
@@ -73,11 +76,7 @@ const CartProduct = ({product}) => {
         productPrice();
         setQuantity(cart.length + (productQuantity));
     });
-    useEffect(()=>{
-        fetch("http://localhost:5000/api/v1/cart/all")
-        .then(res => res.json())
-        .then(data =>setCart(data.cartProducts))
-    }, [cart.length]);
+
 
     return (
         <div>

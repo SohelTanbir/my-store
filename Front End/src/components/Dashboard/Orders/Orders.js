@@ -53,8 +53,8 @@ console.log(orderItems);
                         {orderItems.map( (order, index) => (
                             <tr>
                             <td>#{order._id}</td>
-                            <td>{order.productInfo[1].name}</td>
-                            <td><img src={order.productInfo[1].image} alt="product" /></td>
+                            <td>{order.productInfo[1]?.name}</td>
+                            <td><img src={order.productInfo[1]?.image} alt="product" /></td>
                             <td>Processing</td>
                             <td>1</td>
                             <td><span>৳ </span> 150</td>

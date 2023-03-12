@@ -20,7 +20,7 @@ const UserProfile = () => {
     useEffect(  ()=>{
         fetch("http://localhost:5000/api/v1/orders/all")
         .then(res => res.json())
-        .then(data => setMyOrders(data.Orders))
+        .then(data => setMyOrders(data.orders))
     }, [])
     // product name modify
     const productName = (name)=>{
@@ -30,6 +30,8 @@ const UserProfile = () => {
             return name
         }
     }
+
+console.log(myOrders);
 
 // handle Log out user
 const handleLogOut = async () =>{
@@ -53,7 +55,8 @@ const handleLogOut = async () =>{
             <Header/>
             
         <div className='user-profile'>
-            {myOrders?.length?<div className="container">
+            {myOrders?.length?
+            <div className="container">
             <ToastContainer />
             <div className="row">
                 <div className="user-info">
