@@ -27,7 +27,7 @@ const getAllMessage = async (req, res)=>{
 // create message
 const createMessage  = async (req, res)=>{
     try {
-        const messsage = await Message.create(req.body);
+        const messsage = await Message.create(req.fields);
         messsage.save(err =>{
             if(!err){
                 res.status(200).json({
@@ -39,6 +39,7 @@ const createMessage  = async (req, res)=>{
     } catch (err) {
         res.status(400).json({
             success:false,
+            message:"Something wrong!",
             error:err.messsage
         })
     }
