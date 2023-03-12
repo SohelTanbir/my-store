@@ -157,7 +157,7 @@ const updateOrder  = async (req, res) =>{
 // track order
 const trackOrder =  async (req, res) =>{
     try {
-        const {email, orderId } = req.body
+        const {email, orderId } = req.fields
         const order = await Order.findById(orderId);
         if(order){
             res.status(200).json({
