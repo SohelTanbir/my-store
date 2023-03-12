@@ -26,9 +26,16 @@
     margin-top: .8rem;
     transition: .2s;
     cursor: pointer;
+    user-select: none;
+}
+.categori-items li.active-category{
+    font-weight: 700;
+    transform: translateX(.8rem);
+    color: #FF6000;
+    text-decoration: underline;
 }
 .categori-items li:hover {
-    transform: translateX(.5rem);
+    transform: translateX(.8rem);
 }
 .categori-items li a{
     font-size: 1.6rem;

@@ -21,8 +21,8 @@ class Apifeatures {
                     //remove some fields for category
                     const removeFields = ["name","page","limit"];
                     removeFields.forEach(key => delete queryCopy[key]);
-
-                    this.query = this.query.find(queryCopy.category.length?queryCopy:{});
+                    const query = queryCopy.category.length?queryCopy:{}
+                    this.query = this.query.find(query);
                     return this;
           }
           // pagination
