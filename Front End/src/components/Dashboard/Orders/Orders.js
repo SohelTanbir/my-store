@@ -37,7 +37,7 @@ console.log(orderItems);
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-          {orderItems.length ? <div className="orders-main">
+          {orderItems? <div className="orders-main">
                 <h2>All Orders({orderItems.length?orderItems.length: 0})</h2>
                 <div className="orders-container">
                     <table>
@@ -53,8 +53,8 @@ console.log(orderItems);
                         {orderItems.map( (order, index) => (
                             <tr>
                             <td>#{order._id}</td>
-                            <td>{order.productInfo[1]?.name}</td>
-                            <td><img src={order.productInfo[1]?.image} alt="product" /></td>
+                            <td>{order.productInfo[0]?.name}</td>
+                            <td><img src={order.productInfo[0]?.image} alt="product" /></td>
                             <td>Processing</td>
                             <td>1</td>
                             <td><span>৳ </span> 150</td>

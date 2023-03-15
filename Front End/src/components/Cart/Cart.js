@@ -8,24 +8,19 @@ import CartProduct from './CartProduct';
 import Shipment from '../Shipment/Shipment';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductInfo } from '../../Store/OrderSlice/OrderSlice';
 
 const Cart = () => {
-    
+    const dispatch = useDispatch();    
     const [shiping, setShiping ] =  useState(false);
     const [quantity, setQuantity] = useState(0);
-    const { cartItems} =  useContext(userContext);    
-    const [cart, setCart ]= cartItems;
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
     const shippingPrice = Math.floor((price*3)/100);
     const totalPrice = price + shippingPrice;
-    const {ordersInfo } = useContext(userContext);
-    const [order, setOrder] = ordersInfo;
     const cartProducts = useSelector(state => state.cart.cartProducts.cartProducts);
-  
-    console.log(cartProducts);
+
     const productPrice = ()=>{
         let price = 0;
         cartProducts&& cartProducts.map(product =>setPrice(price += product.quantity * product.price));
@@ -42,20 +37,24 @@ const Cart = () => {
         productPrice();
         productQnt();
         cartProducts?.length <=0 && setPrice(0);
-    });
+    }, [price, productQnt, productPrice, setPrice]);
 
 // handle proceed order
-let orders = [];
 const proceedOrder = ()=>{
     cartProducts.map(pd =>{
-    orders.push({ name:pd.name, price:pd.price, quantity:pd.quantity, image:pd.images[0].url});
-    return 0;
-});
-    setOrder({...order, productInfo:orders, shippingPrice, totalPrice});
-    setShiping(true);
+        const product = {
+            product:pd._id,
+            name:pd.name,
+            price:pd.price,
+            quantity:pd.quantity,
+            image:pd.images[0].url
+        }
+        dispatch(getProductInfo({product, shippingPrice, totalPrice}));
+        setShiping(true);
+        return pd;
+    })
 }
 
-console.log(cart);
 
     return (
         <Fragment>

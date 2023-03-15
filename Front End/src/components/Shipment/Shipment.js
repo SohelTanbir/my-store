@@ -4,8 +4,11 @@ import StripePayment from '../StripePayment/StripePayment';
 import './Shipment.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { getShippingInfo } from '../../Store/OrderSlice/OrderSlice';
 
 const Shipment = () => {
+    const dispatch = useDispatch();
     const [shiping, setShiping] =  useState(false);
     const {ordersInfo } = useContext(userContext);
     const [order, setOrder] = ordersInfo;
@@ -25,8 +28,9 @@ const handleShipping = (e)=>{
     setShiping(true);
     const newOrder = {...order, shippingInfo};
     setOrder(newOrder);
+    dispatch(getShippingInfo(shippingInfo));
    }else{
-    toast.error("All field required!",{position: "bottom-right",autoClose: 1000});
+    toast.error("All field required!",{position: "top-center",autoClose: 1000});
    }
 }
     return (

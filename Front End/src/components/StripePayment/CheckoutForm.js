@@ -1,17 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import './Checkout.css'
 
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import { userContext } from '../../App';
 import { ToastContainer, toast } from 'react-toastify';
 import OrderSuccess from '../OrderSuccess/OrderSuccess';
+import { getPaymentInfo, resetOrdersInfo } from '../../Store/OrderSlice/OrderSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 
 const CheckoutForm = () => {
+  const dispatch = useDispatch();
   const [strip, setStrip] = useState(false)
   const stripe = useStripe();
   const elements = useElements();
-  const {ordersInfo } = useContext(userContext);
-  const [order, setOrder] = ordersInfo;
+const order=  useSelector(state =>state.newOrder.orders);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,11 +30,11 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      toast.error(error.message, {position: "bottom-right",autoClose: 1000})
+      toast.error(error.message, {position: "top-center",autoClose: 1000})
     } else {
-      const paymentInfo = {id:paymentMethod.id,type: paymentMethod.type}
-      const newOrder = {...order, paymentInfo};
-      setOrder(newOrder);
+      const paymentInfo = {id:paymentMethod.id,type: paymentMethod.type};
+      paymentInfo.status = 'success';
+      dispatch(getPaymentInfo(paymentInfo))
        if(paymentInfo){
          // create new order
         const orderResponse = await fetch("http://localhost:5000/api/v1/orders/create", {
@@ -41,7 +45,9 @@ const CheckoutForm = () => {
         const {error} =await orderResponse.json();
         if(!error){
           setStrip(true);
-          toast.success("Order placed successfully", {position: "bottom-right",autoClose: 1000})
+          toast.success("Order placed successfully", {position: "bottom-right",autoClose: 1000});
+          // reset order info state
+          dispatch(resetOrdersInfo());
         }else{
           toast.error(error, {position: "bottom-right",autoClose: 1000})
         }

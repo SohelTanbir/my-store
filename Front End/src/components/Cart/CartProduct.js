@@ -55,16 +55,10 @@ const CartProduct = ({product}) => {
       const {success, message} =await res.json()
         if(success){
             toast.success(message,{position: "bottom-right",autoClose: 500});
-            const response = await fetch("http://localhost:5000/api/v1/cart/all");
-            const {cartProducts} =  await response.json();
-            if(cartProducts?.length > 0){
-                setCart(cartProducts)
-            }
-        }else{
-            toast.error(message,{position: "bottom-right",autoClose: 500});
+             // reload cart product after delete product from 
+            dispatch(loadCartProduct());
         }
-        // reload cart product after delete product from 
-        dispatch(loadCartProduct());
+       
     }
     // calculatate product price
     const productPrice = ()=>{
