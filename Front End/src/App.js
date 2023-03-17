@@ -24,8 +24,11 @@ import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
 import Messages from './components/Dashboard/Messages/Messages';
+import OrderSuccess from './components/OrderSuccess/OrderSuccess'
 import { useDispatch } from 'react-redux';
 import { loadCartProduct } from './Store/CartSlice/CartSlice';
+import Shipment from './components/Shipment/Shipment';
+import StripePayment from './components/StripePayment/StripePayment';
 export const userContext = createContext();
 
 
@@ -97,6 +100,11 @@ useEffect(()=>{
               <Route exact  path="/orders/all" element={<Orders/>} />
 
               <Route exact  path="/orders/status/update" element={<UpdateOrder/>} />
+              <Route exact  path="/orders/create/confirm/message" element={<OrderSuccess/>} />
+
+              <Route exact  path="/checkout" element={<Shipment/>} />
+
+              <Route exact  path="/stripe/payment" element={<StripePayment/>} />
 
               <Route exact  path="/category/all" element={  <Category/>} />
               

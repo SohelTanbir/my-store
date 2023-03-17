@@ -10,8 +10,10 @@ import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductInfo } from '../../Store/OrderSlice/OrderSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+    const navigate =  useNavigate();
     const dispatch = useDispatch();    
     const [shiping, setShiping ] =  useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -50,7 +52,8 @@ const proceedOrder = ()=>{
             image:pd.images[0].url
         }
         dispatch(getProductInfo({product, shippingPrice, totalPrice}));
-        setShiping(true);
+        // nagivatye to checkout
+        navigate('/checkout');
         return pd;
     })
 }

@@ -104,11 +104,34 @@ const removeProduct =  async (req, res)=>{
     }
 }
 
+// Remove all product from cart
+const removeAllProduct = async(req, res)=>{
+    try {
+        const deleteProducts = await Cart.remove({});
+        if(deleteProducts){
+            res.status(200).json({
+                success:true,
+                message:" All products removed from Cart!"
+            });
+        }else{
+            res.status(400).json({
+                success:false,
+                message:"Products remove failed!"
+            });
+        }
+    } catch (err) {
+        res.status(500).json({
+            success:false,
+            message:"There was a sever error!"
+        });
+    }
+}
 
 
 // export
 module.exports = {
     getAllCartItems,
     addToCart,
-    removeProduct
+    removeProduct,
+    removeAllProduct
 }
