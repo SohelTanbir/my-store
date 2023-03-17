@@ -5,15 +5,15 @@ import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import { ToastContainer, toast } from 'react-toastify';
 import { getPaymentInfo, resetOrdersInfo } from '../../Store/OrderSlice/OrderSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import { removeAllProductsFromCart } from '../../Store/CartSlice/CartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [strip, setStrip] = useState(false)
   const stripe = useStripe();
   const elements = useElements();
-const order=  useSelector(state =>state.newOrder.orders);
+  const order=  useSelector(state =>state.newOrder.orders);
 
 
   const handleSubmit = async (event) => {
@@ -46,6 +46,11 @@ const order=  useSelector(state =>state.newOrder.orders);
           toast.success("Order placed successfully", {position: "top-center",autoClose: 1000});
           // reset order info state
           dispatch(resetOrdersInfo());
+          dispatch(removeAllProductsFromCart());
+          // redirect to order place confirmation page
+        setTimeout(() => {
+            navigate("/orders/create/confirm/message");
+        }, 1000);
         }else{
           toast.error("There was an error!", {position: "top-center",autoClose: 1000});
         }
