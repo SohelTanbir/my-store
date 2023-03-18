@@ -32,7 +32,6 @@ const OrderSlice =  createSlice({
                     },
                     getPaymentInfo:(state, action)=>{
                               state.orders.paymentInfo = action.payload;
-                              console.log(action.payload);
                     },
                     resetOrdersInfo:(state, action)=>{
                               state.orders.productInfo = [];

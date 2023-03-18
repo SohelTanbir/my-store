@@ -12,8 +12,8 @@ const { getAllCartItems, addToCart, removeProduct,removeAllProduct } = require("
 // Todo I have to add checkLogin middleware
 router.get("/cart/all", getAllCartItems);
 router.post("/cart/add", addToCart);
-// router.delete("/cart/delete/:id", removeProduct);
 router.delete("/cart/delete/all", removeAllProduct);
+router.delete("/cart/delete/:id", removeProduct);
 
 
 // export router

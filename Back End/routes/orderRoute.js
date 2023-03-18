@@ -19,7 +19,7 @@ router.post("/orders/create", createOrder);
 router.get("/orders/all", getAllOrders);
 router.get("/orders/me",checkLogin, getMyOrders);
 router.get("/orders/:id", getOrderById);
-router.delete("/orders/delete/:id",checkLogin,authorization, deleteOrder);
+router.delete("/orders/delete/:id", deleteOrder);
 router.put("/orders/update/:id",checkLogin, authorization, updateOrder);
 router.post("/orders/me/track", trackOrder);
 

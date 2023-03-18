@@ -6,40 +6,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import Loader from '../../Loader/Loader'
-
+import axios  from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 const Orders = () => {
     const [orderItems, setOrderItems ] = useState([]);
-
+  const [loading, setLoading ] =  useState(true);
 
     const loadOrdersFromDB = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/orders/all");
-        const {success,  orders} = await res.json();
+        const {success, orders} = await res.json();
+        console.log(success);
+        if(success || !success){
+          
+            setLoading(false);
+        }
         setOrderItems(orders)
     }
 
     //  handle side effect actions
     useEffect(()=>{
         loadOrdersFromDB();
-    },[])
+    })
 
-    const deleteProduct = ()=>{
-        alert('deleted');
+    const deleteProduct =async (orderId)=>{
+        const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`);
+        const {success, message } = res.data;
+        if(success){
+            toast.success(message,{position: "top-center",autoClose: 1000});
+        }else{
+            toast.error(message,{position: "top-center",autoClose: 1000});
+        }
     }
 
-console.log(orderItems);
 
-
-
+    
 
     return (
         <div className="all-orders">
+               <ToastContainer/>
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-          {orderItems? <div className="orders-main">
-                <h2>All Orders({orderItems.length?orderItems.length: 0})</h2>
+          {!loading ? <div className="orders-main">
+                <h2>All Orders({orderItems?.length?orderItems.length: 0})</h2>
                 <div className="orders-container">
+                 {orderItems?
                     <table>
                         <tr>
                             <th>Order ID</th>
@@ -50,7 +64,7 @@ console.log(orderItems);
                             <th>Price</th>
                             <th>Action</th>
                         </tr>
-                        {orderItems.map( (order, index) => (
+                        {orderItems&& orderItems.map( (order, index) => (
                             <tr>
                             <td>#{order._id}</td>
                             <td>{order.productInfo[0]?.name}</td>
@@ -60,16 +74,20 @@ console.log(orderItems);
                             <td><span>৳ </span> 150</td>
                             <td>
                                 <Link to="/orders/status/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
-                                <button className='action-btn delete-btn' onClick={deleteProduct}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
+                                <button className='action-btn delete-btn' onClick={()=>deleteProduct(order._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                             </td>
                         </tr>
-                        ))}
-
+                        ))
+                        }  
                     </table>
+                    :
+                    <NotFoundMessage message='There is no orders available!'/>
+                    }
+                 
                 </div>
             </div>
             :<Loader/>
-            }
+                    }
             </div>
         </div>
     );
