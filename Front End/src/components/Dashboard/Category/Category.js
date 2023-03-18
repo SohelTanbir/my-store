@@ -8,6 +8,7 @@ import Loader from '../../Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CategoryModal from './CategoryModal/CategoryModal';
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 
 
@@ -16,12 +17,16 @@ import CategoryModal from './CategoryModal/CategoryModal';
 const Category = () => {
     const [category, setCategory ] = useState([]);
     const [showModal, setShowModal ] = useState(false);
+    const [loading, setLoading ] =  useState(true);
 
 
     const loadCategory = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/category/all");
-        const {categories} = await res.json();
-        setCategory(categories)
+        const {success, categories} = await res.json();
+        if(success || !success){
+            setLoading(false)
+        }
+        setCategory("")
     }
 
     //  handle side effect actions
@@ -71,15 +76,17 @@ const Category = () => {
                     <button onClick={handleModal}>Add category</button>
                     </div>
                     <div className="row">
-                        {category.length ?
+                        {!loading ?
                         <>
                             {
-                                category.map(categoriItem =>(
+                              category?  category.map(categoriItem =>(
                                     <div className="single-category col-xl-1  col-md-3 col-sm-4">
                                         <span>{categoriItem.name}</span>
                                         <FontAwesomeIcon onClick={()=> deleteProduct(categoriItem._id)} icon={faTimes} />
                                     </div>
                                 ))
+                                :
+                                <NotFoundMessage message='There is no category exist!'/>
                             }
                         </>
                         :<Loader/>

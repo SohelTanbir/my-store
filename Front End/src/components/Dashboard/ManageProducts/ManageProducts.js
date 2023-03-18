@@ -8,16 +8,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader'
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 const ManageProducts = () => {
     const [products, setProducts ] = useState([]);
+    const [loading, setLoading ] =  useState(true);
     const navigate = useNavigate();
 
 
 const loadProduct = async ()=>{
     const response = await fetch("http://localhost:5000/api/v1/product/all");
-    const productData = await response.json();
-    setProducts(productData.products)
+    const {success, products} = await response.json();
+    if(success || !success){
+        setLoading(false);
+    }
+    setProducts(products)
 }
 const deleteProduct = async (productId)=>{
     const response = await fetch(`http://localhost:5000/api/v1/product/delete/${productId}`,{
@@ -56,8 +61,10 @@ useEffect( ( )=>{
             <div className="dashboard-main">
             <SideBar/>
                 {
-                    products.length ?  <div className="product-main">
+                    !loading ? 
+                     <div className="product-main">
                     <h2>All Products({products.length?products.length : 0})</h2>
+                 { products&& products.length > 0?  
                     <div className="products-container">
                         <table>
                             <tr>
@@ -92,7 +99,10 @@ useEffect( ( )=>{
                             }
                         </table>
                     </div>
-                    {products.length <1 && <h4 className='no-product'>There is no products found!</h4>}
+                    :
+                  <NotFoundMessage message='There is no products found !'/>
+                    }
+                  
                 </div>
                 : <Loader/>
 

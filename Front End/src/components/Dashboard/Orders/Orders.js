@@ -18,9 +18,7 @@ const Orders = () => {
     const loadOrdersFromDB = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/orders/all");
         const {success, orders} = await res.json();
-        console.log(success);
         if(success || !success){
-          
             setLoading(false);
         }
         setOrderItems(orders)
@@ -50,8 +48,9 @@ const Orders = () => {
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-          {!loading ? <div className="orders-main">
-                <h2>All Orders({orderItems?.length?orderItems.length: 0})</h2>
+          {!loading ? 
+          <div className="orders-main">
+                <h2>All Orders({orderItems?orderItems.length: 0})</h2>
                 <div className="orders-container">
                  {orderItems?
                     <table>
