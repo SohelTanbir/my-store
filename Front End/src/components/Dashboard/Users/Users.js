@@ -8,20 +8,25 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 
 const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
     const [error, setError ] = useState("");
-   
+    const [loading , setLoading ] = useState(true);
 
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all");
         const {success, users, error} = await res.json();
-        setAllUsers(users);
+        // off loader
+        if(success || !success){
+            setLoading(false);
+        }
+        setAllUsers([]);
         setError(error)
     }
+
 
     //  handle side effect actions
     useEffect(()=>{
@@ -72,8 +77,9 @@ const Users = () => {
                     </div>
                     <div className="row">
                         <div className="users-container">
-                            <div className="users-table">
-                                {allUsers.length?    <table>
+                           {!loading? <div className="users-table">
+                                {allUsers.length?
+                                <table>
                                     <tr>
                                         <th>Name</th>
                                         <th>Photo</th>
@@ -98,9 +104,13 @@ const Users = () => {
                                     </tr>
                                     ))}
                                 </table>
-                                :<Loader/>
-                                }
+                                :
+                                <NotFoundMessage message='There is no users exist!'/>
+                            }
+                              
                             </div>
+                            :<Loader/>    
+                            }
                         </div>
                       
                     </div>

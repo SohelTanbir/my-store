@@ -26,7 +26,7 @@ const Category = () => {
         if(success || !success){
             setLoading(false)
         }
-        setCategory("")
+        setCategory(categories);
     }
 
     //  handle side effect actions
@@ -37,17 +37,6 @@ const Category = () => {
     // handle modal close or Show
     const handleModal = ()=>{
         setShowModal(true);
-    }
-
-    // handle change input data
-    const handleChange = e =>{
-        setCategory(e.target.value);
-    }
-
-    // store category in db
-    const handleSubmit = e =>{
-        e.preventDefault();
-        console.log(category)
     }
 
     const deleteProduct = async(id)=>{
