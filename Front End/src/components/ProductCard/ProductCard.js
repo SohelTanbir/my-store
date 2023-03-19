@@ -11,6 +11,8 @@ import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const dispatch =  useDispatch();
+
+
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);
     }

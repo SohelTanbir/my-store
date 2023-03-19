@@ -74,7 +74,7 @@ const proceedOrder = ()=>{
                                 cartProducts?.length?cartProducts.map(product => <CartProduct product={product} key={product._id} />)
                                 :<div className="empty-cart">
                                 <img src={emptyCart} alt="Empty Cart" />
-                                <p>Your <span>Cart</span> is Empty</p>
+                                <p>Your <span>Cart</span> is Empty!</p>
                                 </div> 
                             }
                         </div>

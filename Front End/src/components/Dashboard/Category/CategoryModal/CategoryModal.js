@@ -41,7 +41,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
           return (
                     <div className='category-modal'>
                               <ToastContainer/>
-                              <Modal show={showModal} onHide={handleClose}>
+                              <Modal show={showModal} onHide={handleClose} centered>
                               <Modal.Header closeButton>
                                         <Modal.Title className='fs-2'>Add New Category</Modal.Title>
                               </Modal.Header>

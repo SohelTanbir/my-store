@@ -23,7 +23,7 @@ const Users = () => {
         if(success || !success){
             setLoading(false);
         }
-        setAllUsers([]);
+        setAllUsers(users);
         setError(error)
     }
 

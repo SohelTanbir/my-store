@@ -7,23 +7,28 @@ import Loader from '../../Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 
 
 const Messages = () => {
-    const [Messages, setMessages ] = useState([]);
-   
+    const [message, setMessages ] = useState([]);
+   const [loading, setLoading ] = useState(true);
 
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/message/all");
-        const { messages} = await res.json();
+        const {success, messages} = await res.json();
+        // off laoader 
+        if(success || !success){
+            setLoading(false);
+        }
         setMessages(messages);
     }
 
     //  handle side effect actions
     useEffect(()=>{
         loadUsers();
-    },[Messages])
+    },[message])
 
     const deleteMessage = async(id)=>{
         const response = await fetch(`http://localhost:5000/api/v1/message/delete/${id}`,{
@@ -53,32 +58,37 @@ const Messages = () => {
                     </div>
                     <div className="row">
                         <div className="message-container">
-                            <div className="message-table">
-                                {Messages.length?    <table>
+                        {!loading ?      
+                        <div className="message-table">
+                              {message.length ?
+                                <table>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+                                    <th>CreatedAt</th>
+                                    <th>Action</th>
+                                </tr>
+                                {message.map(message =>(
                                     <tr>
-                                        <th>User Name</th>
-                                        <th>Email</th>
-                                        <th>Subject</th>
-                                        <th>Message</th>
-                                        <th>CreatedAt</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    {Messages.map(message =>(
-                                        <tr>
-                                                  <td>{message.name}</td>
-                                                  <td>{message.email}</td>
-                                                  <td>{message.subject}</td>
-                                                  <td>{message.message}</td>
-                                                  <td>{message.createdAt}</td>
-                                                  <td>
-                                                  <button className='action-btn delete-btn' onClick={()=> deleteMessage(message._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
-                                                  </td>
-                                    </tr>
-                                    ))}
-                                </table>
-                                :<Loader/>
-                                }
+                                              <td>{message.name}</td>
+                                              <td>{message.email}</td>
+                                              <td>{message.subject}</td>
+                                              <td>{message.message}</td>
+                                              <td>{message.createdAt}</td>
+                                              <td>
+                                              <button className='action-btn delete-btn' onClick={()=> deleteMessage(message._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
+                                              </td>
+                                </tr>
+                                ))}
+                            </table>
+                            :    
+                            <NotFoundMessage message='There is no messages exist!'/>
+                            }
                             </div>
+                             :<Loader/>
+                            }
                         </div>
                       
                     </div>
