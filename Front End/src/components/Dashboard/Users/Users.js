@@ -12,19 +12,18 @@ import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 
 const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
-    const [error, setError ] = useState("");
     const [loading , setLoading ] = useState(true);
 
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all");
-        const {success, users, error} = await res.json();
+        const {success, users} = await res.json();
         // off loader
         if(success || !success){
             setLoading(false);
         }
         setAllUsers(users);
-        setError(error)
+
     }
 
 
@@ -38,16 +37,7 @@ const Users = () => {
       
     }
 
-    // handle change input data
-    const handleChange = e =>{
-       
-    }
-
-    // store category in db
-    const handleSubmit = e =>{
-        e.preventDefault();
-    }
-
+   
     const deleteUser = async(id)=>{
         const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
             method:"DELETE"

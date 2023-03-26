@@ -46,7 +46,7 @@ const CheckoutForm = () => {
           toast.success("Order placed successfully", {position: "top-center",autoClose: 1000});
           // reset order info state
           dispatch(resetOrdersInfo());
-          dispatch(removeAllProductsFromCart());
+          dispatch(removeAllProductsFromCart([]));
           // redirect to order place confirmation page
         setTimeout(() => {
             navigate("/orders/create/confirm/message");

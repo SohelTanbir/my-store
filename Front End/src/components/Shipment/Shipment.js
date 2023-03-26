@@ -33,7 +33,7 @@ const handleShipping = (e)=>{
        <div>
         <Header/>
         <ToastContainer/>
-            :<div className="shiping-form">
+            <div className="shiping-form">
                     <h3>Shipping addresse</h3>
                     <div className="shipingForm">
                         <form onSubmit={handleShipping}>

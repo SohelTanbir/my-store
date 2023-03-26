@@ -53,11 +53,9 @@ const loadProduct = async()=>{
                     </div>
                     :<Loader />}
 
-                {products.length >15 &&
                     <div className="pagination-container">
                         <PagePagination totalProduct={totalProduct}/>
                     </div>
-                }
         </div>
        </Fragment>
     );

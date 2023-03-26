@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
-import { userContext } from '../../App';
+import  { React } from 'react';
 import './Shippment.css'
 
 const Shippment = () => {
-    const {ordersInfo } = useContext(userContext);
-    const [order, setOrder] = ordersInfo;
+
 
     const handleShipment = ()=>{
       
     }
-    console.log(order)
+
 
 
 

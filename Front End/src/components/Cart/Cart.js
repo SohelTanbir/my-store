@@ -15,13 +15,14 @@ import { useNavigate } from 'react-router-dom';
 const Cart = () => {
     const navigate =  useNavigate();
     const dispatch = useDispatch();    
-    const [shiping, setShiping ] =  useState(false);
     const [quantity, setQuantity] = useState(0);
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
     const shippingPrice = Math.floor((price*3)/100);
     const totalPrice = price + shippingPrice;
-    const cartProducts = useSelector(state => state.cart.cartProducts.cartProducts);
+    const cartProducts = useSelector(state => state.cart.cartProducts);
+
+   
 
     const productPrice = ()=>{
         let price = 0;
@@ -39,17 +40,18 @@ const Cart = () => {
         productPrice();
         productQnt();
         cartProducts?.length <=0 && setPrice(0);
-    }, [price, productQnt, productPrice, setPrice]);
-
+    }, []);
+    // price, productQnt, productPrice, setPrice
 // handle proceed order
 const proceedOrder = ()=>{
     cartProducts.map(pd =>{
+        console.log(pd);
         const product = {
             product:pd._id,
             name:pd.name,
             price:pd.price,
             quantity:pd.quantity,
-            image:pd.images[0].url
+            image:pd.images.url
         }
         dispatch(getProductInfo({product, shippingPrice, totalPrice}));
         // nagivatye to checkout
@@ -65,22 +67,21 @@ const proceedOrder = ()=>{
                 <Header/>
                 <div className="cart">
                 <ToastContainer />
-                    {shiping===false && <h3>Cart items</h3>}
+                     <h3>Cart items</h3>
                     <div className="container">
                         {
-                            shiping?<Shipment/>:<div className="row">
+                            <div className="row">
                             <div className="product-info">
                             {
-                                cartProducts?.length?cartProducts.map(product => <CartProduct product={product} key={product._id} />)
+                                cartProducts.length?cartProducts.map(product => <CartProduct product={product} key={product._id} />)
                                 :<div className="empty-cart">
                                 <img src={emptyCart} alt="Empty Cart" />
                                 <p>Your <span>Cart</span> is Empty!</p>
                                 </div> 
                             }
                         </div>
-                
-                        {/* <Shippment/> */}
-                            {shiping === false && <div className="cart-count">
+            
+                        <div className="cart-count">
                                 <h3>Order Sumary</h3>
                                     <p>Quantity: {quantity}</p>
                                     <p>Shipping fee: <span className='taka-sign'>৳ </span>{shippingPrice}</p>
@@ -90,7 +91,7 @@ const proceedOrder = ()=>{
                                 cartProducts?.length?<button className='checkout-btn' onClick={ proceedOrder }>Proceed to CheckOut</button>
                                 :<button className='checkout-btn disable-btn'>Proceed</button>}
             
-                            </div>}
+                        </div>
                     </div>
                         }
                     </div>

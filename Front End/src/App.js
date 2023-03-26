@@ -25,8 +25,6 @@ import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
 import Messages from './components/Dashboard/Messages/Messages';
 import OrderSuccess from './components/OrderSuccess/OrderSuccess'
-import { useDispatch } from 'react-redux';
-import { loadCartProduct } from './Store/CartSlice/CartSlice';
 import Shipment from './components/Shipment/Shipment';
 import StripePayment from './components/StripePayment/StripePayment';
 export const userContext = createContext();
@@ -35,7 +33,6 @@ export const userContext = createContext();
 
 
 function App() {
-  const dispatch = useDispatch();
   const [loggedInUser, setLoggedInUser] = useState({});
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(0);
@@ -45,9 +42,6 @@ function App() {
 
 
 
-useEffect(()=>{
-  dispatch(loadCartProduct())
-},[cart])
 
   return (
     <div className="App">

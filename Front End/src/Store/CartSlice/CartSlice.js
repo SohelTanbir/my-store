@@ -1,61 +1,72 @@
-import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
-import axios from 'axios';
-
-
-
-export const loadCartProduct = createAsyncThunk("cart/cartproducts", async ()=>{
-          const res =  await  axios.get('http://localhost:5000/api/v1/cart/all');
-          const cartProducts =  await res.data
-          return cartProducts;
-})
-export const removeAllProductsFromCart = createAsyncThunk("cart/removes", async ()=>{
-          const res =  await  axios.delete('http://localhost:5000/api/v1/cart/delete/all');
-          const cartProducts =  await res.data
-          return cartProducts;
-})
+import { createSlice , current } from "@reduxjs/toolkit";
 
 
 
 const CartSlice =  createSlice({
           name:'cart',
           initialState:{
-                    isLoading:false,
-                    cartProducts:[],
-                    error:""
+                    cartProducts:JSON.parse(localStorage.getItem("cartProducts"))?JSON.parse(localStorage.getItem("cartProducts")): [],
           },
-          extraReducers:(builder)=>{
-                    builder.addCase(loadCartProduct.pending, (state, action)=>{
-                              state.isLoading = true;
-                    });
-                    builder.addCase(loadCartProduct.fulfilled, (state, action)=>{
-                             state.isLoading  = false;
-                              state.cartProducts= action.payload;
-                              state.error = ""
-                    });
-                    builder.addCase(loadCartProduct.rejected, (state, action)=>{
-                             state.isLoading  = false;
-                              state.cartProducts= [];
-                              state.error = action.payload;
-                    })
-                    // remove products from cart
-                    builder.addCase(removeAllProductsFromCart.pending, (state, action)=>{
-                              state.isLoading = true;
-                    });
-                    builder.addCase(removeAllProductsFromCart.fulfilled, (state, action)=>{
-                             state.isLoading  = false;
-                              state.cartProducts= [];
-                              state.error = ""
-                    });
-                    builder.addCase(removeAllProductsFromCart.rejected, (state, action)=>{
-                             state.isLoading  = false;
-                              state.cartProducts= [];
-                              state.error = action.payload;
-                    })
+          reducers:{
+                    // add product to cart
+                    addToCart:(state, action)=>{
+                              const productExist =  current(state.cartProducts).filter(pd => pd.productId === action.payload.productId);
+                             if(!productExist.length > 0){
+                                        const newProduct =  action.payload;
+                                        state.cartProducts = [...state.cartProducts, newProduct];
+                                        // save cart products to localStorage
+                                        localStorage.setItem("cartProducts", [JSON.stringify(state.cartProducts)]);
+                              }else{
+                                        let newCartProducts = current(state.cartProducts).map((product) => {
+                                                  if (product.productId === action.payload.productId) {
+                                                      return { ...product, quantity: product.quantity + 1 };
+                                                  }
+                                                  return product;
+                                              });
+                                        state.cartProducts = newCartProducts;
+                                        localStorage.setItem("cartProducts", [JSON.stringify(state.cartProducts)]);
+                              }
+                    },
+                    // increment quantity
+                    incrementQuantity:(state, action)=>{
+                              let newProducts  = current(state.cartProducts).map((product) => {
+                                        if (product.productId === action.payload.productId) {
+                                                  console.log({ ...product, quantity: product.quantity + 1 });
+                                            return { ...product, quantity: product.quantity + 1 };
+                                        }
+                                     return product
+                                    });
+                              state.cartProducts =newProducts
+                              localStorage.setItem("cartProducts", [JSON.stringify(state.cartProducts)]);
+                    },
+
+                    // decrement quantity
+                    decrementQuantity:(state, action)=>{
+                              let newCartProducts = current(state.cartProducts).map((product) => {
+                                        if (product.productId === action.payload.productId) {
+                                            return { ...product, quantity: product.quantity -1 };
+                                        }
+                                        return product;
+                                    });
+                              state.cartProducts = newCartProducts;
+                              localStorage.setItem("cartProducts", [JSON.stringify(state.cartProducts)]);
+                    },
+                    // remove product from cart
+                    removeProductFromCart:(state, action)=>{
+                              const id =  action.payload.productId;
+                              state.cartProducts =  current(state.cartProducts).filter(pd => pd.productId !== id);
+                              // update cart products to localStorage
+                              localStorage.setItem("cartProducts", [JSON.stringify(state.cartProducts)]);
+                    },
+                    removeAllProductsFromCart:(state, action)=>{
+                        state.cartProducts = action.payload?action.payload: []
+                    }
           }
 });
 
 
-
+// export actions
+export const {addToCart , removeProductFromCart, removeAllProductsFromCart, incrementQuantity, decrementQuantity} = CartSlice.actions;
 
 // default expot 
 export default CartSlice.reducer;

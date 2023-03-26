@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { React } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
+import { addToCart } from '../../Store/CartSlice/CartSlice';
 
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
@@ -33,26 +33,20 @@ const handleAddToCart = async(id) =>{
             description:product.description,
             price:product.price,
             category:product.category,
+            quantity:1,
             images:{
                 public_id:product.images[0].public_id,
                 url:product.images[0].url
             }
         }
-        const res = await fetch("http://localhost:5000/api/v1/cart/add",{
-            method:'post',
-            headers:{
-                'content-type':'application/json',
-            },
-            body:JSON.stringify(cartProduct)
-            }, []);
-        if(res.ok){
-            toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
+    const isAdded =     dispatch(addToCart(cartProduct))
+        if(isAdded){
+            toast.success("1 product added to cart!", {position: "bottom-right",autoClose: 1000,}) 
            }else{
-            const {message} = await res.json();
-            toast.error(message, {position: "bottom-right",autoClose: 1000,}) 
+
+            toast.error("Something wrong!", {position: "bottom-right",autoClose: 1000,}) 
            }
         }
-    dispatch(loadCartProduct());
 }
 
 

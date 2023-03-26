@@ -18,7 +18,7 @@ const Header = () => {
 const handleRightNav = ()=>{
     setShowNav(!false);
 }
-const cartProducts = useSelector(state => state.cart.cartProducts.cartProducts);
+const cartProducts = useSelector(state => state.cart.cartProducts);
 
     return (
        <div className="header">

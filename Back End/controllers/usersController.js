@@ -173,7 +173,7 @@ const logoutUser = async (req, res)=>{
 
 // forgot password
 const forgotPassword = async (req, res)=>{
-    const user =  await User.findOne({email:req.body.email});
+    const user =  await User.findOne({email:req.fields.email});
     if(user){
         // generate random string with hex
         const randomString =   crypto.randomBytes(20).toString("hex");

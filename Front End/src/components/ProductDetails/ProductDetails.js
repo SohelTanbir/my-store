@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './ProductDetails.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
@@ -7,17 +7,13 @@ import Review from '../Reviews/Review';
 import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { userContext } from '../../App';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
-import { useDispatch } from 'react-redux';
-import { loadCartProduct } from '../../Store/CartSlice/CartSlice';
 
 
 const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
-    const dispath = useDispatch();
     useEffect(()=>{
         fetch(`http://localhost:5000/api/v1/product/one/${id}`)
         .then(res => res.json())
@@ -50,8 +46,6 @@ const handleAddToCart = async(id) =>{
         const {message} = await res.json();
         toast.error(message, {position: "bottom-right",autoClose: 1000,}) 
        }
-       // load cart items
-       dispath(loadCartProduct());
     }
 
     return (

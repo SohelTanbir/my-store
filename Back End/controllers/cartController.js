@@ -54,8 +54,13 @@ const addToCart =  async (req, res)=>{
            }
     }else{
         // update product quantity
+        console.log("frontend = ", req.fields.quantity);
+        console.log("backend = ", productExist[0].quantity);
+        // console.log(productExist[0].quantity);   
+
+
         const updateQuantity = {
-            $set:{quantity:productExist[0].quantity+1}
+            $set:{quantity:req.fields.quantity?req.fields.quantity:1}
         }; 
         // update
               Cart.findByIdAndUpdate(productExist[0]._id, updateQuantity, (err, data)=>{
@@ -81,6 +86,15 @@ const addToCart =  async (req, res)=>{
         });
     }
 }
+
+// update cart product by id
+const updateCartProduct  =  async (req, res)=>{
+    
+}
+
+
+
+
 // Remove  product from cart
 const removeProduct =  async (req, res)=>{
     try {
