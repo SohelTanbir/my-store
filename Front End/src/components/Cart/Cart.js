@@ -5,7 +5,6 @@ import emptyCart  from '../../images/cart/empty cart.jpg'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CartProduct from './CartProduct';
-import Shipment from '../Shipment/Shipment';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +39,7 @@ const Cart = () => {
         productPrice();
         productQnt();
         cartProducts?.length <=0 && setPrice(0);
-    }, []);
+    }, [cartProducts.length, productPrice, productQnt]);
     // price, productQnt, productPrice, setPrice
 // handle proceed order
 const proceedOrder = ()=>{
