@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import './Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faUser } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +12,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 
-import { userContext } from '../../App';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
@@ -20,15 +19,13 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-
+  const [loggedInUser, setLoggedInUser] =useState([]);
   // const history = useHistory();
   const location = useLocation();
   const navigate = useNavigate();
   const { from } = location.state || { from: { pathname: "/" } };
-  const {userData} = useContext(userContext);
-  const [loggedInUser, setLoggedInUser] = userData;
   const [user, setUser] = useState({});
-  const [loader, setLoader] = useState(false);
+  const [loading, setLoading ] = useState(false);
 
 
 
@@ -58,7 +55,11 @@ const Login = () => {
         const user = result.user;
         const loggedUser = { name: user.displayName, email: user.email, photo: user.photoURL }
         setLoggedInUser(loggedUser);
-        navigate.replace(from);
+     
+        // redirect to hom page
+        setTimeout(()=>{
+          navigate.replace(from);
+        }, 1100)
   
       });
   }
@@ -71,27 +72,30 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    setLoader(true);
     e.preventDefault();
+    setLoading(true);
     const response = await fetch("http://localhost:5000/api/v1/users/login",{
       method:"post",
       headers:{'content-type':'application/json'},
        credentials: 'include',
       body:JSON.stringify(user)
   });
-  if(response.ok){
-    setLoader(true);
-      const {message, user} = JSON.parse(await response.text());
+  const {success, message} = JSON.parse(await response.text());
+  if(success){
+      if(success || success ){
+        setLoading(false);
+      }
+      setLoggedInUser(user);
       // show toast notification for add prodcut to cart
-  toast.success(message, {position: "top-center",autoClose: 1000,});
-  setLoggedInUser(user)
+   toast.success(message, {position: "top-center",autoClose: 1000,});
   // redirect user to home page
-  setTimeout(() => {
-    navigate("/"); 
-  }, 1100);
+setTimeout(()=>{
+  navigate("/");
+}, 1100)
+
+
+
   }else{
-    setLoader(false);
-   const {message} = JSON.parse(await response.text());
   toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
   }
 }
@@ -100,7 +104,8 @@ const Login = () => {
     <Fragment>
       <HeaderTop/>
         <Header/>
-          <div className="login">
+       {!loading?
+        <div className="login">
           <div className="container">
             <div className="loginBox">
               <h3>Login</h3>
@@ -127,6 +132,8 @@ const Login = () => {
           </div>
           <ToastContainer/>
       </div>
+      :<Loader/>
+    }
     </Fragment>
   );
 };

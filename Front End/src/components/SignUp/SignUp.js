@@ -71,7 +71,8 @@ const SignUp = ()=>{
             <Header/>
             <div className="SignUp">
                 <div className="container">
-                {loader&& <Loader color="#dfb839" />}
+                {loader&& 
+                <Loader color="#dfb839" />}
                     <div className="SignUpBox">
                         <h3>Sign Up</h3>
                         <div className="inputBox">
