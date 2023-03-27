@@ -7,8 +7,10 @@ import { getPaymentInfo, resetOrdersInfo } from '../../Store/OrderSlice/OrderSli
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllProductsFromCart } from '../../Store/CartSlice/CartSlice';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader/Loader';
 
 const CheckoutForm = () => {
+  const [loading, setLoading ] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -41,7 +43,10 @@ const CheckoutForm = () => {
           headers: { 'content-type': 'application/json' },
           body:JSON.stringify(newOrder)
         });
-        const {error} =await orderResponse.json();
+        const {error, success} =await orderResponse.json();
+        if(success || !success){
+          setLoading(false);
+        }
         if(!error){ 
           toast.success("Order placed successfully", {position: "top-center",autoClose: 1000});
           // reset order info state
@@ -63,6 +68,7 @@ const CheckoutForm = () => {
   return (
    <div className='stripe-payment'>
        <ToastContainer />
+          {loading?
           <form onSubmit={handleSubmit} style={{padding:'2rem 0', width:'50%', margin:' 5% auto'}}>
           <CardElement />
           <div className="order-btn">
@@ -71,6 +77,9 @@ const CheckoutForm = () => {
             </button>
           </div>
         </form>
+      :
+      <Loader/>  
+      }
    </div>
   );
 };

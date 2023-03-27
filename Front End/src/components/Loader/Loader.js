@@ -1,12 +1,12 @@
 import React from 'react';
 import './Loader.css';
-import  {BeatLoader } from "react-spinners";
+import  {BeatLoader, PropagateLoader } from "react-spinners";
 
 
 const Loader = () => {
     return (
         <div className='loader container'>
-               <BeatLoader color="#dfb839" />
+               <PropagateLoader color="#FF6000" />
         </div>
     );
 };
