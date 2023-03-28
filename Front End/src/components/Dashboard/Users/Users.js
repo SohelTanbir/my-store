@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
+import Alert from 'sweetalert2'
+
+
 
 const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
@@ -39,15 +42,42 @@ const Users = () => {
 
    
     const deleteUser = async(id)=>{
+        const {isConfirmed} = await   Alert.fire({
+            title: 'Are you sure want to delete?',
+            text: "You can add new category again!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          });
+          if(isConfirmed){
+            const response = await fetch(`http://localhost:5000/api/v1/message/delete/${id}`,{
+                method:"DELETE"
+            })
+            const {success, message } = await response.json();
+            if(success){
+                setLoading(false);
+                Alert.fire(
+                    message,
+                    'Message has been deleted!.',
+                    'success'
+                  ) 
+            }else{
+                Alert.fire({
+                    icon: 'error',
+                    title: message,
+                  })
+            }
+        }
+
+
+
         const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
             method:"DELETE"
         })
         const {success, message } = await response.json();
-        if(success){
-            toast.success(message,{position: "top-center",autoClose: 1000});
-        }else{
-            toast.error(message,{position: "top-center",autoClose: 1000});
-        }
+
     }
 
 
