@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Modal} from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import Alert from 'sweetalert2'
 
 
 const CategoryModal = ({showModal, setShowModal})=> {
@@ -23,16 +21,28 @@ const CategoryModal = ({showModal, setShowModal})=> {
                     });
                     const {success, message} = await response.json();
                     if(success){
-                              toast.success(message,{position: "top-center",autoClose: 1000});
+                              Alert.fire(
+                                  message,
+                                  'Category has been deleted!.',
+                                  'success'
+                                ) 
                               // close modal 
                               setShowModal(false);
                               // reset category
                               setCategory("");
                     }else{
-                              toast.error(message,{position: "top-center",autoClose: 1000});
+                              Alert.fire({
+                                        icon: 'error',
+                                        title: message,
+                                        text:'Please try another category name!'
+                              })
                     }
                    }else{
-                    toast.error("Please Enter Category Name!",{position: "top-center",autoClose: 1000});
+                    Alert.fire({
+                              icon: 'error',
+                              title: 'Category Name required!',
+                              text:'You must enter category name!'
+                    })
                    }
           }
 
@@ -40,7 +50,6 @@ const CategoryModal = ({showModal, setShowModal})=> {
 
           return (
                     <div className='category-modal'>
-                              <ToastContainer/>
                               <Modal show={showModal} onHide={handleClose} centered>
                               <Modal.Header closeButton>
                                         <Modal.Title className='fs-2'>Add New Category</Modal.Title>
