@@ -28,7 +28,7 @@ class Apifeatures {
           // pagination
           Pagination(){
                     const  currentPage = Number(this.queryString.page) || 1;
-                    const   showPerPage = 15;
+                    const   showPerPage = 100;
                     const  skipProduct = showPerPage *(currentPage - 1);
                     this.query =  this.query.limit(showPerPage).skip(skipProduct);
                     return this

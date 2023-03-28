@@ -5,7 +5,7 @@ import SideBar from '../SideBar/SideBar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader';
-
+import Alert from 'sweetalert2'
 
 const AddProduct = () => {
     const [product, setProduct] = useState({
@@ -18,7 +18,7 @@ const AddProduct = () => {
         description:""
     });
     const [image, setImage] = useState("");
-    const [loader, setLoader] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([])
 
     
@@ -45,7 +45,7 @@ const AddProduct = () => {
     
     // handle add product
     const handleSubmit = async (e)=>{
-        setLoader(true);
+        setLoading(true);
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", image);
@@ -60,16 +60,22 @@ const AddProduct = () => {
     
     // if upload prodcut image then store product in db
     if(product.name && product.brand && product.price && product.color && product.description ){
-        setLoader(false);   
+        setLoading(true)
         const res = await fetch('http://localhost:5000/api/v1/product/create',{
            method:'POST',
             body:formData
         });
-        console.log(formData)
         const {success, message } =  await res.json();
         if(success){
-            setLoader(false);
-            toast.success(message,{position: "top-center",autoClose: 500});
+            setLoading(false)
+            Alert.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Product has been created!',
+                showConfirmButton: false,
+                timer: 3000
+              })
+         
             setProduct({
                 name:"",
                 price:"",
@@ -80,12 +86,20 @@ const AddProduct = () => {
                 description:""
             })
         }else{
-            setLoader(false);
+            Alert.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
             toast.error(message,{position: "top-center",autoClose: 1000});
         }
     }else{
-        setLoader(false);
-        toast.error("All field are required!",{position: "top-center",autoClose: 1000});
+        Alert.fire({
+            icon: 'error',
+            title: 'Sorry!',
+            text: 'All field are required!',
+          })
+          setLoading(false)
     }
 
     }
@@ -99,12 +113,13 @@ const fileUploader = (e)=>{
     return (
         <div className="addProduct">
                 <ToastContainer />
-                {loader&& <Loader/>}
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar></SideBar>
+
                 <div className="main-part product-add-form">
                    <h2>Add New Product</h2>
+                   {!loading ?
                    <form onSubmit={handleSubmit}  encType="multipart/form-data">
                        <input type="text" className="mr-2p" onChange={handleChange} name='name' placeholder="Product Name" value={product.name} />
                        <input type="text" onChange={handleChange} name='price' placeholder="৳ Price" value={product.price}/>
@@ -138,6 +153,8 @@ const fileUploader = (e)=>{
                        <textarea name="description"  onChange={handleChange} placeholder='Product description' value={product.description}></textarea>
                        <button className='submit-btn' type="submit">Add Product</button>
                    </form>
+                   :<Loader/>
+                    }
                 </div>
             </div>
         </div>

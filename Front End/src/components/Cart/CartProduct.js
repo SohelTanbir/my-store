@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import  { React} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeProductFromCart } from '../../Store/CartSlice/CartSlice';
 import Alert from 'sweetalert2'
 
@@ -29,8 +27,8 @@ const CartProduct = ({product}) => {
 // remove product from cart
     const removeProduct = async id =>{
         Alert.fire({
-            title: 'Are you sure want to delete?',
-            text: "You won't be able to revert this!",
+            title: 'Are you sure want to delete ?',
+            text: "You will be able to add again!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -42,25 +40,19 @@ const CartProduct = ({product}) => {
             dispatch(removeProductFromCart({productId:id}))
                 Alert.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Product has been removed from cart.',
                 'success'
               )
             }
           })
-
-        // const isRemove = dispatch(removeProductFromCart({productId:id}))
-        // if(isRemove){
-        //     toast.success("1 product removed from cart!",{position: "bottom-right",autoClose: 500});
-        // }
        
-    }
+ }
   
 
 
     return (
         <div>
               <div className="single-cart-product">
-                <ToastContainer/>
                     <div className="product-photo" onClick={()=> showProductDetails(product.productId)}>
                     <img src={product?.images?.url} alt="product" />
                     </div>

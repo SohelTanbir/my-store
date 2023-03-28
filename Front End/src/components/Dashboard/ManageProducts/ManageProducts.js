@@ -9,12 +9,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader'
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
+import Alert from 'sweetalert2'
+
+
+
 
 const ManageProducts = () => {
     const [products, setProducts ] = useState([]);
     const [loading, setLoading ] =  useState(true);
     const navigate = useNavigate();
-
 
 const loadProduct = async ()=>{
     const response = await fetch("http://localhost:5000/api/v1/product/all");
@@ -25,16 +28,33 @@ const loadProduct = async ()=>{
     setProducts(products)
 }
 const deleteProduct = async (productId)=>{
-    const response = await fetch(`http://localhost:5000/api/v1/product/delete/${productId}`,{
-        method:"DELETE",
-        headers:{'content-type':'application/json'}
-    });
-    const {success, message} = await response.json();
-    if(success){
-        toast.success(message,{position: "top-center",autoClose: 1000});
-    }else{
-        toast.error(message,{position: "top-center",autoClose: 1000});
-    }
+const {isConfirmed} = await   Alert.fire({
+        title: 'Are you sure want to delete ?',
+        text: "You won't be able to revert the product!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      });
+      console.log(isConfirmed);
+    if (isConfirmed) {
+        const response = await fetch(`http://localhost:5000/api/v1/product/delete/${productId}`,{
+            method:"DELETE",
+            headers:{'content-type':'application/json'}
+        });
+        const {success, message} = await response.json();
+        if(success){
+            Alert.fire(
+                'Deleted!',
+                'Product has been removed from cart.',
+                'success'
+              )  
+        }else{
+            toast.error(message,{position: "top-center",autoClose: 1000});
+        } 
+        }
+ 
 }
 
 // page navigate to update product
