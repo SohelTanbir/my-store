@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementQuantity, incrementQuantity, removeProductFromCart } from '../../Store/CartSlice/CartSlice';
+import Alert from 'sweetalert2'
 
 
 const CartProduct = ({product}) => {
@@ -27,12 +28,33 @@ const CartProduct = ({product}) => {
     }
 // remove product from cart
     const removeProduct = async id =>{
-        const isRemove = dispatch(removeProductFromCart({productId:id}))
-        if(isRemove){
-            toast.success("1 product removed from cart!",{position: "bottom-right",autoClose: 500});
-        }
+        Alert.fire({
+            title: 'Are you sure want to delete?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+
+            if (result.isConfirmed) {
+            dispatch(removeProductFromCart({productId:id}))
+                Alert.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+
+        // const isRemove = dispatch(removeProductFromCart({productId:id}))
+        // if(isRemove){
+        //     toast.success("1 product removed from cart!",{position: "bottom-right",autoClose: 500});
+        // }
        
     }
+  
 
 
     return (

@@ -1,7 +1,7 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,6 @@ import { addToCart } from '../../Store/CartSlice/CartSlice';
 const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const dispatch =  useDispatch();
-
 
     const goDetailsPage  = (id) =>{
         navigate(`/details/${id}`);
@@ -41,10 +40,10 @@ const handleAddToCart = async(id) =>{
         }
     const isAdded =     dispatch(addToCart(cartProduct))
         if(isAdded){
-            toast.success("1 product added to cart!", {position: "bottom-right",autoClose: 1000,}) 
+            toast.success("1 product added to cart!", {position: "top-center",autoClose: 1000,}) 
            }else{
 
-            toast.error("Something wrong!", {position: "bottom-right",autoClose: 1000,}) 
+            toast.error("Something wrong!", {position: "top-center",autoClose: 1000,}) 
            }
         }
 }
@@ -65,6 +64,7 @@ const handleAddToCart = async(id) =>{
                         <ToastContainer />
                         <button className="plus-btn " onClick={()=> handleAddToCart(product._id)}>
                                 <FontAwesomeIcon icon={faPlus} />
+                                {/* <FontAwesomeIcon icon={faMinus} /> */}
                         </button>
              </div>
     );

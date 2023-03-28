@@ -14,7 +14,6 @@ import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 const Orders = () => {
     const [orderItems, setOrderItems ] = useState([]);
   const [loading, setLoading ] =  useState(true);
-
     const loadOrdersFromDB = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/orders/all");
         const {success, orders} = await res.json();
@@ -33,6 +32,7 @@ const Orders = () => {
         const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`);
         const {success, message } = res.data;
         if(success){
+
             toast.success(message,{position: "top-center",autoClose: 1000});
         }else{
             toast.error(message,{position: "top-center",autoClose: 1000});
@@ -80,7 +80,7 @@ const Orders = () => {
                         }  
                     </table>
                     :
-                    <NotFoundMessage message='There is no orders available!'/>
+                    <NotFoundMessage message='There is no orders found!'/>
                     }
                  
                 </div>

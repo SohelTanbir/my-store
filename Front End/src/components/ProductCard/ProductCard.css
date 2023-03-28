@@ -51,7 +51,6 @@
 }
 .single-product .plus-btn:hover{
     background: #e75901;
-    transform: rotate(90deg);
     color: #e8e8e8;
 }
 
