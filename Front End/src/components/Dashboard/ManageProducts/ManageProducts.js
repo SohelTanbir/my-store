@@ -28,7 +28,7 @@ const loadProduct = async ()=>{
     setProducts(products)
 }
 const deleteProduct = async (productId)=>{
-const {isConfirmed} = await   Alert.fire({
+    const {isConfirmed} = await   Alert.fire({
         title: 'Are you sure want to delete ?',
         text: "You won't be able to revert the product!",
         icon: 'warning',
@@ -37,21 +37,25 @@ const {isConfirmed} = await   Alert.fire({
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes'
       });
-      console.log(isConfirmed);
     if (isConfirmed) {
+        setLoading(true);
         const response = await fetch(`http://localhost:5000/api/v1/product/delete/${productId}`,{
             method:"DELETE",
             headers:{'content-type':'application/json'}
         });
         const {success, message} = await response.json();
         if(success){
+            setLoading(false);
             Alert.fire(
-                'Deleted!',
-                'Product has been removed from cart.',
+                message,
+                'Product has been deleted.',
                 'success'
-              )  
+              ) 
         }else{
-            toast.error(message,{position: "top-center",autoClose: 1000});
+            Alert.fire({
+                icon: 'error',
+                title: message,
+              })
         } 
         }
  

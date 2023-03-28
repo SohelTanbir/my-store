@@ -1,7 +1,7 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import './ProductCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
+import {  faPlus, faStar } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

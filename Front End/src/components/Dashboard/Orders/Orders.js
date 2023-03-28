@@ -10,6 +10,9 @@ import axios  from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
+import Alert from 'sweetalert2'
+
+
 
 const Orders = () => {
     const [orderItems, setOrderItems ] = useState([]);
@@ -29,14 +32,35 @@ const Orders = () => {
     })
 
     const deleteProduct =async (orderId)=>{
-        const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`);
-        const {success, message } = res.data;
-        if(success){
+        const {isConfirmed} = await   Alert.fire({
+            title: 'Are you sure want to delete ?',
+            text: "You won't be able to revert the product!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          });
+          if (isConfirmed) {
+            setLoading(true);
+            const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`);
+            const {success, message } = res.data;
+            if(success){
+                setLoading(false);
+                Alert.fire(
+                    message,
+                    'Order has been deleted!.',
+                    'success'
+                  ) 
+            }else{
+                Alert.fire({
+                    icon: 'error',
+                    title: message,
+                  })
+            } 
+            }
 
-            toast.success(message,{position: "top-center",autoClose: 1000});
-        }else{
-            toast.error(message,{position: "top-center",autoClose: 1000});
-        }
+
     }
 
 
@@ -48,9 +72,10 @@ const Orders = () => {
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
-          {!loading ? 
+        
           <div className="orders-main">
                 <h2>All Orders({orderItems?orderItems.length: 0})</h2>
+                {!loading ? 
                 <div className="orders-container">
                  {orderItems?
                     <table>
@@ -84,9 +109,10 @@ const Orders = () => {
                     }
                  
                 </div>
+                  :<Loader/>
+                }
             </div>
-            :<Loader/>
-                    }
+          
             </div>
         </div>
     );

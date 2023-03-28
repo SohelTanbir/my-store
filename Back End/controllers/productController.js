@@ -105,7 +105,7 @@ const deleteProduct = async (req, res )=>{
             const {result} =await  cloudinary.v2.uploader.destroy(product.images[0].public_id);
             res.status(200).json({
                 success:true,
-                message:"Product Delete Successfully!"
+                message:"Product Deleted Successfully!"
             });
         }else{
             res.status(404).json({
