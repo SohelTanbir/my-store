@@ -4,8 +4,6 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../../Loader/Loader'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
@@ -52,7 +50,7 @@ const Users = () => {
             confirmButtonText: 'Yes'
           });
           if(isConfirmed){
-            const response = await fetch(`http://localhost:5000/api/v1/message/delete/${id}`,{
+            const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
                 method:"DELETE"
             })
             const {success, message } = await response.json();
@@ -60,7 +58,7 @@ const Users = () => {
                 setLoading(false);
                 Alert.fire(
                     message,
-                    'Message has been deleted!.',
+                    'User has been deleted!.',
                     'success'
                   ) 
             }else{
@@ -71,13 +69,7 @@ const Users = () => {
             }
         }
 
-
-
-        const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
-            method:"DELETE"
-        })
-        const {success, message } = await response.json();
-
+        
     }
 
 
@@ -85,8 +77,6 @@ const Users = () => {
 
     return (
         <div className="all-orders">
-        
-            <ToastContainer/>
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
