@@ -96,7 +96,8 @@ setTimeout(()=>{
 
 
   }else{
-  toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
+  toast.error(`${message}!`, {position: "top-center",autoClose: 1000,});
+  setLoading(false); 
   }
 }
 
