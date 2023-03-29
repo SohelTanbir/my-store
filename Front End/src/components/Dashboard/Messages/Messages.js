@@ -33,7 +33,7 @@ const Messages = () => {
     const deleteMessage = async(id)=>{
         const {isConfirmed} = await   Alert.fire({
             title: 'Are you sure want to delete?',
-            text: "You can add new category again!",
+            text: "You won't be able to revert the message!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -75,7 +75,7 @@ const Messages = () => {
             <SideBar/>
             <div className="message-main">
                     <div className="message-header">
-                    <h2>All Messages({Messages.length?Messages.length:0})</h2>
+                    <h2>All Messages({message.length?message.length:0})</h2>
                     </div>
                     <div className="row">
                         <div className="message-container">

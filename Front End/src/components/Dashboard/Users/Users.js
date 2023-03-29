@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import AddUserModal from './AddUserModal';
 
 
 
 const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
     const [loading , setLoading ] = useState(true);
-
+    const [showModal, setShowModal ] = useState(false);
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all");
@@ -35,14 +36,14 @@ const Users = () => {
 
     // handle modal close or Show
     const handleModal = ()=>{
-      
+        setShowModal(!showModal)
     }
 
    
     const deleteUser = async(id)=>{
         const {isConfirmed} = await   Alert.fire({
             title: 'Are you sure want to delete?',
-            text: "You can add new category again!",
+            text: "You will be able to create new user again!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -78,17 +79,18 @@ const Users = () => {
     return (
         <div className="all-orders">
             <DashboardHeader/>
+            <AddUserModal showModal={showModal} setShowModal={setShowModal}/>
             <div className="dashboard-main">
             <SideBar/>
             <div className="users-main">
                     <div className="users-header">
-                    <h2>All users({allUsers.length?allUsers.length:0})</h2>
+                    <h2>All users({allUsers?allUsers?.length:0})</h2>
                     <button onClick={handleModal}>Add user</button>
                     </div>
                     <div className="row">
                         <div className="users-container">
                            {!loading? <div className="users-table">
-                                {allUsers.length?
+                                {allUsers?.length?
                                 <table>
                                     <tr>
                                         <th>Name</th>
@@ -115,7 +117,7 @@ const Users = () => {
                                     ))}
                                 </table>
                                 :
-                                <NotFoundMessage message='There is no users exist!'/>
+                                <NotFoundMessage message='There is no active users!'/>
                             }
                               
                             </div>
