@@ -19,7 +19,9 @@ const AddProduct = () => {
     });
     const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState([]);
+    const [file, setFile ] = useState("");
+    const [previewImageUrl, setPreviewImageUrl  ] = useState("")
 
     
     const loadCategory = async()=>{
@@ -105,8 +107,15 @@ const AddProduct = () => {
     }
 // upload image 
 const fileUploader = (e)=>{
+    let reader = new FileReader();
+    let files = e.target.files[0];
 
-    setImage(e.target.files[0])
+
+    reader.onloadend = ()=>{
+        setPreviewImageUrl(reader.result)
+    }
+    reader.readAsDataURL(files);
+    setImage(files);
     
 }
 
@@ -150,6 +159,11 @@ const fileUploader = (e)=>{
                             <option value="M, L, XL ">M, L, XL</option>
                         </select>
                        <input name='photo' className="mr-2p"  onChange={fileUploader} type="file" defaultValue=""/><br />
+                       {previewImageUrl &&
+                        <div className="uploaded-image-preview  pb-3">
+                                <img className='img-thumbnail' src={previewImageUrl} alt="" />
+                        </div>
+                       }
                        <textarea name="description"  onChange={handleChange} placeholder='Product description' value={product.description}></textarea>
                        <button className='submit-btn' type="submit">Add Product</button>
                    </form>
