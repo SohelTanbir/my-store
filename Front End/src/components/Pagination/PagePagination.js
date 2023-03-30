@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './PagePagination.css'
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPageNumber } from '../../Store/PaginationSlice/PaginationSlice';

@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader'
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import PagePagination from '../../Pagination/PagePagination';
+import { useSelector } from 'react-redux';
 
 
 
@@ -17,15 +19,18 @@ import Alert from 'sweetalert2'
 const ManageProducts = () => {
     const [products, setProducts ] = useState([]);
     const [loading, setLoading ] =  useState(true);
+    const [totalProduct, setTotalProduct ] =  useState(0)
     const navigate = useNavigate();
+    const pageNumber =  useSelector(state => state.PaginationSlice.page);
 
 const loadProduct = async ()=>{
-    const response = await fetch("http://localhost:5000/api/v1/product/all");
-    const {success, products} = await response.json();
+    const response = await fetch(`http://localhost:5000/api/v1/product/all?page=${pageNumber}`);
+    const {success, products, total} = await response.json();
     if(success || !success){
         setLoading(false);
     }
-    setProducts(products)
+    setProducts(products);
+    setTotalProduct(total)
 }
 const deleteProduct = async (productId)=>{
     const {isConfirmed} = await   Alert.fire({
@@ -78,6 +83,8 @@ useEffect( ( )=>{
     }
 }
 
+
+
     return (
         <div className="manage-products">
             <ToastContainer/>
@@ -122,6 +129,9 @@ useEffect( ( )=>{
                             
                             }
                         </table>
+                      <div className="pagination-container  d-flex justify-content-center py-2">
+                        <PagePagination totalProduct={totalProduct}/>
+                      </div>
                     </div>
                     :
                   <NotFoundMessage message='There is no products found !'/>
