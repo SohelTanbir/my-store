@@ -20,6 +20,17 @@ const userSchema = mongoose.Schema({
         enum:["admin", "user"],
         default:"user"
     },
+    image:[
+        {
+            public_id:{
+              type:String,
+            },
+            url:{
+                type:String,
+                default:""
+            },
+          }
+    ],
     resetPasswordToken:{
         type:String,
         default:""

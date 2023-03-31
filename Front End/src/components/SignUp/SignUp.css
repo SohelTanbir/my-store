@@ -2,6 +2,7 @@
     width:100%;
 }
 .SignUpBox{
+    position: relative;
     width:30%;
     margin:8% auto ;
     background-image:linear-gradient(to right, #A5F8CA, #9EDFF1);
@@ -9,6 +10,7 @@
     text-align: center;
     border-radius: .5rem;
     box-shadow: 0 0 .2rem #a0a0a0;
+    overflow: hidden;
 }
 .SignUpBox h3{
     color:#fff;
@@ -92,6 +94,32 @@
     padding: .1rem;
     background-color: #fff;
 }
+/*input file*/
+.inputBox input[type="file"] {
+    width: 100%;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: pointer;
+    left: 25%;
+    top: 62%;
+}
+.file_input_label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    background-color: #FF6000;
+    box-shadow: 0 0  .2rem rgba(0, 0, 0, 0.25);
+    width: 95%;
+    margin: -1.8rem auto 0;
+}
 /*
 ------------------------------------------------------------
 ------------ Responsive CSS Login Page  ----------------
@@ -107,19 +135,23 @@
 /*medium device*/
 @media all and (max-width:768px){
     .SignUpBox{
-        width:55%;
+        width:65%;
+    }
+    .SignUpBox {
+        padding: 1.5rem;
     }
 }
 
 /*small device*/
 @media all and (max-width:576px){
     .SignUpBox{
-        width:75%;
+        width:85%;
+        padding: 1rem;
     }
 }
 /*extra small device*/
 @media all and (max-width:480px){
     .SignUpBox{
-        width:95%;
+        width:100%;
     }
 }

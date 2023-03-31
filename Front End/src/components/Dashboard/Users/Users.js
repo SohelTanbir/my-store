@@ -38,7 +38,7 @@ const Users = () => {
     const handleModal = ()=>{
         setShowModal(!showModal)
     }
-
+console.log(allUsers);
    
     const deleteUser = async(id)=>{
         const {isConfirmed} = await   Alert.fire({
@@ -104,7 +104,7 @@ const Users = () => {
                                     {allUsers.map(user =>(
                                         <tr>
                                         <td>{user.name}</td>
-                                        <td><img src={user.avater} alt="No Photos" /></td>
+                                        <td><img src={user.image[0].url} alt="No Photos" /></td>
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
                                         <td>{user.createdAt.toLocalTimeString}</td>

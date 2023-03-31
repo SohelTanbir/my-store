@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import './SignUp.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUser } from '@fortawesome/free-solid-svg-icons'
+import {  faFile, faUpload, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,23 +15,43 @@ import HeaderTop from '../Header/HeaderTop';
 const SignUp = ()=>{
     const navigate = useNavigate();
     const [user, setUser ] = useState({});
+    const [file, setFile ] = useState("");
+    const [previewImageUrl, setPreviewImageUrl ] = useState("");
     let [loader, setLoader] = useState(false);
-    const handleInput = (e)=> {
+
+
+
+
+    const handleChange = (e)=> {
         const newUser = {...user};
         newUser[e.target.name] = e.target.value;
         setUser(newUser);
+        const files = e.target.files[0]
+        let reader = new FileReader();
+        reader.onloadend = ()=>{
+            setFile(files)
+            setPreviewImageUrl(reader.result);
+        }
+        // read image file
+        reader.readAsDataURL(files);
     }
 
     // submit form data and create account
     const  submitForm = async (e)=>{
+        e.preventDefault();
         setLoader(true);
+        const formData =  new FormData();
+        formData.append("image", file);
+        formData.set("name", user.name);
+        formData.set("email", user.email);
+        formData.set("password", user.password);
+
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
         if(user){
             const NewSuccess = {...user};
-            console.log(NewSuccess)
             NewSuccess.success = true;
             setUser(NewSuccess);
         } else{
@@ -44,11 +64,10 @@ const SignUp = ()=>{
         NewError.error = errorMessage;
         setUser(NewError);
     });
-    e.preventDefault();
+
     const response =  await fetch("http://localhost:5000/api/v1/users/signup",{
         method:"post",
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify(user)
+        body:formData
     });
     if(response.ok){
         setLoader(false);
@@ -77,20 +96,24 @@ const SignUp = ()=>{
                         <h3>Sign Up</h3>
                         <div className="inputBox">
                         <form onSubmit={submitForm}>
-                        <input type="text" name="name" onChange={handleInput} placeholder="Name" required /> <br />
-                            <input type="email" name="email"  onChange={handleInput} placeholder="Email" required /> <br />
-                            <input type="password" name="password" onChange={handleInput} placeholder="Password" required/> <br />
-                                <div className="row g-0">
+                        <input type="text" name="name" onChange={handleChange} placeholder="Name" required /> <br />
+                            <input type="email" name="email"  onChange={handleChange} placeholder="Email" required /> <br />
+                            <input type="password" name="password" onChange={handleChange} placeholder="Password" required/> <br />
+                                <div className="d-flex mb-3 align-items-center justify-content-between">
                                     <div className="col-3">
                                         <div className="preview-photo">
-                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDJzEaxLN-jGRYYUO65pWu7Q9GXoNt4LUSSA&usqp=CAU" alt="" />
+                                            <img src={previewImageUrl?previewImageUrl:'/user/user-2.png'} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-9">
-                                    <input type="file" name="avatar" onChange={handleInput} placeholder="photo"/> <br />
+                                    <input type="file" name="avatar" onChange={handleChange} placeholder="photo"/> <br />
+                                    <labe className="file_input_label">
+                                    <FontAwesomeIcon icon={faUpload} />
+                                        <span className='ms-2'>Upload photo</span>
+                                    </labe>
                                     </div>
                                 </div>
-                            <button className="signupBtn">
+                            <button className="signupBtn mt-3">
                             <FontAwesomeIcon icon={faUser} /><span>Create Account</span></button>
                         </form>
                         </div>

@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../utilities/sendEmail");
 const crypto = require("crypto");
+const cloudinary =  require("cloudinary");
 
 
 // create user or Sign Up
@@ -10,38 +11,73 @@ const createUser = async (req, res)=>{
     try {
         // check user exist or not
         const isUser = await User.find({email:req.fields.email});
+        console.log("name ",req.fields);
         if(isUser.length < 1){
-            const hashPassword = await bcrypt.hash(req.fields.password, 10);
-            const user = await User.create({
-                name:req.fields.name,
-                email:req.fields.email,
-                password:hashPassword,
-                role:req.fields.role
-            });
-            user.save(err =>{
-                if(!err){
-                    res.status(200).json({
-                        success:true,
-                        message:"User Created Successfully!",
-                    });
-                }else{
-                    res.status(400).json({
-                        success:false,
-                        message:err.message +"here"
-                    });
-                }
-            })
+            const imagePath = req.files.image.path;
+            if(imagePath){
+            if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg' || req.files.image.type == 'image/webp'){
+                const {url, public_id} = await  cloudinary.uploader.upload(imagePath,{folder:"mystore"});
+                req.fields.image = {public_id, url}
+
+                const hashPassword = await bcrypt.hash(req.fields.password, 10);
+                const user = await User.create({
+                    name:req.fields.name,
+                    email:req.fields.email,
+                    password:hashPassword,
+                    role:req.fields.role,
+                    image:req.fields.image
+                });
+                user.save(err =>{
+                    if(!err){
+                        res.status(200).json({
+                            success:true,
+                            message:"User Created Successfully!",
+                        });
+                    }else{
+                        res.status(400).json({
+                            success:false,
+                            message:err.message +"here"
+                        });
+                    }
+                })
+            }else{
+                res.status(400).json({
+                    success:false,
+                    message:"User already exist!",
+                });
+            }  
         }else{
-            res.status(400).json({
+            res.status(200).json({
                 success:false,
-                message:"User already exist!",
+                message:"Only image file allowed!",
             });
-        }  
-      
+        }
+    }else{
+        const hashPassword = await bcrypt.hash(req.fields.password, 10);
+        const user = await User.create({
+            name:req.fields.name,
+            email:req.fields.email,
+            password:hashPassword,
+            role:req.fields.role,
+        });
+        user.save(err =>{
+            if(!err){
+                res.status(200).json({
+                    success:true,
+                    message:"Account Created Successfully!",
+                });
+            }else{
+                res.status(400).json({
+                    success:false,
+                    message:err.message +"here"
+                });
+            }
+        })
+    }
     } catch (err) {
         res.status(400).json({
             success:false,
-            message:"Invalid data found!"
+            message:err.message
         })
     }
 }
