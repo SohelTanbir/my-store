@@ -77,9 +77,19 @@ const SignUp = ()=>{
                         <h3>Sign Up</h3>
                         <div className="inputBox">
                         <form onSubmit={submitForm}>
-                        <input type="text" name="name" onBlur={handleInput} placeholder="Name" required /> <br />
-                            <input type="email" name="email"  onBlur={handleInput} placeholder="Email" required /> <br />
-                            <input type="password" name="password" onBlur={handleInput} placeholder="Password" required/> <br />
+                        <input type="text" name="name" onChange={handleInput} placeholder="Name" required /> <br />
+                            <input type="email" name="email"  onChange={handleInput} placeholder="Email" required /> <br />
+                            <input type="password" name="password" onChange={handleInput} placeholder="Password" required/> <br />
+                                <div className="row g-0">
+                                    <div className="col-3">
+                                        <div className="preview-photo">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDJzEaxLN-jGRYYUO65pWu7Q9GXoNt4LUSSA&usqp=CAU" alt="" />
+                                        </div>
+                                    </div>
+                                    <div className="col-9">
+                                    <input type="file" name="avatar" onChange={handleInput} placeholder="photo"/> <br />
+                                    </div>
+                                </div>
                             <button className="signupBtn">
                             <FontAwesomeIcon icon={faUser} /><span>Create Account</span></button>
                         </form>
