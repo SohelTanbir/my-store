@@ -32,14 +32,13 @@
     border:none;
     outline:none;
     padding:1rem 1.5rem;
-    background:#550597; 
+    background:#FF6000; 
     color:#fff;
     border-radius:1rem;
     font-weight:700;
     font-size:1.6rem;
 }
 .SignUpBox .signupBtn:hover{
-    background:#9a3ee6;
     box-shadow:1rem 1rem 2rem #cccccc;
 }
 .SignUpBox .loginBtn span{
@@ -68,6 +67,10 @@
 }
 .loginOption a{
     font-size:1.4rem;
+    color: #000;
+}
+.loginOption a span{
+    color: #FF6000;
 }
 .loginOption a:hover{
     text-decoration: underline;
@@ -112,11 +115,11 @@
     border-radius: 15px;
     font-size: 1.4rem;
     font-weight: 600;
-    color: #fff;
+    color: #FF6000;
     padding: 1rem 1.2rem;
     text-align: center;
-    background-color: #FF6000;
-    box-shadow: 0 0  .2rem rgba(0, 0, 0, 0.25);
+    background: transparent;
+    border:.1rem solid #FF6000;
     width: 95%;
     margin: -1.8rem auto 0;
 }

@@ -26,7 +26,7 @@ const SignUp = ()=>{
         const newUser = {...user};
         newUser[e.target.name] = e.target.value;
         setUser(newUser);
-        const files = e.target.files[0]
+        const files = e.target.name ==='avatar' &&  e.target.files[0]
         let reader = new FileReader();
         reader.onloadend = ()=>{
             setFile(files)
@@ -118,7 +118,7 @@ const SignUp = ()=>{
                         </form>
                         </div>
                         <div className="loginOption">
-                        <Link to="/login">Have an Account? Login now</Link>
+                        <Link to="/login">Have an Account? <span>Login here</span></Link>
                         </div>
                     </div>
                 </div>

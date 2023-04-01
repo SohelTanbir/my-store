@@ -72,6 +72,7 @@
           width: 5rem;
           height: 5rem;
           object-fit: cover;
+          border-radius: .3rem;
 }
 .users-container .action-btn{
           font-size: 1.8rem;

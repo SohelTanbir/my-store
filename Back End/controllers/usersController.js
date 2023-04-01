@@ -11,10 +11,8 @@ const createUser = async (req, res)=>{
     try {
         // check user exist or not
         const isUser = await User.find({email:req.fields.email});
-        console.log("name ",req.fields);
         if(isUser.length < 1){
             const imagePath = req.files.image.path;
-            if(imagePath){
             if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg' || req.files.image.type == 'image/webp'){
                 const {url, public_id} = await  cloudinary.uploader.upload(imagePath,{folder:"mystore"});
                 req.fields.image = {public_id, url}
@@ -52,32 +50,10 @@ const createUser = async (req, res)=>{
                 message:"Only image file allowed!",
             });
         }
-    }else{
-        const hashPassword = await bcrypt.hash(req.fields.password, 10);
-        const user = await User.create({
-            name:req.fields.name,
-            email:req.fields.email,
-            password:hashPassword,
-            role:req.fields.role,
-        });
-        user.save(err =>{
-            if(!err){
-                res.status(200).json({
-                    success:true,
-                    message:"Account Created Successfully!",
-                });
-            }else{
-                res.status(400).json({
-                    success:false,
-                    message:err.message +"here"
-                });
-            }
-        })
-    }
     } catch (err) {
         res.status(400).json({
             success:false,
-            message:err.message
+            message:"There was an server error!"
         })
     }
 }
@@ -134,6 +110,7 @@ const deleteUser =  async (req, res)=>{
         const user =  await User.findById(req.params.id);
         if(user){
             user.deleteOne();
+        const {result} =  await  cloudinary.v2.uploader.destroy(user.image[0].public_id);
             res.status(200).json({
                 success:true,
                 message:"User Deleted Successfully!"
