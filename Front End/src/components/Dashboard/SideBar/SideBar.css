@@ -1,5 +1,5 @@
 .sideBar{
-    background:#160a5a;
+    background:#FF6000;
     min-height: 100vh;
     height:auto;
     padding:3rem 2rem;
@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 .sideBar ul li a{
-    color:#dfdfdf;
+    color:#fff;
 }
 .sidebar-with-text{
     width: 22rem;

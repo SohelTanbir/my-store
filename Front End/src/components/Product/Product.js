@@ -34,7 +34,6 @@ const loadProduct = async()=>{
         loadProduct();
     }, [searchInputVal, pageNumber, category]);
 
-console.log(totalProduct);
 
     return (
        <Fragment>

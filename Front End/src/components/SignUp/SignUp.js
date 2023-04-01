@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import './SignUp.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faFile, faUpload, faUser } from '@fortawesome/free-solid-svg-icons'
+import {  faUpload, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,14 +26,14 @@ const SignUp = ()=>{
         const newUser = {...user};
         newUser[e.target.name] = e.target.value;
         setUser(newUser);
-        const files = e.target.name ==='avatar' &&  e.target.files[0]
+        const files = e.target.files &&  e.target.files[0]
         let reader = new FileReader();
         reader.onloadend = ()=>{
             setFile(files)
             setPreviewImageUrl(reader.result);
         }
         // read image file
-        reader.readAsDataURL(files);
+        files && reader.readAsDataURL(files);
     }
 
     // submit form data and create account
@@ -73,7 +73,7 @@ const SignUp = ()=>{
         setLoader(false);
         const {message} = JSON.parse(await response.text());
         // show toast notification for add prodcut to cart
-    toast.success(`${message}!`, {position: "top-center",autoClose: 1000,});
+    toast.success(`${message}!`, {position: "top-center",autoClose: 1500,});
       // redirect user to home page
   setTimeout(() => {
     navigate("/login"); 
@@ -81,7 +81,7 @@ const SignUp = ()=>{
     }else{
         setLoader(false);
      const {message} = JSON.parse(await response.text());
-    toast.error(`${message}!`, {position: "top-center",autoClose: 1000,}) 
+    toast.error(`${message}!`, {position: "top-center",autoClose: 1500,}) 
     }
 }
     return(
@@ -102,7 +102,7 @@ const SignUp = ()=>{
                                 <div className="d-flex mb-3 align-items-center justify-content-between">
                                     <div className="col-3">
                                         <div className="preview-photo">
-                                            <img src={previewImageUrl?previewImageUrl:'/user/user-2.png'} alt="" />
+                                            <img src={previewImageUrl?previewImageUrl:'/user/user.png'} alt="user" />
                                         </div>
                                     </div>
                                     <div className="col-9">

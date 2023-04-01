@@ -104,7 +104,7 @@ console.log(allUsers);
                                     {allUsers.map(user =>(
                                         <tr>
                                         <td>{user.name}</td>
-                                        <td><img src={user.image[0]?.url } alt="No Photos" /></td>
+                                        <td><img src={user.image[0]?user.image[0].url : '/user/user.png' } alt="No Photos" /></td>
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
                                         <td>{user.createdAt.toLocalTimeString}</td>
