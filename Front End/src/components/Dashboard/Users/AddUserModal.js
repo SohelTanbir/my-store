@@ -1,8 +1,13 @@
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
+import './AddUserModal.css';  
 
 const AddUserModal = ({ showModal, setShowModal }) => {
+  const [file, setFile ] = useState("");
+  const [previewImageUrl, setPreviewImageUrl ] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -13,13 +18,22 @@ const AddUserModal = ({ showModal, setShowModal }) => {
 
   const handleChange = (e) => {
           const newUser = {...user}
-          newUser[e.target.name] = e.target.value
+          newUser[e.target.name] = e.target.value;
           setUser(newUser);
+          const files = e.target.files &&  e.target.files[0]
+          let reader = new FileReader();
+          reader.onloadend = ()=>{
+              setFile(files)
+              setPreviewImageUrl(reader.result);
+          }
+          // read image file
+          files && reader.readAsDataURL(files);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.name && user.email && user.password && user.role) {
       const formData = new FormData();
+      formData.set("image", file);
       formData.set("name", user.name);
       formData.set("email", user.email);
       formData.set("password", user.password);
@@ -59,8 +73,9 @@ const AddUserModal = ({ showModal, setShowModal }) => {
     }
   };
 
+
   return (
-    <div className="user-modal">
+    <div className="user-modal" >
       <Modal show={showModal} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title className="fs-2">Add New User</Modal.Title>
@@ -99,7 +114,7 @@ const AddUserModal = ({ showModal, setShowModal }) => {
                     defaultValue={user.password}
                   />
                 </div>
-                <div className="input-group w-100 mb-3">
+                <div className="input-group w-100 mb-4">
                   <select name="role"  onChange={handleChange}>
                     <option selected value="user">
                       User
@@ -107,7 +122,20 @@ const AddUserModal = ({ showModal, setShowModal }) => {
                     <option value="admin">Admin</option>
                   </select>
                 </div>
-
+                <div className="d-flex mb-3 align-items-center justify-content-between">
+                                    <div className="col-2 offset-1">
+                                        <div className="preview-photo">
+                                            <img src={previewImageUrl?previewImageUrl:'/user/user.png'} alt="user" />
+                                        </div>
+                                    </div>
+                                    <div className="col-9">
+                                    <input className="signup-file-input" type="file" name="avatar" onChange={handleChange} placeholder="photo"/> <br />
+                                    <labe className="file_input_label">
+                                    <FontAwesomeIcon icon={faUpload} />
+                                        <span className='ms-2'>Upload photo</span>
+                                    </labe>
+                                    </div>
+                                </div>
                     <div className="input-group w-100 ">
                     <input
                     style={{background:'#FF6000', color:'#fff'}}

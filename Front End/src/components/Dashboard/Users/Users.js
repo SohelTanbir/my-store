@@ -38,7 +38,7 @@ const Users = () => {
     const handleModal = ()=>{
         setShowModal(!showModal)
     }
-console.log(allUsers);
+
    
     const deleteUser = async(id)=>{
         const {isConfirmed} = await   Alert.fire({
