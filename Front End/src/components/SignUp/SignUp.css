@@ -59,12 +59,7 @@
     font-weight: 700;
     margin-bottom:1.5rem;
 }
-.loginOption .facebook{
-    background: blue;
-}
-.loginOption .google{
-    background: green;
-}
+
 .loginOption a{
     font-size:1.4rem;
     color: #000;

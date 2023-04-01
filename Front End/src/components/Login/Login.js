@@ -127,7 +127,7 @@ setTimeout(()=>{
                 <h4>Login Up With</h4>
                 <button onClick={handleFacebookLogin} className="facebook"><FontAwesomeIcon icon={faFacebookSquare} /> Facebook</button>
                 <button onClick={handleGoogleLogin} className="google"><FontAwesomeIcon icon={faGoogle} /> Google</button>
-                <Link to="/signup">Don't have an Account? Create now</Link>
+                <Link to="/signup" className='create-account'>Don't have an Account? <span>Create now</span></Link>
               </div>
             </div>
           </div>
