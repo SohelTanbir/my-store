@@ -15,7 +15,7 @@ const handleRightNav = ()=>{
     setShowNav(!false);
 }
 const cartProducts = useSelector(state => state.cart.cartProducts);
-const {isAuthenticated, user} = useSelector(state => state.user);
+const {isAuthenticated} = useSelector(state => state.user);
 
     return (
        <div className="header">

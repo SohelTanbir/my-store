@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import {resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -16,6 +16,7 @@ const UserProfile = () => {
     const dispatch = useDispatch();
     const [myOrders, setMyOrders] = useState([]);
     const navigate = useNavigate();
+    const {user} = useSelector(state => state.user);
     // fatch my orders from db
     useEffect(  ()=>{
         fetch("http://localhost:5000/api/v1/orders/all")
@@ -65,10 +66,10 @@ const handleLogOut = async () =>{
             <div className="row">
                 <div className="user-info">
                     <div className="profile-photo">
-                        <img src={profilePhoto} alt="profile" />
+                        <img src={user?.image?user.image: '/user/user.png'} alt="profile" />
                     </div>
-                    <h3 className='user-name'>Sohel Rana</h3>
-                    <p> <span>Email: </span> sohelrana@gmail.com</p>
+                    <h3 className='user-name'>{user?.name}</h3>
+                    <p> <span>Email: </span>{user?.email}</p>
                     <p> <span>Phone: </span> 01774000000</p>
                     <p> <span>Address: </span> Dinajpur</p>
                     <button onClick={handleLogOut} className="logout-btn">Log out</button>
