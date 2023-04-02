@@ -15,17 +15,18 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
+import { getLoginUser } from '../../Store/UserSlice/UserSlice';
+import { useDispatch } from 'react-redux';
 firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-  const [loggedInUser, setLoggedInUser] =useState([]);
-  // const history = useHistory();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { from } = location.state || { from: { pathname: "/" } };
-  const [user, setUser] = useState({});
-  const [loading, setLoading ] = useState(false);
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { from } = location.state || { from: { pathname: "/" } };
+    const [user, setUser] = useState({});
+    const [loading, setLoading ] = useState(false);
 
 
 
@@ -38,7 +39,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const loggedUser = { name: user.displayName, email:user.email, photo: user.photoURL }
-        setLoggedInUser(loggedUser);
+        // dispatch loggedin user 
+        dispatch(getLoginUser(loggedUser))
         // history.replace(from);
       }).catch((error) => {
         const errorMessage = error.message;
@@ -54,8 +56,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const loggedUser = { name: user.displayName, email: user.email, photo: user.photoURL }
-        setLoggedInUser(loggedUser);
-     
+      // dispatch loggedin user 
+      dispatch(getLoginUser(loggedUser))
         // redirect to hom page
         setTimeout(()=>{
           navigate.replace(from);
@@ -80,12 +82,14 @@ const Login = () => {
        credentials: 'include',
       body:JSON.stringify(user)
   });
-  const {success, message} = JSON.parse(await response.text());
+
+  const {success, message, userData} =await response.json();
   if(success){
       if(success || success ){
         setLoading(false);
       }
-      setLoggedInUser(user);
+       // dispatch loggedin user 
+       dispatch(getLoginUser({isLogin:true, user:userData}))
       // show toast notification for add prodcut to cart
    toast.success(message, {position: "top-center",autoClose: 1000,});
   // redirect user to home page

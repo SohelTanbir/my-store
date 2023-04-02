@@ -5,15 +5,15 @@ import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { userContext } from '../../App';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
+import {resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 const UserProfile = () => {
-    const {userData} = useContext(userContext);
-    const [loggedInUser, setLoggedInUser] = userData;
+    const dispatch = useDispatch();
     const [myOrders, setMyOrders] = useState([]);
     const navigate = useNavigate();
     // fatch my orders from db
@@ -31,20 +31,24 @@ const UserProfile = () => {
         }
     }
 
-console.log(myOrders);
+
 
 // handle Log out user
 const handleLogOut = async () =>{
-    const response = await fetch("http://localhost:5000/api/v1/users/logout");
+    const response = await fetch("http://localhost:5000/api/v1/users/logout",{
+        credentials:'include'
+    });
     const {success, message } = await response.json();
     if(success){
         toast.success(message,{position: "top-center",autoClose: 1000});
-        // reset user login data
-        setLoggedInUser({});
-        // redirect to home page
-        setTimeout(()=>navigate("/login"), 2000)
-    }else{
 
+        // redirect to home page
+        setTimeout(()=>{
+            dispatch(resetLogggedinUser());
+            navigate("/login")
+        }, 1500)
+    }else{
+        toast.error(message,{position: "top-center",autoClose: 1000});
     }
 }
 

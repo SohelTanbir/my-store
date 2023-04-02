@@ -16,7 +16,7 @@ const DashboardHeader = () => {
                     <div className="row align-items-center">
                         <div className="col-3">
                             <div className="logo">
-                                <Link to="/dashboard">My<span>Store</span></Link>
+                                <Link to="/">My<span>Store</span></Link>
                             </div>
                         </div>
                         <div className="col-9">

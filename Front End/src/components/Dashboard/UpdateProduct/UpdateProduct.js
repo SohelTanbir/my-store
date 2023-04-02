@@ -73,7 +73,6 @@ const findProdcutById = async ()=>{
            method:'PUT',
             body:formData
         });
-        console.log(formData)
         const {success, message } =  await res.json();
         if(success){
             setLoader(false);

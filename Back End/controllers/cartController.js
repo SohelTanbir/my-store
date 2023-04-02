@@ -54,8 +54,8 @@ const addToCart =  async (req, res)=>{
            }
     }else{
         // update product quantity
-        console.log("frontend = ", req.fields.quantity);
-        console.log("backend = ", productExist[0].quantity);
+        // console.log("frontend = ", req.fields.quantity);
+        // console.log("backend = ", productExist[0].quantity);
         // console.log(productExist[0].quantity);   
 
 
@@ -78,7 +78,6 @@ const addToCart =  async (req, res)=>{
             })
     }
     } catch (err) {
-        console.log(err.message);
         res.status(500).json({
             success:false,
             message:"There was a sever error!",

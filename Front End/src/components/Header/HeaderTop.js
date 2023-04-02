@@ -12,6 +12,9 @@ const HeaderTop = () => {
                                                   <p className='free-shipping'>Free Shipping on first order! <span>Order Now</span></p>
                                                   <ul className='top-menu d-flex'>
                                                             <li>
+                                                                      <Link to="/dashboard">Dashboard</Link>
+                                                            </li>
+                                                            <li>
                                                                       <Link to="/orders/track">Track order</Link>
                                                             </li>
                                                             <li>

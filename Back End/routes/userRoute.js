@@ -22,7 +22,7 @@ router.post("/users/login", loginUser);
 router.get("/users/me",checkLogin, getLoginUserDetails);
 router.post("/users/password/forgot", checkLogin,forgotPassword);
 router.post("/users/password/reset/:id",checkLogin, resetPassword);
-router.get("/users/logout",checkLogin, logoutUser);
+router.get("/users/logout", logoutUser);
 
 
 //export default

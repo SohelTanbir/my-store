@@ -18,7 +18,9 @@ const Users = () => {
     const [showModal, setShowModal ] = useState(false);
 
     const loadUsers = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/users/all");
+        const res =  await fetch("http://localhost:5000/api/v1/users/all",{
+            credentials:'include'
+        });
         const {success, users} = await res.json();
         // off loader
         if(success || !success){

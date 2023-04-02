@@ -12,7 +12,6 @@ const createUser = async (req, res)=>{
         // check user exist or not
         const isUser = await User.find({email:req.fields.email});
         if(isUser.length < 1){
-            console.log(req.files.image);
             const imagePath =req.files.image? req.files.image.path :"";
             if(imagePath){
                 // create user with profile photo
@@ -162,7 +161,8 @@ const deleteUser =  async (req, res)=>{
 // login user
 const loginUser =  async (req, res, next) =>{
     try {
-        const user =  await User.find({email:req.fields.email});
+        const user =  await User.find({email:req.fields.email}).select("+password   ");
+
         if(user){
             const {name, email, role} = user[0];
             const isValidPassword = await bcrypt.compare(req.fields.password, user[0].password)
@@ -182,7 +182,7 @@ const loginUser =  async (req, res, next) =>{
                     success:true,
                     message:"Login Success!",
                     access_token:token,
-                    user:{name, email, role}
+                    userData:{name, email, role, image:user[0].image[0].url }
                 });
             }else{
                 res.status(400).json({
@@ -200,7 +200,7 @@ const loginUser =  async (req, res, next) =>{
     } catch (err) {
         res.status(400).json({
             success:false,
-            message:"Authentication Failed!",
+            message:err.message,
         });
     }
 }
@@ -215,12 +215,12 @@ const logoutUser = async (req, res)=>{
 
 // get loggedin use details
 const getLoginUserDetails = async (req, res ) =>{
-    console.log(req.email);
     const user = await User.findOne({email:req.email})
     if(!user){
         res.status(404).json({
             success:false,
-            message:"User information not found!" 
+            message:"There is no loggedin user found!",
+            user:[] 
         });
     }
     res.status(200).json({

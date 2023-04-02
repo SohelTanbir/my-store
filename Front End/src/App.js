@@ -28,6 +28,8 @@ import OrderSuccess from './components/OrderSuccess/OrderSuccess'
 import Shipment from './components/Shipment/Shipment';
 import StripePayment from './components/StripePayment/StripePayment';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import { loadLoggedInUserData } from './Store/UserSlice/UserSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const userContext = createContext();
 
@@ -35,14 +37,17 @@ export const userContext = createContext();
 
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const dispatch = useDispatch();
+  const user =  useSelector(state => state.user)
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(0);
   const [payment, setPayment] = useState(0)
   const [quantity, setQuantity] = useState(0);
   const [order, setOrder] = useState([]);
 
-
+useEffect(()=>{
+  dispatch(loadLoggedInUserData())
+}, [])
 
 
   return (
@@ -63,7 +68,7 @@ function App() {
                 
               <Route exact path="/product" element={   <Product/>} />
                
-              <Route exact path="/reviews" element={ <Reviews/>} />
+              <Route exact path="/reviews" element={ <PrivateRoute> <Reviews/></PrivateRoute>} />
                  
 
               <Route exact path="/login" element={<Login/>} />
@@ -75,9 +80,9 @@ function App() {
 
               <Route exact path="/cart" element={ <Cart/>} />
 
-              <Route exact path="/contact" element={  <Contact/>} />
+              <Route exact path="/contact" element={ <PrivateRoute> <Contact/> </PrivateRoute>} />
               
-              <Route exact path="/orders/track" element={   <TraceOrder/>} />
+              <Route exact path="/orders/track" element={   <PrivateRoute><TraceOrder/></PrivateRoute>} />
 
               <Route exact path="/password/forgot" element={<ForgotPassword/>} />
           
@@ -96,6 +101,7 @@ function App() {
               <Route exact  path="/orders/all" element={<Orders/>} />
 
               <Route exact  path="/orders/status/update" element={<UpdateOrder/>} />
+
               <Route exact  path="/orders/create/confirm/message" element={<OrderSuccess/>} />
 
               <Route exact  path="/checkout" element={<Shipment/>} />
@@ -104,9 +110,9 @@ function App() {
 
               <Route exact  path="/category/all" element={  <Category/>} />
               
-              <Route exact  path="/users/message" element={  <Messages/>} />
+              <Route exact  path="/users/message" element={ <PrivateRoute> <Messages/></PrivateRoute>} />
 
-              <Route exact path="/users/profile" element={   <UserProfile/>} />
+              <Route exact path="/users/profile" element={ <PrivateRoute> <UserProfile/></PrivateRoute>  } />
 
               <Route exact path="*" element={<NotFound/>} />
 

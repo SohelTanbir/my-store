@@ -32,7 +32,6 @@ const TraceOrder = () => {
                 body:JSON.stringify(trackOrder)
             })
             const {success, message} = await (await response).json();
-            console.log(message);
             if(success){
                 setLoader(false);
                 setStatus(message);
