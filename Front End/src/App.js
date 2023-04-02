@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <userContext.Provider value={{cartItems:[cart, setCart], userData:[loggedInUser, setLoggedInUser], prices:[price, setPrice],
+      <userContext.Provider value={{cartItems:[cart, setCart], prices:[price, setPrice],
       quantities:[quantity, setQuantity],
       paymentInfo:[payment, setPayment],
       ordersInfo: [order, setOrder]

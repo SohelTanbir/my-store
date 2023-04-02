@@ -87,7 +87,7 @@
     background: skyblue;
 }
 .button-group .add-to-cart-btn{
-    background: #dfb839;
+    background: #FF6000;
 }
 .product-description{
     padding: 4rem 1.5rem;
@@ -138,7 +138,6 @@
     }
     .product-text {
         width: 100%;
-        padding: 0;
     }
     .product-description p {
         padding-right: 0;

@@ -1,17 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faBars, faCartPlus } from '@fortawesome/free-solid-svg-icons'
-import { userContext } from '../../App';
 import SearchBox from '../SearchBox/SearchBox';
 import RightNav from '../RightNav/RightNav';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-    const {userData} = useContext(userContext);
-    const [loggedInUser, setLoggedInUser] = userData;
-    const [toggle, setToggle] = useState(false);
     const [showNav, setShowNav ] = useState(false);
 
 // show or hide right sidebar menu

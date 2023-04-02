@@ -213,6 +213,24 @@ const logoutUser = async (req, res)=>{
     });
 }
 
+// get loggedin use details
+const getLoginUserDetails = async (req, res ) =>{
+    console.log(req.email);
+    const user = await User.findOne({email:req.email})
+    if(!user){
+        res.status(404).json({
+            success:false,
+            message:"User information not found!" 
+        });
+    }
+    res.status(200).json({
+        success:true,
+        message:"User found successfully!",
+        user,
+    });
+}
+
+
 // forgot password
 const forgotPassword = async (req, res)=>{
     const user =  await User.findOne({email:req.fields.email});
@@ -313,6 +331,7 @@ module.exports ={
     deleteUser,
     loginUser,
     logoutUser,
+    getLoginUserDetails,
     forgotPassword,
     resetPassword
 }
