@@ -27,6 +27,7 @@ import Messages from './components/Dashboard/Messages/Messages';
 import OrderSuccess from './components/OrderSuccess/OrderSuccess'
 import Shipment from './components/Shipment/Shipment';
 import StripePayment from './components/StripePayment/StripePayment';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const userContext = createContext();
 
@@ -65,12 +66,12 @@ function App() {
               <Route exact path="/reviews" element={ <Reviews/>} />
                  
 
-              <Route exact path="/login" element={loggedInUser.name?<Home/>:<Login/>} />
+              <Route exact path="/login" element={<Login/>} />
        
               <Route exact path="/signup" element={<SignUp/>} />
                
 
-              <Route exact path="/dashboard" element={<Dashboard/>} />
+              <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/> </PrivateRoute>} />
 
               <Route exact path="/cart" element={ <Cart/>} />
 
