@@ -15,11 +15,11 @@ const {
 
 // order routes
 //ToDo must be add checklogin
-router.post("/orders/create", createOrder);
+router.post("/orders/create",checkLogin, createOrder);
 router.get("/orders/all", getAllOrders);
 router.get("/orders/me",checkLogin, getMyOrders);
-router.get("/orders/:id", getOrderById);
-router.delete("/orders/delete/:id", deleteOrder);
+router.get("/orders/:id",checkLogin, getOrderById);
+router.delete("/orders/delete/:id",checkLogin, authorization, deleteOrder);
 router.put("/orders/update/:id",checkLogin, authorization, updateOrder);
 router.post("/orders/me/track", trackOrder);
 

@@ -59,10 +59,8 @@ const Orders = () => {
                   })
             } 
             }
-
-
     }
-
+console.log(orderItems);
 
     
 
@@ -93,9 +91,9 @@ const Orders = () => {
                             <td>#{order._id}</td>
                             <td>{order.productInfo[0]?.name}</td>
                             <td><img src={order.productInfo[0]?.image} alt="product" /></td>
-                            <td>Processing</td>
+                            <td>{order.orderStatus}</td>
                             <td>1</td>
-                            <td><span>৳ </span> 150</td>
+                            <td><span>৳ </span>{order.totalPrice}</td>
                             <td>
                                 <Link to="/orders/status/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
                                 <button className='action-btn delete-btn' onClick={()=>deleteProduct(order._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>

@@ -19,7 +19,7 @@ const createOrder  = async (req, res)=>{
             shippingPrice, 
             totalPrice,
             orderStatus,
-            // user:"sohel"
+            user:req.userId
         });
     if(order){
         res.status(200).json({
@@ -72,7 +72,7 @@ const getMyOrders = async (req, res)=>{
         }else{
             res.status(404).json({
                 success:false,
-                "message":"Order not found!"
+                "message":"There is no orders found!"
             });
         }
     } catch (err) {

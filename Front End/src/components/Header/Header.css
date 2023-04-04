@@ -67,6 +67,16 @@
  .header-bottom-search{
     display: none;
  }
+ .loggedin-user{
+    width: 3rem;
+    margin-left: 2.5rem;
+ }
+ .loggedin-user img{
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    object-fit: cover;
+ }
  /*Responsive CSS*/
  /*medium device*/
  @media all and (max-width:767px){

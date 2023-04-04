@@ -162,7 +162,7 @@ const deleteUser =  async (req, res)=>{
 const loginUser =  async (req, res, next) =>{
     try {
         const user =  await User.find({email:req.fields.email}).select("+password   ");
-        console.log(user);
+
         if(user.length >0){
             const {name, email, role} = user[0];
             const isValidPassword = await bcrypt.compare(req.fields.password, user[0].password)
@@ -182,7 +182,7 @@ const loginUser =  async (req, res, next) =>{
                     success:true,
                     message:"Login Success!",
                     access_token:token,
-                    userData:{name, email, role, image:user[0].image[0].url }
+                    userData:{name, email, role, image:user[0].image[0]?.url }
                 });
             }else{
                 res.status(400).json({
@@ -201,6 +201,7 @@ const loginUser =  async (req, res, next) =>{
         res.status(500).json({
             success:false,
             message:"Autentication Failed!",
+            error:err.message
         });
     }
 }
@@ -226,7 +227,7 @@ const getLoginUserDetails = async (req, res ) =>{
     res.status(200).json({
         success:true,
         message:"User found successfully!",
-        user:{id:user._id, name:user.name, email:user.email, role:user.role, image:user.image[0].url }
+        user:{id:user._id, name:user.name, email:user.email, role:user.role, image:user.image[0]?.url }
     });
 }
 

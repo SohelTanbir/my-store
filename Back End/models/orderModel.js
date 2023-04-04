@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Product = require("../models/productModel");
+
 const orderSchema = mongoose.Schema({
     shippingInfo:{
         name:{
@@ -47,6 +47,7 @@ const orderSchema = mongoose.Schema({
     user:{
         type:mongoose.Schema.ObjectId,
         ref:"User",
+        required:true,
     },
     shippingPrice:{
         type:Number,

@@ -15,7 +15,7 @@ const handleRightNav = ()=>{
     setShowNav(!false);
 }
 const cartProducts = useSelector(state => state.cart.cartProducts);
-const {isAuthenticated} = useSelector(state => state.user);
+const {isAuthenticated, user} = useSelector(state => state.user);
 
     return (
        <div className="header">
@@ -29,11 +29,10 @@ const {isAuthenticated} = useSelector(state => state.user);
                     </div>
                    <div className="header-action d-flex align-items-center">
                         <div className="login-btn">
-                         {!isAuthenticated?
+                         {!isAuthenticated&&
                          <Link to="/login">
                             <button>Login</button>
                          </Link>
-                         :  <button>Log out</button>
                         }
                         </div>
                         <div className="add-to-cart">
@@ -47,6 +46,13 @@ const {isAuthenticated} = useSelector(state => state.user);
                         <div className="bars-icon" onClick={handleRightNav}>
                             <FontAwesomeIcon icon={faBars}/>
                         </div>
+                      {isAuthenticated &&
+                        <div className="loggedin-user">
+                          <Link to="/users/profile">
+                                <img src={user.image?user.image: '/user/user.png'} alt="User" />
+                          </Link>
+                        </div>
+                        }
                    </div>
                 </div>
             </div>

@@ -41,6 +41,7 @@ const CheckoutForm = () => {
         const orderResponse = await fetch("http://localhost:5000/api/v1/orders/create", {
           method: 'post',
           headers: { 'content-type': 'application/json' },
+          credentials:'include',  
           body:JSON.stringify(newOrder)
         });
         const {error, success} =await orderResponse.json();
