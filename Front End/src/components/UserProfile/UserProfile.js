@@ -9,19 +9,30 @@ import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import {resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import NotFoundMessage from '../NotFoundMessage/NotFoundMessage';
 
 
 
 const UserProfile = () => {
+    const [loading, setLoading ] = useState(true);
     const dispatch = useDispatch();
     const [myOrders, setMyOrders] = useState([]);
     const navigate = useNavigate();
     const {user} = useSelector(state => state.user);
     // fatch my orders from db
-    useEffect(  ()=>{
-        fetch("http://localhost:5000/api/v1/orders/all")
-        .then(res => res.json())
-        .then(data => setMyOrders(data.orders))
+    const loadMyOrders = async ()=>{
+        const response =  await  fetch("http://localhost:5000/api/v1/orders/me",{
+            credentials:'include',
+        })
+        const {success, orders} = await response.json();
+        // off laoader 
+        if(success || !success){
+            setLoading(false);
+        }
+        setMyOrders(orders)
+    }
+    useEffect(()=>{
+        loadMyOrders();
     }, [])
     // product name modify
     const productName = (name)=>{
@@ -60,7 +71,7 @@ const handleLogOut = async () =>{
             <Header/>
             
         <div className='user-profile'>
-            {myOrders?.length?
+            {!loading ?
             <div className="container">
             <ToastContainer />
             <div className="row">
@@ -76,6 +87,7 @@ const handleLogOut = async () =>{
                 </div>
                 <div className="orders-info">
                     <h4>My Orders ({myOrders.length?myOrders.length:0})</h4>
+                    {myOrders?.length? 
                     <div className="my-orders-table">
                         <table>
                             <tr>
@@ -85,7 +97,8 @@ const handleLogOut = async () =>{
                                 <th>Price </th>
                                 <th>Status</th>
                             </tr>
-                             {myOrders.map(product  =>
+                            
+                          {   myOrders.map(product  =>
                                 <tr>
                                     <td>{product._id}</td>
                                     <td><img src={product.productInfo[0].image} alt="product" /></td>
@@ -94,8 +107,12 @@ const handleLogOut = async () =>{
                                     <td>{product.orderStatus}</td>
                                 </tr>
                                 )}
+                          
                         </table>
                     </div>
+                      :
+                      <NotFoundMessage message="You don't have any orders!"/>
+                      }
                 </div>
                 </div>
             </div>:<Loader/>}
