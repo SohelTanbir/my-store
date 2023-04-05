@@ -35,7 +35,7 @@ const Banner = ()=>{
                         Top Categories 
                     </h3>
                     <ul  className="categori-items">
-                        <li  onClick={handleSelectCategory} className="category-item active-category" data="all">All Categories</li>
+                        <li  onClick={handleSelectCategory} className="category-item active-category" data="">All Categories</li>
                         <li  onClick={handleSelectCategory} className="category-item" data="electronics">Electronics</li>
                         <li onClick={handleSelectCategory} className="category-item" data="men">Men's Fashion</li>
                         <li  onClick={handleSelectCategory} className="category-item" data="women">Women's Fashion</li>
