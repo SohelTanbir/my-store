@@ -161,8 +161,8 @@ const trackOrder =  async (req, res) =>{
     try {
         const {email, orderId } = req.fields
         const order = await Order.findById(orderId);
-        console.log(order);
-        if(order){
+        const orderEmail = order?.shippingInfo?.email;
+        if(order && orderEmail === email){
             res.status(200).json({
                 success:true,
                 message: order.orderStatus

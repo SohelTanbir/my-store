@@ -15,7 +15,8 @@ const Product = () => {
     const searchInputVal =  useSelector(state => state.searchVal.searchVal);
     const pageNumber =  useSelector(state => state.PaginationSlice.page);
     const {category} =  useSelector(state =>state.category);
-    const [totalProduct, setTotalProduct ] =  useState(0)
+    const [totalProduct, setTotalProduct ] =  useState(0);
+    const [searchResult, setSearchSesult ] = useState([]);
 
 
 const loadProduct = async()=>{
@@ -28,12 +29,9 @@ const loadProduct = async()=>{
     setProducts(products);
     setTotalProduct(total)
 }
-
-
     useEffect(()=>{
         loadProduct();
     }, [searchInputVal, pageNumber, category]);
-
 
     return (
        <Fragment>

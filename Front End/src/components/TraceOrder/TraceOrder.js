@@ -56,7 +56,7 @@ const TraceOrder = () => {
                     <ToastContainer/>
                     {loader&& <Loader/>}
                     <div className="container">
-                    {status.length?
+                    {status?
                     <OrderStatus status={status} orderId={trackOrder.orderId}/>:
                     <div className="trace-order-form">
                         <h4>Track your Order</h4>
