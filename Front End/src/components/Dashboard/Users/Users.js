@@ -54,7 +54,8 @@ const Users = () => {
           });
           if(isConfirmed){
             const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
-                method:"DELETE"
+                method:"DELETE",
+                credentials:'include'
             })
             const {success, message } = await response.json();
             if(success){

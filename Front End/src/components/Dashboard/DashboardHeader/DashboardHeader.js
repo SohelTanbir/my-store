@@ -1,14 +1,17 @@
 import React from 'react';
 import './DashboardHeader.css';
-import user from '../../../images/user-photo.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPowerOff} from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import {useSelector } from 'react-redux'
 
 
 
 const DashboardHeader = () => {
+    const {isAuthenticated, user  } = useSelector(state => state.user)
+
+
+
     return (
         <div className="dashboradHeader">
             <div className="dashboard-header">
@@ -21,9 +24,9 @@ const DashboardHeader = () => {
                         </div>
                         <div className="col-9">
                             <div className="activeUser align-items-center">
-                                <p>Admin</p>
+                                <p>{user?.name?user.name:'User'}</p>
                                 <div className="user-photo">
-                                    <img src={user} alt="" />
+                                    <img src={user?.image?user.image: '/user/user.png'} alt="user" />
                                 </div>
                             </div>
                         </div>

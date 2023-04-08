@@ -29,7 +29,7 @@ const Orders = () => {
     //  handle side effect actions
     useEffect(()=>{
         loadOrdersFromDB();
-    })
+    },[])
 
     const deleteProduct =async (orderId)=>{
         const {isConfirmed} = await   Alert.fire({
@@ -43,7 +43,9 @@ const Orders = () => {
           });
           if (isConfirmed) {
             setLoading(true);
-            const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`);
+            const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`,{
+                withCredentials:'include'
+            });
             const {success, message } = res.data;
             if(success){
                 setLoading(false);
@@ -60,7 +62,7 @@ const Orders = () => {
             } 
             }
     }
-console.log(orderItems);
+
 
     
 
