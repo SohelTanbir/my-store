@@ -9,9 +9,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Store/CartSlice/CartSlice';
 
 const ProductDetails = () => {
+    const dispatch =  useDispatch();
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     useEffect(()=>{
@@ -20,33 +22,42 @@ const ProductDetails = () => {
         .then(data => setProduct(data.products));
     }, []);
     
-const handleAddToCart = async(id) =>{
 
-    const cartProduct = {
-        productId:product._id,
-        name:product.name,
-        description:product.description,
-        price:product.price,
-        category:product.category,
-        images:{
-            public_id:product.images[0].public_id,
-            url:product.images[0].url
-        }
+// add product to cart
+const handleAddToCart = async(id) =>{
+        if(product._id===id){
+            const cartProduct = {
+                productId:product._id,
+                name:product.name,
+                description:product.description,
+                price:product.price,
+                category:product.category,
+                quantity:1,
+                images:{
+                    public_id:product.images[0].public_id,
+                    url:product.images[0].url
+                }
+            }
+        const isAdded =     dispatch(addToCart(cartProduct))
+            if(isAdded){
+                toast.success("1 product added to cart!", {position: "top-center",autoClose: 1000,}) 
+               }else{
+    
+                toast.error("Something wrong!", {position: "top-center",autoClose: 1000,}) 
+               }
+            }
     }
-    const res = await fetch("http://localhost:5000/api/v1/cart/add",{
-        method:'post',
-        headers:{
-            'content-type':'application/json',
-        },
-        body:JSON.stringify(cartProduct)
-        }, []);
-    if(res.ok){
-        toast.success("1 Product added to Cart!", {position: "bottom-right",autoClose: 1000,}) 
-       }else{
-        const {message} = await res.json();
-        toast.error(message, {position: "bottom-right",autoClose: 1000,}) 
-       }
-    }
+
+
+
+
+
+
+
+
+
+
+
 
     return (
       <Fragment>
