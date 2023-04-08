@@ -29,7 +29,7 @@ import Shipment from './components/Shipment/Shipment';
 import StripePayment from './components/StripePayment/StripePayment';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { loadLoggedInUserData } from './Store/UserSlice/UserSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import GuestRoute from './components/GuestRoute/GuestRoute';
 
 export const userContext = createContext();

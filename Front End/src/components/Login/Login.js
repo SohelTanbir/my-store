@@ -21,15 +21,12 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const { from } = location.state || { from: { pathname: "/" } };
     const [user, setUser] = useState({});
     const [loading, setLoading ] = useState(false);
-  const intendedUrl = searchParams.get('intended');
-
 
   // login with google account
   const handleGoogleLogin = () => {
@@ -73,27 +70,25 @@ const Login = () => {
     setUser(newUser);
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     const response = await fetch("http://localhost:5000/api/v1/users/login",{
       method:"post",
       headers:{'content-type':'application/json'},
        credentials: 'include',
       body:JSON.stringify(user)
   });
-
   const {success, message, userData} =await response.json();
   if(success){
       if(success || success ){
         setLoading(false);
-      }
-       // dispatch loggedin user 
-       dispatch(getLoginUser({isLogin:true, user:userData}))
-      // show toast notification for add prodcut to cart
+      } 
+
    toast.success(message, {position: "top-center",autoClose: 1000,});
-  // redirect user to home page
+    // dispatch loggedin user 
+    dispatch(getLoginUser({isLogin:true, user:userData}))
 
 
 
@@ -104,6 +99,7 @@ const Login = () => {
   setLoading(false); 
   }
 }
+
 
   return (
     <Fragment>

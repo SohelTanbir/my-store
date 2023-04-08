@@ -6,8 +6,7 @@ const GuestRoute = ({children}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const intendedUrl = searchParams.get('intended');
   const {isAuthenticated, user} = useSelector(state => state.user);
-  const url =intendedUrl?intendedUrl :'/home'
-  console.log(" guest",url);
+  const url =intendedUrl?intendedUrl :'/'
 
 
     return isAuthenticated && user?.email? <Navigate to={url}/>: children 

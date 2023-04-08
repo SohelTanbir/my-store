@@ -8,7 +8,6 @@ const PrivateRoute = ({children}) => {
   const routeName = window.location.pathname;
   const url = `/login?intended=${routeName} `
 
-  console.log(" private ",url);
 
     return isAuthenticated && user?.email? children : <Navigate to={url}/>
     

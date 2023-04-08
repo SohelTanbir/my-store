@@ -6,7 +6,7 @@ import './HeaderTop.css';
 
 
 const HeaderTop = () => {
-          const {isAuthenticated, user} = useSelector(state => state.user);
+          const {user} = useSelector(state => state.user);
 
 
           return (
@@ -25,10 +25,10 @@ const HeaderTop = () => {
                                                             <li>
                                                                       <Link to="/contact">Contact</Link>
                                                             </li>
-                                                         {isAuthenticated&&   
+                                                       
                                                          <li>
                                                                       <Link to="/users/profile">Profile</Link>
-                                                            </li>}
+                                                            </li>
                                                                   
                                                             <li>
                                                                       <Link to="/return/policy">Easy Return</Link>
