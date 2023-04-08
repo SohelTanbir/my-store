@@ -32,7 +32,6 @@ export const UserSlice =  createSlice({
                     builder.addCase(loadLoggedInUserData.fulfilled, (state, action)=>{
                            state.isAuthenticated = action.payload.success?action.payload.success:false;
                            state.user = action.payload.user? action.payload.user:[]
-                     console.log(action.payload);
                     })
           }
 });

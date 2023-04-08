@@ -10,7 +10,8 @@ const createOrder  = async (req, res)=>{
             paymentInfo,
             shippingPrice, 
             totalPrice,
-            orderStatus 
+            orderStatus,
+            email 
         } = req.fields;
         const order = await Order.create({
             shippingInfo,
@@ -19,6 +20,7 @@ const createOrder  = async (req, res)=>{
             shippingPrice, 
             totalPrice,
             orderStatus,
+            email,
             user:req.userId
         });
     if(order){
@@ -159,6 +161,7 @@ const trackOrder =  async (req, res) =>{
     try {
         const {email, orderId } = req.fields
         const order = await Order.findById(orderId);
+        console.log(order);
         if(order){
             res.status(200).json({
                 success:true,

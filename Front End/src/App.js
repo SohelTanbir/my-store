@@ -30,6 +30,7 @@ import StripePayment from './components/StripePayment/StripePayment';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { loadLoggedInUserData } from './Store/UserSlice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import GuestRoute from './components/GuestRoute/GuestRoute';
 
 export const userContext = createContext();
 
@@ -38,15 +39,16 @@ export const userContext = createContext();
 
 function App() {
   const dispatch = useDispatch();
-  const user =  useSelector(state => state.user)
   const [cart, setCart] = useState([]);
   const [price, setPrice] = useState(0);
   const [payment, setPayment] = useState(0)
   const [quantity, setQuantity] = useState(0);
   const [order, setOrder] = useState([]);
 
+
 useEffect(()=>{
-  dispatch(loadLoggedInUserData())
+  dispatch(loadLoggedInUserData());
+
 }, [])
 
 
@@ -71,9 +73,9 @@ useEffect(()=>{
               <Route exact path="/reviews" element={ <PrivateRoute> <Reviews/></PrivateRoute>} />
                  
 
-              <Route exact path="/login" element={<Login/>} />
+              <Route exact path="/login" element={<GuestRoute><Login/></GuestRoute>} />
        
-              <Route exact path="/signup" element={<SignUp/>} />
+              <Route exact path="/signup" element={<GuestRoute><SignUp/></GuestRoute> } />
                
 
               <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/> </PrivateRoute>} />
@@ -90,23 +92,23 @@ useEffect(()=>{
                 
               <Route exact path="/details/:id" element={<ProductDetails/>} />
 
-              <Route exact  path="/products/addproduct" element={<AddProduct/>} /> 
+              <Route exact  path="/products/addproduct" element={<PrivateRoute><AddProduct/></PrivateRoute>} /> 
 
-              <Route exact path="/products/manage" element={<ManageProducts/>} />
+              <Route exact path="/products/manage" element={<PrivateRoute><ManageProducts/></PrivateRoute>} />
 
-              <Route exact path="/products/update/:id" element={<UpdateProduct/>} />
+              <Route exact path="/products/update/:id" element={<PrivateRoute><UpdateProduct/></PrivateRoute>} />
 
-              <Route  exact path="/admin/users" element={<Users/>} />
+              <Route  exact path="/admin/users" element={<PrivateRoute><Users/></PrivateRoute>} />
 
-              <Route exact  path="/orders/all" element={<Orders/>} />
+              <Route exact  path="/orders/all" element={<PrivateRoute><Orders/></PrivateRoute>} />
 
-              <Route exact  path="/orders/status/update" element={<UpdateOrder/>} />
+              <Route exact  path="/orders/status/update" element={<PrivateRoute><UpdateOrder/></PrivateRoute>} />
 
               <Route exact  path="/orders/create/confirm/message" element={<OrderSuccess/>} />
 
-              <Route exact  path="/checkout" element={<Shipment/>} />
+              <Route exact  path="/checkout" element={<PrivateRoute> <Shipment/> </PrivateRoute>} />
 
-              <Route exact  path="/stripe/payment" element={<StripePayment/>} />
+              <Route exact  path="/stripe/payment" element={<PrivateRoute><StripePayment/></PrivateRoute>} />
 
               <Route exact  path="/category/all" element={  <Category/>} />
               

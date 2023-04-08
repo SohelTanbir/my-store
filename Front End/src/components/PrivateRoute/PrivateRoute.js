@@ -3,10 +3,14 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({children}) => {
+
   const {isAuthenticated, user} = useSelector(state => state.user);
+  const routeName = window.location.pathname;
+  const url = `/login?intended=${routeName} `
 
+  console.log(" private ",url);
 
-    return isAuthenticated && user?.email? children : <Navigate to="/login"/>
+    return isAuthenticated && user?.email? children : <Navigate to={url}/>
     
 };
 

@@ -8,7 +8,7 @@ import firebase from "firebase/app";
 import 'firebase/auth';
 import firebaseConfig from '../../firebase/firebase.config';
 import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 
 
@@ -21,14 +21,14 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const { from } = location.state || { from: { pathname: "/" } };
     const [user, setUser] = useState({});
     const [loading, setLoading ] = useState(false);
-
-
+  const intendedUrl = searchParams.get('intended');
 
 
   // login with google account
@@ -73,6 +73,7 @@ const Login = () => {
     setUser(newUser);
   }
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -93,9 +94,8 @@ const Login = () => {
       // show toast notification for add prodcut to cart
    toast.success(message, {position: "top-center",autoClose: 1000,});
   // redirect user to home page
-setTimeout(()=>{
-  navigate("/");
-}, 1100)
+
+
 
 
 
