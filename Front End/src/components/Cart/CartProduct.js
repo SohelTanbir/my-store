@@ -35,7 +35,6 @@ const CartProduct = ({product}) => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes'
           }).then((result) => {
-
             if (result.isConfirmed) {
             dispatch(removeProductFromCart({productId:id}))
                 Alert.fire(

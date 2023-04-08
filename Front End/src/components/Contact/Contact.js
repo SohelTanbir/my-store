@@ -5,11 +5,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
+import { useSelector } from 'react-redux';
 
 const Contact = () => {
+    const {isAuthenticated, user } = useSelector(state => state.user);
     const [message, setMessage] = useState({
-        name:"",
-        email:"",
+        name:isAuthenticated?user.name:"",
+        email:isAuthenticated?user.email:"",
         subject:"",
         message:""
     });

@@ -11,6 +11,7 @@ import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Store/CartSlice/CartSlice';
+import Alert from 'sweetalert2'
 
 const ProductDetails = () => {
     const dispatch =  useDispatch();
@@ -22,10 +23,23 @@ const ProductDetails = () => {
         .then(data => setProduct(data.products));
     }, []);
     
+// handle buy product 
+const handleBuyProduct  = (productId)=>{
+    if(productId){
+    Alert.fire({
+        title: 'We are really sorry!',
+        text: "This feature isn't available at this moment!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+      })
+    }
+}
 
 // add product to cart
-const handleAddToCart = async(id) =>{
-        if(product._id===id){
+const handleAddToCart = async(productId) =>{
+        if(product._id===productId){
             const cartProduct = {
                 productId:product._id,
                 name:product.name,
@@ -46,7 +60,8 @@ const handleAddToCart = async(id) =>{
                 toast.error("Something wrong!", {position: "top-center",autoClose: 1000,}) 
                }
             }
-    }
+}
+
 
 
 
@@ -97,7 +112,7 @@ const handleAddToCart = async(id) =>{
                             </div>
                         </div>}
                         <div className="button-group">
-                            <button className='buy-now-btn'>Buy Now</button>
+                            <button onClick={()=>{handleBuyProduct(product._id)}} className='buy-now-btn'>Buy Now</button>
                             <button onClick={()=>{ handleAddToCart(product._id)}} className='add-to-cart-btn'>Add to Cart</button>
                         </div>
                     </div>
