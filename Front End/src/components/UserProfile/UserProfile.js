@@ -17,6 +17,7 @@ const UserProfile = () => {
     const [loading, setLoading ] = useState(true);
     const dispatch = useDispatch();
     const [myOrders, setMyOrders] = useState([]);
+    const [totalPrice, setTotalPrice ] = useState(0)
     const navigate = useNavigate();
     const {user} = useSelector(state => state.user);
     // fatch my orders from db
@@ -32,7 +33,8 @@ const UserProfile = () => {
         setMyOrders(orders)
     }
     useEffect(()=>{
-        loadMyOrders();
+        loadMyOrders(myOrders);
+        console.log();
     }, [])
     // product name modify
     const productName = (name)=>{
@@ -86,29 +88,41 @@ const handleLogOut = async () =>{
                     <button onClick={handleLogOut} className="logout-btn">Log out</button>
                 </div>
                 <div className="orders-info">
-                    <h4>My Orders ({myOrders.length?myOrders.length:0})</h4>
+                    <h4>My Orders ({myOrders?.length?myOrders.length:0})</h4>
                     {myOrders?.length? 
                     <div className="my-orders-table">
-                        <table>
+                        <table className='text-center'>
                             <tr>
                                 <th>ID</th>
                                 <th>Photo</th>
                                 <th>Name</th>
-                                <th>Price </th>
-                                <th>Status</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
                             </tr>
                             
-                          {   myOrders.map(product  =>
-                                <tr>
-                                    <td>{product._id}</td>
-                                    <td><img src={product.productInfo[0].image} alt="product" /></td>
-                                    <td>{productName(product.productInfo[0].name)}</td>
-                                    <td><span className='taka-sign'>৳ </span> {product.totalPrice}</td>
-                                    <td>{product.orderStatus}</td>
+                          {   myOrders.map((order, index)  =>
+                                    order.productInfo.map(product => (
+                                 
+                                    <tr key={index}>
+                                        <td>{order._id}</td>
+                                        <td><img src={product.image} alt="product" /></td>
+                                        <td>{productName(product.name)}</td>
+                                        <td>{product.quantity}</td>
+                                        <td><span>৳</span> {product.price}</td>
+                                     
+                                    </tr>
+                                
+                                    ))
+                                    
+                                )    
+                             
+                            }
+                              <tr className='bg-dark text-white  px-5'>
+                                     <td colSpan={4}>Total price</td>  
+                                     <td> <span>৳</span>{totalPrice}</td>  
                                 </tr>
-                                )}
-                          
                         </table>
+                        
                     </div>
                       :
                       <NotFoundMessage message="You don't have any orders!"/>

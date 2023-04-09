@@ -16,7 +16,7 @@ const {
 // order routes
 //ToDo must be add checklogin
 router.post("/orders/create",checkLogin, createOrder);
-router.get("/orders/all", getAllOrders);
+router.get("/orders/all",checkLogin, authorization,  getAllOrders);
 router.get("/orders/me",checkLogin, getMyOrders);
 router.get("/orders/:id",checkLogin, getOrderById);
 router.delete("/orders/delete/:id",checkLogin, authorization, deleteOrder);

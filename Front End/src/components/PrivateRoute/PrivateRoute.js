@@ -8,9 +8,10 @@ const PrivateRoute = ({children}) => {
   const routeName = window.location.pathname;
   const url = `/login?intended=${routeName} `
 
-
-    return isAuthenticated && user?.email? children : <Navigate to={url}/>
-    
+  // if(routeName === '/dashboard'){
+  //   return user.role ==='admin' ?  <Navigate to="/dashboard" /> :<Navigate to="/" /> 
+  // }
+  return isAuthenticated && user?.email? children : <Navigate to={url}/>
 };
 
 export default PrivateRoute;

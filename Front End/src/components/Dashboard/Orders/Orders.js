@@ -18,7 +18,9 @@ const Orders = () => {
     const [orderItems, setOrderItems ] = useState([]);
   const [loading, setLoading ] =  useState(true);
     const loadOrdersFromDB = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/orders/all");
+        const res =  await fetch("http://localhost:5000/api/v1/orders/all",{
+            credentials:'include'
+        });
         const {success, orders} = await res.json();
         if(success || !success){
             setLoading(false);
@@ -29,12 +31,12 @@ const Orders = () => {
     //  handle side effect actions
     useEffect(()=>{
         loadOrdersFromDB();
-    },[])
+    },[orderItems])
 
     const deleteProduct =async (orderId)=>{
         const {isConfirmed} = await   Alert.fire({
             title: 'Are you sure want to delete ?',
-            text: "You won't be able to revert the product!",
+            text: "You won't be able to revert the order!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

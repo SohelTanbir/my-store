@@ -11,8 +11,11 @@
 .sideBar ul li a{
     color:#fff;
 }
-.sidebar-with-text{
+.sidebar-with-text {
     width: 22rem;
+    position: sticky;
+    top: 6rem;
+    left: 0;
 }
 .sidebar-without-text{
     width: 2rem;

@@ -43,7 +43,7 @@ const OrderStatus = ({status, orderId}) => {
                             <p className='step-title'>Delivered</p>
                         </div>
                     </div>
-                    <Link to="/my-orders">
+                    <Link to="/users/profile">
                         <button className='btn'>View Order Page</button>
                     </Link>
                 </div>

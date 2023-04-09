@@ -11,7 +11,7 @@ const authorization  = async (req, res, next)=>{
     }else{
         res.status(404).json({
             success:false,
-            message:"You are not authorized for the resources!"
+            message:"You are not authorized for the actions!"
         })
     }
    } catch (err) {
