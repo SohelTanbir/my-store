@@ -17,7 +17,6 @@ const UserProfile = () => {
     const [loading, setLoading ] = useState(true);
     const dispatch = useDispatch();
     const [myOrders, setMyOrders] = useState([]);
-    const [totalPrice, setTotalPrice ] = useState(0)
     const navigate = useNavigate();
     const {user} = useSelector(state => state.user);
     // fatch my orders from db
@@ -33,9 +32,14 @@ const UserProfile = () => {
         setMyOrders(orders)
     }
     useEffect(()=>{
-        loadMyOrders(myOrders);
-        console.log();
-    }, [])
+        loadMyOrders();
+    }, []);
+
+    // calculation total order price
+    let totalPrice = 0;
+    myOrders.map(order => totalPrice += order.totalPrice);
+
+
     // product name modify
     const productName = (name)=>{
         if(JSON.stringify(name).length >30){
@@ -118,8 +122,8 @@ const handleLogOut = async () =>{
                              
                             }
                               <tr className='bg-dark text-white  px-5'>
-                                     <td colSpan={4}>Total price</td>  
-                                     <td> <span>৳</span>{totalPrice}</td>  
+                                     <td colSpan={4}>Total price <small>(shipping fee included)</small></td>  
+                                     <td> <span>৳</span> {totalPrice}</td>  
                                 </tr>
                         </table>
                         
