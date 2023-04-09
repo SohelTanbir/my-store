@@ -7,7 +7,8 @@ const initialState = {
                               shippingInfo:{},
                               paymentInfo:{},
                               shippingPrice:0,
-                              totalPrice:0
+                              totalPrice:0,
+                              totalQuantity:0
 
                     }
           
@@ -26,6 +27,7 @@ const OrderSlice =  createSlice({
                               state.orders.productInfo.push(action.payload.product);
                               state.orders.shippingPrice= action.payload.shippingPrice;
                               state.orders.totalPrice = action.payload.totalPrice;  
+                              state.orders.totalQuantity = action.payload.totalQuantity;  
                     },
                     getShippingInfo:(state, action)=>{
                               state.orders.shippingInfo = action.payload;

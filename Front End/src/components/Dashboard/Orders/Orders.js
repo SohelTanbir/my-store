@@ -72,6 +72,7 @@ const orderDetails = orderId =>{
 }
     
 
+
     return (
         <div className="all-orders">
                <ToastContainer/>
@@ -96,13 +97,13 @@ const orderDetails = orderId =>{
                         {orderItems&& orderItems.map( (order, index) => (
                             <tr>
                             <td>#{order._id}</td>
-                            <td>5</td>
-                            <td>{order.orderStatus}</td>
-                            <td>1</td>
+                            <td>{order?.productInfo?.length}</td>
+                            <td>{order?.orderStatus}</td>
+                            <td>{order?.totalQuantity}</td>
                             <td><span>৳ </span>{order.totalPrice}</td>
                             <td>
-                                <button onClick={()=> orderDetails(order._id)} className='action-btn edit-btn'><FontAwesomeIcon title='View Details' icon={faEye }  /> ||</button>
-                                <button className='action-btn delete-btn' onClick={()=>deleteProduct(order._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
+                                <button onClick={()=> orderDetails(order?._id)} className='action-btn edit-btn'><FontAwesomeIcon title='View Details' icon={faEye }  /> ||</button>
+                                <button className='action-btn delete-btn' onClick={()=>deleteProduct(order?._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                             </td>
                         </tr>
                         ))

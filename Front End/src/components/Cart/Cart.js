@@ -52,7 +52,7 @@ const proceedOrder = ()=>{
             quantity:pd.quantity,
             image:pd.images.url
         }
-        dispatch(getProductInfo({product, shippingPrice, totalPrice}));
+        dispatch(getProductInfo({product, shippingPrice, totalPrice, totalQuantity:quantity}));
         // nagivatye to checkout
         navigate('/checkout');
         return pd;

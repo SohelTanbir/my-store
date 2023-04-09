@@ -11,7 +11,8 @@ const createOrder  = async (req, res)=>{
             shippingPrice, 
             totalPrice,
             orderStatus,
-            email 
+            email,
+            totalQuantity 
         } = req.fields;
         const order = await Order.create({
             shippingInfo,
@@ -21,6 +22,8 @@ const createOrder  = async (req, res)=>{
             totalPrice,
             orderStatus,
             email,
+            email,
+            totalQuantity,
             user:req.userId
         });
     if(order){

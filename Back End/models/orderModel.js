@@ -63,6 +63,11 @@ const orderSchema = mongoose.Schema({
         default:0,
         required:true
     },
+    totalQuantity:{
+        type:Number,
+        default:0,
+        required:true
+    },
     paymentInfo:{
         id:{
             type:String,
@@ -93,6 +98,7 @@ const orderSchema = mongoose.Schema({
         type:Date,
         default:Date.now()
     },
+
     deliveredAt:Date,
 });
 
