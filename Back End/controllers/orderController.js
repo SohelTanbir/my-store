@@ -88,11 +88,11 @@ const getMyOrders = async (req, res)=>{
 // get order by id
 const getOrderById =   async(req, res)=>{
     try {
-        const order = await Order.findById(req.params.id);
-        if(order){
+        const orders = await Order.findById(req.params.id);
+        if(orders){
             res.status(200).json({
                 success:true,
-                order
+                orders
             });
         }else{
             res.status(404).json({

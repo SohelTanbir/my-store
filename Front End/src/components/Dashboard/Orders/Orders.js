@@ -3,8 +3,8 @@ import './Orders.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../../Loader/Loader'
 import axios  from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import Alert from 'sweetalert2'
 
 
 const Orders = () => {
+    const navigete = useNavigate();
     const [orderItems, setOrderItems ] = useState([]);
   const [loading, setLoading ] =  useState(true);
     const loadOrdersFromDB = async()=>{
@@ -65,7 +66,10 @@ const Orders = () => {
             }
     }
 
-
+// go to order details page
+const orderDetails = orderId =>{
+    navigete(`/orders/details/${orderId}`)
+}
     
 
     return (
@@ -83,23 +87,21 @@ const Orders = () => {
                     <table>
                         <tr>
                             <th>Order ID</th>
-                            <th>Name</th>
-                            <th>Photo</th>
+                            <th>Total products</th>
                             <th>Status</th>
                             <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Total price</th>
                             <th>Action</th>
                         </tr>
                         {orderItems&& orderItems.map( (order, index) => (
                             <tr>
                             <td>#{order._id}</td>
-                            <td>{order.productInfo[0]?.name}</td>
-                            <td><img src={order.productInfo[0]?.image} alt="product" /></td>
+                            <td>5</td>
                             <td>{order.orderStatus}</td>
                             <td>1</td>
                             <td><span>৳ </span>{order.totalPrice}</td>
                             <td>
-                                <Link to="/orders/status/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                <button onClick={()=> orderDetails(order._id)} className='action-btn edit-btn'><FontAwesomeIcon title='View Details' icon={faEye }  /> ||</button>
                                 <button className='action-btn delete-btn' onClick={()=>deleteProduct(order._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                             </td>
                         </tr>

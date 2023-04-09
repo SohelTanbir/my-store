@@ -20,7 +20,7 @@ import ManageProducts from './components/Dashboard/ManageProducts/ManageProducts
 import UpdateProduct from './components/Dashboard/UpdateProduct/UpdateProduct';
 import Users from './components/Dashboard/Users/Users.js';
 import Orders from './components/Dashboard/Orders/Orders';
-import UpdateOrder from './components/Dashboard/UpdateOrder/UpdateOrder';
+import UpdateOrder from './components/Dashboard/Orders/UpdateOrder';
 import NotFound from './components/NotFount/NotFound';
 import Category from './components/Dashboard/Category/Category';
 import Messages from './components/Dashboard/Messages/Messages';
@@ -31,6 +31,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import { loadLoggedInUserData } from './Store/UserSlice/UserSlice';
 import { useDispatch } from 'react-redux';
 import GuestRoute from './components/GuestRoute/GuestRoute';
+import OrderDetails from './components/Dashboard/Orders/OrderDetails';
 
 export const userContext = createContext();
 
@@ -103,6 +104,8 @@ useEffect(()=>{
               <Route exact  path="/orders/all" element={<PrivateRoute><Orders/></PrivateRoute>} />
 
               <Route exact  path="/orders/status/update" element={<PrivateRoute><UpdateOrder/></PrivateRoute>} />
+
+              <Route exact  path="/orders/details/:id" element={<PrivateRoute><OrderDetails/></PrivateRoute>} />
 
               <Route exact  path="/orders/create/confirm/message" element={<OrderSuccess/>} />
 
