@@ -1,11 +1,39 @@
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './CartFixed.css'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { userContext } from '../../App';
 
 
 const CartFixed = () => {
+    const [quantity, setQuantity] = useState(0);
+    const {prices}= useContext(userContext);
+    const [price, setPrice ] = prices;
+          const cartProducts = useSelector(state => state.cart.cartProducts);
+
+   
+
+          const productPrice = ()=>{
+              let price = 0;
+              cartProducts&& cartProducts.map(product =>setPrice(price += product.quantity * product.price));
+      
+          }
+          
+          const productQnt = ()=>{
+              let qnt = 0;
+              cartProducts&& cartProducts.map(product =>(qnt += product.quantity));
+              setQuantity(qnt);
+          }
+
+          useEffect(()=>{
+                productPrice();
+                productQnt()
+          })
+
+
+
           return (
                     <div id='cart-fixed'>
                               <Link to="/cart">
@@ -13,11 +41,11 @@ const CartFixed = () => {
                                         <div className="cart-icon-fixed">
                                                   <FontAwesomeIcon icon={faCartPlus}/>
                                         </div>
-                                        <span className='me-2'>10</span> 
+                                        <span className='me-2'>{quantity}</span> 
                                         <span>items</span>
                               </div>
                               <div className="cart-price-fixed">
-                                        <p><span>৳ </span> 1200</p>
+                                        <p><span>৳ </span> {price}</p>
                               </div>
                               </Link>
                     </div>
