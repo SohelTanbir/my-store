@@ -8,6 +8,7 @@ import LatestNews from '../LatestNews/LatestNews';
 import Product from '../Product/Product';
 import SearchBox from '../SearchBox/SearchBox';
 import Service from '../Service/Service';
+import CartFixed from '../Cart/CartFixed';
 
 
 const Home = ()=> {
@@ -16,6 +17,7 @@ const Home = ()=> {
             <HeaderTop/>
             <Header/>
             <div className="home">
+                <CartFixed/>
                 <Banner/>
                 <Service/>
                 <Product/>
