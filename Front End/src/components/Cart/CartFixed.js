@@ -11,7 +11,8 @@ const CartFixed = () => {
     const [quantity, setQuantity] = useState(0);
     const {prices}= useContext(userContext);
     const [price, setPrice ] = prices;
-          const cartProducts = useSelector(state => state.cart.cartProducts);
+    const shippingPrice = Math.floor((price*3)/100);
+    const cartProducts = useSelector(state => state.cart.cartProducts);
 
    
 
@@ -45,7 +46,7 @@ const CartFixed = () => {
                                         <span>items</span>
                               </div>
                               <div className="cart-price-fixed">
-                                        <p><span>৳ </span> {price}</p>
+                                        <p><span>৳ </span> {price +shippingPrice}</p>
                               </div>
                               </Link>
                     </div>

@@ -272,7 +272,6 @@ const forgotPassword = async (req, res)=>{
 
 // reset password
 const resetPassword = async (req, res)=>{
-  
     try {
         const user  = await User.find({
             resetPasswordToken:req.params.id,
@@ -282,10 +281,10 @@ const resetPassword = async (req, res)=>{
         // const isResetPasswordTokenExpired = await User.find({resetPasswordTokenExpire:{$gt:Date.now()}})
     if(user.length > 0 ){
         // check password and confirm password match or not
-        if(req.body.password == req.body.confirmPassword){
+        if(req.fields.password == req.fields.confirmPassword){
             
             // generate hash password
-            const hashPassword = await bcrypt.hash(req.body.password, 10);
+            const hashPassword = await bcrypt.hash(req.fields.password, 10);
             // update user password
             
             const passwordUpdated = await User.updateOne({resetPasswordToken:req.params.id},{$set:{password:hashPassword}});

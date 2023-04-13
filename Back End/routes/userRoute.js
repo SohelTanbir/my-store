@@ -20,8 +20,8 @@ router.get("/users/one/:id",checkLogin, getUserById);
 router.delete("/users/delete/:id",checkLogin, deleteUser);
 router.post("/users/login", loginUser);
 router.get("/users/me",checkLogin, getLoginUserDetails);
-router.post("/users/password/forgot", checkLogin,forgotPassword);
-router.post("/users/password/reset/:id",checkLogin, resetPassword);
+router.post("/users/password/forgot",forgotPassword);
+router.post("/users/password/reset/:id", resetPassword);
 router.get("/users/logout", logoutUser);
 
 
