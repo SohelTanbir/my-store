@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { json } from "react-router-dom";
 
 
 export const loadLoggedInUserData = createAsyncThunk('user/loggedinuser', async()=>{
@@ -22,10 +23,12 @@ export const UserSlice =  createSlice({
                     getLoginUser:(state, action)=>{
                               state.isAuthenticated =  action.payload.isLogin;
                               state.user = action.payload.user;
+                              localStorage.setItem("user", JSON.stringify( action.payload.user))
                     },
                     resetLogggedinUser:(state, action) =>{
                               state.isAuthenticated  = false;
                               state.user = [];
+                              localStorage.setItem("user", "")
                     }
           },
           extraReducers:(builder)=>{
