@@ -140,17 +140,18 @@ const deleteOrder =   async(req, res)=>{
 const updateOrder  = async (req, res) =>{
     try {
         const order = await Order.findByIdAndUpdate(req.params.id, {orderStatus:req.fields.orderStatus});
-        console.log(order);
         if(order){
             res.status(200).json({
                 success:true,
                 message:"Order Updated Successfully!",
                 order
             });
-        }  res.status(400).json({
-            success:false,
-            message:"Order not found!",
-        });
+        }else{
+            res.status(400).json({
+                success:false,
+                message:"Order not found!",
+            });
+        }  
         
     } catch (err) {
         res.status(400).json({
