@@ -139,7 +139,8 @@ const deleteOrder =   async(req, res)=>{
 // update order  -- admin
 const updateOrder  = async (req, res) =>{
     try {
-        const order = await Order.findByIdAndUpdate(req.params.id, {orderStatus:req.body.orderStatus});
+        const order = await Order.findByIdAndUpdate(req.params.id, {orderStatus:req.fields.orderStatus});
+        console.log(order);
         if(order){
             res.status(200).json({
                 success:true,

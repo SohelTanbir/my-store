@@ -11,13 +11,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import UpdateOrderModal from './UpdateOrderModal';
 
 
 
 const Orders = () => {
     const navigete = useNavigate();
+    const [showModal, setShowModal ] = useState(false);
     const [orderItems, setOrderItems ] = useState([]);
-  const [loading, setLoading ] =  useState(true);
+    const [loading, setLoading ] =  useState(true);
+    let [order_id, setOrderId ] = useState("");
     const loadOrdersFromDB = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/orders/all",{
             credentials:'include'
@@ -68,9 +71,13 @@ const Orders = () => {
 
 // go to order details page
 const orderDetails = orderId =>{
-    navigete(`/orders/details/${orderId}`)
+    navigete(`/dashboard/orders/details/${orderId}`)
 }
-    
+// handle order update modal
+const handleUpdateOrderModal = (orderId)=>{
+    setOrderId(orderId);
+    setShowModal(true);
+} 
 
 
     return (
@@ -98,7 +105,9 @@ const orderDetails = orderId =>{
                             <tr>
                             <td>#{order._id}</td>
                             <td>{order?.productInfo?.length}</td>
-                            <td>{order?.orderStatus}</td>
+                            <td>
+                                <button onClick={()=> handleUpdateOrderModal (order._id)} className='btn  btn-outline-success  fs-4'>{order?.orderStatus}</button>
+                            </td>
                             <td>{order?.totalQuantity}</td>
                             <td><span>৳ </span>{order.totalPrice}</td>
                             <td>
@@ -117,7 +126,8 @@ const orderDetails = orderId =>{
                   :<Loader/>
                 }
             </div>
-          
+                {/* order update modal */}
+                <UpdateOrderModal showModal={showModal} setShowModal={setShowModal} order_id={order_id}/>
             </div>
         </div>
     );
