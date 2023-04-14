@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Modal} from 'react-bootstrap';
 import Alert from 'sweetalert2'
+import Loader from '../../Loader/Loader';
+import { BarLoader, BeatLoader } from 'react-spinners';
 
 
 const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
-  const [orderStatus, setOrderStatus ] = useState("");
+  const [orderStatus, setOrderStatus ] = useState("Processing");
+  const [loading, setLoading ] =  useState(false);
   const handleClose = () => setShowModal(false);
 
   const handleChange  = (e) =>{
@@ -12,10 +15,10 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
   }
   const handleSubmit = async(e)=>{
     e.preventDefault();
+    setLoading(true);
      if(orderStatus.length > 0){
        const formData = new FormData();
        formData.set("orderStatus", orderStatus);
-       console.log(order_id);
       const response = await fetch(`http://localhost:5000/api/v1/orders/update/${order_id}`, {
           method:"PUT",
            body:formData,
@@ -23,6 +26,7 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
       });
     const {success, message} = await response.json();
     if(success){
+      setLoading(false);
        Alert.fire(
         message,
            'Order status has been updated!.',
@@ -38,20 +42,22 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
             title: message,
             text:'There was an server error!'
             })
-              }
+            setLoading(false);
+      }
 }else{
       Alert.fire({
       icon: 'error',
         title: 'Order status is  required!',
             text:'You must select order status to update the order!'
          })
+         setLoading(false);
        }
   }
 
 
 
           return (
-                    <div className='order-update-modal'>
+                    <div className='order-update-modal py-5'>
                               <Modal show={showModal} onHide={handleClose} centered>
                               <Modal.Header closeButton>
                                         <Modal.Title className='fs-2'>Update Order</Modal.Title>
@@ -59,16 +65,22 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
                               <Modal.Body>
                                         <div className="row">
                                                   <div className="col-lg-12">
-                                                  <form onSubmit={handleSubmit} className='py-4'>
+                                                 {!loading?
+                                                    <form onSubmit={handleSubmit} className='py-4'>
                                                             <div className="input-group w-100">
                                                                 <select onChange={handleChange} name="orderStatus">
                                                                   <option value="Processing">Processing</option>
                                                                   <option value="Shipped">Shipped</option>
                                                                   <option value="Delivered">Delivered</option>
                                                                 </select>
-                                                                  <input type="submit" className='btn btn-success ms-auto fs-3 my-4 py-2 rounded' value="Update now " />
+                                                                  <input type="submit" className='btn btn-sm btn-success ms-auto fs-3 my-4 py-2 rounded' value="Update now " />
                                                             </div>
-                                                            </form>
+                                                      </form>
+                                                      :
+                                                      <div className="text-center">
+                                                          <BeatLoader  color="#FF6000"  />
+                                                      </div>
+                                                    }
                                                   </div>
                                         </div>
                               </Modal.Body>
