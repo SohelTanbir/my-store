@@ -13,7 +13,7 @@ const UpdateProduct = () => {
     const [category, setCategory ] = useState("");
     const [selectedSize, setSelectedSize ] = useState("");
     const [image, setImage] = useState("");
-    const [loader, setLoader] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { id }= useParams();
 
 
@@ -44,6 +44,7 @@ const findProdcutById = async ()=>{
     // handle add product
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        setLoading(true);
         const formData = new FormData();
         formData.append("image", image);
         if(product.name){
@@ -68,15 +69,14 @@ const findProdcutById = async ()=>{
         }
     // if upload prodcut image then store product in db
     if(product){
-
-        setLoader(false);   
+        setLoading(true)
         const res = await fetch(`http://localhost:5000/api/v1/product/update/${id}`,{
            method:'PUT',
             body:formData
         });
         const {success, message } =  await res.json();
         if(success){
-            setLoader(false);
+            setLoading(false);
             toast.success(message,{position: "top-center",autoClose: 500});
             setProduct({
                 name:"",
@@ -88,11 +88,11 @@ const findProdcutById = async ()=>{
                 description:""
             })
         }else{
-            setLoader(false);
+            setLoading(false)
             toast.error(message,{position: "top-center",autoClose: 1000});
         }
     }else{
-        setLoader(false);
+        setLoading(false)
         toast.error("All field are required!",{position: "top-center",autoClose: 1000});
     }
 }
@@ -101,12 +101,14 @@ const findProdcutById = async ()=>{
     return (
       <Fragment>
         <ToastContainer/>
-            {oldProduct._id?<div className="update-product">
+            {oldProduct._id ?
+            <div className="update-product">
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar></SideBar>
                 <div className="main-part product-update-form">
                    <h2>Update Product</h2>
+                   {!loading ?
                    <form onSubmit={handleSubmit}>
                        <div className="flex-container">
                         <div className="input-group mr-2p">
@@ -173,6 +175,8 @@ const findProdcutById = async ()=>{
                        <button className='submit-btn' type="submit">Update Product</button>
                        </div>
                    </form>
+                   :<Loader/> 
+                   }
                 </div>
             </div>
         </div>:<Loader/>    }
