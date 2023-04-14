@@ -68,7 +68,7 @@ const deleteProduct = async (productId)=>{
 
 // page navigate to update product
 const pageNavigate = (id)=>{
-    navigate(`/products/update/${id}`)
+    navigate(`/dashboard/products/update/${id}`)
 }
 
 useEffect( ( )=>{

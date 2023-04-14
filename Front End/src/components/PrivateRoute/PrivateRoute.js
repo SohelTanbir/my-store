@@ -8,7 +8,6 @@ const PrivateRoute = ({children}) => {
   const routeName = window.location.pathname;
   const url = `/login?intended=${routeName} `;
   const userFromLocalStorage = localStorage.getItem("user");
-  console.log(userFromLocalStorage);
   const loggedInUser = userFromLocalStorage?.length > 0? JSON.parse(userFromLocalStorage) : user;
 
   if(routeName === '/dashboard'){

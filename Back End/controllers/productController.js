@@ -144,6 +144,9 @@ const updateProduct = async (req, res)=>{
                 updateData.price = req.fields.price;
             }
             if(req.fields.brand){
+                updateData.brand = req.fields.brand;
+            }
+            if(req.fields.color){
                 updateData.color = req.fields.color;
             }
             if(req.fields.category){
@@ -158,7 +161,6 @@ const updateProduct = async (req, res)=>{
             if(imgLinks.length > 0){
                 updateData.images = imgLinks[0]
             }
-            console.log("updated = ", updateData);
 
             // update
             Product.findByIdAndUpdate(req.params.id, updateData , (err, data)=>{

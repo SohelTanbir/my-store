@@ -40,25 +40,22 @@ const SideBar = () => {
                             <Link to="/dashboard"><FontAwesomeIcon icon={faTh} /></Link>
                         </li>
                         <li title='Add Product'>
-                            <Link to="/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /></Link>
+                            <Link to="/dashboard/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /></Link>
                         </li>
                         <li title='Manage Product'>
-                            <Link to="/products/manage"><FontAwesomeIcon icon={faEdit} /></Link>
+                            <Link to="/dashboard/products/manage"><FontAwesomeIcon icon={faEdit} /></Link>
                         </li>
                         <li title='Orders'>
-                            <Link to="/orders/all"><FontAwesomeIcon icon={faLayerGroup} /></Link>
+                            <Link to="/dashboard/orders/all"><FontAwesomeIcon icon={faLayerGroup} /></Link>
                         </li>
                         <li title='Category'>
-                            <Link to="/category/all"><FontAwesomeIcon icon={faQrcode} /></Link>
+                            <Link to="/dashboard/category/all"><FontAwesomeIcon icon={faQrcode} /></Link>
                         </li>
-                        <li title='Make Admin'>
-                            <Link to="/admin/make-admin"><FontAwesomeIcon icon={faUserPlus} /></Link>
+                        <li title='users'>
+                            <Link to="/dashboard/admin/users"><FontAwesomeIcon icon={faUsers} /></Link>
                         </li>
-                        <li title='Blog'>
-                            <Link to="/blogs"><FontAwesomeIcon icon={faBlogger} /></Link>
-                        </li>
-                        <li title='Manage Blog'>
-                            <Link to="/manageblogs"><FontAwesomeIcon icon={faEdit} /></Link>
+                        <li title='message'>
+                            <Link to="/dashboard/users/message"><FontAwesomeIcon icon={faEnvelope} /></Link>
                         </li>
                         <li title='Setting'>
                             <Link><FontAwesomeIcon icon={faCog} /></Link>
