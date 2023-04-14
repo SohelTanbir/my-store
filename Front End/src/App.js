@@ -53,6 +53,7 @@ useEffect(()=>{
 }, [])
 
 
+
   return (
     <div className="App">
       <userContext.Provider value={{cartItems:[cart, setCart], prices:[price, setPrice],
@@ -93,19 +94,19 @@ useEffect(()=>{
                 
               <Route exact path="/details/:id" element={<ProductDetails/>} />
 
-              <Route exact  path="/products/addproduct" element={<PrivateRoute><AddProduct/></PrivateRoute>} /> 
+              <Route exact  path="/dashboard/products/addproduct" element={<PrivateRoute><AddProduct/></PrivateRoute>} /> 
 
-              <Route exact path="/products/manage" element={<PrivateRoute><ManageProducts/></PrivateRoute>} />
+              <Route exact path="/dashboard/products/manage" element={<PrivateRoute><ManageProducts/></PrivateRoute>} />
 
-              <Route exact path="/products/update/:id" element={<PrivateRoute><UpdateProduct/></PrivateRoute>} />
+              <Route exact path="/dashboard/products/update/:id" element={<PrivateRoute><UpdateProduct/></PrivateRoute>} />
 
-              <Route  exact path="/admin/users" element={<PrivateRoute><Users/></PrivateRoute>} />
+              <Route  exact path="/dashboard/admin/users" element={<PrivateRoute><Users/></PrivateRoute>} />
 
-              <Route exact  path="/orders/all" element={<PrivateRoute><Orders/></PrivateRoute>} />
+              <Route exact  path="/dashboard/orders/all" element={<PrivateRoute><Orders/></PrivateRoute>} />
 
-              <Route exact  path="/orders/status/update" element={<PrivateRoute><UpdateOrder/></PrivateRoute>} />
+              <Route exact  path="/dashboard/orders/status/update" element={<PrivateRoute><UpdateOrder/></PrivateRoute>} />
 
-              <Route exact  path="/orders/details/:id" element={<PrivateRoute><OrderDetails/></PrivateRoute>} />
+              <Route exact  path="/dashboard/orders/details/:id" element={<PrivateRoute><OrderDetails/></PrivateRoute>} />
 
               <Route exact  path="/orders/create/confirm/message" element={<OrderSuccess/>} />
 
@@ -113,9 +114,9 @@ useEffect(()=>{
 
               <Route exact  path="/stripe/payment" element={<PrivateRoute><StripePayment/></PrivateRoute>} />
 
-              <Route exact  path="/category/all" element={  <Category/>} />
+              <Route exact  path="/dashboard/category/all" element={ <PrivateRoute><Category/>  </PrivateRoute> } />
               
-              <Route exact  path="/users/message" element={ <PrivateRoute> <Messages/></PrivateRoute>} />
+              <Route exact  path="/dashboard/users/message" element={ <PrivateRoute> <Messages/></PrivateRoute>} />
 
               <Route exact path="/users/profile" element={ <PrivateRoute> <UserProfile/></PrivateRoute>  } />
 

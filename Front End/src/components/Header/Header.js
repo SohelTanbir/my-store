@@ -17,6 +17,13 @@ const handleRightNav = ()=>{
 const cartProducts = useSelector(state => state.cart.cartProducts);
 const {isAuthenticated, user} = useSelector(state => state.user);
 
+// removed user info from localstorage if login token expired
+setTimeout(()=>{
+    localStorage.setItem("user", "");
+}, 3600000)
+
+
+
     return (
        <div className="header">
             <div className="container-fluid">

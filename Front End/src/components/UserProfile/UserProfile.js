@@ -83,7 +83,7 @@ const handleLogOut = async () =>{
             <div className="row">
                 <div className="user-info">
                     <div className="profile-photo">
-                        <img src={user?.image?user.image: '/user/user.png'} alt="profile" />
+                        <img src={user?.image?user?.image: '/user/user.png'} alt="profile" />
                     </div>
                     <h3 className='user-name'>{user?.name}</h3>
                     <p> <span>Email: </span>{user?.email}</p>
@@ -104,15 +104,15 @@ const handleLogOut = async () =>{
                                 <th>Price</th>
                             </tr>
                             
-                          {   myOrders.map((order, index)  =>
-                                    order.productInfo.map(product => (
+                          {   myOrders?.map((order, index)  =>
+                                    order?.productInfo.map(product => (
                                  
                                     <tr key={index}>
-                                        <td>{order._id}</td>
-                                        <td><img src={product.image} alt="product" /></td>
-                                        <td>{productName(product.name)}</td>
-                                        <td>{product.quantity}</td>
-                                        <td><span>৳</span> {product.price}</td>
+                                        <td>{order?._id}</td>
+                                        <td><img src={product?.image} alt="product" /></td>
+                                        <td>{productName(product?.name)}</td>
+                                        <td>{product?.quantity}</td>
+                                        <td><span>৳</span> {product?.price}</td>
                                      
                                     </tr>
                                 

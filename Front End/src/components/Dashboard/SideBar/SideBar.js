@@ -14,22 +14,22 @@ const SideBar = () => {
                             <Link to="/dashboard"><FontAwesomeIcon icon={faTh} /> Dashboard</Link>
                         </li>
                         <li>
-                            <Link to="/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /> Add Product</Link>
+                            <Link to="/dashboard/products/addproduct"><FontAwesomeIcon icon={faPlusSquare} /> Add Product</Link>
                         </li>
                         <li>
-                            <Link to="/products/manage"><FontAwesomeIcon icon={faEdit} /> Products</Link>
+                            <Link to="/dashboard/products/manage"><FontAwesomeIcon icon={faEdit} /> Products</Link>
                         </li>
                         <li>
-                            <Link to="/orders/all"><FontAwesomeIcon icon={faLayerGroup} /> Orders</Link>
+                            <Link to="/dashboard/orders/all"><FontAwesomeIcon icon={faLayerGroup} /> Orders</Link>
                         </li>
                         <li>
-                            <Link to="/category/all"><FontAwesomeIcon icon={faQrcode} /> Category</Link>
+                            <Link to="/dashboard/category/all"><FontAwesomeIcon icon={faQrcode} /> Category</Link>
                         </li>
                         <li>
-                            <Link to="/admin/users"><FontAwesomeIcon icon={faUsers} /> Users</Link>
+                            <Link to="/dashboard/admin/users"><FontAwesomeIcon icon={faUsers} /> Users</Link>
                         </li>
                         <li>
-                            <Link to="/users/message"><FontAwesomeIcon icon={faEnvelope} /> Mesages <span className="badge bg-danger">4</span></Link>
+                            <Link to="/dashboard/users/message"><FontAwesomeIcon icon={faEnvelope} /> Mesages <span className="badge bg-danger">4</span></Link>
                         </li>
                         <li>
                             <Link><FontAwesomeIcon icon={faCog} /> Setting</Link>

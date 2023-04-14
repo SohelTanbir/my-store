@@ -17,6 +17,13 @@ const messageSchema  = mongoose.Schema({
         type:String,
         required:true
     },
+    view:{
+        type:String,
+        enum:[true, false],
+        default:false,
+        required:true
+    },
+    
     createdAt:{
         type:Date,
         default:Date.now()

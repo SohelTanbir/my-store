@@ -7,8 +7,9 @@ const PrivateRoute = ({children}) => {
   const {isAuthenticated, user} = useSelector(state => state.user);
   const routeName = window.location.pathname;
   const url = `/login?intended=${routeName} `;
-
-  const loggedInUser =  localStorage.getItem("user").length > 0? JSON?.parse( localStorage?.getItem("user")) : user
+  const userFromLocalStorage = localStorage.getItem("user");
+  console.log(userFromLocalStorage);
+  const loggedInUser = userFromLocalStorage?.length > 0? JSON.parse(userFromLocalStorage) : user;
 
   if(routeName === '/dashboard'){
     return loggedInUser.role ==='admin' ? children  :<Navigate to="/" /> 
