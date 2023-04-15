@@ -9,6 +9,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import AddUserModal from './AddUserModal';
+import UpdateUser from './UpdateUser';
 
 
 
@@ -16,6 +17,7 @@ const Users = () => {
     const [allUsers, setAllUsers ] = useState([]);
     const [loading , setLoading ] = useState(true);
     const [showModal, setShowModal ] = useState(false);
+    const [showUpdateModal, setShowUpdateModal ] = useState(false);
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all",{
@@ -41,7 +43,11 @@ const Users = () => {
         setShowModal(!showModal)
     }
 
-   
+   // update user information
+const updateUser = async(id)=>{
+    setShowUpdateModal(!showUpdateModal)
+}
+// delete a user
     const deleteUser = async(id)=>{
         const {isConfirmed} = await   Alert.fire({
             title: 'Are you sure want to delete?',
@@ -83,6 +89,7 @@ const Users = () => {
         <div className="all-orders">
             <DashboardHeader/>
             <AddUserModal showModal={showModal} setShowModal={setShowModal}/>
+            <UpdateUser showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal}/>
             <div className="dashboard-main">
             <SideBar/>
             <div className="users-main">
@@ -113,7 +120,7 @@ const Users = () => {
                                         <td>{user.createdAt.toLocalTimeString}</td>
                                         <td>Sohel Rana</td>
                                         <td>
-                                            <Link to="/users/update"><button className='action-btn edit-btn'><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button></Link>
+                                            <button className='action-btn edit-btn' onClick={()=> updateUser(user._id)} ><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
                                             <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                                         </td>
                                     </tr>

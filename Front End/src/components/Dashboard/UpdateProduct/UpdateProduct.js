@@ -49,7 +49,8 @@ const findProdcutById = async ()=>{
         formData.append("image", image);
         if(product.name){
             formData.set("name",product.name);
-        }if(product.price){
+        }
+        if(product.price){
             formData.set("price",product.price);
         }
         if(product.brand){
