@@ -23,7 +23,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
                     if(success){
                               Alert.fire(
                                   message,
-                                  'Category has been deleted!.',
+                                  'Category has been created!.',
                                   'success'
                                 ) 
                               // close modal 

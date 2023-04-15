@@ -90,7 +90,7 @@ const AddProduct = () => {
         }else{
             Alert.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: message,
                 text: 'Something went wrong!',
               })
             toast.error(message,{position: "top-center",autoClose: 1000});
@@ -136,16 +136,11 @@ const fileUploader = (e)=>{
                        <input type="text" onChange={handleChange} name='color' placeholder="Color" value={product.color}/>
                        <select name="category" className="mr-2p"  id="category" onChange={handleChange} value={product.category}>
                             <option value="all">Category</option>
-                            <option value="men">Men Fasion</option>
-                            <option value="women">Women Fasion</option>
-                            <option value="winter">Winter Collection</option>
-                            <option value="electronics">Electronics Accesories</option>
-                            <option value="shoes">Shoes Collection</option>
-                            <option value="watch">Watch</option>
-                            <option value="bag">Bags</option>
-                            <option value="t-shirt">T-shirt</option>
-                            <option value="shirt">Shirt</option>
-                            <option value="others">Others</option>
+                           {categories && 
+                               categories?.map(category =>(
+                                    <option value={category?.name}>{category?.name}</option>
+                               )) 
+                            }
                         </select>
                        <select name="size" id="size" onChange={handleChange} value={product.size}>
                             <option value="all">Size</option>
