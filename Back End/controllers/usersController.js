@@ -130,6 +130,68 @@ const getUserById =  async (req, res)=>{
         });
     }
 }
+
+// update user
+const updateUser =  async(req, res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+    if(!user){
+      return  res.status(404).json({
+            success:false,
+            message:"User not found!"
+        });
+    }
+    const imgLinks = [];
+    if(req.files.image){
+        const path =req.files.image.path;
+        if(req.files.image.type == 'image/jpg' || req.files.image.type == 'image/png' || req.files.image.type == 'image/jpeg'){
+            const {url, public_id} = await  cloudinary.uploader.upload(path,{folder:"mystore"});
+            imgLinks.push({public_id, url})
+        }
+          // delete previous image from cloudinary 
+          if(user.image.length > 0){
+              const {result } = await cloudinary.uploader.destroy(user.image[0]?.public_id);
+          }
+          const updateData = {
+            name:req.fields.name,
+            email:req.fields.email,
+            role:req.fields.role,
+            password:req.fields.password,
+            image:imgLinks
+          };
+        // update 
+        const updated = await User.updateOne({_id:req.params.id}, {$set:updateData})
+        if(!updated.modifiedCount){
+            return  res.status(500).json({
+                    success:false,
+                    message:"User update failed!"
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            message:"User updated Successfully!"
+        });
+    }
+   // update user data without image 
+  const updated = await User.updateOne({_id:req.params.id}, {$set:req.fields})
+  if(!updated.modifiedCount){
+    return  res.status(500).json({
+            success:false,
+            message:"User update failed!"
+        });
+  }
+  return res.status(200).json({
+    success:true,
+    message:"User updated Successfully!"
+});
+    } catch (err) {
+        console.log(err);
+      return  res.status(400).json({
+            success:false,
+            message:err.message
+        });
+    }
+}
 // delete user by Id
 const deleteUser =  async (req, res)=>{
     try {
@@ -218,13 +280,13 @@ const logoutUser = async (req, res)=>{
 const getLoginUserDetails = async (req, res ) =>{
     const user = await User.findOne({email:req.email});
     if(!user){
-        res.status(404).json({
+     return   res.status(404).json({
             success:false,
             message:"There is no loggedin user found!",
             user:[] 
         });
     }
-    res.status(200).json({
+   return res.status(200).json({
         success:true,
         message:"User found successfully!",
         user:{id:user._id, name:user.name, email:user.email, role:user.role, image:user.image[0]?.url }
@@ -328,6 +390,7 @@ module.exports ={
     createUser,
     getAllUsers,
     getUserById,
+    updateUser,
     deleteUser,
     loginUser,
     logoutUser,

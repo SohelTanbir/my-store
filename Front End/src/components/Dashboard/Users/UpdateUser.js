@@ -1,23 +1,24 @@
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
 import './UpdateUser.css';  
 
-const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
+const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
   const [file, setFile ] = useState("");
   const [previewImageUrl, setPreviewImageUrl ] = useState("");
+
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
-    role: "user",
+    role: "",
   });
   const handleClose = () => setShowUpdateModal(false);
 
   const handleChange = (e) => {
-          const newUser = {...user}
+          const newUser = {...user, email:"soheltanbir19@gmail.com"}
           newUser[e.target.name] = e.target.value;
           setUser(newUser);
           const files = e.target.files &&  e.target.files[0]
@@ -29,8 +30,11 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
           // read image file
           files && reader.readAsDataURL(files);
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(user);
     if (user.name || user.email || user.password || user.role) {
       const formData = new FormData();
       formData.set("image", file);
@@ -48,17 +52,18 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
       }
     
     const response = await fetch(
-        "http://localhost:5000/api/v1/users/",
+        `http://localhost:5000/api/v1/users/update/one/`,
         {
           method: "POST",
           body: formData,
+          credentials:'include'
         }
       );
       const { success, message } = await response.json();
       if (success) {
         Alert.fire(message, `User updated successfully!`, "success");
         // close modal
-        showUpdateModal(false);
+        setShowUpdateModal(false);
         // reset user information
         setUser({
           name: "",
@@ -70,7 +75,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
         Alert.fire({
           icon: "error",
           title: message,
-          text: `Already you have an account!`,
+          text: `Sorry we didn't find your account!`,
         });
       }
     } else {
@@ -83,11 +88,13 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
   };
 
 
+
+
   return (
     <div className="user-update-modal" >
       <Modal show={showUpdateModal} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title className="fs-2">Update User</Modal.Title>
+          <Modal.Title className="fs-2">Update User </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="row">
@@ -100,7 +107,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
                     className="form-control w-100 fs-3 py-3"
                     name="name"
                     placeholder="Name"
-                    defaultValue={user.name}
+                    defaultValue={selectedUser.name}
                   />
                 </div>
                 <div className="input-group w-100 mb-5">
@@ -110,7 +117,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
                     className="form-control w-100 fs-3 py-3"
                     name="email"
                     placeholder="Email"
-                    defaultValue={user.email}
+                    defaultValue={selectedUser.email}
                   />
                 </div>
                 <div className="input-group w-100 mb-5">
@@ -120,7 +127,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal }) => {
                     className="form-control w-100 fs-3 py-3"
                     name="password"
                     placeholder="Password"
-                    defaultValue={user.password}
+                    defaultValue={user?.password}
                   />
                 </div>
                 <div className="input-group w-100 mb-4">

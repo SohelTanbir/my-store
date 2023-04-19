@@ -8,7 +8,8 @@ const {
     forgotPassword, 
     resetPassword, 
     getUserById, 
-    getLoginUserDetails} = require("../controllers/usersController");
+    getLoginUserDetails,
+    updateUser} = require("../controllers/usersController");
 const checkLogin = require("../middleware/checkLogin");
 const router  = express.Router();
 
@@ -17,6 +18,7 @@ const router  = express.Router();
 router.get("/users/all",checkLogin, getAllUsers);
 router.post("/users/signup", createUser);
 router.get("/users/one/:id",checkLogin, getUserById);
+router.post("/users/update/one/:id",checkLogin, updateUser);
 router.delete("/users/delete/:id",checkLogin, deleteUser);
 router.post("/users/login", loginUser);
 router.get("/users/me",checkLogin, getLoginUserDetails);

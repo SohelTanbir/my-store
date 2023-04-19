@@ -4,7 +4,7 @@ import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../../Loader/Loader'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
@@ -14,10 +14,12 @@ import UpdateUser from './UpdateUser';
 
 
 const Users = () => {
+    const navigate = useNavigate();
     const [allUsers, setAllUsers ] = useState([]);
     const [loading , setLoading ] = useState(true);
     const [showModal, setShowModal ] = useState(false);
     const [showUpdateModal, setShowUpdateModal ] = useState(false);
+    const [selectedUser, setSelelectUser]  = useState([])
 
     const loadUsers = async()=>{
         const res =  await fetch("http://localhost:5000/api/v1/users/all",{
@@ -36,7 +38,7 @@ const Users = () => {
     //  handle side effect actions
     useEffect(()=>{
         loadUsers();
-    },[allUsers])
+    }, [allUsers])
 
     // handle modal close or Show
     const handleModal = ()=>{
@@ -45,7 +47,14 @@ const Users = () => {
 
    // update user information
 const updateUser = async(id)=>{
-    setShowUpdateModal(!showUpdateModal)
+    const response =  await fetch(`http://localhost:5000/api/v1/users/one/${id}`,{
+        credentials:'include'
+    });
+    const {user} =  await response.json();
+    setSelelectUser(user);
+    setShowUpdateModal(true);
+    navigate(`/dashboard/admin/update/${id}`)
+    
 }
 // delete a user
     const deleteUser = async(id)=>{
@@ -83,13 +92,16 @@ const updateUser = async(id)=>{
     }
 
 
-
+const convertLocalDate = (utcDate) =>{
+    const date = new Date(utcDate);
+    return date.toLocaleString();
+}
 
     return (
         <div className="all-orders">
             <DashboardHeader/>
             <AddUserModal showModal={showModal} setShowModal={setShowModal}/>
-            <UpdateUser showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal}/>
+            <UpdateUser showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} selectedUser={selectedUser}/>
             <div className="dashboard-main">
             <SideBar/>
             <div className="users-main">
@@ -108,7 +120,6 @@ const updateUser = async(id)=>{
                                         <th>Email</th>
                                         <th>Role</th>
                                         <th>CreatedAt</th>
-                                        <th>Created  By</th>
                                         <th>Action</th>
                                     </tr>
                                     {allUsers.map(user =>(
@@ -117,10 +128,9 @@ const updateUser = async(id)=>{
                                         <td><img src={user.image[0]?user.image[0].url : '/user/user.png' } alt="No Photos" /></td>
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
-                                        <td>{user.createdAt.toLocalTimeString}</td>
-                                        <td>Sohel Rana</td>
+                                        <td>{convertLocalDate(user.createdAt)}</td>
                                         <td>
-                                            <button className='action-btn edit-btn' onClick={()=> updateUser(user._id)} ><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
+                                            <button className='action-btn edit-btn' onClick={()=> updateUser(user._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
                                             <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                                         </td>
                                     </tr>

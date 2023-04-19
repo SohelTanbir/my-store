@@ -32,6 +32,7 @@ import { loadLoggedInUserData } from './Store/UserSlice/UserSlice';
 import { useDispatch } from 'react-redux';
 import GuestRoute from './components/GuestRoute/GuestRoute';
 import OrderDetails from './components/Dashboard/Orders/OrderDetails';
+import UserUpdate from './components/Dashboard/Users/UserUpdate';
 
 export const userContext = createContext();
 
@@ -101,6 +102,8 @@ useEffect(()=>{
               <Route exact path="/dashboard/products/update/:id" element={<PrivateRoute><UpdateProduct/></PrivateRoute>} />
 
               <Route  exact path="/dashboard/admin/users" element={<PrivateRoute><Users/></PrivateRoute>} />
+
+              <Route  exact path="/dashboard/admin/update/:id" element={<PrivateRoute><UserUpdate/></PrivateRoute>} />
 
               <Route exact  path="/dashboard/orders/all" element={<PrivateRoute><Orders/></PrivateRoute>} />
 
