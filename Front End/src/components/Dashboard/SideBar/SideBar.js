@@ -1,12 +1,39 @@
 import React from 'react';
 import './SideBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {    faCog, faEdit, faEnvelope, faLayerGroup, faPlusSquare,faQrcode,faTh, faUserPlus, faUsers} from '@fortawesome/free-solid-svg-icons'
-import { faBlogger } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import {  faEdit, faEnvelope, faLayerGroup, faPlusSquare,faPowerOff,faQrcode,faTh, faUsers} from '@fortawesome/free-solid-svg-icons'
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { resetLogggedinUser } from '../../../Store/UserSlice/UserSlice';
 
 
 const SideBar = () => {
+const dispatch = useDispatch();
+const navigate =  useNavigate();
+
+
+
+
+// handle Log out user
+const handleLogOut = async () =>{
+    const response = await fetch("http://localhost:5000/api/v1/users/logout",{
+        credentials:'include'
+    });
+    const {success, message } = await response.json();
+    if(success){
+        toast.success("Hello",{position: "top-center",autoClose: 1000});
+        // redirect to home page
+        setTimeout(()=>{
+            dispatch(resetLogggedinUser());
+            navigate("/dashboard/api")
+        }, 1500)
+    }else{
+
+        toast.error(message,{position: "top-center",autoClose: 1000});
+    }
+}
+
     return (
         <div className="sideBar">
                     <ul className='sidebar-with-text'>
@@ -31,8 +58,8 @@ const SideBar = () => {
                         <li>
                             <Link to="/dashboard/users/message"><FontAwesomeIcon icon={faEnvelope} /> Mesages <span className="badge bg-danger">4</span></Link>
                         </li>
-                        <li>
-                            <Link><FontAwesomeIcon icon={faCog} /> Setting</Link>
+                        <li title='Log out' onClick={handleLogOut}>
+                            <Link><FontAwesomeIcon icon={faPowerOff} /> Log out</Link>
                         </li>
                     </ul>
                     <ul className='sidebar-without-text'>
@@ -57,8 +84,8 @@ const SideBar = () => {
                         <li title='message'>
                             <Link to="/dashboard/users/message"><FontAwesomeIcon icon={faEnvelope} /></Link>
                         </li>
-                        <li title='Setting'>
-                            <Link><FontAwesomeIcon icon={faCog} /></Link>
+                        <li title='Log out' onClick={handleLogOut}>
+                            <Link><FontAwesomeIcon icon={faPowerOff} /></Link>
                         </li>
                     </ul>
         </div>
