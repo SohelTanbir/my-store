@@ -1,28 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './RightNav.css';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Link } from 'react-router-dom';
-import userPhoto from '../../images/users/sohelrana.jpg';
+import { Link, useNavigate } from 'react-router-dom';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faCompass, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import {  faCompass, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
 
 
 const RightNav =  ({showNav, setShowNav}) =>{
+  const dispatch = useDispatch();
+const navigate =  useNavigate();
+  const {isAuthenticated, user} = useSelector(state => state.user)
 
+  // handle close navbar 
   const handleClose = () => setShowNav(false);
+
+
+// handle Log out user
+const handleLogOut = async () =>{
+  const response = await fetch("http://localhost:5000/api/v1/users/logout",{
+      credentials:'include'
+  });
+  const {success, message } = await response.json();
+  if(success){
+      toast.success(message,{position: "top-center",autoClose: 1000});
+      // redirect to home page
+      setTimeout(()=>{
+          dispatch(resetLogggedinUser());
+          navigate("/login")
+      }, 1500)
+  }else{
+
+      toast.error(message,{position: "top-center",autoClose: 1000});
+  }
+}
+
+
 
   return (
     <>
       <Offcanvas show={showNav} onHide={handleClose} placement="end" id="Right-menu">
         <Offcanvas.Header>
+         {isAuthenticated ?
           <div className="login-user">
-                <img src={userPhoto} alt="user" />
-                <h4>Sohel Rana</h4>
+                <img src={user.image?user.image: '/user/user.png'} alt="user" />
+                <h4 className='text-capitalize'>{user.name}</h4>
           </div>
+          :
+          <div className="login-user">
+                <img src="/user/user.png" alt="user" />
+                <h4>Guest</h4>
+          </div>
+          }
         </Offcanvas.Header>
         <Offcanvas.Body>
 
         <ul className='sidebar-right-menu'>
+              {isAuthenticated &&
                 <li>
                   <Link to="/users/profile">
                     <div className="left-icon">
@@ -31,6 +67,7 @@ const RightNav =  ({showNav, setShowNav}) =>{
                       Profile
                     </Link>
                 </li>
+                }
                 <li>
                   <Link to="/orders/track">
                     <div className="left-icon">
@@ -55,8 +92,9 @@ const RightNav =  ({showNav, setShowNav}) =>{
                     Easy Return
                   </Link>
                 </li>
-              
-                <li>
+              {
+              isAuthenticated &&
+                <li onClick={handleLogOut}>
                   <Link to="#">
                   <div className="left-icon">
                       <FontAwesomeIcon icon={faPowerOff}/>
@@ -64,6 +102,7 @@ const RightNav =  ({showNav, setShowNav}) =>{
                     Log out
                   </Link>
                 </li>
+                }
       </ul>
       
         </Offcanvas.Body>
