@@ -83,6 +83,7 @@ useEffect(()=>{
 
               <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/> </PrivateRoute>} />
 
+
               <Route exact path="/cart" element={ <Cart/>} />
 
               <Route exact path="/contact" element={ <PrivateRoute> <Contact/> </PrivateRoute>} />

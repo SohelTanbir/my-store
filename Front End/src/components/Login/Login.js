@@ -17,6 +17,7 @@ import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { getLoginUser } from '../../Store/UserSlice/UserSlice';
 import { useDispatch } from 'react-redux';
+import { baseUrl } from '../../config';
 firebase.initializeApp(firebaseConfig);
 
 
@@ -74,7 +75,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
 
-    const response = await fetch("http://localhost:5000/api/v1/users/login",{
+    const response = await fetch(`${baseUrl}/api/v1/login`,{
       method:"post",
       headers:{'content-type':'application/json'},
        credentials: 'include',
