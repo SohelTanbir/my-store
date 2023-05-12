@@ -7,8 +7,9 @@ const utilities = {
               if (!regx) {
                 return false;
               }
+              return true
         }
-        return false
+        
     }
 }
 

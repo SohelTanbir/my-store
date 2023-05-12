@@ -31,7 +31,7 @@ const createUser = async (req, res)=>{
                         if(!err){
                             res.status(200).json({
                                 success:true,
-                                message:"User Created Successfully!",
+                                message:" Account has been  cSuccessfully!",
                             });
                         }else{
                             res.status(400).json({
