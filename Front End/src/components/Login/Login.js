@@ -18,6 +18,7 @@ import HeaderTop from '../Header/HeaderTop';
 import { getLoginUser } from '../../Store/UserSlice/UserSlice';
 import { useDispatch } from 'react-redux';
 import { baseUrl } from '../../config';
+import { isValidEmail } from '../../utilities';
 firebase.initializeApp(firebaseConfig);
 
 
@@ -28,6 +29,7 @@ const Login = () => {
     const { from } = location.state || { from: { pathname: "/" } };
     const [user, setUser] = useState({});
     const [loading, setLoading ] = useState(false);
+    const [showError, setShowError ] = useState({});
 
   // login with google account
   const handleGoogleLogin = () => {
@@ -69,12 +71,36 @@ const Login = () => {
     const newUser = { ...user };
     newUser[e.target.name] = e.target.value;
     setUser(newUser);
+    if(e.target.name =='email'){
+      if(! isValidEmail(user.email)){
+          setShowError({email:"Invalid email address!"})
+          return ""
+         }
+         setShowError({email:""});
+     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
+        // email validation
+        if(!user.email){
+          setShowError({email:"Please enter email address!"})
+          return
+      }
+      setShowError({email:""});
+    // password validation
+    if(!user.password){
+      setShowError({password:"Please enter pasword!"})
+      return
+  }
+  setShowError({password:""});
+  if(user.password.length < 6){
+      setShowError({password:"Password must be 6 digit"})
+      return
+  }
+  setShowError({password:""});
+    setLoading(true);
     const response = await fetch(`${baseUrl}/api/v1/login`,{
       method:"post",
       headers:{'content-type':'application/json'},
@@ -90,11 +116,6 @@ const Login = () => {
    toast.success(message, {position: "top-center",autoClose: 1000,});
     // dispatch loggedin user 
     dispatch(getLoginUser({isLogin:true, user:userData}))
-
-
-
-
-
   }else{
   toast.error(`${message}!`, {position: "top-center",autoClose: 1000,});
   setLoading(false); 
@@ -113,8 +134,11 @@ const Login = () => {
               <h3>Login</h3>
               <div className="inputBox">
                 <form onSubmit={handleSubmit}>
-                  <input type="email" name="email" onChange={handleInput} placeholder="Email" required /> <br />
+                  <input type="email" name="email" onChange={handleInput} placeholder="Email" /> <br />
+                  {showError.email && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.email}</p>}
+
                   <input type="password" name="password" onChange={handleInput} placeholder="Password" /> <br />
+                  {showError.password && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.password}</p>}
                   <button className="loginBtn">
                     <FontAwesomeIcon icon={faUser} /><span>Login Now</span></button>
                   <div className="forgot-password">
@@ -124,12 +148,7 @@ const Login = () => {
                   </div>
                 </form>
               </div>
-              <div className="loginOption">
-                <h4>Login Up With</h4>
-                <button onClick={handleFacebookLogin} className="facebook"><FontAwesomeIcon icon={faFacebookSquare} /> Facebook</button>
-                <button onClick={handleGoogleLogin} className="google"><FontAwesomeIcon icon={faGoogle} /> Google</button>
-                <Link to="/signup" className='create-account'>Don't have an Account? <span>Create now</span></Link>
-              </div>
+             
             </div>
           </div>
           <ToastContainer/>
