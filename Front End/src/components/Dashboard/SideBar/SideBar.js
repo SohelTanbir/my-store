@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { resetLogggedinUser } from '../../../Store/UserSlice/UserSlice';
-
+import Alert from 'sweetalert2'
 
 const SideBar = () => {
 const dispatch = useDispatch();
@@ -15,23 +15,33 @@ const navigate =  useNavigate();
 
 
 
-// handle Log out user
 const handleLogOut = async () =>{
-    const response = await fetch("http://localhost:5000/api/v1/users/logout",{
-        credentials:'include'
-    });
-    const {success, message } = await response.json();
-    if(success){
-        toast.success("Hello",{position: "top-center",autoClose: 1000});
-        // redirect to home page
-        setTimeout(()=>{
-            dispatch(resetLogggedinUser());
-            navigate("/dashboard/api")
-        }, 1500)
-    }else{
+    Alert.fire({
+        title: 'Are you sure you want to log out?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#FF6000',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            fetch("http://localhost:5000/api/v1/users/logout",{
+                credentials:'include'
+            })
+            .then(res => res.json())
+            .then(result =>{
+                if(result.success){
+                    toast.success("Log out successfully!", { position: "top-center", autoClose: 1000 });
+                    setTimeout(()=>{
+                        dispatch(resetLogggedinUser());
+                        navigate("/login")
+                    }, 1500)
+                }
+            })
+        }
+      })
 
-        toast.error(message,{position: "top-center",autoClose: 1000});
-    }
+
 }
 
     return (

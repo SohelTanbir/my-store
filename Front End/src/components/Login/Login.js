@@ -7,12 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../../firebase/firebase.config";
-import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
+
 import {
   Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
 } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
@@ -20,15 +17,12 @@ import Header from "../Header/Header";
 import HeaderTop from "../Header/HeaderTop";
 import { getLoginUser } from "../../Store/UserSlice/UserSlice";
 import { useDispatch } from "react-redux";
-import { BaseUrl, baseUrl } from "../../config";
+import { BaseUrl } from "../../config";
 import { isValidEmail } from "../../utilities";
 firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { from } = location.state || { from: { pathname: "/" } };
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState({});
@@ -38,7 +32,7 @@ const Login = () => {
     const newUser = { ...user };
     newUser[e.target.name] = e.target.value;
     setUser(newUser);
-    if (e.target.name == "email") {
+    if (e.target.name === "email") {
       if (!isValidEmail(user.email)) {
         setShowError({ email: "Invalid email address!" });
         return "";
@@ -68,7 +62,7 @@ const Login = () => {
       return;
     }
     setShowError({ password: "" });
-    setLoading(true);
+
     const response = await fetch(`${BaseUrl}/api/v1/users/login`, {
       method: "post",
       headers: { "content-type": "application/json" },
@@ -79,7 +73,6 @@ const Login = () => {
     if (success) {
       if (success || success) {
         setLoading(false);
-        return
       }
       setLoading(false);
       toast.success(message, { position: "top-center", autoClose: 1000 });
@@ -87,7 +80,7 @@ const Login = () => {
       dispatch(getLoginUser({ isLogin: true, user: userData }));
     } else {
       toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
-      setLoading(false);
+ 
     }
   };
 
