@@ -8,7 +8,6 @@ import Header from '../Header/Header';
 
 
 
-
 const ResetPassword = () => {
     const navigate = useNavigate();
     const [resetPassword, setResetPassword] = useState({
@@ -17,6 +16,8 @@ const ResetPassword = () => {
     });
     const [loader, setLoader] =  useState(false);
     const { token } = useParams();
+    const [showError, setShowError] = useState({});
+
     const handleChange = (e)=>{
         const newPassword = {...resetPassword};
         newPassword[e.target.name] = e.target.value;
@@ -24,8 +25,33 @@ const ResetPassword = () => {
     }
     // submit email and get the reset password url
     const handleSubmit = async e =>{
-        setLoader(true);
+
         e.preventDefault();
+        // validate password
+        if (!resetPassword.password) {
+            setShowError({ password: "Please enter new pasword!" });
+            return;
+          }
+          setShowError({ password: "" });
+          if (resetPassword.password.length < 6) {
+            setShowError({ password: "Password must be 6 digit" });
+            return;
+          }
+          setShowError({ password: "" });
+
+        // validate confirm password
+        if (!resetPassword.confirmPassword) {
+            setShowError({ confirmPassword: "Please enter confirm pasword!" });
+            return;
+          }
+          setShowError({ password: "" });
+          if (resetPassword.confirmPassword.length < 6) {
+            setShowError({ confirmPassword: "Confirm password must be 6 digit" });
+            return;
+          }
+          setShowError({ confirmPassword: "" });
+          setLoader(true);
+
        if(resetPassword.password.length > 0 && resetPassword.confirmPassword.length > 0){
         if(resetPassword.password === resetPassword.confirmPassword){
             const response = await  fetch(`http://localhost:5000/api/v1/users/password/reset/${token}`,{
@@ -50,7 +76,7 @@ const ResetPassword = () => {
         }
         }else{
             setLoader(false);
-            toast.error("New password and confirm password is not match!",{position: "top-center",autoClose: 2000});
+            toast.error(" Confirm password is not match!",{position: "top-center",autoClose: 2000});
         }
        }else{
         toast.error("All field required!",{position: "top-center",autoClose: 1000});
@@ -70,7 +96,17 @@ const ResetPassword = () => {
                     <p>You are ready to set new password.</p>
                     <form onSubmit={handleSubmit}>
                         <input type="password" onChange={handleChange} name='password' placeholder='New password' value={resetPassword.password}/> <br />
-                        <input type="password" onChange={handleChange} name='confirmPassword' placeholder='Confirm password' value={resetPassword.confirmPassword}/> <br />
+                        {showError.password && (
+                    <p className="text-danger fw-bold p-2 fs-5 text-start">
+                      {showError.password}
+                    </p>
+                  )}
+                    <input type="password" onChange={handleChange} name='confirmPassword' placeholder='Confirm password' value={resetPassword.confirmPassword}/> <br />
+                    {showError.confirmPassword && (
+                    <p className="text-danger fw-bold p-2 fs-5 text-start">
+                      {showError.confirmPassword}
+                    </p>
+                  )}
                         <button className='set-password-btn'>Save Change</button>
                     </form>
                 </div>

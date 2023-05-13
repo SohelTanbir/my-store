@@ -48,8 +48,8 @@ const ForgotPassword = () => {
                         <h4>Forgot Password?</h4>
                         <p>Please Enter your email, we will send a link to reset your password</p>
                         <form onSubmit={handleSubmit}>
-                            <input type="text" onChange={handleChange} placeholder='Enter your email or phone number'/> <br />
-                            <button className='reset-password-btn'>Send link</button>
+                            <input type="text" onChange={handleChange} placeholder='Enter your email '    /> <br />
+                            <button className='reset-password-btn'>Reset link</button>
                         </form>
                     </div>
                 </div>
