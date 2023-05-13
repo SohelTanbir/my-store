@@ -10,7 +10,7 @@ import HeaderTop from '../Header/HeaderTop';
 import {resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import NotFoundMessage from '../NotFoundMessage/NotFoundMessage';
-
+import Alert from 'sweetalert2'
 
 
 const UserProfile = () => {
@@ -53,21 +53,32 @@ const UserProfile = () => {
 
 // handle Log out user
 const handleLogOut = async () =>{
-    const response = await fetch("http://localhost:5000/api/v1/users/logout",{
-        credentials:'include'
-    });
-    const {success, message } = await response.json();
-    if(success){
-        toast.success(message,{position: "top-center",autoClose: 1000});
+    Alert.fire({
+        title: 'Are you sure you want to log out?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#FF6000',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            fetch("http://localhost:5000/api/v1/users/logout",{
+                credentials:'include'
+            })
+            .then(res => res.json())
+            .then(result =>{
+                if(result.success){
+                    toast.success("Log out successfully!", { position: "top-center", autoClose: 1000 });
+                    setTimeout(()=>{
+                        dispatch(resetLogggedinUser());
+                        navigate("/login")
+                    }, 1500)
+                }
+            })
+        }
+      })
 
-        // redirect to home page
-        setTimeout(()=>{
-            dispatch(resetLogggedinUser());
-            navigate("/login")
-        }, 1500)
-    }else{
-        toast.error(message,{position: "top-center",autoClose: 1000});
-    }
+
 }
 
 
@@ -87,8 +98,7 @@ const handleLogOut = async () =>{
                     </div>
                     <h3 className='user-name'>{user?.name}</h3>
                     <p> <span>Email: </span>{user?.email}</p>
-                    <p> <span>Phone: </span> 01774000000</p>
-                    <p> <span>Address: </span> Dinajpur</p>
+                    <p className='text-capitalize'><span>Role: </span> {user?.role}</p>
                     <button onClick={handleLogOut} className="logout-btn">Log out</button>
                 </div>
                 <div className="orders-info">
