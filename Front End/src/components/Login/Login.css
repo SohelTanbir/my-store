@@ -38,7 +38,6 @@
     margin-top: 2rem;
 }
 .loginBox .loginBtn:hover{
-    background:#9a3ee6;
     box-shadow:1rem 1rem 2rem #cccccc;
 }
 .loginBox .loginBtn span{

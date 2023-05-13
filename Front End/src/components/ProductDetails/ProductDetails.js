@@ -100,7 +100,7 @@ const handleAddToCart = async(productId) =>{
                         <div className="price">
                             <h3><span className='taka-sign'>৳ </span>{product.price} </h3>
                         </div>
-                      {product.size&& <div className="size">
+                      {product.size&& <div className="size d-none">
                             <div className="M active">
                                 <h4>M</h4>
                             </div>

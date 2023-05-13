@@ -75,18 +75,18 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify(user),
     });
-    console.log(response);
     const { success, message, userData } = await response.json();
     if (success) {
       if (success || success) {
         setLoading(false);
+        return
       }
-
+      setLoading(false);
       toast.success(message, { position: "top-center", autoClose: 1000 });
       // dispatch loggedin user
       dispatch(getLoginUser({ isLogin: true, user: userData }));
     } else {
-      toast.error(`${message}!`, { position: "top-center", autoClose: 1000 });
+      toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
       setLoading(false);
     }
   };
