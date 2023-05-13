@@ -15,7 +15,7 @@ const HeaderTop = () => {
                                         <div className="d-flex align-items-center justify-content-between">
                                                   <p className='free-shipping'>Free Shipping on first order! <span>Order Now</span></p>
                                                   <ul className='top-menu d-flex'>
-                                                       {user.role ==='admin'&&
+                                                       {user?.role ==='admin'&&
                                                             <li>
                                                                       <Link to="/dashboard">Dashboard</Link>
                                                             </li>}

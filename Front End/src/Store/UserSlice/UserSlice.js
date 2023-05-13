@@ -24,6 +24,7 @@ export const UserSlice =  createSlice({
                               state.isAuthenticated =  action.payload.isLogin;
                               state.user = action.payload.user;
                               localStorage.setItem("user", JSON.stringify( action.payload.user))
+                              console.log(action.payload);
                     },
                     resetLogggedinUser:(state, action) =>{
                               state.isAuthenticated  = false;
