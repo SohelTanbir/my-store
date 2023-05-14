@@ -44,7 +44,7 @@ const Cart = () => {
 // handle proceed order
 const proceedOrder = ()=>{
     cartProducts.map(pd =>{
-        console.log(pd);
+
         const product = {
             product:pd._id,
             name:pd.name,

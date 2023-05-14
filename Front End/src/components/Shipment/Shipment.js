@@ -23,7 +23,6 @@ const Shipment = () => {
 // handle submit shiping data
 const handleShipping = (e)=>{
     e.preventDefault();
-    console.log(user);
    if(shippingInfo.name && shippingInfo.phone && shippingInfo.city && shippingInfo.address && shippingInfo.email  ){
     dispatch(getShippingInfo(shippingInfo));
     navigate("/stripe/payment");

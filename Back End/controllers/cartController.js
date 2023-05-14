@@ -53,11 +53,6 @@ const addToCart =  async (req, res)=>{
             }
            }
     }else{
-        // update product quantity
-        // console.log("frontend = ", req.fields.quantity);
-        // console.log("backend = ", productExist[0].quantity);
-        // console.log(productExist[0].quantity);   
-
 
         const updateQuantity = {
             $set:{quantity:req.fields.quantity?req.fields.quantity:1}

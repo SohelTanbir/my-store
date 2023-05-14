@@ -185,7 +185,6 @@ const updateUser =  async(req, res)=>{
     message:"User updated Successfully!"
 });
     } catch (err) {
-        console.log(err);
       return  res.status(400).json({
             success:false,
             message:err.message

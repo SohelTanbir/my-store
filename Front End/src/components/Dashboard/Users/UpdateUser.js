@@ -34,7 +34,6 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
     if (user.name || user.email || user.password || user.role) {
       const formData = new FormData();
       formData.set("image", file);

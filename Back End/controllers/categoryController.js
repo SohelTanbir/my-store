@@ -17,7 +17,7 @@ const getAllCategory = async(req, res)=>{
             })
         }
     } catch (err) {
-        console.log(err);
+        return
     }
 }
 
@@ -51,7 +51,7 @@ const createCategory = async (req, res)=>{
         });
      }
    } catch (err) {
-    console.log(err);
+   return
    }
 }
 // delete category --admin

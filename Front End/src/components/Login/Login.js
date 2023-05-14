@@ -73,7 +73,6 @@ const Login = () => {
     if (success || success) {
       setLoading(false);
     }
-    console.log(success);
     if (success) {
       toast.success(message, { position: "top-center", autoClose: 1000 });
       // dispatch loggedin user

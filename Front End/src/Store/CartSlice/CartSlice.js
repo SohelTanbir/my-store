@@ -31,7 +31,6 @@ const CartSlice =  createSlice({
                     incrementQuantity:(state, action)=>{
                               let newProducts  = current(state.cartProducts).map((product) => {
                                         if (product.productId === action.payload.productId) {
-                                                  console.log({ ...product, quantity: product.quantity + 1 });
                                             return { ...product, quantity: product.quantity + 1 };
                                         }
                                      return product

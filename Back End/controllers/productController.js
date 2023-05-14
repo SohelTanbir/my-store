@@ -67,7 +67,6 @@ const getAllProducts =  async(req, res)=>{
             })
         }
     } catch (err) {
-        console.log(err);
     }
     
 }
@@ -89,7 +88,7 @@ const getProductById =  async(req, res)=>{
             })
         }
     } catch (err) {
-        console.log(err);
+      
     }
     
 }
@@ -114,7 +113,7 @@ const deleteProduct = async (req, res )=>{
             });
         }
    } catch (err) {
-        console.log(err);
+       
    }
 
 }
@@ -184,7 +183,7 @@ const updateProduct = async (req, res)=>{
             })
         }
     } catch (err) {
-        console.log(err);
+    return
     }
 }
 

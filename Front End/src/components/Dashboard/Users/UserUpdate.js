@@ -83,7 +83,6 @@ const UserUpdate = () => {
             credentials:'include'
           }
         );
-        console.log(user);
         const { success, message } = await response.json();
         if (success) {
           Alert.fire(message, `Congrations!`, "success");
@@ -108,7 +107,6 @@ const UserUpdate = () => {
           text: "You must enter  user information!",
         });
       }
-      console.log(user);
     };
   
 
