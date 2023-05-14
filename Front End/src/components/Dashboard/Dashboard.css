@@ -26,6 +26,9 @@
 .statistics h4, h5{
     font-weight: 400;
 }
+.statistics-item{
+    cursor: pointer;
+}
 .total-orders{
     background:tomato;
 }

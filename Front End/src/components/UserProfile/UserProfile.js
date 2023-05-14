@@ -1,6 +1,5 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './UserProfile.css'
-import profilePhoto from '../../images/users/sohelrana.jpg'
 import Loader from '../Loader/Loader';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
