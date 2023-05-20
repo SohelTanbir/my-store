@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
 import './UpdateUser.css';  
+import { BaseUrl } from "../../../config";
 
 const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
   const [file, setFile ] = useState("");
@@ -51,7 +52,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
       }
     
     const response = await fetch(
-        `http://localhost:5000/api/v1/users/update/one/`,
+        `${BaseUrl}/api/v1/users/update/one/`,
         {
           method: "POST",
           body: formData,

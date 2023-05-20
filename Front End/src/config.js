@@ -1,5 +1,5 @@
 const configuration = {
-    BaseUrl:"http://localhost:5000",
+    BaseUrl:"https://my-store-coqd-soheltanbir.vercel.app",
 }
 
 

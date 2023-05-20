@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import PagePagination from '../Pagination/PagePagination';
 import NotFoundMessage from '../NotFoundMessage/NotFoundMessage';
+import { BaseUrl } from '../../config';
 
 
 const Product = () => {
@@ -20,7 +21,7 @@ const Product = () => {
 
 
 const loadProduct = async()=>{
-    const res = await fetch(`http://localhost:5000/api/v1/product/all?name=${searchInputVal}&category=${category}&page=${pageNumber}`);
+    const res = await fetch(`${BaseUrl}/api/v1/product/all?name=${searchInputVal}&category=${category}&page=${pageNumber}`);
     const {success, products, total} = await res.json();
         // off laoader 
         if(success || !success){

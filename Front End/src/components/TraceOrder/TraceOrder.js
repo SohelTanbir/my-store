@@ -6,6 +6,7 @@ import OrderStatus from './OrderStatus';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
+import { BaseUrl } from '../../config';
 
 const TraceOrder = () => {
     const [trackOrder, setTrackOrder] = useState({
@@ -26,7 +27,7 @@ const TraceOrder = () => {
         e.preventDefault();
         setLoader(true);
         if(trackOrder.email && trackOrder.orderId){
-            const  response = fetch("http://localhost:5000/api/v1/orders/me/track",{
+            const  response = fetch(`${BaseUrl}/api/v1/orders/me/track`,{
                 method:'post',
                 headers:{'content-type':'application/json'},
                 body:JSON.stringify(trackOrder)

@@ -7,6 +7,7 @@ import {  faCompass, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-so
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
+import { BaseUrl } from '../../config';
 
 
 const RightNav =  ({showNav, setShowNav}) =>{
@@ -20,7 +21,7 @@ const navigate =  useNavigate();
 
 // handle Log out user
 const handleLogOut = async () =>{
-  const response = await fetch("http://localhost:5000/api/v1/users/logout",{
+  const response = await fetch(`${BaseUrl}/api/v1/users/logout`,{
       credentials:'include'
   });
   const {success, message } = await response.json();

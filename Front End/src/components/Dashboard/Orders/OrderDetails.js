@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import { useParams } from 'react-router-dom';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -16,7 +17,7 @@ const OrderDetails = () => {
           const [orderItems, setOrderItems ] = useState([]);
           const [loading, setLoading ] =  useState(true);
           const loadOrdersFromDB = async()=>{
-          const res =  await fetch(`http://localhost:5000/api/v1/orders/${id}`,{
+          const res =  await fetch(`${BaseUrl}/api/v1/orders/${id}`,{
             credentials:'include'
         });
         const {success, orders} = await res.json();

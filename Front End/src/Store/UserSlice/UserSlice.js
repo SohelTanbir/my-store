@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { json } from "react-router-dom";
+import { BaseUrl } from "../../config";
 
 
 export const loadLoggedInUserData = createAsyncThunk('user/loggedinuser', async()=>{
-          const response = await fetch("http://localhost:5000/api/v1/users/me",{
+          const response = await fetch(`${BaseUrl}/api/v1/users/me`,{
                     credentials:'include'
           });
           const    {success, user}=  await response.json();

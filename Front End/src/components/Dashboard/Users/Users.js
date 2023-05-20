@@ -10,6 +10,7 @@ import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import AddUserModal from './AddUserModal';
 import UpdateUser from './UpdateUser';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -22,7 +23,7 @@ const Users = () => {
     const [selectedUser, setSelelectUser]  = useState([])
 
     const loadUsers = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/users/all",{
+        const res =  await fetch(`${BaseUrl}/api/v1/users/all`,{
             credentials:'include'
         });
         const {success, users} = await res.json();
@@ -47,7 +48,7 @@ const Users = () => {
 
    // update user information
 const updateUser = async(id)=>{
-    const response =  await fetch(`http://localhost:5000/api/v1/users/one/${id}`,{
+    const response =  await fetch(`${BaseUrl}/api/v1/users/one/${id}`,{
         credentials:'include'
     });
     const {user} =  await response.json();
@@ -68,7 +69,7 @@ const updateUser = async(id)=>{
             confirmButtonText: 'Yes'
           });
           if(isConfirmed){
-            const response = await fetch(`http://localhost:5000/api/v1/users/delete/${id}`,{
+            const response = await fetch(`${BaseUrl}/api/v1/users/delete/${id}`,{
                 method:"DELETE",
                 credentials:'include'
             })

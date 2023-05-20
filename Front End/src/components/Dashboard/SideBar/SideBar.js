@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { resetLogggedinUser } from '../../../Store/UserSlice/UserSlice';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../../config';
 
 const SideBar = () => {
 const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const handleLogOut = async () =>{
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-            fetch("http://localhost:5000/api/v1/users/logout",{
+            fetch(`${BaseUrl}/api/v1/users/logout`,{
                 credentials:'include'
             })
             .then(res => res.json())

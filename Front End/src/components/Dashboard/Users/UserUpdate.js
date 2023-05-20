@@ -9,6 +9,7 @@ import { faEdit, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import UpdateUser from './UpdateUser';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -26,7 +27,7 @@ const UserUpdate = () => {
 
     // find user by id
     const findUser = async()=>{
-        const response  = await fetch(`http://localhost:5000/api/v1/users/one/${id}`, {
+        const response  = await fetch(`${BaseUrl}/api/v1/users/one/${id}`, {
             credentials:'include'
         });
         const {success, user} =await response.json();
@@ -76,7 +77,7 @@ const UserUpdate = () => {
         }
       
       const response = await fetch(
-          `http://localhost:5000/api/v1/users/update/one/${id}`,
+          `${BaseUrl}/api/v1/users/update/one/${id}`,
           {
             method: "POST",
             body: formData,

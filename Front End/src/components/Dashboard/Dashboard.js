@@ -3,6 +3,7 @@ import './Dashboard.css'
 import DashboardHeader from './DashboardHeader/DashboardHeader';
 import SideBar from './SideBar/SideBar';
 import { Link } from 'react-router-dom';
+import { BaseUrl } from '../../config';
 
 const Dashboard = () => {
 const [orders, setOrders ] = useState([]);
@@ -12,20 +13,20 @@ const [revenue, setRevenue] =  useState(0);
 
 useEffect(()=>{
     // orders
-    fetch("http://localhost:5000/api/v1/orders/all",{
+    fetch( `${BaseUrl}/api/v1/orders/all`,{
         credentials:'include'
     })
     .then(res => res.json())
     .then(ordersData => setOrders(ordersData.orders))
     // all categories
-    fetch("http://localhost:5000/api/v1/category/all",{
+    fetch(`${BaseUrl}/api/v1/category/all`,{
         credentials:'include'
     })
     .then(res => res.json())
     .then(data =>setCategory(data.categories))
 
     // all users
-    fetch("http://localhost:5000/api/v1/users/all",{
+    fetch(`${BaseUrl}/api/v1/users/all`,{
         credentials:'include'
     })
     .then(res => res.json())

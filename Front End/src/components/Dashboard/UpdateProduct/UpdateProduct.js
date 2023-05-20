@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Loader from '../../Loader/Loader'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BaseUrl } from '../../../config';
 
 const UpdateProduct = () => {
     const [product, setProduct] = useState({});
@@ -19,7 +20,7 @@ const UpdateProduct = () => {
 
 // find a product
 const findProdcutById = async ()=>{
-  const response = await  fetch(`http://localhost:5000/api/v1/product/one/${id}`);
+  const response = await  fetch(`${BaseUrl}/api/v1/product/one/${id}`);
   const { products } =  await response.json();
   setCategory(products.category);
   setSelectedSize(products.size);   
@@ -71,7 +72,7 @@ const findProdcutById = async ()=>{
     // if upload prodcut image then store product in db
     if(product){
         setLoading(true)
-        const res = await fetch(`http://localhost:5000/api/v1/product/update/${id}`,{
+        const res = await fetch(`${BaseUrl}/api/v1/product/update/${id}`,{
            method:'PUT',
             body:formData
         });

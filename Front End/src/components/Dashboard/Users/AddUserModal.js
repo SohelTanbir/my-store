@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
 import './AddUserModal.css';  
+import { BaseUrl } from "../../../config";
 
 const AddUserModal = ({ showModal, setShowModal }) => {
   const [file, setFile ] = useState("");
@@ -39,7 +40,7 @@ const AddUserModal = ({ showModal, setShowModal }) => {
       formData.set("password", user.password);
       formData.set("role", user.role);
       const response = await fetch(
-        "http://localhost:5000/api/v1/users/signup",
+        `${BaseUrl}/api/v1/users/signup`,
         {
           method: "POST",
           body: formData,

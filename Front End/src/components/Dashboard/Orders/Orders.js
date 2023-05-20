@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import UpdateOrderModal from './UpdateOrderModal';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -22,7 +23,7 @@ const Orders = () => {
     const [loading, setLoading ] =  useState(true);
     let [order_id, setOrderId ] = useState("");
     const loadOrdersFromDB = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/orders/all",{
+        const res =  await fetch(`${BaseUrl}/api/v1/orders/all`,{
             credentials:'include'
         });
         const {success, orders} = await res.json();
@@ -49,7 +50,7 @@ const Orders = () => {
           });
           if (isConfirmed) {
             setLoading(true);
-            const res = await axios.delete(`http://localhost:5000/api/v1/orders/delete/${orderId}`,{
+            const res = await axios.delete(`${BaseUrl}/api/v1/orders/delete/${orderId}`,{
                 withCredentials:'include'
             });
             const {success, message } = res.data;

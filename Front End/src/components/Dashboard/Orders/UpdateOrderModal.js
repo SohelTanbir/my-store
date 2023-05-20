@@ -3,6 +3,7 @@ import { Modal} from 'react-bootstrap';
 import Alert from 'sweetalert2'
 import Loader from '../../Loader/Loader';
 import { BarLoader, BeatLoader } from 'react-spinners';
+import { BaseUrl } from '../../../config';
 
 
 const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
@@ -19,7 +20,7 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
      if(orderStatus.length > 0){
        const formData = new FormData();
        formData.set("orderStatus", orderStatus);
-      const response = await fetch(`http://localhost:5000/api/v1/orders/update/${order_id}`, {
+      const response = await fetch(`${BaseUrl}/api/v1/orders/update/${order_id}`, {
           method:"PUT",
            body:formData,
            credentials:'include'

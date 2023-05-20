@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CategoryModal from './CategoryModal/CategoryModal';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../../config';
 
 
 
@@ -21,7 +22,7 @@ const Category = () => {
 
 
     const loadCategory = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/category/all");
+        const res =  await fetch(`${BaseUrl}/api/v1/category/all`);
         const {success, categories} = await res.json();
         if(success || !success){
             setLoading(false)
@@ -50,7 +51,7 @@ const Category = () => {
             confirmButtonText: 'Yes'
           });
     if(isConfirmed){
-        const response = await fetch(`http://localhost:5000/api/v1/category/delete/${id}`,{
+        const response = await fetch(`${BaseUrl}/api/v1/category/delete/${id}`,{
             method:"DELETE"
         })
         const {success, message } = await response.json();

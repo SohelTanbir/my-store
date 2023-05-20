@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../Loader/Loader';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../../config';
 
 const AddProduct = () => {
     const [product, setProduct] = useState({
@@ -25,7 +26,7 @@ const AddProduct = () => {
 
     
     const loadCategory = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/category/all");
+        const res =  await fetch(`${BaseUrl}/api/v1/category/all`);
         const {categories} = await res.json();
         setCategories(categories);
     }
@@ -63,7 +64,7 @@ const AddProduct = () => {
     // if upload prodcut image then store product in db
     if(product.name && product.brand && product.price && product.color && product.description ){
         setLoading(true)
-        const res = await fetch('http://localhost:5000/api/v1/product/create',{
+        const res = await fetch(`${BaseUrl}/api/v1/product/create`,{
            method:'POST',
             body:formData
         });

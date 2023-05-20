@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
+import { BaseUrl } from '../../config';
 
 
 
@@ -54,7 +55,7 @@ const ResetPassword = () => {
 
        if(resetPassword.password.length > 0 && resetPassword.confirmPassword.length > 0){
         if(resetPassword.password === resetPassword.confirmPassword){
-            const response = await  fetch(`http://localhost:5000/api/v1/users/password/reset/${token}`,{
+            const response = await  fetch(`${BaseUrl}/api/v1/users/password/reset/${token}`,{
                 method:'post',
                 headers:{'content-type':'application/json'},
                 body:JSON.stringify(resetPassword)

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../../config';
 
 const Messages = () => {
     const [message, setMessages ] = useState([]);
@@ -16,7 +17,7 @@ const Messages = () => {
 
 
     const loadUsers = async()=>{
-        const res =  await fetch("http://localhost:5000/api/v1/message/all");
+        const res =  await fetch(`${BaseUrl}/api/v1/message/all`);
         const {success, messages} = await res.json();
         // off laoader 
         if(success || !success){
@@ -41,7 +42,7 @@ const Messages = () => {
             confirmButtonText: 'Yes'
           });
           if(isConfirmed){
-            const response = await fetch(`http://localhost:5000/api/v1/message/delete/${id}`,{
+            const response = await fetch(`${BaseUrl}/api/v1/message/delete/${id}`,{
                 method:"DELETE"
             })
             const {success, message } = await response.json();
