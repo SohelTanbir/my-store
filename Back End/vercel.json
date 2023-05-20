@@ -1,5 +1,11 @@
 {
     "header":{
         "source": "./index.js"
-    }
+    },
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
+        }
+       ]
 }
