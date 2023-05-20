@@ -2,12 +2,12 @@
     "builds": [
      {
          "src": "./index.js",
-         "use": "node"
+         "use": "@vercel/nodemoon"
      }
     ],
     "routes": [
      {
-         "src": "/(.*)",
+         "src": "*",
          "dest": "/"
      }
     ]
