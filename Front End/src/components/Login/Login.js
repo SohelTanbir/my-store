@@ -26,7 +26,7 @@ const Login = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState({});
-  console.log(user);
+
 
   // login with email and password
   const handleInput = (e) => {
@@ -71,18 +71,18 @@ const Login = () => {
       body: JSON.stringify(user),
     });
 
-    const { success, message, userData } = await response.json();
+    const { success, message, userData, access_token } = await response.json();
     if (success || success) {
       setLoading(false);
     }
+
     if (success) {
       toast.success(message, { position: "top-center", autoClose: 1000 });
       // dispatch loggedin user
       dispatch(getLoginUser({ isLogin: true, user: userData }));
     } else {
-      setLoading(false);
       toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
-
+      setLoading(false);
     }
   };
 
