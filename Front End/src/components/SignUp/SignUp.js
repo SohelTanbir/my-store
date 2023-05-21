@@ -54,7 +54,6 @@ const SignUp = ()=>{
         formData.set("name", user.name);
         formData.set("email", user.email);
         formData.set("password", user.password);
-        
         // name validation
         if(!user.name){
             setShowError({name:"Please enter name!"})
@@ -86,21 +85,22 @@ const SignUp = ()=>{
         method:"post",
         body:formData
     });
-    if(response.ok){
+
+    const {success, message} = await response.json();
+
+    
+    if(success){
         setLoader(false);
-        const {message} = JSON.parse(await response.text());
         // show toast notification for add prodcut to cart
-    toast.success(`${message}!`, {position: "top-center",autoClose: 1500,});
+        toast.success(`${message}!`, {position: "top-center",autoClose: 1500,});
       // redirect user to home page
-  setTimeout(() => {
-    navigate("/login"); 
-  },2000); 
+        setTimeout(() => {
+            navigate("/login"); 
+        },2000); 
     }else{
-        setLoader(false);
-        setUser({})
-     const {message} = JSON.parse(await response.text());
     toast.error(`${message}!`, {position: "top-center",autoClose: 1500,}) 
-    }
+    setLoader(false);
+}
 
 
 }
@@ -120,7 +120,7 @@ const SignUp = ()=>{
                 <input type="text" name="name" onChange={handleChange} placeholder="Name" /> <br />
                 {showError.name && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.name}</p>}
 
-                    <input type="email" name="email"  onChange={handleChange} placeholder="Email"  /> <br />
+                    <input type="email" name="email"  onChange={handleChange} placeholder="Email" /> <br />
                     {showError.email && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.email}</p>}
 
                     <input type="password" name="password" onChange={handleChange} placeholder="Password" /> <br />

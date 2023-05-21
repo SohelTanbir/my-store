@@ -26,6 +26,7 @@ const Login = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState({});
+  console.log(user);
 
   // login with email and password
   const handleInput = (e) => {
@@ -69,6 +70,7 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify(user),
     });
+
     const { success, message, userData } = await response.json();
     if (success || success) {
       setLoading(false);

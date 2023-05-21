@@ -37,7 +37,7 @@ const UserProfile = () => {
 
     // calculation total order price
     let totalPrice = 0;
-    myOrders.map(order => totalPrice += order.totalPrice);
+    myOrders?.map(order => totalPrice += order.totalPrice);
 
 
     // product name modify

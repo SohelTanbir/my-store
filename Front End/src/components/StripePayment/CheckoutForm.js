@@ -60,7 +60,8 @@ const CheckoutForm = () => {
             navigate("/orders/create/confirm/message");
         }, 1000);
         }else{
-          toast.error("There was an error!", {position: "top-center",autoClose: 1000});
+          setLoading(false);
+          toast.error(error, {position: "top-center",autoClose: 1000});
         }
        }
     }
