@@ -3,7 +3,7 @@ import './RightNav.css';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link, useNavigate } from 'react-router-dom';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faCompass, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import {  faCompass, faEnvelope, faPowerOff, faTh, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
@@ -69,6 +69,16 @@ const handleLogOut = async () =>{
                     </Link>
                 </li>
                 }
+                 {user?.role ==='admin'&&
+                 <li>
+                 <Link to="/dashboard">
+                   <div className="left-icon">
+                     <FontAwesomeIcon icon={faTh}/>
+                   </div>
+                   Dashboard
+                   </Link>
+               </li>
+                  }
                 <li>
                   <Link to="/orders/track">
                     <div className="left-icon">
