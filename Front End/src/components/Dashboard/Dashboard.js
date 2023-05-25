@@ -27,7 +27,9 @@ useEffect(()=>{
 
     // all users
     fetch(`${BaseUrl}/api/v1/users/all`,{
-        credentials:'include'
+        headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
     })
     .then(res => res.json())
     .then(data =>setUsers(data.users))
@@ -52,7 +54,7 @@ useEffect(()=>{
                                    <Link to="/dashboard/orders/all">
                                     <div className="statistics-item total-orders">
                                             <h4>Total Orders</h4>
-                                            <h5>{orders.length ? orders.length : orders.length }</h5>
+                                            <h5>{orders ? orders?.length : orders?.length }</h5>
                                         </div>
                                    </Link>
                                 </div>
@@ -60,7 +62,7 @@ useEffect(()=>{
                                     <Link to="/dashboard/category/all"> 
                                         <div className="statistics-item total-blog">
                                             <h4>Categories</h4>
-                                            <h5>{category.length ? category.length : 0}</h5>
+                                            <h5>{category ? category?.length : 0}</h5>
                                         </div>
                                     </Link>
                                 </div>
@@ -68,7 +70,7 @@ useEffect(()=>{
                                     <Link to="/dashboard/admin/users"> 
                                     <div className="statistics-item total-admin">
                                         <h4>Total Users</h4>
-                                        <h5>{users?.length?users.length:0}</h5>
+                                        <h5>{users?users?.length:0}</h5>
                                     </div>
                                     </Link>
                                 </div>
