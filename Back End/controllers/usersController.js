@@ -236,8 +236,7 @@ const loginUser =  async (req, res, next) =>{
                 })
                 // set cookie
                 res.cookie("token", token, {
-                    expiresIn:process.env.COOKIE_EXPERY,
-                    httpOnly: true
+                    expiresIn: 60*60
                 });
                 
                 res.status(200).json({

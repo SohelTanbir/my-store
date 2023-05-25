@@ -79,7 +79,9 @@ const Login = () => {
     if (success) {
       toast.success(message, { position: "top-center", autoClose: 1000 });
       // dispatch loggedin user
+      console.log("hello");
       dispatch(getLoginUser({ isLogin: true, user: userData }));
+
     } else {
       toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
       setLoading(false);
