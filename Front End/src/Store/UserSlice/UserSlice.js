@@ -29,7 +29,8 @@ export const UserSlice =  createSlice({
                     resetLogggedinUser:(state, action) =>{
                               state.isAuthenticated  = false;
                               state.user = [];
-                              localStorage.setItem("user", "")
+                              localStorage.setItem("user", "");
+                              localStorage.setItem("token", "");
                     }
           },
           extraReducers:(builder)=>{

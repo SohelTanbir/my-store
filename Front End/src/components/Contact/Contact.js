@@ -31,7 +31,10 @@ const Contact = () => {
         if(message.name && message.email&& message.subject && message.message){
           const response = await  fetch(`${BaseUrl}/api/v1/message/create`,{
                 method:'post',
-                headers:{'content-type':'application/json'},
+                headers:{
+                    'content-type':'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
                 body:JSON.stringify(message)
         })
         const { success} = await response.json();

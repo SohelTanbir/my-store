@@ -66,7 +66,9 @@ const Login = () => {
     setLoading(true);
     const response = await fetch(`${BaseUrl}/api/v1/users/login`, {
       method: "post",
-      headers: { "content-type": "application/json" },
+      headers: { 
+        "content-type": "application/json", 
+      },
       credentials: "include",
       body: JSON.stringify(user),
     });
@@ -79,8 +81,9 @@ const Login = () => {
     if (success) {
       toast.success(message, { position: "top-center", autoClose: 1000 });
       // dispatch loggedin user
-      console.log("hello");
       dispatch(getLoginUser({ isLogin: true, user: userData }));
+    // save token localStorage 
+    localStorage.setItem("token", access_token)
 
     } else {
       toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
