@@ -22,7 +22,10 @@ const UserProfile = () => {
     // fatch my orders from db
     const loadMyOrders = async ()=>{
         const response =  await  fetch(`${BaseUrl}/api/v1/orders/me`,{
-            credentials:'include',
+            method: 'get',
+            headers:{
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+          },
         })
         const {success, orders} = await response.json();
         // off laoader 
@@ -63,7 +66,9 @@ const handleLogOut = async () =>{
       }).then((result) => {
         if (result.isConfirmed) {
             fetch(`${BaseUrl}/api/v1/users/logout`,{
-                credentials:'include'
+                headers:{
+                  Authorization: `Bearer ${localStorage.getItem("token")}`
+              },
             })
             .then(res => res.json())
             .then(result =>{

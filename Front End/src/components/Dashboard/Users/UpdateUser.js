@@ -55,8 +55,10 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
         `${BaseUrl}/api/v1/users/update/one/`,
         {
           method: "POST",
+          headers:{
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+          },
           body: formData,
-          credentials:'include'
         }
       );
       const { success, message } = await response.json();

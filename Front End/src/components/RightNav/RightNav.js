@@ -22,7 +22,9 @@ const navigate =  useNavigate();
 // handle Log out user
 const handleLogOut = async () =>{
   const response = await fetch(`${BaseUrl}/api/v1/users/logout`,{
-      credentials:'include'
+    headers:{
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+  },
   });
   const {success, message } = await response.json();
   if(success){

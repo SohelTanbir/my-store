@@ -27,7 +27,10 @@ const handleLogOut = async () =>{
       }).then((result) => {
         if (result.isConfirmed) {
             fetch(`${BaseUrl}/api/v1/users/logout`,{
-                credentials:'include'
+                method:'get',
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
             })
             .then(res => res.json())
             .then(result =>{

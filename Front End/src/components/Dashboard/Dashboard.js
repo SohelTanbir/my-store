@@ -14,20 +14,30 @@ const [revenue, setRevenue] =  useState(0);
 useEffect(()=>{
     // orders
     fetch( `${BaseUrl}/api/v1/orders/all`,{
-        credentials:'include'
+        method:'get',
+        headers:{
+            'content-type':'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
     })
     .then(res => res.json())
     .then(ordersData => setOrders(ordersData.orders))
     // all categories
     fetch(`${BaseUrl}/api/v1/category/all`,{
-        credentials:'include'
+        method:'get',
+        headers:{
+            'content-type':'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
     })
     .then(res => res.json())
     .then(data =>setCategory(data.categories))
 
     // all users
     fetch(`${BaseUrl}/api/v1/users/all`,{
+        method:'get',
         headers:{
+            'content-type':'application/json',
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
     })
@@ -54,7 +64,7 @@ useEffect(()=>{
                                    <Link to="/dashboard/orders/all">
                                     <div className="statistics-item total-orders">
                                             <h4>Total Orders</h4>
-                                            <h5>{orders ? orders?.length : orders?.length }</h5>
+                                            <h5>{orders?.length > 0 ? orders?.length : orders?.length }</h5>
                                         </div>
                                    </Link>
                                 </div>
@@ -62,7 +72,7 @@ useEffect(()=>{
                                     <Link to="/dashboard/category/all"> 
                                         <div className="statistics-item total-blog">
                                             <h4>Categories</h4>
-                                            <h5>{category ? category?.length : 0}</h5>
+                                            <h5>{category?.length > 0 ? category?.length : 0}</h5>
                                         </div>
                                     </Link>
                                 </div>
@@ -70,7 +80,7 @@ useEffect(()=>{
                                     <Link to="/dashboard/admin/users"> 
                                     <div className="statistics-item total-admin">
                                         <h4>Total Users</h4>
-                                        <h5>{users?users?.length:0}</h5>
+                                        <h5>{users?.length > 0 ?users?.length:0}</h5>
                                     </div>
                                     </Link>
                                 </div>

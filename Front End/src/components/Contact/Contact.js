@@ -29,7 +29,7 @@ const Contact = () => {
         setLoader(true)
         e.preventDefault();
         if(message.name && message.email&& message.subject && message.message){
-          const response = await  fetch(`${BaseUrl}/api/v1/message/create`,{
+          const response = await  fetch(`${BaseUrl}/api/v1/message/create`,{    
                 method:'post',
                 headers:{
                     'content-type':'application/json',

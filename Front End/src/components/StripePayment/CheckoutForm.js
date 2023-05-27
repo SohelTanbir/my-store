@@ -42,8 +42,10 @@ const CheckoutForm = () => {
          // create new order
         const orderResponse = await fetch(`${BaseUrl}/api/v1/orders/create`, {
           method: 'post',
-          headers: { 'content-type': 'application/json' },
-          credentials:'include',  
+          headers:{
+             'content-type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
           body:JSON.stringify(newOrder)
         });
         const {error, success} =await orderResponse.json();

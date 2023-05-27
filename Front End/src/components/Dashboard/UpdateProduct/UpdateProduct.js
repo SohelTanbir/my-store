@@ -20,7 +20,12 @@ const UpdateProduct = () => {
 
 // find a product
 const findProdcutById = async ()=>{
-  const response = await  fetch(`${BaseUrl}/api/v1/product/one/${id}`);
+  const response = await  fetch(`${BaseUrl}/api/v1/product/one/${id}`,{
+    method:'get',
+    headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    },
+  });
   const { products } =  await response.json();
   setCategory(products.category);
   setSelectedSize(products.size);   
@@ -73,7 +78,10 @@ const findProdcutById = async ()=>{
     if(product){
         setLoading(true)
         const res = await fetch(`${BaseUrl}/api/v1/product/update/${id}`,{
-           method:'PUT',
+           method:'PUT',    
+           headers:{
+               Authorization: `Bearer ${localStorage.getItem("token")}`
+           },
             body:formData
         });
         const {success, message } =  await res.json();

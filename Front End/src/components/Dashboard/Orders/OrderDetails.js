@@ -18,7 +18,10 @@ const OrderDetails = () => {
           const [loading, setLoading ] =  useState(true);
           const loadOrdersFromDB = async()=>{
           const res =  await fetch(`${BaseUrl}/api/v1/orders/${id}`,{
-            credentials:'include'
+            method:'get',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
         });
         const {success, orders} = await res.json();
         if(success || !success){

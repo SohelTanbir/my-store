@@ -24,7 +24,10 @@ const Orders = () => {
     let [order_id, setOrderId ] = useState("");
     const loadOrdersFromDB = async()=>{
         const res =  await fetch(`${BaseUrl}/api/v1/orders/all`,{
-            credentials:'include'
+            method:'get',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
         });
         const {success, orders} = await res.json();
         if(success || !success){
@@ -51,7 +54,9 @@ const Orders = () => {
           if (isConfirmed) {
             setLoading(true);
             const res = await axios.delete(`${BaseUrl}/api/v1/orders/delete/${orderId}`,{
-                withCredentials:'include'
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
             });
             const {success, message } = res.data;
             if(success){

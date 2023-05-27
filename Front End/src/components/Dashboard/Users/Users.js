@@ -17,14 +17,17 @@ import { BaseUrl } from '../../../config';
 const Users = () => {
     const navigate = useNavigate();
     const [allUsers, setAllUsers ] = useState([]);
-    const [loading , setLoading ] = useState(true);
+    const [loading , setLoading ] = useState(false);
     const [showModal, setShowModal ] = useState(false);
     const [showUpdateModal, setShowUpdateModal ] = useState(false);
     const [selectedUser, setSelelectUser]  = useState([])
 
     const loadUsers = async()=>{
         const res =  await fetch(`${BaseUrl}/api/v1/users/all`,{
-            credentials:'include'
+            method:'get',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
         });
         const {success, users} = await res.json();
         // off loader
@@ -49,12 +52,21 @@ const Users = () => {
    // update user information
 const updateUser = async(id)=>{
     const response =  await fetch(`${BaseUrl}/api/v1/users/one/${id}`,{
-        credentials:'include'
+        method:'get',
+        headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
     });
-    const {user} =  await response.json();
+    const {success, user} =  await response.json();
+    // off loader
+    if(success || !success){
+        setLoading(false);
+    }
+  if(success){ 
     setSelelectUser(user);
     setShowUpdateModal(true);
     navigate(`/dashboard/admin/update/${id}`)
+}
     
 }
 // delete a user
@@ -70,10 +82,16 @@ const updateUser = async(id)=>{
           });
           if(isConfirmed){
             const response = await fetch(`${BaseUrl}/api/v1/users/delete/${id}`,{
-                method:"DELETE",
-                credentials:'include'
+                method:'delete',
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
             })
             const {success, message } = await response.json();
+            // off loader
+        if(success || !success){
+            setLoading(false);
+        }
             if(success){
                 setLoading(false);
                 Alert.fire(

@@ -22,8 +22,10 @@ const UpdateOrderModal = ({showModal, setShowModal, order_id})=> {
        formData.set("orderStatus", orderStatus);
       const response = await fetch(`${BaseUrl}/api/v1/orders/update/${order_id}`, {
           method:"PUT",
+          headers:{
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+          },
            body:formData,
-           credentials:'include'
       });
     const {success, message} = await response.json();
     if(success){

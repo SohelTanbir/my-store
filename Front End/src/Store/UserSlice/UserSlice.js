@@ -5,9 +5,13 @@ import { BaseUrl } from "../../config";
 
 export const loadLoggedInUserData = createAsyncThunk('user/loggedinuser', async()=>{
           const response = await fetch(`${BaseUrl}/api/v1/users/me`,{
-                    credentials:'include'
+              method:'get',
+              headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
           });
           const    {success, user}=  await response.json();
+        
           return {success, user}
        
 })

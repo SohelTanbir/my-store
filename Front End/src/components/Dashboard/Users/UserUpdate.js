@@ -28,7 +28,9 @@ const UserUpdate = () => {
     // find user by id
     const findUser = async()=>{
         const response  = await fetch(`${BaseUrl}/api/v1/users/one/${id}`, {
-            credentials:'include'
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
         });
         const {success, user} =await response.json();
         setSelectedUser(user)
@@ -81,10 +83,13 @@ const UserUpdate = () => {
           {
             method: "POST",
             body: formData,
-            credentials:'include'
+            headers:{
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+          },
           }
         );
         const { success, message } = await response.json();
+        console.log(message);
         if (success) {
           Alert.fire(message, `Congrations!`, "success");
           // reset user information
