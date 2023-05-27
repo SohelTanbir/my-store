@@ -10,7 +10,12 @@ const utilities = {
               return true
         }
         
-    }
+    },
+     // convert time 
+     convetUTCToLocalTIme: (utcTime ) =>{
+      const  date = new Date(utcTime);
+      return date.toLocaleDateString();
+    },
 }
 
 

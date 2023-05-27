@@ -10,6 +10,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import { BaseUrl } from '../../../config';
+import { convetUTCToLocalTIme } from '../../../utilities';
 
 const Messages = () => {
     const [message, setMessages ] = useState([]);
@@ -98,7 +99,7 @@ const Messages = () => {
                                               <td>{message.email}</td>
                                               <td>{message.subject}</td>
                                               <td>{message.message}</td>
-                                              <td>{message.createdAt}</td>
+                                              <td>{convetUTCToLocalTIme(message.createdAt)}</td>
                                               <td>
                                               <button className='action-btn delete-btn' onClick={()=> deleteMessage(message._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
                                               </td>
