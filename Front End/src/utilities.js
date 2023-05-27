@@ -12,9 +12,9 @@ const utilities = {
         
     },
      // convert time 
-     convetUTCToLocalTIme: (utcTime ) =>{
+     convetUTCToLocalTime: (utcTime ) =>{
       const  date = new Date(utcTime);
-      return date.toLocaleDateString();
+      return date.toLocaleString();
     },
 }
 

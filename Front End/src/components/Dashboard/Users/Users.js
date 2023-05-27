@@ -11,6 +11,7 @@ import Alert from 'sweetalert2'
 import AddUserModal from './AddUserModal';
 import UpdateUser from './UpdateUser';
 import { BaseUrl } from '../../../config';
+import { convetUTCToLocalTime } from '../../../utilities';
 
 
 
@@ -111,11 +112,6 @@ const updateUser = async(id)=>{
     }
 
 
-const convertLocalDate = (utcDate) =>{
-    const date = new Date(utcDate);
-    return date.toLocaleString();
-}
-
     return (
         <div className="all-orders">
             <DashboardHeader/>
@@ -147,7 +143,7 @@ const convertLocalDate = (utcDate) =>{
                                         <td><img src={user.image[0]?user.image[0].url : '/user/user.png' } alt="No Photos" /></td>
                                         <td>{user.email}</td>
                                         <td>{user.role}</td>
-                                        <td>{convertLocalDate(user.createdAt)}</td>
+                                        <td>{convetUTCToLocalTime(user.createdAt)}</td>
                                         <td>
                                             <button className='action-btn edit-btn' onClick={()=> updateUser(user._id)}><FontAwesomeIcon title='Edit' icon={faEdit }  /> ||</button>
                                             <button className='action-btn delete-btn' onClick={()=> deleteUser(user._id)}><FontAwesomeIcon title='Delete ' icon={faTrash }/></button>
