@@ -28,8 +28,8 @@ const ProductDetails = () => {
 const handleBuyProduct  = (productId)=>{
     if(productId){
     Alert.fire({
-        title: 'We are really sorry!',
-        text: "This feature isn't available at this moment!",
+        title: 'Ops!',
+        text: "We are working on it!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

@@ -102,5 +102,10 @@
                     width: 70rem;
                 }
        }
-
+       @medial all and (max-width:575px){
+        /*input file*/
+    .signup-file-input {
+        top: 51%;
+    }
+    }
       

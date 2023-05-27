@@ -34,7 +34,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
                     }else{
                               Alert.fire({
                                         icon: 'error',
-                                        title: message,
+                                        title: "Category exist!",
                                         text:'Please try another category name!'
                               })
                     }

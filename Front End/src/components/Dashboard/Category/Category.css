@@ -94,4 +94,7 @@
     .category-main h2 {
         font-size: 2rem;
     }
+    .category-header button {
+        font-size: 1.4rem;
+    }
  }

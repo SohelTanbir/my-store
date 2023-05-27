@@ -12,14 +12,14 @@
 }
 /*input file*/
 .signup-file-input {
-          width: 100%;
-          opacity: 0;
-          overflow: hidden;
-          position: absolute;
-          cursor: pointer;
-          left: 30%;
-          top: 70%;
-      }
+    width: 40%;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    cursor: pointer;
+    left: 46%;
+    top: 70%;
+}
 .file_input_label {
           cursor: pointer;
           display: flex;
