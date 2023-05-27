@@ -73,7 +73,7 @@ const ForgotPassword = () => {
                             {showError.email}
                             </p>
                         )}
-                            <button className='reset-password-btn mt-4'>Reset link</button>
+                            <button className='reset-password-btn mt-4'>Send link</button>
                         </form>
                     </div>
                 </div>

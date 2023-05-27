@@ -108,7 +108,7 @@ const ResetPassword = () => {
                       {showError.confirmPassword}
                     </p>
                   )}
-                        <button className='set-password-btn'>Save Change</button>
+                        <button className='set-password-btn mt-5'>Save Change</button>
                     </form>
                 </div>
             </div>
