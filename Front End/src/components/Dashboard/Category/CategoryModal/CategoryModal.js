@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Modal} from 'react-bootstrap';
 import Alert from 'sweetalert2'
-import { BaseUrl } from '../../../../config';
+
 
 
 const CategoryModal = ({showModal, setShowModal})=> {
@@ -16,7 +16,7 @@ const CategoryModal = ({showModal, setShowModal})=> {
                    if(category.length > 0){
                     const formData = new FormData();
                     formData.set("name", category)
-                    const response = await fetch(`${BaseUrl}/api/v1/category/create`, {
+                    const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/category/create`, {
                               method:"POST",
                               body:formData
                     });

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../Loader/Loader';
 import Header from '../Header/Header'
 import { isValidEmail } from '../../utilities';
-import { BaseUrl } from '../../config';
+
 
 
 const ForgotPassword = () => {
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
       setShowError({ email: "" });
       setLoader(true);
        if(email.length > 0){
-        const response = await  fetch(`${BaseUrl}/api/v1/users/password/forgot`,{
+        const response = await  fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/password/forgot`,{
             method:'post',
             headers:{'content-type':'application/json'},
             body:JSON.stringify({email})

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { resetLogggedinUser } from '../../../Store/UserSlice/UserSlice';
 import Alert from 'sweetalert2'
-import { BaseUrl } from '../../../config';
+
 
 const SideBar = () => {
 const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const handleLogOut = async () =>{
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`${BaseUrl}/api/v1/users/logout`,{
+            fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/logout`,{
                 method:'get',
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem("token")}`

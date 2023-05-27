@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { useSelector } from 'react-redux';
-import { BaseUrl } from '../../config';
+
 
 const Contact = () => {
     const {isAuthenticated, user } = useSelector(state => state.user);
@@ -29,7 +29,7 @@ const Contact = () => {
         setLoader(true)
         e.preventDefault();
         if(message.name && message.email&& message.subject && message.message){
-          const response = await  fetch(`${BaseUrl}/api/v1/message/create`,{    
+          const response = await  fetch(`https://my-store-henna-sigma.vercel.app/api/v1/message/create`,{    
                 method:'post',
                 headers:{
                     'content-type':'application/json',

@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import UpdateOrderModal from './UpdateOrderModal';
-import { BaseUrl } from '../../../config';
 
 
 
@@ -23,7 +22,7 @@ const Orders = () => {
     const [loading, setLoading ] =  useState(true);
     let [order_id, setOrderId ] = useState("");
     const loadOrdersFromDB = async()=>{
-        const res =  await fetch(`${BaseUrl}/api/v1/orders/all`,{
+        const res =  await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/orders/all`,{
             method:'get',
             headers:{
                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -53,7 +52,7 @@ const Orders = () => {
           });
           if (isConfirmed) {
             setLoading(true);
-            const res = await axios.delete(`${BaseUrl}/api/v1/orders/delete/${orderId}`,{
+            const res = await axios.delete(`https://my-store-henna-sigma.vercel.app/api/v1/orders/delete/${orderId}`,{
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 },

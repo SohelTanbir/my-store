@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import Header from '../Header/Header'
 import HeaderTop from '../Header/HeaderTop';
 import { isValidEmail } from '../../utilities';
-import { BaseUrl } from '../../config';
+
 
 
 const SignUp = ()=>{
@@ -81,7 +81,7 @@ const SignUp = ()=>{
     setShowError({password:""});
 
      setLoader(true);
-    const response =  await fetch(`${BaseUrl}/api/v1/users/signup`,{
+    const response =  await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/signup`,{
         method:"post",
         body:formData
     });

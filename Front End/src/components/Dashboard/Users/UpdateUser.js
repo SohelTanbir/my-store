@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
 import './UpdateUser.css';  
-import { BaseUrl } from "../../../config";
+
 
 const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
   const [file, setFile ] = useState("");
@@ -52,7 +52,7 @@ const UpdateUser = ({ showUpdateModal, setShowUpdateModal, selectedUser }) => {
       }
     
     const response = await fetch(
-        `${BaseUrl}/api/v1/users/update/one/`,
+        `https://my-store-henna-sigma.vercel.app/api/v1/users/update/one/`,
         {
           method: "POST",
           headers:{

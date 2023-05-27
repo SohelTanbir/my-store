@@ -7,7 +7,7 @@ import {  faCompass, faEnvelope, faPowerOff, faTh, faUser } from '@fortawesome/f
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
-import { BaseUrl } from '../../config';
+
 
 
 const RightNav =  ({showNav, setShowNav}) =>{
@@ -21,7 +21,7 @@ const navigate =  useNavigate();
 
 // handle Log out user
 const handleLogOut = async () =>{
-  const response = await fetch(`${BaseUrl}/api/v1/users/logout`,{
+  const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/logout`,{
     headers:{
       Authorization: `Bearer ${localStorage.getItem("token")}`
   },

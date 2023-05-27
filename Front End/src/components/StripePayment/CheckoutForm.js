@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeAllProductsFromCart } from '../../Store/CartSlice/CartSlice';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { BaseUrl } from '../../config';
+
 
 const CheckoutForm = () => {
   const [loading, setLoading ] = useState(true);
@@ -40,7 +40,7 @@ const CheckoutForm = () => {
       const newOrder = {...order, paymentInfo};
        if(paymentInfo.id){
          // create new order
-        const orderResponse = await fetch(`${BaseUrl}/api/v1/orders/create`, {
+        const orderResponse = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/orders/create`, {
           method: 'post',
           headers:{
              'content-type': 'application/json',
