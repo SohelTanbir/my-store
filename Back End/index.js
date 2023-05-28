@@ -7,7 +7,7 @@ const formidable =  require("express-formidable");
 const cloudinary = require("cloudinary");
 
 app.use(cors({
-    origin:"http://localhost:3000",
+    origin:"*",
     credentials:true
 }));
 
