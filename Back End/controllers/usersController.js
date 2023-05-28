@@ -301,7 +301,7 @@ const forgotPassword = async (req, res)=>{
         const randomString =   crypto.randomBytes(20).toString("hex");
         const subject  = 'MyStore - Forogt Password Recovery';
         const resetpasswordurl = `${req.protocol
-        }://mystore-ecommerce-app.netlify.app/password/reset/${randomString}`;
+        }:${process.env.FRONTEND_HOST}/password/reset/${randomString}`;
         const message = `Please click the below link to reset your password \n\n 
         ${resetpasswordurl}
         if you are not requested for this mail,  please ignore it. 
