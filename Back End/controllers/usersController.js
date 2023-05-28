@@ -310,7 +310,7 @@ const forgotPassword = async (req, res)=>{
        if(response.accepted.length > 0){
         // save user password reset token and time
         await user.updateOne({$set:{resetPasswordToken:randomString}});
-        await user.updateOne({$set:{resetPasswordExpire:Date.now() + 60*1000*60*24}})
+        await user.updateOne({$set:{resetPasswordExpire:Date.now() + 60*5*1000}})
             res.status(200).json({
                 success:true,
                 message:`Email sent to ${user.email} successfully!`,
