@@ -6,10 +6,7 @@ const bodyParser = require('body-parser');
 const formidable =  require("express-formidable");
 const cloudinary = require("cloudinary");
 
-app.use(cors({
-    origin:"*",
-    credentials:true
-}));
+app.use(cors());
 
 
 // app.use(express.json());

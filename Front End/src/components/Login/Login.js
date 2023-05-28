@@ -17,6 +17,7 @@ import Header from "../Header/Header";
 import HeaderTop from "../Header/HeaderTop";
 import { getLoginUser } from "../../Store/UserSlice/UserSlice";
 import { useDispatch } from "react-redux";
+import { BaseUrl } from "../../config";
 import { isValidEmail } from "../../utilities";
 firebase.initializeApp(firebaseConfig);
 
@@ -63,12 +64,11 @@ const Login = () => {
     }
     setShowError({ password: "" });
     setLoading(true);
-    const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/login`, {
+    const response = await fetch(`${BaseUrl}/api/v1/users/login`, {
       method: "post",
       headers: { 
         "content-type": "application/json", 
       },
-      credentials: "include",
       body: JSON.stringify(user),
     });
 
