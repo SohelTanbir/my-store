@@ -62,8 +62,8 @@ const TraceOrder = () => {
                     <div className="trace-order-form">
                         <h4>Track your Order</h4>
                             <form onSubmit={handleSubmit}>
-                            <input type="text" name='email' onChange={handleChange} placeholder='Email Address' value={trackOrder.email} /> <br />
-                            <input type="text" name='orderId' onChange={handleChange} placeholder='Order Id' value={trackOrder.orderId}/> <br />
+                            <input type="text" name='email' onChange={handleChange} placeholder='Email Address' value={trackOrder.email} autoComplete="nope"/> <br />
+                            <input type="text" name='orderId' onChange={handleChange} placeholder='Order Id' value={trackOrder.orderId} autoComplete="none"/> <br />
                             <button className='trace-now-btn'>Track Now</button>
                         </form>
                     </div>

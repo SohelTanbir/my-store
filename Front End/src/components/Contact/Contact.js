@@ -68,16 +68,16 @@ const Contact = () => {
                     <form onSubmit={handleSubmit}>
                        <div className="row">
                         <div className=" col-md-6">
-                            <input type="text" name='name'  onChange={handleChange} placeholder='Name' value={message.name} /> <br />
+                            <input type="text" name='name'  onChange={handleChange} placeholder='Name' value={message.name}    autoComplete="none"/> <br />
 
                         </div>
                         <div className="col-md-6">
-                        <input type="email" name='email'  onChange={handleChange} placeholder='Email' value={message.email} /> <br />
+                        <input type="email" name='email'  onChange={handleChange} placeholder='Email' value={message.email}    autoComplete="none"/> <br />
                         </div>
                         
                        </div>
-                        <input type="text" name='subject'  onChange={handleChange} placeholder='Subject' value={message.subject}/> <br />
-                        <textarea name="message" onChange={handleChange} placeholder='Message' value={message.message}></textarea>
+                        <input type="text" name='subject'  onChange={handleChange} placeholder='Subject' value={message.subject}    autoComplete="none"/> <br />
+                        <textarea name="message" onChange={handleChange} placeholder='Message' value={message.message}    autoComplete="none"></textarea>
                         <button>Send message</button>
                     </form>
                 </div>

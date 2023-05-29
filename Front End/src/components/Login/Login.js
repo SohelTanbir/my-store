@@ -106,6 +106,7 @@ const Login = () => {
                     name="email"
                     onChange={handleInput}
                     placeholder="Email"
+                    autoComplete="none"
                   />{" "}
                   <br />
                   {showError.email && (
@@ -118,6 +119,7 @@ const Login = () => {
                     name="password"
                     onChange={handleInput}
                     placeholder="Password"
+                    autoComplete="none"
                   />{" "}
                   <br />
                   {showError.password && (

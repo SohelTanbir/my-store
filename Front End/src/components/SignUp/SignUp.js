@@ -117,14 +117,14 @@ const SignUp = ()=>{
                 <h3>Sign Up</h3>
                 <div className="inputBox">
                 <form onSubmit={submitForm}>
-                <input type="text" name="name" onChange={handleChange} placeholder="Name" /> <br />
+                <input type="text" name="name" onChange={handleChange} placeholder="Name" autoComplete="none"/> <br />
                 {showError.name && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.name}</p>}
 
-                    <input type="email" name="email"  onChange={handleChange} placeholder="Email" /> <br />
+                    <input type="email" name="email"  onChange={handleChange} placeholder="Email" autoComplete="none" /> <br />
                     {showError.email && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.email}</p>}
 
-                    <input type="password" name="password" onChange={handleChange} placeholder="Password" /> <br />
-                    {showError.password && <p className="text-danger fw-bold p-2 fs-5 text-start">{showError.password}</p>}
+                    <input type="password" name="password" onChange={handleChange} placeholder="Password" autoComplete="none"/> <br />
+                    {showError.password && <p className="text-danger fw-bold p-2 fs-5 text-start" >{showError.password}</p>}
 
                     <div className="d-flex mb-3 align-items-center justify-content-between my-4">
                             <div className="col-3">

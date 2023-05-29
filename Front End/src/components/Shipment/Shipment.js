@@ -38,10 +38,10 @@ const handleShipping = (e)=>{
                     <h3>Shipping addresse</h3>
                     <div className="shipingForm">
                         <form onSubmit={handleShipping}>
-                          <input type="text" name="name"  onBlur={handleChange} placeholder="Name"/> <br />
-                          <input type="tell" name="phone" onBlur={handleChange}  placeholder="Phone"/><br />
-                           <input type="text" name="city"  onBlur={handleChange}  placeholder="City"/><br />
-                           <input type="text" name="address" onBlur={handleChange}  placeholder="Address details"/><br />
+                          <input type="text" name="name"  onBlur={handleChange} placeholder="Name"autoComplete="none"  /> <br />
+                          <input type="tell" name="phone" onBlur={handleChange}  placeholder="Phone" autoComplete="none" /><br />
+                           <input type="text" name="city"  onBlur={handleChange}  placeholder="City" autoComplete="none" /><br />
+                           <input type="text" name="address" onBlur={handleChange}  placeholder="Address details" autoComplete="none" /><br />
                            <button>Next </button>
                     </form>
                 </div>
