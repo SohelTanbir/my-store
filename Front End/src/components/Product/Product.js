@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import { useSelector } from 'react-redux';
 import PagePagination from '../Pagination/PagePagination';
 import NotFoundMessage from '../NotFoundMessage/NotFoundMessage';
+import { BaseUrl } from '../../config';
 
 
 
@@ -17,11 +18,10 @@ const Product = () => {
     const pageNumber =  useSelector(state => state.PaginationSlice.page);
     const {category} =  useSelector(state =>state.category);
     const [totalProduct, setTotalProduct ] =  useState(0);
-    const [searchResult, setSearchSesult ] = useState([]);
 
 
 const loadProduct = async()=>{
-    const res = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/all?name=${searchInputVal}&category=${category}&page=${pageNumber}`);
+    const res = await fetch(`${BaseUrl}/api/v1/product/all?name=${searchInputVal}&category=${category}&page=${pageNumber}`);
     const {success, products, total} = await res.json();
         // off laoader 
         if(success || !success){

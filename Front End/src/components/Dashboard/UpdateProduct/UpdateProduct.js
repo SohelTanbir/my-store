@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import Loader from '../../Loader/Loader'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BaseUrl } from '../../../config';
 
 
 const UpdateProduct = () => {
@@ -20,7 +21,7 @@ const UpdateProduct = () => {
 
 // find a product
 const findProdcutById = async ()=>{
-  const response = await  fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/one/${id}`,{
+  const response = await  fetch(`${BaseUrl}/api/v1/product/one/${id}`,{
     method:'get',
     headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -77,7 +78,7 @@ const findProdcutById = async ()=>{
     // if upload prodcut image then store product in db
     if(product){
         setLoading(true)
-        const res = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/update/${id}`,{
+        const res = await fetch(`${BaseUrl}/api/v1/product/update/${id}`,{
            method:'PUT',    
            headers:{
                Authorization: `Bearer ${localStorage.getItem("token")}`

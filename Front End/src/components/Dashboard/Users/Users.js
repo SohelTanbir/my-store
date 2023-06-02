@@ -12,6 +12,7 @@ import AddUserModal from './AddUserModal';
 import UpdateUser from './UpdateUser';
 
 import { convetUTCToLocalTime } from '../../../utilities';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -24,7 +25,7 @@ const Users = () => {
     const [selectedUser, setSelelectUser]  = useState([])
 
     const loadUsers = async()=>{
-        const res =  await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/all`,{
+        const res =  await fetch(`${BaseUrl}/api/v1/users/all`,{
             method:'get',
             headers:{
                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -52,7 +53,7 @@ const Users = () => {
 
    // update user information
 const updateUser = async(id)=>{
-    const response =  await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/one/${id}`,{
+    const response =  await fetch(`${BaseUrl}/api/v1/users/one/${id}`,{
         method:'get',
         headers:{
             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -82,7 +83,7 @@ const updateUser = async(id)=>{
             confirmButtonText: 'Yes'
           });
           if(isConfirmed){
-            const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/delete/${id}`,{
+            const response = await fetch(`${BaseUrl}/api/v1/users/delete/${id}`,{
                 method:'delete',
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem("token")}`

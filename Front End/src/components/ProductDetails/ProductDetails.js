@@ -12,6 +12,7 @@ import HeaderTop from '../Header/HeaderTop';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Store/CartSlice/CartSlice';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../config';
 
 
 const ProductDetails = () => {
@@ -19,7 +20,7 @@ const ProductDetails = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     useEffect(()=>{
-        fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/one/${id}`)
+        fetch(`${BaseUrl}/api/v1/product/one/${id}`)
         .then(res => res.json())
         .then(data => setProduct(data.products));
     }, []);

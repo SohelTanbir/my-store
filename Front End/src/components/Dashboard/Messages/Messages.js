@@ -11,6 +11,7 @@ import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 
 import {  convetUTCToLocalTime } from '../../../utilities';
+import { BaseUrl } from '../../../config';
 
 const Messages = () => {
     const [message, setMessages ] = useState([]);
@@ -18,7 +19,7 @@ const Messages = () => {
 
 
     const loadUsers = async()=>{
-        const res =  await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/message/all`);
+        const res =  await fetch(`${BaseUrl}/api/v1/message/all`);
         const {success, messages} = await res.json();
         // off laoader 
         if(success || !success){
@@ -43,7 +44,7 @@ const Messages = () => {
             confirmButtonText: 'Yes'
           });
           if(isConfirmed){
-            const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/message/delete/${id}`,{
+            const response = await fetch(`${BaseUrl}/api/v1/message/delete/${id}`,{
                 method:"DELETE"
             })
             const {success, message } = await response.json();

@@ -9,6 +9,7 @@ import { faEdit, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import UpdateUser from './UpdateUser';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -27,7 +28,7 @@ const UserUpdate = () => {
 
     // find user by id
     const findUser = async()=>{
-        const response  = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/one/${id}`, {
+        const response  = await fetch(`${BaseUrl}/api/v1/users/one/${id}`, {
           headers:{
             Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -79,7 +80,7 @@ const UserUpdate = () => {
         }
       
       const response = await fetch(
-          `https://my-store-henna-sigma.vercel.app/api/v1/users/update/one/${id}`,
+          `${BaseUrl}/api/v1/users/update/one/${id}`,
           {
             method: "POST",
             body: formData,

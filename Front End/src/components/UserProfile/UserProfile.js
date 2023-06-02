@@ -10,6 +10,7 @@ import {resetLogggedinUser } from '../../Store/UserSlice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import NotFoundMessage from '../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
+import { BaseUrl } from '../../config';
 
 
 
@@ -21,7 +22,7 @@ const UserProfile = () => {
     const {user} = useSelector(state => state.user);
     // fatch my orders from db
     const loadMyOrders = async ()=>{
-        const response =  await  fetch(`https://my-store-henna-sigma.vercel.app/api/v1/orders/me`,{
+        const response =  await  fetch(`${BaseUrl}/api/v1/orders/me`,{
             method: 'get',
             headers:{
               Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -65,7 +66,7 @@ const handleLogOut = async () =>{
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/logout`,{
+            fetch(`${BaseUrl}/api/v1/users/logout`,{
                 headers:{
                   Authorization: `Bearer ${localStorage.getItem("token")}`
               },

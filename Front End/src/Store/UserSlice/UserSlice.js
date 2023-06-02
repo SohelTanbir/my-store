@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
+import { BaseUrl } from "../../config";
 
 
 
 export const loadLoggedInUserData = createAsyncThunk('user/loggedinuser', async()=>{
-          const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/users/me`,{
+          const response = await fetch(`${BaseUrl}/api/v1/users/me`,{
               method:'get',
               headers:{
                 Authorization: `Bearer ${localStorage.getItem("token")}`

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Alert from "sweetalert2";
 import './AddUserModal.css';  
+import { BaseUrl } from "../../../config";
 
 
 const AddUserModal = ({ showModal, setShowModal }) => {
@@ -40,7 +41,7 @@ const AddUserModal = ({ showModal, setShowModal }) => {
       formData.set("password", user.password);
       formData.set("role", user.role);
       const response = await fetch(
-        `https://my-store-henna-sigma.vercel.app/api/v1/users/signup`,
+        `${BaseUrl}/api/v1/users/signup`,
         {
           method: "POST",
           body: formData,

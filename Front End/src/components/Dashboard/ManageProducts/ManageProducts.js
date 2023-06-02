@@ -12,6 +12,7 @@ import NotFoundMessage from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import PagePagination from '../../Pagination/PagePagination';
 import { useSelector } from 'react-redux';
+import { BaseUrl } from '../../../config';
 
 
 
@@ -25,7 +26,7 @@ const ManageProducts = () => {
     const pageNumber =  useSelector(state => state.PaginationSlice.page);
 
 const loadProduct = async ()=>{
-    const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/all?page=${pageNumber}`);
+    const response = await fetch(`${BaseUrl}/api/v1/product/all?page=${pageNumber}`);
     const {success, products, total} = await response.json();
     if(success || !success){
         setLoading(false);
@@ -45,7 +46,7 @@ const deleteProduct = async (productId)=>{
       });
     if (isConfirmed) {
         setLoading(true);
-        const response = await fetch(`https://my-store-henna-sigma.vercel.app/api/v1/product/delete/${productId}`,{
+        const response = await fetch(`${BaseUrl}/api/v1/product/delete/${productId}`,{
             method:"DELETE",
             headers:{'content-type':'application/json'}
         });
