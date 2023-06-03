@@ -17,8 +17,8 @@ const ProductCard = ({ product }) => {
     }
     // product name modify
     const productName = ()=>{
-        if(JSON.stringify(product.name).length >40){
-                return JSON.stringify(product.name).slice(0,40) + "...";
+        if(JSON.stringify(product.name).length >30){
+                return JSON.stringify(product.name).slice(0,30) + "...";
         }else{
             return product.name
         }

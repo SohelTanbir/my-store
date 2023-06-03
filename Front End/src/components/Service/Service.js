@@ -9,22 +9,22 @@ import ServiceCard from '../ServiceCard/ServiceCard';
 const serviceData = [
     {
         title:'Order Discount',
-        description:'Free shipping on all order',
+        description:'Get 5% off on your first order',
         imgUrl:discoutnImg
     },
     {
         title:'Money Return',
-        description:'Free shipping on all order',
+        description:'100% Money back guarantee',
         imgUrl:money
     },
     {
         title:'Support 24/7',
-        description:'Free shipping on all order',
+        description:'Get Instant customer support',
         imgUrl:supportImg
     },
     {
         title:'Free Shipping',
-        description:'Free shipping on all order',
+        description:'Free shipping on first order',
         imgUrl:shipping
     }
 ]

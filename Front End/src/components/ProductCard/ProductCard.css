@@ -73,11 +73,3 @@
         width: 47%;
     }
 }
-/*Extra small device*/
-@media all and (max-width:380px){
-    /*product*/
-    .single-product {
-        width: 100%;
-        margin: 3% auto;
-    }
-}
