@@ -292,7 +292,6 @@ const getLoginUserDetails = async (req, res ) =>{
     });
 }
 
-
 // forgot password
 const forgotPassword = async (req, res)=>{
     const user =  await User.findOne({email:req.fields.email});
@@ -300,8 +299,7 @@ const forgotPassword = async (req, res)=>{
         // generate random string with hex
         const randomString =   crypto.randomBytes(20).toString("hex");
         const subject  = 'MyStore - Forogt Password Recovery';
-        const resetpasswordurl = `${req.protocol
-        }:${process.env.FRONTEND_HOST}/password/reset/${randomString}`;
+        const resetpasswordurl = `Link: ${process.env.FRONTEND_HOST}/password/reset/${randomString}`;
         const message = `Please click the below link to reset your password \n\n 
         ${resetpasswordurl}
         if you are not requested for this mail,  please ignore it. 
