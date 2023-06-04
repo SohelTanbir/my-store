@@ -9,7 +9,6 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
 import Alert from 'sweetalert2'
 import AddUserModal from './AddUserModal';
-import UpdateUser from './UpdateUser';
 
 import { convetUTCToLocalTime } from '../../../utilities';
 import { BaseUrl } from '../../../config';
@@ -117,7 +116,6 @@ const updateUser = async(id)=>{
         <div className="all-orders">
             <DashboardHeader/>
             <AddUserModal showModal={showModal} setShowModal={setShowModal}/>
-            <UpdateUser showUpdateModal={showUpdateModal} setShowUpdateModal={setShowUpdateModal} selectedUser={selectedUser}/>
             <div className="dashboard-main">
             <SideBar/>
             <div className="users-main">

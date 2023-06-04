@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './Users.css'
+import './UserUpdate.css'
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import SideBar from '../SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Loader from '../../Loader/Loader'
-import { Link, useParams } from 'react-router-dom';
-import { faEdit, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
-import NotFoundMessage  from '../../NotFoundMessage/NotFoundMessage';
+import { useParams } from 'react-router-dom';
+import {  faUpload } from '@fortawesome/free-solid-svg-icons';
 import Alert from 'sweetalert2'
-import UpdateUser from './UpdateUser';
 import { BaseUrl } from '../../../config';
 
 
@@ -121,14 +119,14 @@ const UserUpdate = () => {
 
 
     return (
-        <div className="all-orders">
+        <div className="user-update">
             <DashboardHeader/>
             <div className="dashboard-main">
             <SideBar/>
             <div className="users-main">
               <div className="container">
               <div className="users-header">
-                    <h2>Update user </h2>
+                    <h2>Update user</h2>
                     </div>
                 {selectedUser?.email ?
                     <div className="row">
@@ -173,14 +171,14 @@ const UserUpdate = () => {
                         </select>
                         </div>
                         <div className="d-flex mb-3 align-items-center justify-content-between">
-                                            <div className="col-2 offset-1">
+                                            <div className="col-sm-1">
                                                 <div className="preview-photo">
                                                     <img src={previewImageUrl?previewImageUrl:selectedUser.image[0]?.url || '/user/user.png'} alt="user" />
                                                 </div>
                                             </div>
-                                            <div className="col-9">
-                                            <input className="signup-file-input" type="file" name="avatar" onChange={handleChange} placeholder="photo"/> <br />
-                                            <labe className="file_input_label">
+                                            <div className="col-sm-11 col-11">
+                                            <input className="user-update-file-input" type="file" name="avatar" onChange={handleChange} placeholder="photo"/> <br />
+                                            <labe className="user_update_file_input_label">
                                             <FontAwesomeIcon icon={faUpload} />
                                                 <span className='ms-2'>Upload photo</span>
                                             </labe>
