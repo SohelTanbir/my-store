@@ -77,7 +77,7 @@ const handleLogOut = async () =>{
                     toast.success("Log out successfully!", { position: "top-center", autoClose: 1000 });
                     setTimeout(()=>{
                         dispatch(resetLogggedinUser());
-                        navigate("/login")
+                        navigate("/login");
                     }, 1500)
                 }
             })

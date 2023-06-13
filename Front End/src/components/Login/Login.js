@@ -38,6 +38,7 @@ const Login = () => {
         setShowError({ email: "Invalid email address!" });
         return "";
       }
+
       setShowError({ email: "" });
     }
   };
@@ -63,7 +64,6 @@ const Login = () => {
       return;
     }
     setShowError({ password: "" });
-    setLoading(true);
     const response = await fetch(`${BaseUrl}/api/v1/users/login`, {
       method: "post",
       headers: { 
@@ -71,23 +71,17 @@ const Login = () => {
       },
       body: JSON.stringify(user),
     });
-
     const { success, message, userData, access_token } = await response.json();
-    if (success || success) {
-      setLoading(false);
-    }
-
     if (success) {
-      toast.success(message, { position: "top-center", autoClose: 1000 });
+      toast.success(message, { position: "top-center", autoClose: 1500 });
       // dispatch loggedin user
       dispatch(getLoginUser({ isLogin: true, user: userData }));
     // save token localStorage 
     localStorage.setItem("token", access_token)
-
-    } else {
-      toast.error(`${message}`, { position: "top-center", autoClose: 1000 });
-      setLoading(false);
-    }
+      return;
+    } 
+    toast.error(message, { position: "top-center", autoClose: 1500 });
+    return;
   };
 
   return (
@@ -107,6 +101,7 @@ const Login = () => {
                     onChange={handleInput}
                     placeholder="Email"
                     autoComplete="none"
+                    defaultValue={user.email}
                   />{" "}
                   <br />
                   {showError.email && (
