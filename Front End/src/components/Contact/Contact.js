@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 import Header from '../Header/Header';
 import HeaderTop from '../Header/HeaderTop';
 import { useSelector } from 'react-redux';
-import BaseUrl from '../../config'
+import { BaseUrl } from '../../config';
 
 const Contact = () => {
     const {isAuthenticated, user } = useSelector(state => state.user);
